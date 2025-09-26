@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JQRG GAMES</title>
-  <!-- Google Fonts: Josefin Sans -->
+  <title>Games | JQRG</title>
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -27,10 +26,10 @@
       font-size: 2.5rem;
       font-weight: 600;
       letter-spacing: 2px;
-      text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
     }
     .btn {
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0,0,0,0.6);
       border: 2px solid white;
       border-radius: 6px;
       color: white;
@@ -78,14 +77,13 @@
   </style>
   <script>
     function openGame(url) {
-      // Open a new blank window and then set its location to the game URL
       const win = window.open('about:blank', '_blank', 'width=1024,height=768');
       win.location.href = url;
     }
   </script>
 </head>
 <body>
-  <a href="index.html" class="back-home">⬅ Back</a>
+  <a href="../" class="back-home">⬅ Home</a>
   <h1>JQRG GAMES</h1>
 
   <button class="btn" onclick="openGame('https://jimmyqrg.github.io/bridd-jump')">BRIDD JUMP ORIGINAL GAME</button>
