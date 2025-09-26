@@ -20,6 +20,7 @@
       font-family: "Josefin Sans", sans-serif;
       text-align: center;
       padding: 20px;
+      position: relative;
     }
     h1 {
       margin-bottom: 30px;
@@ -54,29 +55,51 @@
       color: #ddd;
       text-shadow: 0 0 6px rgba(0,0,0,0.7);
     }
+    .back-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      border: 2px solid white;
+      border-radius: 6px;
+      background-color: rgba(0,0,0,0.6);
+      color: white;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .back-home:hover {
+      background-color: white;
+      color: black;
+      transform: translateY(-2px);
+    }
   </style>
   <script>
-    function openBlank(url) {
-      window.open("about:blank", "_blank").location.href = url;
+    function openGame(url) {
+      // Open a new blank window and then set its location to the game URL
+      const win = window.open('about:blank', '_blank', 'width=1024,height=768');
+      win.location.href = url;
     }
   </script>
 </head>
 <body>
+  <a href="index.html" class="back-home">⬅ Back</a>
   <h1>JQRG GAMES</h1>
 
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/bridd-jump')">BRIDD JUMP ORIGINAL GAME</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/dragonX-')">EAGLERCRAFT HACKED CLIENT 1.8</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/eaglercraft-1.8.8')">EAGLERCRAFT 1.8.8</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/wordle')">INFINITE WORDLE ULTIMATE</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/undertale')">UNDERTALE</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/sound-effects')">SOUND EFFECTS PLAYER</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/slope-two-players')">SLOPE 2 PLAYERS</button>
-  <button class="btn" onclick="openBlank('https://jimmyqrg.github.io/ghost-train')">GHOST TRAIN CUBE (NOT FINISHED)</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/bridd-jump')">BRIDD JUMP ORIGINAL GAME</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/dragonX-')">EAGLERCRAFT HACKED CLIENT 1.8</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/eaglercraft-1.8.8')">EAGLERCRAFT 1.8.8</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle')">INFINITE WORDLE ULTIMATE</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/undertale')">UNDERTALE</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/sound-effects')">SOUND EFFECTS PLAYER</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/slope-two-players')">SLOPE 2 PLAYERS</button>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/ghost-train')">GHOST TRAIN CUBE (NOT FINISHED)</button>
 
   <div class="footer">
-    Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white; text-decoration:underline;">ikunbeautiful@gmail.com</a>  
-    if you would like more games added. I will do my best to include them.
+    Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white; text-decoration:underline;">ikunbeautiful@gmail.com</a> if you would like more games added. I will do my best to include them.
   </div>
 </body>
 </html>
