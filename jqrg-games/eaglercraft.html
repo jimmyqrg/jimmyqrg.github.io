@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eaglercraft Release</title>
+  <link rel="icon" type="image/png" href="../jq.png">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url("../background3.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: "Josefin Sans", sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 25px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 8px rgba(0,0,0,0.6);
+    }
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+    .btn {
+      background-color: rgba(0,0,0,0.6);
+      border: 2px solid white;
+      border-radius: 6px;
+      color: white;
+      padding: 12px 28px;
+      margin: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 320px;
+      max-width: 90%;
+      transition: all 0.25s ease;
+    }
+    .btn:hover {
+      background: white;
+      color: black;
+      transform: translateY(-3px);
+    }
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      border: 2px solid white;
+      border-radius: 6px;
+      color: white;
+      padding: 8px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      background: white;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <!-- Back button -->
+  <button class="back-btn" onclick="location.href='../'">← Back</button>
+
+  <h1>EAGLERCRAFT RELEASE</h1>
+
+  <!-- Release Versions -->
+  <button class="btn" onclick="openGame('indev.html')">INDEV</button>
+  <button class="btn" onclick="openGame('alpha.html')">ALPHA 1.2.6</button>
+  <button class="btn" onclick="openGame('beta1-3.html')">BETA 1.3</button>
+  <button class="btn" onclick="openGame('beta1-7-3.html')">BETA 1.7.3</button>
+  <button class="btn" onclick="openGame('r1-5-2.html')">RELEASE 1.5.2</button>
+  <button class="btn" onclick="openGame('r1-8-8.html')">RELEASE 1.8.8</button>
+  <button class="btn" onclick="openGame('r1-12-2.html')">RELEASE 1.12.2</button>
+
+  <h2>TOUCHSCREEN MODE</h2>
+  <button class="btn" onclick="openGame('indev-t.html')">INDEV</button>
+  <button class="btn" onclick="openGame('alpha-t.html')">ALPHA 1.2.6</button>
+  <button class="btn" onclick="openGame('beta1-3-t.html')">BETA 1.3</button>
+  <button class="btn" onclick="openGame('beta1-7-3-t.html')">BETA 1.7.3</button>
+  <button class="btn" onclick="openGame('r1-5-2-t.html')">RELEASE 1.5.2</button>
+  <button class="btn" onclick="openGame('r1-8-8-t.html')">RELEASE 1.8.8</button>
+  <button class="btn" onclick="openGame('r1-12-2-t.html')">RELEASE 1.12.2</button>
+
+  <h2>OTHER</h2>
+  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/dragonX-')">
+    HACKED CLIENT (DRAGONX)
+  </button>
+
+  <script>
+    function openGame(url) {
+      if (url.startsWith("http")) {
+        // External site
+        const win = window.open('about:blank', '_blank');
+        const iframe = win.document.createElement('iframe');
+        iframe.style.position = "fixed";
+        iframe.style.top = 0;
+        iframe.style.left = 0;
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.src = url;
+        win.document.body.style.margin = "0";
+        win.document.body.appendChild(iframe);
+      } else {
+        // Local file
+        const win = window.open('about:blank', '_blank');
+        const iframe = win.document.createElement('iframe');
+        iframe.style.position = "fixed";
+        iframe.style.top = 0;
+        iframe.style.left = 0;
+        iframe.style.width = "100%";
+        iframe.style.height = "100%";
+        iframe.style.border = "none";
+        iframe.src = url;
+        win.document.body.style.margin = "0";
+        win.document.body.appendChild(iframe);
+      }
+    }
+  </script>
+</body>
+</html>
