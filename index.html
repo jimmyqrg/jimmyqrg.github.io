@@ -13,15 +13,69 @@
             justify-content: center;
             align-items: center;
             background-color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        h1 {
-            font-weight: bold;
-            font-size: 2em;
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* banner row: image next to text, image slightly higher */
+        .banner {
+            display: flex;
+            align-items: flex-start; /* image sits a bit above the text baseline */
+            gap: 20px;
+            background: #fff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .banner img {
+            width: 96px;
+            height: auto;
+            object-fit: contain;
+            /* nudge image slightly up so it appears "above" the sentence */
+            margin-top: -8px;
+        }
+
+        .banner p {
+            margin: 0;
             color: #333;
+            font-weight: 700;
+            line-height: 1.35;
+            font-size: 1.1rem;
+        }
+
+        /* responsive: stack on narrow viewports */
+        @media (max-width: 600px) {
+            .banner {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .banner img {
+                margin-top: 0;
+            }
+        }
+
+
+        .full-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-    <h1>THIS SITE IS UNPUBLISHED</h1>
+    <div class="container full-center">
+        <div class="banner" role="region" aria-label="Site removed notice">
+            <img src="github.png" alt="GitHub logo (github.png)">
+            <p>This website has violated the terms of use and has been removed from the shelves and is temporarily unavailable. If you have any questions, please report them to us.</p>
+        </div>
+    </div>
 </body>
 </html>
