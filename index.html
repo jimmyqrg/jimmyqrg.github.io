@@ -11,7 +11,7 @@
     --text-black: #000;
     --maxw: 760px;
   }
-  html,body{
+  html, body{
     margin:0;
     padding:0;
     background: var(--page-bg);
@@ -21,7 +21,7 @@
   body{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* horizontally center */
     padding: 40px 20px;
     box-sizing: border-box;
   }
@@ -30,7 +30,7 @@
     max-width: var(--maxw);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* horizontally center content */
   }
   .code404{
     font-size: 4rem;
@@ -47,11 +47,13 @@
     font-size: 0.85rem;
     margin: 0 0 8px 0;
     line-height: 1.4;
+    text-align: center;
   }
   .note{
     font-size: 0.75rem;
     color:#777;
     margin-top: 8px;
+    text-align: center;
   }
   .cat{
     width:32px;
