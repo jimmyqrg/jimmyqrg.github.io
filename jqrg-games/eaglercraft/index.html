@@ -74,7 +74,7 @@
   <h1>EAGLERCRAFT RELEASE</h1>
   <button class="btn" onclick="openGame('r1-5-2.html')">RELEASE 1.5.2</button>
   <button class="btn" onclick="openGame('r1-8-8.html')">RELEASE 1.8.8</button>
-  <button class="btn" onclick="openGame('r1-12-2.html')">RELEASE 1.12.2</button>
+  <button class="btn" onclick="openExact()">RELEASE 1.12.2</button>
 
   <h2>TOUCHSCREEN MODE</h2>
   <button class="btn" onclick="openGame('r1-8-8-t1.html')">EAGLER MOBILE 1.8.8</button>
@@ -114,6 +114,11 @@
         win.document.body.style.margin = "0";
         win.document.body.appendChild(iframe);
       }
+    }
+    function openExact() {
+      const url = "https://jimmyqrg.neocities.org/r1-12-2";
+      // Use window.open with 'noopener' to avoid URL rewriting
+      window.open(url, "_blank", "noopener,noreferrer");
     }
   </script>
 </body>
