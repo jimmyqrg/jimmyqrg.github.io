@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Infinite Campus</title>
+  <link rel="icon" type="image/png" href="infinite-campus.png">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url("c6e66984-1a96-4753-b83d-e7824f7c7c2a.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: "Josefin Sans", sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 8px rgba(0,0,0,0.6);
+    }
+    .btn {
+      background-color: rgba(0,0,0,0.6);
+      border: 2px solid white;
+      border-radius: 6px;
+      color: white;
+      padding: 12px 28px;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      width: 500px;
+      max-width: 90%;
+      transition: all 0.25s ease;
+    }
+    .btn:hover {
+      background: white;
+      color: black;
+      transform: translateY(-3px);
+    }
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      border: 2px solid white;
+      border-radius: 6px;
+      color: white;
+      padding: 8px 20px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .back-btn:hover {
+      background: white;
+      color: black;
+    }
+    p {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fixed Back button -->
+  <a href="https://jimmyqrg.github.io/WoCaoNiMaZenMeHuiYouZheYangDeRenYaoJinWoDeWangZhan54188sb250.html" class="back-btn">⬅ Back</a>
+
+  <h1>GN-MATH</h1>
+
+  <button class="btn" onclick="openGame('https://experience.bacusmoa.com')">
+    BACUSMOA.COM
+  </button>
+
+  <button class="btn" onclick="openGame('https://www.gn-math.dev/')">
+    GN-MATH.DEV
+  </button>
+
+  <p>Wanna create your own game website? Totorial: <a href="https://docs.google.com/document/d/1ky210XqK9hBFeYQBO_oxZM8o9GmbKGaDafuoqEtcBgI/edit?tab=t.0" style="color:white;">Click me</a>.</p>
+
+  <script>
+    function openGame(url) {
+      const win = window.open('about:blank', '_blank');
+      const iframe = win.document.createElement('iframe');
+      iframe.style.position = "fixed";
+      iframe.style.top = 0;
+      iframe.style.left = 0;
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+      iframe.style.border = "none";
+      iframe.src = url.startsWith("http") ? url : "https://" + url;
+      win.document.body.style.margin = "0";
+      win.document.body.appendChild(iframe);
+    }
+  </script>
+</body>
+</html>
