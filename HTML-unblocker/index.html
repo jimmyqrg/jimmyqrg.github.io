@@ -23,6 +23,25 @@
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
     margin-bottom: 30px;
   }
+  
+  .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.7);
+      border: 2px solid white;
+      border-radius: 6px;
+      color: white;
+      padding: 8px 20px;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+  
+    .back-btn:hover {
+      background: white;
+      color: black;
+    }
 
   .upload-btn {
     background-color: rgba(0, 0, 0, 0.6);
@@ -47,6 +66,7 @@
 </head>
 <body>
   <h1>Upload Your HTML File</h1>
+  <a href="https://jimmyqrg.github.io/WoCaoNiMaZenMeHuiYouZheYangDeRenYaoJinWoDeWangZhan54188sb250.html" class="back-btn">⬅ Back</a>
 
   <label class="upload-btn" for="fileInput">Choose HTML File</label>
   <input type="file" id="fileInput" accept=".html">
