@@ -7,64 +7,62 @@
   <link rel="icon" type="image/png" href="infinite-campus.png">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: url("background2.png") no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      font-family: "Josefin Sans", sans-serif;
-      text-align: center;
-    }
-    h1 {
-      margin-bottom: 40px;
-      font-size: 2.5rem;
-      text-shadow: 0 0 8px rgba(0,0,0,0.6);
-    }
-    .btn {
-      background-color: rgba(0,0,0,0.6);
-      border: 2px solid white;
-      border-radius: 6px;
-      color: white;
-      padding: 12px 28px;
-      margin: 10px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      width: 500px;
-      max-width: 90%;
-      transition: all 0.25s ease;
-    }
-    .btn:hover {
-      background: white;
-      color: black;
-      transform: translateY(-3px);
-    }
-    .back-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.7);
-      border: 2px solid white;
-      border-radius: 6px;
-      color: white;
-      padding: 8px 20px;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .back-btn:hover {
-      background: white;
-      color: black;
-    }
-    p {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
+  body {
+    margin: 0;
+    background: url("background2.png") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+    padding-top: 100px; /* pushes everything down neatly */
+    padding-bottom: 200px; /* makes last button not stick to bottom */
+    overflow-y: auto; /* allows scrolling */
+  }
+  h1 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  }
+  .btn {
+    background-color: rgba(0,0,0,0.6);
+    border: 2px solid white;
+    border-radius: 6px;
+    color: white;
+    padding: 12px 28px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    width: 500px;
+    max-width: 90%;
+    transition: all 0.25s ease;
+  }
+  .btn:hover {
+    background: white;
+    color: black;
+    transform: translateY(-3px);
+  }
+  .back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.7);
+    border: 2px solid white;
+    border-radius: 6px;
+    color: white;
+    padding: 8px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .back-btn:hover {
+    background: white;
+    color: black;
+  }
+  p {
+    margin-top: 40px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
   </style>
 </head>
 <body>
