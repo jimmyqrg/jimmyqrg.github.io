@@ -1,0 +1,45 @@
+body, html {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+
+body, canvas, html {
+    touch-action: none;
+}
+
+#notSupportedWrap {
+    margin: 2em auto 1em;
+    width: 75%;
+    max-width: 45em;
+    border: 2px solid rgb(170, 170, 170);
+    border-radius: 1em;
+    padding: 2em;
+    background-color: rgb(240, 240, 240);
+    font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+#notSupportedTitle {
+    font-size: 1.8em;
+}
+
+.notSupportedMessage {
+    font-size: 1.2em;
+}
+
+.notSupportedMessage em {
+    color: rgb(136, 136, 136);
+}
+
+@font-face {
+    font-family: "in your face, joffrey!";
+    src: url("fonts/in your face, joffrey!.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: varela-regular;
+    src: url("fonts/varela-regular.ttf") format("truetype");
+}
