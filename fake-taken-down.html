@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Site not found · GitHub Pages</title>
+<style>
+  :root{
+    --page-bg: #f0f0f0;
+    --text-gray: #555;
+    --text-black: #000;
+    --maxw: 760px;
+  }
+  html, body{
+    margin:0;
+    padding:0;
+    background: var(--page-bg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color: var(--text-gray);
+  }
+  body{
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* horizontally center */
+    padding: 40px 20px;
+    box-sizing: border-box;
+  }
+  main{
+    width:100%;
+    max-width: var(--maxw);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* horizontally center content */
+  }
+  .code404{
+    font-size: 4rem;
+    color: var(--text-black);
+    font-weight: normal;
+    margin: 0 0 10px 0;
+  }
+  .headline{
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+  .explain{
+    font-size: 0.85rem;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .note{
+    font-size: 0.75rem;
+    color:#777;
+    margin-top: 8px;
+    text-align: center;
+  }
+  .cat{
+    width:32px;
+    height:auto;
+    display:block;
+    margin-top:12px;
+  }
+  @media (max-width:480px){
+    .code404{font-size:3rem}
+    .headline{font-size:0.9rem}
+    .explain{font-size:0.8rem}
+    .note{font-size:0.7rem}
+    .cat{width:24px;margin-top:8px}
+  }
+</style>
+</head>
+<body>
+  <main>
+    <div class="code404">404</div>
+    <div class="headline">This site has been removed from GitHub Pages</div>
+    <p class="explain">
+      This website has been removed from the service and is temporarily inaccessible due to serious violations of our Terms of Use and multiple illegal content. If you have any questions, please report them to us.
+    </p>
+    <div class="note">
+      GitHub Status — @githubstatus<br>This site has been disabled by GitHub and will no longer be public
+    </div>
+    <img src="github.png" alt="gray cat icon" class="cat" />
+  </main>
+</body>
+</html>
