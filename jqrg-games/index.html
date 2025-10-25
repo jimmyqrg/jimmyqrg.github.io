@@ -29,26 +29,28 @@
     text-shadow: 0 0 8px rgba(0,0,0,0.6);
   }
   .btn {
-		position: relative;
-		display: inline-block;
-		padding: 12px 28px;
-		border: 2px solid white;
-		border-radius: 10px;
-		background: rgba(0, 0, 0, 0.6);
-		color: white;
-		font-weight: 600;
-		letter-spacing: 0.5px;
-		text-transform: uppercase;
-		cursor: pointer;
-		transition:
-			transform 0.5s ease,
-			box-shadow 0.8s ease,
-			background 1s ease,
-			border-color 0.8s ease,
-			letter-spacing 0.8s ease;
-		background-size: 300% 300%;
-		overflow: hidden;
-	}
+    display: inline-block; /* keep for compatibility */
+    width: 100%; /* make all buttons stretch to grid cell width */
+    max-width: 250px; /* optional: limit the max width */
+    padding: 12px 28px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.8s ease,
+        background 1s ease,
+        border-color 0.8s ease,
+        letter-spacing 0.8s ease;
+    background-size: 300% 300%;
+    overflow: hidden;
+    box-sizing: border-box; /* ensures padding is included in width */
+  }
 	.btn:hover {
 		color: #fff;
 		border-color: transparent;
@@ -211,6 +213,18 @@
     <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/granny.html')">GRANNY</button>
     <button class="btn" onclick="location.href='https://jimmyqrg.github.io/scratch/jqrg-games/geometry-dash'">GEOMETRY DASH (SCRATCH BASED ALL LEVELS)</button>
     <button class="btn" onclick="location.href='https://jimmyqrg.github.io/scratch/jqrg-games/'">MORE SCRATCH MADE GAMES</button>
+  </div>
+
+  <h2>TOUCHSCREEN GAMES</h2>
+
+  <div class="btn-grid">
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0/')">BRIDD JUMP ORIGINAL GAME</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')">CANDY JUMP</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle/')">INFINITE WORDLE ULTIMATE</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')">WORDLE NO WORD DETECTION</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/drift-boss.html')">DRIFT BOSS</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/2048.html')">2048</button>
   </div>
 
   <p>Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white;">ikunbeautiful@gmail.com</a> if you wish to add more games. I will do my best to add them.</p>
