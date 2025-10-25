@@ -31,22 +31,42 @@
       text-shadow: 0 0 6px rgba(0,0,0,0.6);
     }
     .btn {
-      background-color: rgba(0,0,0,0.6);
-      border: 2px solid white;
-      border-radius: 6px;
-      color: white;
+      position: relative;
+      display: inline-block;
       padding: 12px 28px;
-      margin: 8px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
       cursor: pointer;
-      font-size: 1.1rem;
-      width: 500px;
-      max-width: 90%;
-      transition: all 0.25s ease;
+      transition:
+        transform 0.5s ease,
+        box-shadow 0.8s ease,
+        background 1s ease,
+        border-color 0.8s ease,
+        letter-spacing 0.8s ease;
+      background-size: 300% 300%;
+      overflow: hidden;
     }
-    .btn:hover {
-      background: white;
-      color: black;
-      transform: translateY(-3px);
+	  .btn:hover {
+		color: #fff;
+		border-color: transparent;
+		background: linear-gradient(90deg, #ffb84d, #ff4d4d, #ff4dd5, #d34dff);
+		background-size: 400% 100%;
+		transform: translateY(-4px) scale(1.07);
+		letter-spacing: 1px;
+		box-shadow:
+			0 0 10px rgba(77, 140, 255, 0.6),
+			0 0 20px rgba(138, 77, 255, 0.5),
+			0 0 35px rgba(255, 77, 184, 0.4),
+			inset 0 0 10px rgba(255, 255, 255, 0.2);
+		animation:
+			gradientTravel 4s linear infinite,
+			outlinePulse 2.5s ease-in-out infinite alternate,
+			shineSweep 6s ease-in-out infinite;
     }
     .back-btn {
       position: absolute;
