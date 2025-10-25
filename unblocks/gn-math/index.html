@@ -26,22 +26,90 @@
       text-shadow: 0 0 8px rgba(0,0,0,0.6);
     }
     .btn {
-      background-color: rgba(0,0,0,0.6);
-      border: 2px solid white;
-      border-radius: 6px;
-      color: white;
+      display: inline-block; /* keep for compatibility */
+      width: 100%; /* make all buttons stretch to grid cell width */
+      max-width: 250px; /* optional: limit the max width */
       padding: 12px 28px;
-      margin: 10px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
       cursor: pointer;
-      font-size: 1.1rem;
-      width: 500px;
-      max-width: 90%;
-      transition: all 0.25s ease;
+      transition:
+          transform 0.5s ease,
+          box-shadow 0.8s ease,
+          background 1s ease,
+          border-color 0.8s ease,
+          letter-spacing 0.8s ease;
+      background-size: 300% 300%;
+      overflow: hidden;
+      box-sizing: border-box; /* ensures padding is included in width */
     }
     .btn:hover {
-      background: white;
-      color: black;
-      transform: translateY(-3px);
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+      background-size: 400% 100%;
+      transform: translateY(-4px) scale(1.07);
+      letter-spacing: 1px;
+      box-shadow:
+        0 0 10px rgba(77, 140, 255, 0.6),
+        0 0 20px rgba(138, 77, 255, 0.5),
+        0 0 35px rgba(255, 77, 184, 0.4),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      animation:
+        gradientTravel 4s linear infinite,
+        outlinePulse 2.5s ease-in-out infinite alternate,
+        shineSweep 6s ease-in-out infinite;
+    }
+
+    @keyframes gradientTravel {
+      0% {
+        background-position: 0% 50%;
+        box-shadow:
+          0 0 15px rgba(77, 140, 255, 0.6),
+          0 0 30px rgba(138, 77, 255, 0.4),
+          0 0 50px rgba(255, 77, 184, 0.3);
+      }
+      100% {
+        background-position: 200% 50%;
+        box-shadow:
+          0 0 20px rgba(255, 77, 184, 0.7),
+          0 0 40px rgba(77, 140, 255, 0.5),
+          0 0 60px rgba(138, 77, 255, 0.4);
+      }
+    }
+
+    @keyframes outlinePulse {
+      0% {
+        box-shadow:
+          0 0 10px rgba(77, 140, 255, 0.7),
+          0 0 25px rgba(138, 77, 255, 0.4),
+          0 0 45px rgba(255, 77, 184, 0.3),
+          0 0 0 3px rgba(77, 140, 255, 0.1);
+      }
+      100% {
+        box-shadow:
+          0 0 18px rgba(255, 77, 184, 0.8),
+          0 0 40px rgba(77, 140, 255, 0.6),
+          0 0 65px rgba(138, 77, 255, 0.4),
+          0 0 0 5px rgba(255, 77, 184, 0.15);
+      }
+    }
+
+    @keyframes shineSweep {
+      0% {
+        filter: brightness(1);
+      }
+      50% {
+        filter: brightness(1.4);
+      }
+      100% {
+        filter: brightness(1);
+      }
     }
     .back-btn {
       position: absolute;
