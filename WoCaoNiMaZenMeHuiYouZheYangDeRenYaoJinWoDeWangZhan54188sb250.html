@@ -31,43 +31,45 @@
       text-shadow: 0 0 8px rgba(0,0,0,0.7);
     }
     .btn {
-		position: relative;
-		display: inline-block;
-		padding: 12px 28px;
-		border: 2px solid white;
-		border-radius: 10px;
-		background: rgba(0, 0, 0, 0.6);
-		color: white;
-		font-weight: 600;
-		letter-spacing: 0.5px;
-		text-transform: uppercase;
-		cursor: pointer;
-		transition:
-			transform 0.5s ease,
-			box-shadow 0.8s ease,
-			background 1s ease,
-			border-color 0.8s ease,
-			letter-spacing 0.8s ease;
-		background-size: 300% 300%;
-		overflow: hidden;
-	}
-	.btn:hover {
-		color: #fff;
-		border-color: transparent;
-		background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-		background-size: 400% 100%;
-		transform: translateY(-4px) scale(1.07);
-		letter-spacing: 1px;
-		box-shadow:
-			0 0 10px rgba(77, 140, 255, 0.6),
-			0 0 20px rgba(138, 77, 255, 0.5),
-			0 0 35px rgba(255, 77, 184, 0.4),
-			inset 0 0 10px rgba(255, 255, 255, 0.2);
-		animation:
-			gradientTravel 4s linear infinite,
-			outlinePulse 2.5s ease-in-out infinite alternate,
-			shineSweep 6s ease-in-out infinite;
-	}
+      display: inline-block; /* keep for compatibility */
+      width: 100%; /* make all buttons stretch to grid cell width */
+      max-width: 250px; /* optional: limit the max width */
+      padding: 12px 28px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition:
+          transform 0.5s ease,
+          box-shadow 0.8s ease,
+          background 1s ease,
+          border-color 0.8s ease,
+          letter-spacing 0.8s ease;
+      background-size: 300% 300%;
+      overflow: hidden;
+      box-sizing: border-box; /* ensures padding is included in width */
+    }
+    .btn:hover {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+      background-size: 400% 100%;
+      transform: translateY(-4px) scale(1.07);
+      letter-spacing: 1px;
+      box-shadow:
+        0 0 10px rgba(77, 140, 255, 0.6),
+        0 0 20px rgba(138, 77, 255, 0.5),
+        0 0 35px rgba(255, 77, 184, 0.4),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      animation:
+        gradientTravel 4s linear infinite,
+        outlinePulse 2.5s ease-in-out infinite alternate,
+        shineSweep 6s ease-in-out infinite;
+    }
     a {
       text-decoration: none;
     }
