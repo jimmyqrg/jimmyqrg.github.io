@@ -70,6 +70,51 @@
         outlinePulse 2.5s ease-in-out infinite alternate,
         shineSweep 6s ease-in-out infinite;
       }
+    @keyframes gradientTravel {
+      0% {
+        background-position: 0% 50%;
+        box-shadow:
+          0 0 15px rgba(77, 140, 255, 0.6),
+          0 0 30px rgba(138, 77, 255, 0.4),
+          0 0 50px rgba(255, 77, 184, 0.3);
+      }
+      100% {
+        background-position: 200% 50%;
+        box-shadow:
+          0 0 20px rgba(255, 77, 184, 0.7),
+          0 0 40px rgba(77, 140, 255, 0.5),
+          0 0 60px rgba(138, 77, 255, 0.4);
+      }
+    }
+
+    @keyframes outlinePulse {
+      0% {
+        box-shadow:
+          0 0 10px rgba(77, 140, 255, 0.7),
+          0 0 25px rgba(138, 77, 255, 0.4),
+          0 0 45px rgba(255, 77, 184, 0.3),
+          0 0 0 3px rgba(77, 140, 255, 0.1);
+      }
+      100% {
+        box-shadow:
+          0 0 18px rgba(255, 77, 184, 0.8),
+          0 0 40px rgba(77, 140, 255, 0.6),
+          0 0 65px rgba(138, 77, 255, 0.4),
+          0 0 0 5px rgba(255, 77, 184, 0.15);
+      }
+    }
+
+    @keyframes shineSweep {
+      0% {
+        filter: brightness(1);
+      }
+      50% {
+        filter: brightness(1.4);
+      }
+      100% {
+        filter: brightness(1);
+      }
+    }
     .back-btn {
       position: absolute;
       top: 20px;
