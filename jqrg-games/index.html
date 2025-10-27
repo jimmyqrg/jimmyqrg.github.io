@@ -115,60 +115,96 @@
 		}
 	}
   
-	.btn-new {
-		position: relative;
-	}
+	/* === NEW BUTTON VARIANT === */
+  .btn-new {
+    position: relative; /* allows badge positioning */
+    overflow: visible !important; /* ensures the badge can overflow freely */
+    z-index: 1; /* ensures it stays above other nearby elements */
+  }
 
-	.btn-new::after {
-		content: "NEW!";
-		position: absolute;
-		top: -8px;
-		right: -8px;
-		padding: 3px 7px;
-		font-size: 0.7rem;
-		font-weight: 700;
-		color: #fff;
-		background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
-		border-radius: 6px;
-		box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
-		text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-		animation: newBadgePulse 2.5s ease-in-out infinite;
-		transition: all 0.3s ease;
-		pointer-events: none;
-	}
+  /* === Floating NEW! Tag === */
+  .btn-new::after {
+    content: "NEW!";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 3px 7px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    animation: newBadgePulse 2.5s ease-in-out infinite;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 5; /* ensures the badge sits above the button */
+  }
 
-	.btn-new:hover::after {
-		transform: scale(1.15) rotate(2deg);
-		box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
-		animation: newBadgeShimmer 1.5s linear infinite;
-	}
+  /* === Hover makes badge shimmer brighter === */
+  .btn-new:hover::after {
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
+    animation: newBadgeShimmer 1.5s linear infinite;
+  }
 
-	@keyframes newBadgePulse {
-		0% {
-			opacity: 0.85;
-			transform: scale(1);
-		}
-		50% {
-			opacity: 1;
-			transform: scale(1.1);
-		}
-		100% {
-			opacity: 0.85;
-			transform: scale(1);
-		}
-	}
+  /* === Subtle pulsing animation === */
+  @keyframes newBadgePulse {
+    0% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 0.85;
+      transform: scale(1);
+    }
+  }
 
-	@keyframes newBadgeShimmer {
-		0% {
-			filter: brightness(1);
-		}
-		50% {
-			filter: brightness(1.4);
-		}
-		100% {
-			filter: brightness(1);
-		}
-	}
+  /* === Slight shimmer when hovered === */
+  @keyframes newBadgeShimmer {
+    0% {
+      filter: brightness(1);
+    }
+    50% {
+      filter: brightness(1.4);
+    }
+    100% {
+      filter: brightness(1);
+    }
+  }
+
+
+    @keyframes newBadgePulse {
+      0% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes newBadgeShimmer {
+      0% {
+        filter: brightness(1);
+      }
+      50% {
+        filter: brightness(1.4);
+      }
+      100% {
+        filter: brightness(1);
+      }
+    }
 
 
   .back-btn {
