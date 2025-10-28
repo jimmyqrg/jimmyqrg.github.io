@@ -328,13 +328,13 @@
 	<br>
 	<br>
 	<h1>PLEASE SAVE YOUR GAME PROGRESS<h1>
-	<h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!<h2>
+	<h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!</h2>h2>
 	<button class="btn" onclick="downloadSave()">Download Progress</button>
 	<input class="btn" type="file" id="upload" onchange="uploadSave()" />
 
   <p>Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white;">ikunbeautiful@gmail.com</a> if you wish to add more games. I will do my best to add them.</p>
 
-  <script>
+<script>
   // ==== PROGRESS SAVE / LOAD FUNCTIONS ====
   function downloadSave() {
     const data = JSON.stringify(localStorage);
@@ -348,14 +348,32 @@
   function uploadSave() {
     const file = document.getElementById("upload").files[0];
     if (!file) return;
+
     const reader = new FileReader();
     reader.onload = () => {
       try {
         const data = JSON.parse(reader.result);
-        for (const [k, v] of Object.entries(data)) localStorage.setItem(k, v);
-        alert("Progress restored!");
+
+        // Ask if user wants to overwrite existing keys
+        let overwrite = false;
+        for (const key of Object.keys(data)) {
+          if (localStorage.getItem(key) !== null) {
+            overwrite = confirm("⚠️ Some of your current progress already exists in this file. Overwrite existing data?");
+            break; // only ask once
+          }
+        }
+
+        for (const [k, v] of Object.entries(data)) {
+          if (localStorage.getItem(k) === null || overwrite) {
+            localStorage.setItem(k, v);
+          }
+        }
+
+        alert("Progress successfully merged!");
+        location.reload(); // apply new progress immediately
       } catch (e) {
         alert("Failed to load progress. Invalid file.");
+        console.error(e);
       }
     };
     reader.readAsText(file);
