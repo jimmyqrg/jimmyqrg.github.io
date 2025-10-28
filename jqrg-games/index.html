@@ -325,9 +325,35 @@
     <button class="btn" onclick="openGame('https://qqusdqqusd.github.io/jqrg-games/games/subway-surfers-newyork.html')">SUBWAY SURFERS NEWYORK</button>
   </div>
 
+	<h1>PLEASE SAVE YOUR GAME PROGRESS<h1>
+	<h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!<h2>
+	<button class="btn" onclick="downloadSave()">Download Progress</button>
+	<input class="btn" type="file" id="upload" onchange="uploadSave()" />
+
   <p>Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white;">ikunbeautiful@gmail.com</a> if you wish to add more games. I will do my best to add them.</p>
 
   <script>
+
+	function downloadSave() {
+	  const data = JSON.stringify(localStorage);
+	  const blob = new Blob([data], {type: "application/json"});
+	  const a = document.createElement("a");
+	  a.href = URL.createObjectURL(blob);
+	  a.download = "game-save.json";
+	  a.click();
+	}
+	
+	function uploadSave() {
+	  const file = document.getElementById("upload").files[0];
+	  const reader = new FileReader();
+	  reader.onload = () => {
+	    const data = JSON.parse(reader.result);
+	    for (const [k, v] of Object.entries(data)) localStorage.setItem(k, v);
+	    alert("Progress restored!");
+	  };
+	  reader.readAsText(file);
+	}
+
     function openGame(url) {
       const win = window.open('about:blank', '_blank');
       const iframe = win.document.createElement('iframe');
