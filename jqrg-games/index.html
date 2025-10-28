@@ -335,49 +335,55 @@
   <p>Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white;">ikunbeautiful@gmail.com</a> if you wish to add more games. I will do my best to add them.</p>
 
   <script>
+  // ==== PROGRESS SAVE / LOAD FUNCTIONS ====
+  function downloadSave() {
+    const data = JSON.stringify(localStorage);
+    const blob = new Blob([data], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "game-save.json";
+    a.click();
+  }
 
-	function downloadSave() {
-	  const data = JSON.stringify(localStorage);
-	  const blob = new Blob([data], {type: "application/json"});
-	  const a = document.createElement("a");
-	  a.href = URL.createObjectURL(blob);
-	  a.download = "game-save.json";
-	  a.click();
-	}
-	
-	function uploadSave() {
-	  const file = document.getElementById("upload").files[0];
-	  const reader = new FileReader();
-	  reader.onload = () => {
-	    const data = JSON.parse(reader.result);
-	    for (const [k, v] of Object.entries(data)) localStorage.setItem(k, v);
-	    alert("Progress restored!");
-	  };
-	  reader.readAsText(file);
-	}
+  function uploadSave() {
+    const file = document.getElementById("upload").files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const data = JSON.parse(reader.result);
+        for (const [k, v] of Object.entries(data)) localStorage.setItem(k, v);
+        alert("Progress restored!");
+      } catch (e) {
+        alert("Failed to load progress. Invalid file.");
+      }
+    };
+    reader.readAsText(file);
+  }
 
-    function openGame(url) {
-      const win = window.open('about:blank', '_blank');
-      const iframe = win.document.createElement('iframe');
-      iframe.style.position = "fixed";
-      iframe.style.top = 0;
-      iframe.style.left = 0;
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
-      iframe.src = url.startsWith("http") ? url : "https://" + url;
-      win.document.body.style.margin = "0";
-      win.document.body.appendChild(iframe);
-    }
+  // ==== GAME OPENING FUNCTION ====
+  function openGame(url) {
+    const win = window.open('about:blank', '_blank');
+    const iframe = win.document.createElement('iframe');
+    iframe.style.position = "fixed";
+    iframe.style.top = 0;
+    iframe.style.left = 0;
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "none";
+    iframe.src = url.startsWith("http") ? url : "https://" + url;
+    win.document.body.style.margin = "0";
+    win.document.body.appendChild(iframe);
+  }
 
-    // Sort ALL GAMES alphabetically
-    window.addEventListener('DOMContentLoaded', () => {
-      const container = document.getElementById('allGames');
-      const buttons = Array.from(container.querySelectorAll('.btn'));
-      buttons.sort((a, b) => a.textContent.trim().localeCompare(b.textContent.trim()));
-      container.innerHTML = '';
-      buttons.forEach(btn => container.appendChild(btn));
-    });
-  </script>
+  // ==== SORT ALL GAMES ALPHABETICALLY ====
+  window.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('allGames');
+    const buttons = Array.from(container.querySelectorAll('.btn'));
+    buttons.sort((a, b) => a.textContent.trim().localeCompare(b.textContent.trim()));
+    container.innerHTML = '';
+    buttons.forEach(btn => container.appendChild(btn));
+  });
+</script>
 </body>
 </html>
