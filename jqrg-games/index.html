@@ -349,31 +349,20 @@
     const file = document.getElementById("upload").files[0];
     if (!file) return;
 
+    const confirmReplace = confirm(
+      "WARNING: Uploading this file will REPLACE your current progress.\nDo you want to continue?"
+    );
+    if (!confirmReplace) return;
+
     const reader = new FileReader();
     reader.onload = () => {
       try {
         const data = JSON.parse(reader.result);
-
-        // Ask if user wants to overwrite existing keys
-        let overwrite = false;
-        for (const key of Object.keys(data)) {
-          if (localStorage.getItem(key) !== null) {
-            overwrite = confirm("⚠️ Some of your current progress already exists in this file. Overwrite existing data?");
-            break; // only ask once
-          }
-        }
-
-        for (const [k, v] of Object.entries(data)) {
-          if (localStorage.getItem(k) === null || overwrite) {
-            localStorage.setItem(k, v);
-          }
-        }
-
-        alert("Progress successfully merged!");
-        location.reload(); // apply new progress immediately
+        localStorage.clear(); // safely clear existing progress
+        for (const [k, v] of Object.entries(data)) localStorage.setItem(k, v);
+        alert("Progress successfully replaced!");
       } catch (e) {
         alert("Failed to load progress. Invalid file.");
-        console.error(e);
       }
     };
     reader.readAsText(file);
@@ -403,5 +392,6 @@
     buttons.forEach(btn => container.appendChild(btn));
   });
 </script>
+
 </body>
 </html>
