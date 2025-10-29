@@ -149,6 +149,34 @@
     animation: newBadgeShimmer 1.5s linear infinite;
   }
 
+  /* === CONSTRUCTION ZONE OVERLAY === */
+  .construction-zone {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .construction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 50% black overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffcc00;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    border-radius: 12px;
+    pointer-events: none; /* prevents blocking hover or clicks if you want */
+  }
+
+
   /* === Subtle pulsing animation === */
   @keyframes newBadgePulse {
     0% {
@@ -324,13 +352,18 @@
     <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')">SUBWAY SURFERS MONACO</button>
     <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')">SUBWAY SURFERS NEWYORK</button>
   </div>
-	<br>
-	<br>
-	<br>
-	<h1>PLEASE SAVE YOUR GAME PROGRESS<h1>
-	<h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!</h2>
-	<button class="btn" onclick="downloadSave()">Download Progress</button>
-	<input class="btn" type="file" id="upload" onchange="uploadSave()" />
+
+	<br><br><br>
+
+  <div class="construction-zone">
+    <div style="padding: 40px; border: 2px solid white; border-radius: 12px;">
+      <h1>PLEASE SAVE YOUR GAME PROGRESS</h1>
+      <h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!</h2>
+      <button class="btn" onclick="downloadSave()">Download Progress</button>
+      <input class="btn" type="file" id="upload" onchange="uploadSave()" />
+    </div>
+    <div class="construction-overlay">⚠️ Construction Zone</div>
+  </div>
 
   <p>Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white;">ikunbeautiful@gmail.com</a> if you wish to add more games. I will do my best to add them.</p>
 
