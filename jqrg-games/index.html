@@ -3,166 +3,227 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | JQRG</title>
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="jq.ico">
-  <!-- Google Fonts: Josefin Sans -->
+  <title>Home | Infinite Campus</title>
+  <link rel="icon" type="image/png" href="infinite-campus.png">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      background: url("background.png") no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      font-family: "Josefin Sans", sans-serif;
-      text-align: center;
-    }
-    h1 {
-      margin-bottom: 40px;
-      font-size: 2.8rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-align: center;
-      text-shadow: 0 0 8px rgba(0,0,0,0.7);
-    }
-    .btn {
-      display: inline-block;
-      width: 100%;
-      max-width: 250px;
-      padding: 12px 28px;
-      border: 2px solid white;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition:
-          transform 0.5s ease,
-          box-shadow 0.8s ease,
-          background 1s ease,
-          border-color 0.8s ease,
-          letter-spacing 0.8s ease;
-      background-size: 300% 300%;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-    .btn:hover {
-      color: #fff;
-      border-color: transparent;
-      background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-      background-size: 400% 100%;
-      transform: translateY(-4px) scale(1.07);
-      letter-spacing: 1px;
-      box-shadow:
-        0 0 10px rgba(77, 140, 255, 0.6),
-        0 0 20px rgba(138, 77, 255, 0.5),
-        0 0 35px rgba(255, 77, 184, 0.4),
-        inset 0 0 10px rgba(255, 255, 255, 0.2);
-      animation:
-        gradientTravel 4s linear infinite,
-        outlinePulse 2.5s ease-in-out infinite alternate,
-        shineSweep 6s ease-in-out infinite;
-    }
+  body {
+    margin: 0;
+    background: url("background2.png") no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 200px;
+    overflow-y: auto;
+  }
+  h1 {
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  }
+  h2 {
+    margin: 50px 0 35px 0;
+    font-size: 2rem;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  }
+  .btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 250px;
+    padding: 12px 28px;
+    border: 2px solid white;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+        transform 0.5s ease,
+        box-shadow 0.8s ease,
+        background 1s ease,
+        border-color 0.8s ease,
+        letter-spacing 0.8s ease;
+    background-size: 300% 300%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .btn:hover {
+    color: #fff;
+    border-color: transparent;
+    background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+    background-size: 400% 100%;
+    transform: translateY(-4px) scale(1.07);
+    letter-spacing: 1px;
+    box-shadow:
+      0 0 10px rgba(77, 140, 255, 0.6),
+      0 0 20px rgba(138, 77, 255, 0.5),
+      0 0 35px rgba(255, 77, 184, 0.4),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+    animation:
+      gradientTravel 4s linear infinite,
+      outlinePulse 2.5s ease-in-out infinite alternate,
+      shineSweep 6s ease-in-out infinite;
+  }
+  @keyframes gradientTravel {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+  @keyframes outlinePulse {
+    0% { box-shadow: 0 0 10px rgba(77, 140, 255, 0.7),0 0 25px rgba(138, 77, 255, 0.4),0 0 45px rgba(255, 77, 184, 0.3),0 0 0 3px rgba(77, 140, 255, 0.1);}
+    100% { box-shadow: 0 0 18px rgba(255, 77, 184, 0.8),0 0 40px rgba(77, 140, 255, 0.6),0 0 65px rgba(138, 77, 255, 0.4),0 0 0 5px rgba(255, 77, 184, 0.15);}
+  }
+  @keyframes shineSweep { 0%,100% {filter: brightness(1);} 50% {filter: brightness(1.4);} }
 
-    @keyframes gradientTravel {
-      0% {
-        background-position: 0% 50%;
-        box-shadow:
-          0 0 15px rgba(77, 140, 255, 0.6),
-          0 0 30px rgba(138, 77, 255, 0.4),
-          0 0 50px rgba(255, 77, 184, 0.3);
-      }
-      100% {
-        background-position: 200% 50%;
-        box-shadow:
-          0 0 20px rgba(255, 77, 184, 0.7),
-          0 0 40px rgba(77, 140, 255, 0.5),
-          0 0 60px rgba(138, 77, 255, 0.4);
-      }
-    }
+  .btn-new { position: relative; overflow: visible !important; z-index: 1; }
+  .btn-new::after {
+    content: "NEW!";
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    padding: 3px 7px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
+    border-radius: 6px;
+    box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    animation: newBadgePulse 2.5s ease-in-out infinite;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .btn-new:hover::after {
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
+    animation: newBadgeShimmer 1.5s linear infinite;
+  }
+  @keyframes newBadgePulse { 0%,100%{opacity:0.85;transform:scale(1);}50%{opacity:1;transform:scale(1.1);} }
+  @keyframes newBadgeShimmer { 0%,100%{filter: brightness(1);}50%{filter: brightness(1.4);} }
 
-    @keyframes outlinePulse {
-      0% {
-        box-shadow:
-          0 0 10px rgba(77, 140, 255, 0.7),
-          0 0 25px rgba(138, 77, 255, 0.4),
-          0 0 45px rgba(255, 77, 184, 0.3),
-          0 0 0 3px rgba(77, 140, 255, 0.1);
-      }
-      100% {
-        box-shadow:
-          0 0 18px rgba(255, 77, 184, 0.8),
-          0 0 40px rgba(77, 140, 255, 0.6),
-          0 0 65px rgba(138, 77, 255, 0.4),
-          0 0 0 5px rgba(255, 77, 184, 0.15);
-      }
-    }
+  .back-btn { position: fixed; top: 20px; left: 20px; background: rgba(0,0,0,0.7); border: 2px solid white; border-radius: 6px; color: white; padding: 8px 20px; font-size: 1rem; text-decoration: none; transition: all 0.2s; }
+  .back-btn:hover { background: white; color: black; }
+  .btn-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; justify-items: center; max-width: 1200px; margin: 0 auto; }
+  p { margin-top: 40px; font-size: 0.9rem; opacity: 0.8; }
 
-    @keyframes shineSweep {
-      0% { filter: brightness(1); }
-      50% { filter: brightness(1.4); }
-      100% { filter: brightness(1); }
-    }
-
-    /* Construction overlay */
-    .construction-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: 700;
-      color: #ffcc00;
-      text-shadow: 0 0 8px rgba(0,0,0,0.8);
-      border-radius: 12px;
-      pointer-events: all;
-      cursor: not-allowed;
-    }
+  /* === CONSTRUCTION ZONE === */
+  .construction-zone { position: relative; display: inline-block; width: 100%; max-width: 600px; margin: 0 auto; }
+  .construction-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffcc00;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    border-radius: 12px;
+    pointer-events: all; /* blocks all interactions below it */
+    cursor: not-allowed; /* shows "🚫" cursor when hovered */
+  }
   </style>
 </head>
 <body>
+  <a href="https://jimmyqrg.github.io/WoCaoNiMaZenMeHuiYouZheYangDeRenYaoJinWoDeWangZhan54188sb250.html" class="back-btn">⬅ Back</a>
 
-  <h1>JIMMYQRG.GITHUB.IO</h1>
+  <h1>JQRG Games</h1>
 
-  <a href="https://jimmyqrg.github.io/jqrg-games">
-    <button class="btn">JQRG UNBLOCKED GAMES</button>
-  </a>
+  <button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/melon-playground.html')">MELON PLAYGROUND</button>
 
-  <br>
-
-  <a href="https://jimmyqrg.github.io/unblocks">
-    <button class="btn">SAVED GAME LINKS</button>
-  </a>
-
-  <br>
-
-  <a href="https://jimmyqrg.github.io/HTML-unblocker">
-    <button class="btn">HTML UNBLOCKER</button>
-  </a>
-
-  <br>
-
-  <a href="https://jimmyqrg.github.io/suggest-games">
-    <button class="btn">SUGGEST GAMES</button>
-  </a>
-  
-  <p><a href="https://docs.google.com/document/d/1Xv3x76SwL2CkZPIJq0uMNBt_YQNRfWrR5H5mXILuxfw/edit?tab=t.w5htvyo8czbl" style="color:white; text-decoration:underline;">Announcements (If your access is allowed)</a></p>
-
-  <div class="construction-overlay">
-    🚧 Under Construction 🚧
+  <h2>FEATURED GAMES</h2>
+  <div class="btn-grid">
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')">TAG</button>
+    <button class="btn" onclick="location.href='https://jimmyqrg.github.io/jqrg-games/eaglercraft'">EAGLERCRAFT</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')">WE BECOME WHAT WE BEHOLD</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')">UNDERTALE</button>
+    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')">HOLLOW KNIGHT</button>
   </div>
+
+  <h2>ALL GAMES</h2>
+  <div id="allGames" class="btn-grid"></div>
+
+  <h2>TOUCHSCREEN GAMES</h2>
+  <div class="btn-grid"></div>
+
+  <br><br><br>
+
+  <div class="construction-zone">
+    <div style="padding: 40px; border: 2px solid white; border-radius: 12px;">
+      <h1>PLEASE SAVE YOUR GAME PROGRESS</h1>
+      <h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!</h2>
+      <button class="btn" onclick="downloadSave()">Download Progress</button>
+      <input class="btn" type="file" id="upload" onchange="uploadSave()" />
+    </div>
+    <div class="construction-overlay"><strong>⚠️ CONSTRUCTION ZONE</strong></div>
+  </div>
+
+  <p>Email <a href="mailto:ikunbeautiful@gmail.com" style="color:white;">ikunbeautiful@gmail.com</a> if you wish to add more games. I will do my best to add them.</p>
+
+<script>
+function downloadSave() {
+  const data = JSON.stringify(localStorage);
+  const blob = new Blob([data], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "game-save.json";
+  a.click();
+}
+
+function uploadSave() {
+  const file = document.getElementById("upload").files[0];
+  if (!file) return;
+
+  const confirmReplace = confirm(
+    "WARNING: Uploading this file will REPLACE your current progress.\nDo you want to continue?"
+  );
+  if (!confirmReplace) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      localStorage.clear();
+      for (const [k, v] of Object.entries(data)) localStorage.setItem(k, v);
+      alert("Progress successfully replaced!");
+    } catch (e) {
+      alert("Failed to load progress. Invalid file.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+function openGame(url) {
+  const win = window.open('about:blank', '_blank');
+  const iframe = win.document.createElement('iframe');
+  iframe.style.position = "fixed";
+  iframe.style.top = 0;
+  iframe.style.left = 0;
+  iframe.style.width = "100%";
+  iframe.style.height = "100%";
+  iframe.style.border = "none";
+  iframe.src = url.startsWith("http") ? url : "https://" + url;
+  win.document.body.style.margin = "0";
+  win.document.body.appendChild(iframe);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('allGames');
+  const buttons = Array.from(container.querySelectorAll('.btn'));
+  buttons.sort((a, b) => a.textContent.trim().localeCompare(b.textContent.trim()));
+  container.innerHTML = '';
+  buttons.forEach(btn => container.appendChild(btn));
+});
+</script>
 
 </body>
 </html>
