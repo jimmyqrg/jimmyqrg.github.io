@@ -1,86 +1,275 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Site not found · GitHub Pages</title>
-<style>
-  :root{
-    --page-bg: #f0f0f0;
-    --text-gray: #555;
-    --text-black: #000;
-    --maxw: 760px;
-  }
-  html, body{
-    margin:0;
-    padding:0;
-    background: var(--page-bg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color: var(--text-gray);
-  }
-  body{
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* horizontally center */
-    padding: 40px 20px;
-    box-sizing: border-box;
-  }
-  main{
-    width:100%;
-    max-width: var(--maxw);
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* horizontally center content */
-  }
-  .code404{
-    font-size: 4rem;
-    color: var(--text-black);
-    font-weight: normal;
-    margin: 0 0 10px 0;
-  }
-  .headline{
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-  }
-  .explain{
-    font-size: 0.85rem;
-    margin: 0 0 8px 0;
-    line-height: 1.4;
-    text-align: center;
-  }
-  .note{
-    font-size: 0.75rem;
-    color:#777;
-    margin-top: 8px;
-    text-align: center;
-  }
-  .cat{
-    width:32px;
-    height:auto;
-    display:block;
-    margin-top:12px;
-  }
-  @media (max-width:480px){
-    .code404{font-size:3rem}
-    .headline{font-size:0.9rem}
-    .explain{font-size:0.8rem}
-    .note{font-size:0.7rem}
-    .cat{width:24px;margin-top:8px}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | JQRG</title>
+  <link rel="icon" type="image/png" href="jq.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: url("background.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: "Josefin Sans", sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 250px;
+      padding: 12px 28px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.5s ease, box-shadow 0.8s ease, background 1s ease, border-color 0.8s ease, letter-spacing 0.8s ease;
+      background-size: 300% 300%;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .btn:hover {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+      background-size: 400% 100%;
+      transform: translateY(-4px) scale(1.07);
+      letter-spacing: 1px;
+      box-shadow:
+        0 0 10px rgba(77, 140, 255, 0.6),
+        0 0 20px rgba(138, 77, 255, 0.5),
+        0 0 35px rgba(255, 77, 184, 0.4),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      animation:
+        gradientTravel 4s linear infinite,
+        outlinePulse 2.5s ease-in-out infinite alternate,
+        shineSweep 6s ease-in-out infinite;
+    }
+
+    @keyframes gradientTravel {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    @keyframes outlinePulse {
+      0% {
+        box-shadow:
+          0 0 10px rgba(77, 140, 255, 0.7),
+          0 0 25px rgba(138, 77, 255, 0.4),
+          0 0 45px rgba(255, 77, 184, 0.3),
+          0 0 0 3px rgba(77, 140, 255, 0.1);
+      }
+      100% {
+        box-shadow:
+          0 0 18px rgba(255, 77, 184, 0.8),
+          0 0 40px rgba(77, 140, 255, 0.6),
+          0 0 65px rgba(138, 77, 255, 0.4),
+          0 0 0 5px rgba(255, 77, 184, 0.15);
+      }
+    }
+
+    @keyframes shineSweep {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+      100% { filter: brightness(1); }
+    }
+
+    /* === Modal Popup Styles === */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 2px solid white;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      color: white;
+      padding: 30px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      transform: scale(0.85);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    /* Glow animation while open */
+    .modal-content.active {
+      animation: modalGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes modalGlow {
+      0% {
+        box-shadow: 0 0 25px rgba(255, 77, 184, 0.4), 0 0 50px rgba(77, 140, 255, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 35px rgba(255, 77, 184, 0.8), 0 0 70px rgba(77, 140, 255, 0.6);
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #ff4db8;
+      transform: scale(1.3);
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      animation: fadeIn 0.4s forwards;
+    }
+
+    .modal-overlay.hide {
+      animation: fadeOut 0.4s forwards;
+    }
+
+    .modal-content.show {
+      opacity: 1;
+      transform: scale(1);
+      transition: all 0.4s ease;
+    }
+
+    .modal-content.hide {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .announcement-link {
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+  </style>
 </head>
 <body>
-  <main>
-    <div class="code404">404</div>
-    <div class="headline">This site has been removed from GitHub Pages</div>
-    <p class="explain">
-      This website has been removed from the service and is temporarily inaccessible due to serious violations of our Terms of Use and multiple illegal content. If you have any questions, please report them to us.
-    </p>
-    <div class="note">
-      GitHub Status — @githubstatus<br>This site has been disabled by GitHub and will no longer be public
+
+  <h1>JIMMYQRG.GITHUB.IO</h1>
+
+  <a href="https://jimmyqrg.github.io/jqrg-games"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
+  <br>
+  <a href="https://jimmyqrg.github.io/unblocks"><button class="btn">SAVED GAME LINKS</button></a>
+  <br>
+  <a href="https://jimmyqrg.github.io/HTML-unblocker"><button class="btn">HTML UNBLOCKER</button></a>
+  <br>
+  <a href="https://jimmyqrg.github.io/suggest-games"><button class="btn">SUGGEST GAMES</button></a>
+  
+  <p><span class="announcement-link">Announcements (Click to reopen)</span></p>
+
+  <!-- === Modal Popup === -->
+  <div class="modal-overlay" id="announcementModal">
+    <div class="modal-content" id="announcementContent">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <h2 style="text-align:center;">📢 Announcements</h2>
+      <p>Welcome to <strong>JimmyQrg</strong>! Check here for updates, new game releases, and important information.</p>
+      <p>More informations and updates can be found 
+        <a href="https://docs.google.com/document/d/1Xv3x76SwL2CkZPIJq0uMNBt_YQNRfWrR5H5mXILuxfw/edit?tab=t.w5htvyo8czbl" 
+           target="_blank" 
+           style="color:#4d8cff; text-decoration:underline;">here</a>.</p>
+      <hr style="border: 1px solid rgba(255,255,255,0.3);">
+      <p>✨ Latest updates:</p>
+        <ul>
+          <li>Due to serious bugs, the site will <strong>not</strong> be switched to qqusdqqusd.github.io in a while</li>
+          <li>The website is back to <strong>jimmyqrg.github.io</strong>!</li>
+          <li>Button click issue <strong>fixed!</strong></li>
+          <li>Added Announcements Pop up</li>
+          <li>The download game progress button doesn't work.</li>
+        </ul>
+      <p>🚀 Future work:</p>
+        <ul>
+          <li>This website will be switched to qqusdqqusd.github.io after I figure out how to save the game progress.</li>
+        </ul>
     </div>
-    <img src="github.png" alt="gray cat icon" class="cat" />
-  </main>
+  </div>
+
+  <script>
+    const modal = document.getElementById('announcementModal');
+    const content = document.getElementById('announcementContent');
+    const openBtn = document.querySelector('.announcement-link');
+    const closeBtn = document.getElementById('closeModal');
+
+    function openModal() {
+      modal.classList.remove('hide');
+      content.classList.remove('hide');
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('show');
+        content.classList.add('show', 'active');
+      }, 10);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      content.classList.remove('show', 'active');
+      content.classList.add('hide');
+      modal.classList.add('hide');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        content.classList.remove('hide');
+      }, 400);
+    }
+
+    // open when the website is visited
+    window.addEventListener('load', openModal);
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+
 </body>
 </html>
