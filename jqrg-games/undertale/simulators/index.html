@@ -193,13 +193,47 @@
       cursor: pointer;
     }
 
+    .btn-new::after {
+        content: "FEATURED";
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        padding: 3px 7px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
+        border-radius: 6px;
+        box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        animation: newBadgePulse 2.5s ease-in-out infinite;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 5;
+    }
+    .btn-new:hover::after {
+        transform: scale(1.15) rotate(2deg);
+        box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
+        animation: newBadgeShimmer 1.5s linear infinite;
+    }
+    @keyframes newBadgePulse {
+        0% { opacity: 0.85; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+        100% { opacity: 0.85; transform: scale(1); }
+    }
+    @keyframes newBadgeShimmer {
+        0% { filter: brightness(1); }
+        50% { filter: brightness(1.4); }
+        100% { filter: brightness(1); }
+    }
+
   </style>
 </head>
 <body>
 
   <h1>UNDERTALE FIGHT SIMULATORS</h1>
 
-  <a href="https://jimmyqrg.github.io/jqrg-games/games/asriel.html"><button class="btn">ASRIEL DREEMURR FIGHT</button></a>
+  <a href="https://jimmyqrg.github.io/jqrg-games/games/asriel.html"><button class="btn btn-new">ASRIEL DREEMURR FIGHT</button></a>
   <br>
   <a href="https://jimmyqrg.github.io/jqrg-games/games/asriel-i.html"><button class="btn">ASRIEL DREEMURR INVINCIBLE MODE</button></a>
   <br>
