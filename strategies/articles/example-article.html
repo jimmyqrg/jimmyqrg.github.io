@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <title>Formatting Examples - JQRG</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Josefin Sans, stylesheet;
+      background: radial-gradient(circle at center, #1a0033, #000010);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 80px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 750px;
+      padding: 30px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(150, 0, 255, 0.3);
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes contentLoad {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 46px;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgba(255,255,255,0.25);
+      text-shadow: 0 0 10px rgba(180, 0, 255, 0.7);
+      animation: contentLoad 1s ease-out;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 30px;
+      letter-spacing: 2px;
+      margin-top: -10px;
+      margin-bottom: 25px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid rgba(255,255,255,0.15);
+      text-shadow: 0 0 6px rgba(180, 0, 255, 0.5);
+      animation: contentLoad 1.2s ease-out;
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 26px;
+      color: #d580ff;
+      animation: contentLoad 1.2s ease-out;
+    }
+
+    p, ul {
+      font-size: 18px;
+      line-height: 28px;
+      animation: contentLoad 1.3s ease-out;
+    }
+
+    ul {
+      padding-left: 25px;
+    }
+
+    .box {
+      margin-top: 20px;
+      padding: 20px;
+      background: rgba(255,255,255,0.08);
+      border-left: 4px solid #b300ff;
+      border-radius: 10px;
+      animation: fadeIn 1.8s ease-out;
+    }
+
+    /* BACK BUTTON */
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(255,255,255,0.12);
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-size: 18px;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: 0.25s;
+      box-shadow: 0 0 5px rgba(200, 0, 255, 0.4);
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.2);
+      box-shadow: 0 0 12px rgba(200,0,255,0.7);
+      transform: scale(1.05);
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 2px solid white;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      color: white;
+      padding: 30px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      transform: scale(0.85);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    /* Glow animation while open */
+    .modal-content.active {
+      animation: modalGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes modalGlow {
+      0% {
+        box-shadow: 0 0 25px rgba(255, 77, 184, 0.4), 0 0 50px rgba(77, 140, 255, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 35px rgba(255, 77, 184, 0.8), 0 0 70px rgba(77, 140, 255, 0.6);
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #ff4db8;
+      transform: scale(1.3);
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      animation: fadeIn 0.4s forwards;
+    }
+
+    .modal-overlay.hide {
+      animation: fadeOut 0.4s forwards;
+    }
+
+    .modal-content.show {
+      opacity: 1;
+      transform: scale(1);
+      transition: all 0.4s ease;
+    }
+
+    .modal-content.hide {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .announcement-link {
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Back Button -->
+  <div class="back-btn" onclick="location.href='https://jimmyqrg.github.io/strategies/'">
+    ⬅ Back
+  </div>
+
+  <div class="container">
+    <h1>Formatting</h1>
+    <div class="subtitle">Formatting Examples Page</div>
+
+    <h2>Section Title</h2>
+    <p>This is a section description under a section title.</p>
+
+    <h2>Bullet Points</h2>
+    <ul>
+      <li>First bullet example</li>
+      <li>Second bullet example</li>
+      <li>Third bullet example</li>
+    </ul>
+
+    <div class="box">
+      <p><b>Bold text example</b></p>
+      <p><i>Italic text example</i></p>
+      <p><u>Underlined text example</u></p>
+      <p><s>Crossed-out text example</s></p>
+      <p>Normal text example.</p>
+    </div>
+
+  </div>
+</body>
+</html>
