@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>THIS PAGE IS IN PROGRESS!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0a0020;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #0066ff;
+      color: white;
+    }
+    button:hover {
+      background: #0040aa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>THIS PAGE IS IN PROGRESS!</h1>
+  <button id="backBtn">Back</button>
+
+  <script>
+    // Get the "back" link from URL
+    const params = new URLSearchParams(window.location.search);
+    const backLink = params.get("back") || "https://jimmyqrg.github.io";
+
+    document.getElementById("backBtn").onclick = () => {
+      window.location.href = backLink;
+    };
+  </script>
+
+</body>
+</html>
