@@ -89,33 +89,59 @@
       color: white;
       text-decoration: none;
     }
+
+    /* ✅ Back button style */
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 25px;
+      padding: 10px 18px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 16px;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.18);
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(180, 0, 255, 0.4);
+    }
+
   </style>
 </head>
 <body>
   <div class="container">
+
+    <!-- ✅ Back Button -->
+    <button class="back-btn" onclick="location.href='https://jimmyqrg.github.io/'">← Back</button>
+
     <h1>Information</h1>
     <ul>
 
       <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/avoid-goguardian'">
         <a>
-          <span class="item-title">How to avoid GoGuardian</span><br>
-          <span class="item-desc">No more annoying GuGuardian that stops you from playing games!</span>
+          <span class="item-title">How to Avoid GoGuardian</span><br>
+          <span class="item-desc">No more annoying GoGuardian blocking your fun.</span>
         </a>
       </li>
 
       <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/clear-history'">
         <a>
-          <span class="item-title">How to clear Chromebook web history</span><br>
-          <span class="item-desc">3 easiest way to delete your bad bad bad history</span>
+          <span class="item-title">How to Clear Chromebook Web History</span><br>
+          <span class="item-desc">Three easiest ways to delete your bad bad bad history.</span>
         </a>
       </li>
 
       <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/make-website/'">
         <a>
-          <span class="item-title">How to Create Your Very Own Website</span><br>
-          <span class="item-desc">Use a very easy way to create your own website using GitHub</span>
+          <span class="item-title">How to Create Your Own Website</span><br>
+          <span class="item-desc">Build a website easily using GitHub.</span>
         </a>
       </li>
+
     </ul>
   </div>
 </body>
