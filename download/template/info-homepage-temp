@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <title>Strategies - JQRG</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Josefin Sans, stylesheet;
+      background: radial-gradient(circle at center, #1a0033, #000010);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 60px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 750px;
+      padding: 30px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(150, 0, 255, 0.3);
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 10px;
+      animation: slideDown 1s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .item {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(255,255,255,0.07);
+      border-left: 4px solid #b300ff;
+      border-radius: 8px;
+      transition: 0.3s;
+      animation: itemFade 1.2s ease-out forwards;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    @keyframes itemFade {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .item:hover {
+      transform: scale(1.03);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 10px rgba(180, 0, 255, 0.4);
+    }
+
+    .item-title {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .item-desc {
+      opacity: 0.8;
+      font-size: 15px;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Information</h1>
+    <ul>
+
+      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example1.html'">
+        <a>
+          <span class="item-title">Example Article #1</span><br>
+          <span class="item-desc">Description about topic goes here...</span>
+        </a>
+      </li>
+
+      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example2.html'">
+        <a>
+          <span class="item-title">Example Article #2</span><br>
+          <span class="item-desc">Description about topic goes here...</span>
+        </a>
+      </li>
+
+      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example3.html'">
+        <a>
+          <span class="item-title">Example Article #3</span><br>
+          <span class="item-desc">Description about topic goes here...</span>
+        </a>
+      </li>
+
+      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example4.html'">
+        <a>
+          <span class="item-title">Example Article #4</span><br>
+          <span class="item-desc">Description about topic goes here...</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+</body>
+</html>
