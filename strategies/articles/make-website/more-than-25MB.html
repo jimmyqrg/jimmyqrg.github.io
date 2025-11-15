@@ -14,6 +14,7 @@
 
     body {
       margin: 0;
+      margin-top: 20px;
       font-family: Josefin Sans, stylesheet;
       background: radial-gradient(circle at center, #1a0033, #000010);
       color: white;
@@ -75,6 +76,7 @@
     }
 
     p, ul {
+      margin-top: 20px;
       font-size: 18px;
       line-height: 28px;
       animation: contentLoad 1.3s ease-out;
@@ -222,37 +224,61 @@
 <body>
 
   <!-- Back Button -->
-  <div class="back-btn" onclick="location.href='https://jimmyqrg.github.io/strategies/'">
+  <div class="back-btn" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/make-website/'">
     ⬅ Back
   </div>
 
   <div class="container">
-    <h1>Part 1</h1>
-    <div class="subtitle">How to make your very own gaming website</div>
+    <h1>Better File Upload Options</h1>
+    <div class="subtitle">Totorial for uploading files more than 25MB</div>
 
     <h2>Introduction</h2>
-    <p>Before you start, I assume you already knows how to code HTML, but don't worry if you don't, AI's got everything ^_^</p>
+    <p>As if you don't know, if you try to upload files that are more than 25MB, like Eaglercraft 1.12.2, GitHub will auto reject it. This is a common problem for website developers and there is two solutions. The first one is to host the script in another place and link it to GitHub, which is more complex. In this totorial, we are going to focus on the second one.</p>
 
-    <h2>Learning Goal</h2>
-    <p>In this part, you'll learn:</p>
+    <h2>Requirements</h2>
+    <p>To use this method, you have to have a computer that:</p>
     <div class="box">
       <ul>
-        <li>Start using GitHub</li>
-        <li>Use repo and add file</li>
-        <li>Publish your website using GitHub Pages</li>
+        <li>Is not your school chromebook;</li>
+        <li>Can download apps</li>
+        <li>Is Mac or Windows</li>
       </ul>
     </div>
 
-    <h2>Start Using GitHub</h2>
-    <p>There is no rush, follow these steps carefully</p>
-    <div class="box">
-      <ul>
-        <li>First, go to <i><a href="https://www.github.com" target="_blank">GitHub</a></i> and sign up for an account that's <b>NOT YOUR SCHOOL ACCOUNT</b>, </li>
-        <li>Find the "New Repository" button on the left menu, click it.</li>
-        <img src="images/image-1.png" alt="image">
-      </ul>
+    <h2>Downloading GitHub Desktop</h2>
+    <p>Go to <u><a href="https://desktop.github.com/download/" target="_blank">this link</a> and download GitHub installer</u><br><br></p>
+    <p>After downloading, open the installer and follow the instructions to install GitHub Desktop on your computer.<br><br></p>
+    <p>Sign in GitHub Desktop<br><br></p>
+    <p>Click "File" -> "Clone repository..."<br><br></p>
+    <p>Select your repository, or your repo, then click "Clone"<br><br></p>
+    <p>Now, your repo is cloned to your computer, you can see all the files in your repo.<br><br></p>
 
+    <h2>Use repo and add file</h2>
+    <img src="images/image-1.png" alt="image">
+    <ul>
+      <li>For the name, what matters is do you want your website to be [yourname].github.io or [yourname].github.io/[repository name]<br><br></li>
+    </ul>
+      <div class="box">
+        <ul>
+          <li>If you want <i><u>[yourname]</u>.github.io</i>, name the repository as <i><u>[yourname]</u>.github.io</i></li>
+          <li>If you want <i><u>[yourname]</u>.github.io/[repository name]</i>, name the repository as anything you want</li>
+        </ul>
+      </div>
+    <br>
+    <ul>
+      <li>After naming, make sure to select "Public", nothing else don't really matter, unless you want your website to be copyrighted, added a lisence. For the lisence, I actually don't know anything about it, <u><a herf="https://chatgpt.com" target="_blank">ChatGPT</a></u> is the right <c>person</c> thing to ask.<br><br></li>
+      <li>Now, click <u><a href="https://jimmyqrg.github.io/download/games/r1-8-8" target="_blank">here</a></u> to download an example game file which is Minecraft 1.8.8.<br>You can also download other game files as long as they are HTML files.<br><br></li>
+      <li>Go back to your repository page, click "Add file" -> "Upload files"<br><br></li>
+      <li>Drag and drop the game file you just downloaded, wait for it to finish uploading, then click "Commit changes" at the bottom.<br><br></li>
+      <li>Now change your entire file name to <b>index.html</b><br>You don't have to understand the following things<br>A repository, or a repo, will see index.html as the default file, if your file name is something else, for example, eaglercraft-1.12.2.html, then you have to type [yourname].github.io/[repo name]/eaglercraft-1.12.2.html or [yourname].github.io/eaglercraft-1.12.2.html<br>If your file name does not end with .html, such as "eaglercraft-1.12.2.sb3", the website is not going to function correctly. If your file name does not have any endings such as "eaglercraft<c>.html</c>" once you enter the link [yourname].github.io/[repo name]/eaglercraft, you are going to download the file.<br>If you are uploading an image, then the image file shouldn't be ending with .html, it can be .png, .svg, .jpg, etc. .html is the browser tab code, not a form of image.</li>
+    </ul>
 
-  </div>
+    <h2>Publish your website using GitHub Pages</h2>
+    <ul>
+      <li>Now, go to "Settings" tab on the top right.</li>
+      <li>Scroll down to "Pages" section in the left menu, it should show a line of text "Deploy from a branch" at the right. Under "Source", select "main" branch, then click "Save".</li>
+      <li>After saving, wait for about 2 minutes, then refresh the page, it should show a message "Your site is ready to be published at <u>https://[yourname].github.io/[repository name]</u>" if you named your repository as [yourname].github.io, then the link will be <u>https://[yourname].github.io</u>. Once you press "visit site" or type the link of your HTML file, you will be able to access the link. It will work on everybody's computer.</li>
+      <li>Congratulations! You have made your very own gaming website!</li>
+    </ul>
 </body>
 </html>
