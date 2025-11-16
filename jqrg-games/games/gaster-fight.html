@@ -3,6 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting…</title>
-  <meta http-equiv="refresh" content="0; url=https://turbowarp.org/fullscreen?project=https://jimmyqrg.github.io/jqrg-games/games/gaster-fight.sb3">
+  <style>
+    body {
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    .warning {
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .count {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+  </style>
+
+  <script>
+    let seconds = 3;
+    function updateCountdown() {
+      document.getElementById("count").textContent = seconds;
+      if (seconds === 0) {
+        window.location.href = "https://turbowarp.org/fullscreen?project=https://jimmyqrg.github.io/jqrg-games/games/gaster-fight.sb3";
+      } else {
+        seconds--;
+        setTimeout(updateCountdown, 1000);
+      }
+    }
+    window.onload = updateCountdown;
+  </script>
 </head>
+
+<body>
+  <div class="warning">WARNING</div>
+  <div>If you die, the game will crash, and your browser will lag.</div>
+  <div class="count">Opening game in <span id="count">5</span> seconds</div>
+</body>
 </html>
