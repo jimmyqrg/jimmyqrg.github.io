@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sans Fights | JQRG</title>
+  <link rel="icon" type="image/png" href="https://jimmyqrg.github.io/jq.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: url("background.png") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+      font-family: "Josefin Sans", sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+    }
+
+    .btn {
+      display: inline-block;
+      width: 100%;
+      max-width: 250px;
+      padding: 12px 28px;
+      border: 2px solid white;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.5s ease, box-shadow 0.8s ease, background 1s ease, border-color 0.8s ease, letter-spacing 0.8s ease;
+      background-size: 300% 300%;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    .btn:hover {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+      background-size: 400% 100%;
+      transform: translateY(-4px) scale(1.07);
+      letter-spacing: 1px;
+      box-shadow:
+        0 0 10px rgba(77, 140, 255, 0.6),
+        0 0 20px rgba(138, 77, 255, 0.5),
+        0 0 35px rgba(255, 77, 184, 0.4),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      animation:
+        gradientTravel 4s linear infinite,
+        outlinePulse 2.5s ease-in-out infinite alternate,
+        shineSweep 6s ease-in-out infinite;
+    }
+
+    @keyframes gradientTravel {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    @keyframes outlinePulse {
+      0% {
+        box-shadow:
+          0 0 10px rgba(77, 140, 255, 0.7),
+          0 0 25px rgba(138, 77, 255, 0.4),
+          0 0 45px rgba(255, 77, 184, 0.3),
+          0 0 0 3px rgba(77, 140, 255, 0.1);
+      }
+      100% {
+        box-shadow:
+          0 0 18px rgba(255, 77, 184, 0.8),
+          0 0 40px rgba(77, 140, 255, 0.6),
+          0 0 65px rgba(138, 77, 255, 0.4),
+          0 0 0 5px rgba(255, 77, 184, 0.15);
+      }
+    }
+
+    @keyframes shineSweep {
+      0% { filter: brightness(1); }
+      50% { filter: brightness(1.4); }
+      100% { filter: brightness(1); }
+    }
+
+    /* === Modal Popup Styles === */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      animation-fill-mode: forwards;
+    }
+
+    .modal-content {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 2px solid white;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      color: white;
+      padding: 30px;
+      text-align: left;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+      transform: scale(0.85);
+      opacity: 0;
+      transition: all 0.4s ease;
+    }
+
+    /* Glow animation while open */
+    .modal-content.active {
+      animation: modalGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes modalGlow {
+      0% {
+        box-shadow: 0 0 25px rgba(255, 77, 184, 0.4), 0 0 50px rgba(77, 140, 255, 0.3);
+      }
+      100% {
+        box-shadow: 0 0 35px rgba(255, 77, 184, 0.8), 0 0 70px rgba(77, 140, 255, 0.6);
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: #ff4db8;
+      transform: scale(1.3);
+    }
+
+    .modal-overlay.show {
+      display: flex;
+      animation: fadeIn 0.4s forwards;
+    }
+
+    .modal-overlay.hide {
+      animation: fadeOut 0.4s forwards;
+    }
+
+    .modal-content.show {
+      opacity: 1;
+      transform: scale(1);
+      transition: all 0.4s ease;
+    }
+
+    .modal-content.hide {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .announcement-link {
+      color: white;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .btn-new::after {
+        content: "FEATURED";
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        padding: 3px 7px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
+        border-radius: 6px;
+        box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        animation: newBadgePulse 2.5s ease-in-out infinite;
+        transition: all 0.3s ease;
+        pointer-events: none;
+        z-index: 5;
+    }
+    .btn-new:hover::after {
+        transform: scale(1.15) rotate(2deg);
+        box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
+        animation: newBadgeShimmer 1.5s linear infinite;
+    }
+    @keyframes newBadgePulse {
+        0% { opacity: 0.85; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+        100% { opacity: 0.85; transform: scale(1); }
+    }
+    @keyframes newBadgeShimmer {
+        0% { filter: brightness(1); }
+        50% { filter: brightness(1.4); }
+        100% { filter: brightness(1); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>UNDERTALE SANS FIGHTS</h1>
+
+  <a href="https://jimmyqrg.github.io/jqrg-games/games/sans" target="_blank"><button class="btn">NORMAL BAD TIME SIMULATOR</button></a>
+  <br>
+
+  <h1>HARD MODE</h1>
+
+  <h2>LAST BREATH</h2>
+  <a href="https://jimmyqrg.github.io/jqrg-games/games/sans-last-breath" target="_blank"><button class="btn">SANS LAST BREATH WITH GASTER FIGHT</button></a>
+  <br>
+  
+  <h2>FRISK MODE</h2>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/frisk-mode/')">FRISK MODE</button>
+
+  <h2>CJS SANS</h2>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/CJ-s-Bad-Time-Simulator/')">NORMAL MODE</button>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/CJ-s-Bad-Time-Simulator-debug/')">INVINCIBLE MODE</button>
+  
+  <h2>UNDERFELL</h2>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/UNDERFELL/')">NORMAL MODE</button>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/UNDERFELL-debug/')">INVINCIBLE MODE</button>
+
+  <h2>UNDERSWAP</h2>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/UNDERSWAP-SANS-FIGHT/')">NORMAL MODE</button>
+  <button class="btn" onclick="openGame('https://caijiQAQ.github.io/UNDERSWAP-SANS-FIGHT-EasyMode/')">EASY MODE</button>
+  
+  <p>Some games are made with Scratch</p>
+
+  <script>
+    const modal = document.getElementById('announcementModal');
+    const content = document.getElementById('announcementContent');
+    const openBtn = document.querySelector('.announcement-link');
+    const closeBtn = document.getElementById('closeModal');
+    function openGame(url) {
+    	const win = window.open('about:blank', '_blank');
+    	const iframe = win.document.createElement('iframe');
+    	iframe.style.position = "fixed";
+    	iframe.style.top = 0;
+    	iframe.style.left = 0;
+    	iframe.style.width = "100%";
+    	iframe.style.height = "100%";
+    	iframe.style.border = "none";
+    	iframe.src = url.startsWith("http") ? url : "https://" + url;
+    	win.document.body.style.margin = "0";
+    	win.document.body.appendChild(iframe);
+    }
+
+    function openModal() {
+      modal.classList.remove('hide');
+      content.classList.remove('hide');
+      modal.style.display = 'flex';
+      setTimeout(() => {
+        modal.classList.add('show');
+        content.classList.add('show', 'active');
+      }, 10);
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+      content.classList.remove('show', 'active');
+      content.classList.add('hide');
+      modal.classList.add('hide');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        content.classList.remove('hide');
+      }, 400);
+    }
+
+    // open when the website is visited
+    window.addEventListener('load', openModal);
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  </script>
+
+</body>
+</html>
