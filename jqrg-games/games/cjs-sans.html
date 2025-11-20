@@ -120,7 +120,7 @@
 				return;		// no SW support, ignore call
 			
 			try {
-				navigator.serviceWorker.register("sw.js", { scope: "./" })
+				navigator.serviceWorker.register("https://caijiQAQ.github.io/CJ-s-Bad-Time-Simulator/sw.js", { scope: "./" })
 				.then(function (reg)
 				{
 					console.log("Registered service worker on " + reg.scope);
