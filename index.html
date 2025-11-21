@@ -135,7 +135,6 @@
       transition: all 0.4s ease;
     }
 
-    /* Glow animation while open */
     .modal-content.active {
       animation: modalGlow 3s ease-in-out infinite alternate;
     }
@@ -201,9 +200,29 @@
       cursor: pointer;
     }
 
+    /* === SETTINGS BUTTON === */
+    #settingsBtn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+      transition: transform 0.3s ease;
+      z-index: 2000;
+    }
+
+    #settingsBtn:hover {
+      transform: rotate(25deg) scale(1.2);
+      color: #ff4db8;
+    }
+
   </style>
 </head>
 <body>
+
+  <span id="settingsBtn">⚙️</span>
 
   <h1>JIMMYQRG.GITHUB.IO</h1>
 
@@ -223,10 +242,9 @@
   <a href="https://jimmyqrg.github.io/HTML-unblocker"><button class="btn">HTML UNBLOCKER</button></a>
   <br>
   
-  
   <p><span class="announcement-link">Announcements (Click to reopen)</span></p>
 
-  <!-- === Modal Popup === -->
+  <!-- === Announcement Modal === -->
   <div class="modal-overlay" id="announcementModal">
     <div class="modal-content" id="announcementContent">
       <span class="close-btn" id="closeModal">&times;</span>
@@ -255,7 +273,40 @@
     </div>
   </div>
 
+  <!-- === SETTINGS MODAL === -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content" id="settingsContent">
+      <span class="close-btn" id="closeSettings">&times;</span>
+
+      <h2 style="text-align:center;">⚙️ Settings</h2>
+
+      <!-- Auto popup setting -->
+      <label><b>Auto pop up announcements:</b></label><br>
+      <select id="announcementSetting" style="width:100%; padding:8px; margin-top:8px; border-radius:8px;">
+        <option value="always">Always</option>
+        <option value="big">Only when there is a big announcement</option>
+      </select>
+
+      <br><br>
+
+      <!-- Access code -->
+      <label><b>Access code:</b></label>
+      <input id="accessCode" type="password" placeholder="Enter code" 
+             style="width:100%; padding:8px; margin-top:5px; border-radius:8px;">
+
+      <button id="authorizeBtn" class="btn" style="margin-top:15px;">AUTHORIZE</button>
+      <button id="unauthorizeBtn" class="btn" style="margin-top:10px;">UNAUTHORIZE</button>
+
+      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
+
+    </div>
+  </div>
+
   <script>
+    /* --- Big Announcement flag --- */
+    let hasBigAnnouncement = true; // ✔️ Change this manually
+
+    /* --- Announcement Modal Controls --- */
     const modal = document.getElementById('announcementModal');
     const content = document.getElementById('announcementContent');
     const openBtn = document.querySelector('.announcement-link');
@@ -282,13 +333,78 @@
       }, 400);
     }
 
-    // open when the website is visited
-    window.addEventListener('load', openModal);
+    /* === Auto Popup Logic === */
+    const autoSetting = localStorage.getItem("autoAnnouncement") || "always";
+
+    if (autoSetting === "always") {
+      window.addEventListener('load', openModal);
+    } else if (autoSetting === "big" && hasBigAnnouncement) {
+      window.addEventListener('load', openModal);
+    }
+
     openBtn.addEventListener('click', openModal);
     closeBtn.addEventListener('click', closeModal);
+
     window.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
     });
+
+    /* === SETTINGS MODAL === */
+    const settingsBtn = document.getElementById("settingsBtn");
+    const settingsModal = document.getElementById("settingsModal");
+    const settingsContent = document.getElementById("settingsContent");
+    const closeSettings = document.getElementById("closeSettings");
+
+    settingsBtn.addEventListener("click", () => {
+      settingsModal.style.display = "flex";
+      setTimeout(() => {
+        settingsModal.classList.add("show");
+        settingsContent.classList.add("show", "active");
+      }, 10);
+    });
+
+    closeSettings.addEventListener("click", () => {
+      settingsModal.classList.remove("show");
+      settingsContent.classList.remove("show","active");
+      settingsContent.classList.add("hide");
+      settingsModal.classList.add("hide");
+      setTimeout(() => {
+        settingsModal.style.display = "none";
+        settingsContent.classList.remove("hide");
+      }, 400);
+    });
+
+    window.addEventListener("click", e => {
+      if (e.target === settingsModal) closeSettings.click();
+    });
+
+    /* === SETTINGS FUNCTIONALITY === */
+    const announcementSetting = document.getElementById("announcementSetting");
+    announcementSetting.value = autoSetting;
+
+    announcementSetting.addEventListener("change", () => {
+      localStorage.setItem("autoAnnouncement", announcementSetting.value);
+    });
+
+    /* --- Access Code System --- */
+    const authorizeBtn = document.getElementById("authorizeBtn");
+    const unauthorizeBtn = document.getElementById("unauthorizeBtn");
+
+    authorizeBtn.addEventListener("click", () => {
+      const code = document.getElementById("accessCode").value;
+      if (code === "asdfghjkl;'") {
+        localStorage.setItem("user", "authorized");
+        alert("Access granted.");
+      } else {
+        alert("Incorrect code.");
+      }
+    });
+
+    unauthorizeBtn.addEventListener("click", () => {
+      localStorage.setItem("user", "normal");
+      alert("User unauthorized.");
+    });
+
   </script>
 
 </body>
