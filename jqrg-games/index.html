@@ -18,15 +18,31 @@
     padding-bottom: 200px;
     overflow-y: auto;
   }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.707);
+    border: 4px solid white;
+  }
+  .collection-img {
+    max-width: 50%;
+    margin-top: 20px;
+  }
   h1 {
     margin-bottom: 40px;
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     text-shadow: 0 0 8px rgba(0,0,0,0.6);
   }
   h2 {
     margin: 50px 0 35px 0;
-    font-size: 2rem;
+    font-size: 2.3rem;
     text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  }
+  .collection-discription {
+    font-size: 1.3rem;
+    opacity: 1;
+    margin-top: 10px;
   }
   .btn {
     display: inline-block;
@@ -212,12 +228,14 @@
   </div>
 
   <h2>COLLECTIONS</h2>
-  <div class="btn-grid">
-    <button class="btn" onclick="location.href='https://jimmyqrg.github.io/jqrg-games/eaglercraft'">EAGLERCRAFT</button>
-    <button class="btn" onclick="location.href='https://jimmyqrg.github.io/scratch/jqrg-games/geometry-dash'">GEOMETRY DASH (SCRATCH BASED ALL LEVELS)</button>
-    <button class="btn" onclick="location.href='https://jimmyqrg.github.io/scratch/jqrg-games/'">MORE SCRATCH MADE GAMES</button>
-    <button class="btn" onclick="location.href='https://jimmyqrg.github.io/jqrg-games/undertale'">UNDERTALE GAMES</button>
-  </div>
+  <a href="https://jimmyqrg.github.io/jqrg-games/eaglercraft"><img class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/eaglercraft.png" alt="Eaglercraft"></a>
+  <p class="collection-discription">Eaglercraft</p>
+  <a href="https://jimmyqrg.github.io/scratch/jqrg-games/geometry-dash"><img class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/geo-dash-scratch.png" alt="Geometry Dash Lite Scratch"></a>
+  <p class="collection-discription">Geometry Dash (Scratch Based All Levels)</p>
+  <a href="https://jimmyqrg.github.io/scratch/jqrg-games/"><img class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/scratch.png" alt="Other Scratch Made Games"></a>
+  <p class="collection-discription">Other Scratch Made Games</p>
+  <a href="https://jimmyqrg.github.io/jqrg-games/undertale"><img class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/undertale.png" alt="Undertale"></a>
+  <p class="collection-discription">Undertale Games</p>
 
   <h2>FEATURED GAMES</h2>
 
