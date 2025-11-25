@@ -129,6 +129,35 @@
   .btn-new::after {
     content: "NEW!";
     position: absolute;
+    top: -4px;
+    right: -12px;
+    padding: 6px 14px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    animation: newBadgePulse 2.5s ease-in-out infinite;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .btn-new:hover::after {
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
+    animation: newBadgeShimmer 1.5s linear infinite;
+  }
+  .btn-image-new {
+    position: relative;
+    overflow: visible !important;
+    z-index: 1;
+    display: inline-block;
+  }
+  .btn-image-new::after {
+    content: "NEW!";
+    position: absolute;
     top: -8px;
     right: -8px;
     padding: 3px 7px;
@@ -144,11 +173,12 @@
     pointer-events: none;
     z-index: 5;
   }
-  .btn-new:hover::after {
+  .btn-image-new:hover::after {
     transform: scale(1.15) rotate(2deg);
     box-shadow: 0 0 12px rgba(255, 77, 184, 0.7);
     animation: newBadgeShimmer 1.5s linear infinite;
   }
+
   .construction-zone {
     position: relative;
     display: inline-block;
@@ -222,10 +252,10 @@
   <a href="https://jimmyqrg.github.io" class="back-btn">⬅ Back</a>
 
   <h1>Unblocked Games</h1>
-
-  <div class="btn-grid">
-  	<button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')">THAT'S NOT MY NEIGHBOR</button>
-  </div>
+  <!--
+  <img src="https://jimmyqrg.github.io/game-images/games/" alt="That's Not My Neighbor" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/', '_blank')">
+  <img src="https://jimmyqrg.github.io/game-images/games/" alt="That's Not My Neighbor" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/')">
+  -->
 
   <h2>COLLECTIONS</h2>
   <a href="https://jimmyqrg.github.io/jqrg-games/eaglercraft"><img class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/eaglercraft.png" alt="Eaglercraft"></a>
@@ -240,107 +270,104 @@
   <h2>FEATURED GAMES</h2>
 
   <div class="btn-grid">
-	<button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')">THAT'S NOT MY NEIGHBOR</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')">AMONG US</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')">TAG</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-12-2.html')">EAGLERCRAFT 1.12.2</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')">WE BECOME WHAT WE BEHOLD</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')">UNDERTALE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')">HOLLOW KNIGHT</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')">LEVEL DEVIL</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')">10 MINUTES TILL DAWN</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')">PLANT VS ZOMBIES</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')">FRIDAY NIGHT FUNKIN</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')">DRIFT BOSS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0')">BRIDD JUMP ORIGINAL GAME</button>
-    <button class="btn" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/undertale/asriel', '_blank')">ASRIEL DREAMURR FIGHT</button>
+    <img class="btn-image-new" src="https://jimmyqrg.github.io/game-images/games/thatsnotmyneighbor.png" alt="That's Not My Neighbor" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/among-us.png" alt="Among Us" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/tag.png" alt="Tag" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/we-become-what-we-behold.png" alt="WE BECOME WHAT WE BEHOLD" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/a-dance-of-fire-and-ice.png" alt="A DANCE OF FIRE AND ICE" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">
+    <img src="https://jimmyqrg.github.io/game-images/games/undertale.png" alt="UNDERTALE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/hollow-knight.png" alt="HOLLOW KNIGHT" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/level-devil.png" alt="LEVEL DEVIL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/10-minutes-till-dawn.png" alt="10 MINUTES TILL DAWN" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/pvs.png" alt="PLANT VS ZOMBIES" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/fnf.png" alt="FRIDAY NIGHT FUNKIN" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/drift-boss.png" alt="DRIFT BOSS" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/bridd-jump.png" alt="BRIDD JUMP ORIGINAL GAME" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0')">
+    <img src="https://jimmyqrg.github.io/game-images/games/asriel.png" alt="ASRIEL DREAMURR FIGHT" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/undertale/asriel', '_blank')">
   </div>
 
   <h2>TOUCHSCREEN GAMES</h2>
   <div class="btn-grid">
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0/')">BRIDD JUMP ORIGINAL GAME</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')">CANDY JUMP</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle/')">INFINITE WORDLE ULTIMATE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')">WORDLE WITHOUT WORD DETECTION</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')">DRIFT BOSS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')">SUBWAY SURFERS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')">SUBWAY SURFERS BEIJING</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')">SUBWAY SURFERS HOUSTON</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')">SUBWAY SURFERS MONACO</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')">SUBWAY SURFERS NEWYORK</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')">EAGLERCRAFT 1.8 TOUCHSCREEN EM</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')">EAGLERCRAFT 1.8 TOUCHSCREEN PM</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')">LEVEl DEVIL</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')">CROSSY ROAD</button>
+    <img src="https://jimmyqrg.github.io/game-images/games/a-dance-of-fire-and-ice.png" alt="A DANCE OF FIRE AND ICE" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">
+    <img src="https://jimmyqrg.github.io/game-images/games/bridd-jump.png" alt="BRIDD JUMP ORIGINAL GAME" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/candy-jump.png" alt="CANDY JUMP" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/wordle.png" alt="INFINITE WORDLE ULTIMATE" onclick="openGame('https://jimmyqrg.github.io/wordle/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/wordle-noletterdetection.png" alt="WORDLE WITHOUT WORD DETECTION" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/drift-boss.png" alt="DRIFT BOSS" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers.png" alt="SUBWAY SURFERS" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-beijing.png" alt="SUBWAY SURFERS BEIJING" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-houston.png" alt="SUBWAY SURFERS HOUSTON" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-monaco.png" alt="SUBWAY SURFERS MONACO" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-newyork.png" alt="SUBWAY SURFERS NEWYORK" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/r1-8-8-t1.png" alt="EAGLERCRAFT 1.8 TOUCHSCREEN EM" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/r1-8-8-t2.png" alt="EAGLERCRAFT 1.8 TOUCHSCREEN PM" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/level-devil.png" alt="LEVEl DEVIL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/crossy-road.png" alt="CROSSY ROAD" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')">
   </div>
 
   <h2>ALL GAMES</h2>
   <div id="allGames" class="btn-grid">
-
-    <button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')">AMONG US</button>
-    <button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')">CROSSY ROAD</button>
-    <button class="btn btn-new" onclick="window.open='https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html'">THAT'S NOT MY NEIGHBOR</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/melon-playground.html')">MELON PLAYGROUND</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0')">BRIDD JUMP ORIGINAL GAME</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle')">INFINITE WORDLE ULTIMATE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')">WE BECOME WHAT WE BEHOLD</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/survival-race.html')">SURVIVAL RACE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')">DRIFT BOSS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')">WORDLE WITHOUT WORD DETECTION</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">A DANCE OF FIRE AND ICE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/sound-effects')">SOUND EFFECTS PLAYER</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')">UNDERTALE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale-y.html')">UNDERTALE YELLOW</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/slope-two-players')">SLOPE 2 PLAYERS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans.html')">SANS SIMULATOR</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')">HOLLOW KNIGHT</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/portal/play/')">PORTAL (2D)</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tg-playground.html')">PEOPLE PLAY</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/backrooms.html')">BACKROOMS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')">LEVEL DEVIL</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/zombie-derby-pixel-survival.html')">ZOMBIE DERBY PIXEL SURVIVAL</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')">TAG</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')">CANDY JUMP</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/3d-car-simulator')">3D CAR SIMULATOR</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pacman.html')">PACMAN</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')">10 MINUTES TILL DAWN</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/1v1-lol/index.html')">1V1 LOL</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/paperio2.html')">PAPER.IO 2</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')">PLANT VS ZOMBIES</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')">SUBWAY SURFERS</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')">SUBWAY SURFERS BEIJING</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')">SUBWAY SURFERS HOUSTON</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')">SUBWAY SURFERS MONACO</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')">SUBWAY SURFERS NEWYORK</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/geo-dash.html')">GEOMETRY DASH LITE</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')">FRIDAY NIGHT FUNKIN</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/doodle-jump.html')">DOODLE JUMP</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-12-2.html')">EAGLERCRAFT 1.12.2</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8.html')">EAGLERCRAFT 1.8.8</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r-1-5-2.html')">EAGLERCRAFT 1.5.2</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')">EAGLERCRAFT 1.8 TOUCHSCREEN EM</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')">EAGLERCRAFT 1.8 TOUCHSCREEN PM</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/dragonx.html')">HACKED CLIENT (DRAGONX)</button>
-    <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')">EAGLERCRAFT 1.8 TOUCHSCREEN EM</button>
-    <button class="btn" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/undertale/asriel', '_blank')">ASRIEL DREAMURR FIGHT</button>
-    <button class="btn" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/undertale/flowey', '_blank')">MEGA FLOWEY FIGHT</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-last-breath.html')">SANS LAST BREATH WITH GASTER FIGHT SIMULATOR</button>
-	<button class="btn" onclick="window.open='https://jimmyqrg.github.io/jqrg-games/games/gaster-fight.html'">GASTER BOSS FIGHT SIMULATOR</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-frisk-mode.html/')">SANS FIGHT FRISK MODE</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs.html')">SANS FIGHT CJS NORMAL MODE</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs-i.html')">SANS FIGHT CJS INVINCIBLE MODE</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell.html')">SANS FIGHT UNDERFELL NORMAL MODE</button>
-  	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell-i.html')">SANS FIGHT UNDERFELL INVINCIBLE MODE</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-hell.html')">SANS FIGHT HELL MODE</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/underswap-papyrus.html')">PAPYRUS HARD MODE BOSS FIGHT</button>
+    <img class="btn-image-new" src="https://jimmyqrg.github.io/game-images/games/among-us.png" alt="Among Us" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')">
+    <img class="btn-image-new" src="https://jimmyqrg.github.io/game-images/games/crossy-road.png" alt="CROSSY ROAD" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/thatsnotmyneighbor.png" alt="THAT'S NOT MY NEIGHBOR" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html', '_blank')">
+    <img src="https://jimmyqrg.github.io/game-images/games/melon-playground.png" alt="MELON PLAYGROUND" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/melon-playground.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/bridd-jump.png" alt="BRIDD JUMP ORIGINAL GAME" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/V1.0.0')">
+    <img src="https://jimmyqrg.github.io/game-images/games/wordle.png" alt="INFINITE WORDLE ULTIMATE" onclick="openGame('https://jimmyqrg.github.io/wordle')">
+    <img src="https://jimmyqrg.github.io/game-images/games/we-become-what-we-behold.png" alt="WE BECOME WHAT WE BEHOLD" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/survival-race.png" alt="SURVIVAL RACE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/survival-race.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/drift-boss.png" alt="DRIFT BOSS" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/wordle-noletterdetection.png" alt="WORDLE WITHOUT WORD DETECTION" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/a-dance-of-fire-and-ice.png" alt="A DANCE OF FIRE AND ICE" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sound-effect-player.png" alt="SOUND EFFECTS PLAYER" onclick="openGame('https://jimmyqrg.github.io/sound-effects')">
+    <img src="https://jimmyqrg.github.io/game-images/games/undertale.png" alt="UNDERTALE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/undertale-y.png" alt="UNDERTALE YELLOW" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale-y.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/slope-2-players.png" alt="SLOPE 2 PLAYERS" onclick="openGame('https://jimmyqrg.github.io/slope-two-players')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans.png" alt="SANS SIMULATOR" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/hollow-knight.png" alt="HOLLOW KNIGHT" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/portal.png" alt="PORTAL (2D)" onclick="openGame('https://jimmyqrg.github.io/portal/play/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/tg-playground.png" alt="PEOPLE PLAY" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tg-playground.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/backrooms.png" alt="BACKROOMS" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/backrooms.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/level-devil.png" alt="LEVEL DEVIL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/zombie-derby-pixel-survival.png" alt="ZOMBIE DERBY PIXEL SURVIVAL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/zombie-derby-pixel-survival.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/tag.png" alt="Tag" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/candy-jump.png" alt="CANDY JUMP" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/3d-car-simulator.png" alt="3D CAR SIMULATOR" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/3d-car-simulator')">
+    <img src="https://jimmyqrg.github.io/game-images/games/pacman.png" alt="PACMAN" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pacman.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/10-minutes-till-dawn.png" alt="10 MINUTES TILL DAWN" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/1v1.lol.png" alt="1V1 LOL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/1v1-lol/index.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/paperio2.png" alt="PAPER.IO 2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/paperio2.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/pvs.png" alt="PLANT VS ZOMBIES" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers.png" alt="SUBWAY SURFERS" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-beijing.png" alt="SUBWAY SURFERS BEIJING" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-houston.png" alt="SUBWAY SURFERS HOUSTON" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-monaco.png" alt="SUBWAY SURFERS MONACO" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/subway-surfers-newyork.png" alt="SUBWAY SURFERS NEWYORK" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/geo-dash.png" alt="GEOMETRY DASH LITE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/geo-dash.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/fnf.png" alt="FRIDAY NIGHT FUNKIN" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/doodle-jump.png" alt="DOODLE JUMP" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/doodle-jump.html')">
+    <img class="btn-image-new" src="https://jimmyqrg.github.io/game-images/games/thatsnotmyneighbor.png" alt="That's Not My Neighbor" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/r1-8-8.png" alt="EAGLERCRAFT 1.8.8" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/r1-5-2.png" alt="EAGLERCRAFT 1.5.2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-5-2.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/r1-8-8t1.png" alt="EAGLERCRAFT 1.8 TOUCHSCREEN EM" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/r1-8-8t2.png" alt="EAGLERCRAFT 1.8 TOUCHSCREEN PM" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/dragonx.png" alt="HACKED CLIENT (DRAGONX)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/dragonx.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/asriel.png" alt="ASRIEL DREAMURR FIGHT" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/undertale/asriel', '_blank')">
+    <img src="https://jimmyqrg.github.io/game-images/games/flowey.png" alt="MEGA FLOWEY FIGHT" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/undertale/flowey', '_blank')">
+    <img src="https://jimmyqrg.github.io/game-images/games/last-breath.png" alt="SANS LAST BREATH WITH GASTER FIGHT SIMULATOR" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-last-breath.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/gaster-fight.png" alt="GASTER BOSS FIGHT SIMULATOR" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/gaster-fight.html', '_blank')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans-frisk-mode.png" alt="SANS FIGHT FRISK MODE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-frisk-mode.html/')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans-cjs.png" alt="SANS FIGHT CJS NORMAL MODE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans-cjs-i.png" alt="SANS FIGHT CJS INVINCIBLE MODE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs-i.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans-underfell.png" alt="SANS FIGHT UNDERFELL NORMAL MODE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans-underfell-i.png" alt="SANS FIGHT UNDERFELL INVINCIBLE MODE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell-i.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/sans-hell-mode.png" alt="SANS FIGHT HELL MODE" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-hell.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/underswap-papyrus.png" alt="PAPYRUS HARD MODE BOSS FIGHT" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/underswap-papyrus.html')">
   </div>
 	
   <h2>PENDING, NOT RELEASED</h2>
   <div class="btn-grid">
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/strategies/tools/browser.html')">UNBLOCKED BROWSER</button>
-	<button class="btn" onclick="openGame('https://jimmyqrg.github.io/wmcbg/')">WORLD"S MOST CONFUSING BUTTON GAME</button>
+    <img src="https://jimmyqrg.github.io/game-images/games/browser.png" alt="UNBLOCKED BROWSER" onclick="openGame('https://jimmyqrg.github.io/strategies/tools/browser.html')">
+    <img src="https://jimmyqrg.github.io/game-images/games/wmcbg.png" alt="WORLD'S MOST CONFUSING BUTTON GAME" onclick="openGame('https://jimmyqrg.github.io/wmcbg/')">
   </div>
 
   <br><br><br>
