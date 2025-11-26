@@ -190,6 +190,13 @@
       // Use window.open with 'noopener' to avoid URL rewriting
       window.open(url, "_blank", "noopener,noreferrer");
     }
+    // Get the "back" link from URL
+    const params = new URLSearchParams(window.location.search);
+    const backLink = params.get("back") || "https://jimmyqrg.github.io";
+
+    document.getElementById("back-btn").onclick = () => {
+      window.location.href = backLink;
+    };
   </script>
 </body>
 </html>

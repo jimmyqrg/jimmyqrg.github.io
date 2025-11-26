@@ -32,31 +32,71 @@
   }
   .image:hover {
     transform: scale(1.05);
-    filter: brightness(60%); 
-    transition: transform 0.3s ease, filter 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.35s ease;
+  }
+  .image:hover img {
+    filter: brightness(41%);
   }
   .image::after {
     content: attr(data-alt);
     position: absolute;
     inset: 0;
+    width: 80%;
+    left: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
-
     color: white;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: bold;
     opacity: 0;
-    transition: opacity 0.35s ease;
     pointer-events: none;
     z-index: 10;
+    max-width: 80%;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
   }
   .image:hover::after {
     opacity: 1;
   }
   .collection-img {
-    max-width: 36%;
+    max-width: 56%;
     margin-top: 20px;
+    position: relative;
+    display: inline-block;
+  }
+  .collection-img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease, filter 0.3s ease, opacity 0.35s ease;
+  }
+  .collection-img:hover img {
+    filter: brightness(41%);
+  }
+  .collection-img::after {
+    content: attr(data-alt);
+    position: absolute;
+    inset: 0;
+    width: 80%;
+    left: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8em;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    max-width: 80%;
+    word-wrap: break-word;
+    text-align: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+  .collection-img:hover::after {
+    opacity: 1;
   }
   h1 {
     margin-bottom: 40px;
@@ -295,13 +335,13 @@
   -->
 
   <h2>COLLECTIONS</h2>
-  <a href="https://jimmyqrg.github.io/jqrg-games/eaglercraft"><spam class="image"><img class="image" class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/eaglercraft.png" alt="Eaglercraft"></spam></a>
+  <a href="https://jimmyqrg.github.io/jqrg-games/eaglercraft"><spam class="collection-img"><img src="https://jimmyqrg.github.io/game-images/collections/eaglercraft.png" alt="Eaglercraft"></spam></a>
   <p class="collection-discription">Eaglercraft</p>
-  <a href="https://jimmyqrg.github.io/scratch/jqrg-games/geometry-dash"><spam class="image"><img class="image" class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/geo-dash-scratch.png" alt="Geometry Dash Lite Scratch"></spam></a>
+  <a href="https://jimmyqrg.github.io/scratch/jqrg-games/geometry-dash"><spam class="collection-img"><img src="https://jimmyqrg.github.io/game-images/collections/geo-dash-scratch.png" alt="Geometry Dash Lite Scratch"></spam></a>
   <p class="collection-discription">Geometry Dash (Scratch Based All Levels)</p>
-  <a href="https://jimmyqrg.github.io/scratch/jqrg-games/"><spam class="image"><img class="image" class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/scratch.png" alt="Other Scratch Made Games"></spam></a>
+  <a href="https://jimmyqrg.github.io/scratch/jqrg-games/"><spam class="collection-img"><img src="https://jimmyqrg.github.io/game-images/collections/scratch.png" alt="Other Scratch Made Games"></spam></a>
   <p class="collection-discription">Other Scratch Made Games</p>
-  <a href="https://jimmyqrg.github.io/jqrg-games/undertale"><spam class="image"><img class="image" class="collection-img" src="https://jimmyqrg.github.io/game-images/collections/undertale.png" alt="Undertale"></spam></a>
+  <a href="https://jimmyqrg.github.io/jqrg-games/undertale"><spam class="collection-img"><img src="https://jimmyqrg.github.io/game-images/collections/undertale.png" alt="Undertale"></spam></a>
   <p class="collection-discription">Undertale Games</p>
 
   <h2>FEATURED GAMES</h2>
@@ -439,7 +479,14 @@
     win.document.body.appendChild(iframe);
   }
 
-  document.querySelectorAll('.img-box').forEach(box => {
+  document.querySelectorAll('.image').forEach(box => {
+    const img = box.querySelector('img');
+    if (img && img.alt) {
+      box.setAttribute('data-alt', img.alt);
+    }
+  });
+
+  document.querySelectorAll('.collection-img').forEach(box => {
     const img = box.querySelector('img');
     if (img && img.alt) {
       box.setAttribute('data-alt', img.alt);
@@ -466,8 +513,8 @@
   if (version === "3.2.4") {
     window.location.href = "https://jimmyqrg.github.io/jqrg-games/aF7kL2pQ9mXr8HsVzT1wYcB5jDn4GqE0Uo.html";
   }
-  if (version === "3.2.4") {
-    window.location.href = "https://jimmyqrg.github.io/jqrg-games/aF7kL2pQ9mXr8HsVzT1wYcB5jDn4GqE0Uo.html";
+  if (version === "1.0.0") {
+    window.location.href = "https://jimmyqrg.github.io/jqrg-games/J4mT9vQ2xZpL6rFwK1bHs8yC0nAeR7uYdG.html";
   }
 
 </script>
