@@ -26,6 +26,10 @@
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.707);
     border: 4px solid white;
   }
+  img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 1);
+  }
   .collection-img {
     max-width: 36%;
     margin-top: 20px;
@@ -40,10 +44,16 @@
     font-size: 2.3rem;
     text-shadow: 0 0 8px rgba(0,0,0,0.6);
   }
+  .h {
+    margin: 50px 0 35px 0;
+    font-size: 2.3rem;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  }
   .collection-discription {
     font-size: 1.3rem;
-    opacity: 1;
+    opacity: 0.8;
     margin-top: 10px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
   }
   .btn {
     display: inline-block;
@@ -236,16 +246,18 @@
   }
   .btn-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 10px;
     justify-items: center;
-    max-width: 1200px;
+    width: 75%;
+    max-width: 1000px;
     margin: 0 auto;
   }
   p {
     margin-top: 40px;
     font-size: 0.9rem;
     opacity: 0.8;
+    text-shadow: 0 0 4px rgba(0,0,0,0.6);
   }
   </style>
 </head>
@@ -376,7 +388,7 @@
   <div class="construction-zone">
     <div style="padding: 40px; border: 2px solid white; border-radius: 12px;">
       <h1>PLEASE SAVE YOUR GAME PROGRESS</h1>
-      <h2>THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!</h2>
+      <p class="h">THIS SITE IS GOING TO BE MOVING TO NEW LINK THIS WEEKEND!</p>
       <button class="btn">Download Progress</button>
       <input class="btn" type="file" />
     </div>
