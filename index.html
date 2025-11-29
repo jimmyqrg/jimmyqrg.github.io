@@ -55,6 +55,8 @@
       text-shadow: 0 0 8px rgba(0,0,0,0.7);
     }
 
+    .customizeKey
+
     /* ---------- Original Button (preserved) ---------- */
     .btn {
       display: inline-block;
@@ -408,6 +410,14 @@
       <label><b>Open in about:blank</b></label>
       <button class="btn" onclick="openGame('index.html')">OPEN</button>
 
+      <!-- Panic Key -->
+      <label><b>Panic Key</b></label>
+      <p style="margin-top:20px; opacity:0.8;">A key that auto-redirect to an website right when you press it. This will exit the website immediately in an emergency.<br><br>THIS WORKS IN PAGES ONLY, NOT IN GAMES.</p>
+      <p>Customize key</p>
+      <button id="panicKeyBtn" class="btn customizeKey"></button>
+      <p>Customize website</p>
+      <input type="text" id="panicLinkInput" placeholder="https://example.com" />
+
       <!-- Access code -->
       <label><b>Access code:</b></label>
       <input id="accessCode" type="password" placeholder="Enter code" 
@@ -416,11 +426,10 @@
       <!-- Lisence -->
       <label><b>Lisence</b></label>
       <p>All rights held by <b>ikunbeautiful@gmail.com</b><br>No part of this website may be copied, reused, redistributed, modified, or commercially exploited <b>without prior written permission from the owner</b>.</p>
+      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
 
       <button id="authorizeBtn" class="btn" style="margin-top:15px;">AUTHORIZE</button>
       <button id="unauthorizeBtn" class="btn" style="margin-top:10px;">UNAUTHORIZE</button>
-
-      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
 
     </div>
   </div>
@@ -430,7 +439,8 @@
 
 
 
-
+    
+    
 
 
     
@@ -545,6 +555,63 @@
     unauthorizeBtn.addEventListener("click", () => {
       localStorage.setItem("user", "normal");
       alert("User unauthorized.");
+    });
+
+    // ---------- Persistent Panic Key Logic ----------
+    const PANIC_KEY_STORAGE = "panicKey";
+    const PANIC_LINK_STORAGE = "panicKeyLink";
+
+    // Default: Right Shift
+    let panicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
+    let isRecording = false;
+    let previousKey = panicKey;
+
+    const customizeKey = document.getElementById("panicKeyBtn");
+    const linkInput = document.getElementById("panicLinkInput");
+
+    // Display current key
+    customizeKey.textContent = panicKey;
+
+    // Load saved link
+    linkInput.value = localStorage.getItem(PANIC_LINK_STORAGE) || "";
+
+    // Save link on input
+    linkInput.addEventListener("input", () => {
+      localStorage.setItem(PANIC_LINK_STORAGE, linkInput.value);
+    });
+
+    // Start listening for key press
+    customizeKey.addEventListener("click", (e) => {
+      e.stopPropagation(); 
+      if (isRecording) return;
+
+      isRecording = true;
+      previousKey = panicKey;
+
+      customizeKey.textContent = ""; // blank for recording
+      customizeKey.style.opacity = "0.6";
+    });
+
+    // Key recorder
+    document.addEventListener("keydown", (e) => {
+      if (!isRecording) return;
+
+      panicKey = e.code;
+      localStorage.setItem(PANIC_KEY_STORAGE, panicKey);
+
+      customizeKey.textContent = panicKey;
+      customizeKey.style.opacity = "1";
+      isRecording = false;
+    });
+
+    // Cancel recording on outside click
+    document.addEventListener("click", () => {
+      if (!isRecording) return;
+
+      // Restore the old key
+      customizeKey.textContent = previousKey;
+      customizeKey.style.opacity = "1";
+      isRecording = false;
     });
 
   </script>
