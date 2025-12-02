@@ -403,7 +403,6 @@
       <!-- Open in about:blank -->
       <label><b>Open in about:blank</b></label><br>
       <button class="btn" onclick="openGame('https://jimmyqrg.github.io')">OPEN</button><br>
-      <p style="margin-top:20px; opacity:0.8;">Or you can just press A+B+O+U+T</p>
       <br><br><br>
 
       <!-- Panic Key 
@@ -608,23 +607,6 @@
       customizeKey.textContent = previousKey;
       customizeKey.style.opacity = "1";
       isRecording = false;
-    });
-
-    // Keys we need to check
-    const requiredKeys = ["a", "b", "o", "u", "t"];
-    const pressed = {};
-
-    document.addEventListener("keydown", (e) => {
-      pressed[e.key.toLowerCase()] = true;
-
-      if (requiredKeys.every(k => pressed[k])) {
-        const currentURL = window.location.href;
-        openGame(currentURL);
-      }
-    });
-
-    document.addEventListener("keyup", (e) => {
-      pressed[e.key.toLowerCase()] = false;
     });
 
     function openGame(url) {
