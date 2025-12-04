@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DB Export / Import</title>
+<title>DB Export / Import Test</title>
 <style>
   body { font-family: Arial; padding: 20px; background: #fafafa; color: #222; }
   h1 { font-size: 20px; }
@@ -15,15 +15,15 @@
 
 <h1>IndexedDB + LocalStorage Export / Import Test</h1>
 
-<button id="exportBtn">Export (.jqrgd)</button>
+<button onclick="exportAll('save')">Export</button>
 <div class="filebox">
-  <input type="file" id="importFile" accept=".jqrgd">
+  <input type="file" id="importFile" accept=".save">
 </div>
-<button id="importBtn">Import</button>
+<button onclick="importData()">Import</button>
 
 <h2>Log</h2>
 <div id="log"></div>
-
+<script src="https://jimmyqrg.github.io/authority.js"></script>
 <script>
 // -----------------------
 // Logging helper
@@ -99,7 +99,7 @@ async function exportAll() {
 
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = "export.jqrgd";
+  a.download = "export.save";
   a.click();
 
   log("Export completed!");
@@ -117,7 +117,7 @@ async function importAll() {
 
   const file = fileInput.files[0];
 
-  if (!file.name.endsWith(".jqrgd")) {
+  if (!file.name.endsWith(".save")) {
     log("Invalid file type.");
     return;
   }
@@ -197,6 +197,85 @@ async function importAll() {
 // -----------------------
 document.getElementById("exportBtn").onclick = exportAll;
 document.getElementById("importBtn").onclick = importAll;
+
+async function exportData(format="save"){
+  const cookies=document.cookie.split("; ").reduce((a,c)=>{
+    const [n,v]=c.split("=");
+    a[n]=v;
+    return a;
+  },{});
+  const ls={};
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    ls[k]=localStorage.getItem(k);
+  }
+  const ss={};
+  for(let i=0;i<sessionStorage.length;i++){
+    const k=sessionStorage.key(i);
+    ss[k]=sessionStorage.getItem(k);
+  }
+  const cachesData={};
+  if("caches"in window){
+    const names=await caches.keys();
+    for(const n of names){
+      const c=await caches.open(n);
+      const r=await c.keys();
+      cachesData[n]=r.map(e=>e.url);
+    }
+  }
+  const data={
+    exportedAt:new Date().toISOString(),
+    userAgent:navigator.userAgent,
+    cookies,
+    localStorage:ls,
+    sessionStorage:ss,
+    caches:cachesData
+  };
+  const json=JSON.stringify(data,null,2);
+  let mime="application/json";
+  let ext=format.replace(".","").toLowerCase();
+  if(ext==="data")mime="application/octet-stream";
+  if(ext==="save")mime="application/x-game-save";
+  const blob=new Blob([json],{type:mime});
+  const link=document.createElement("a");
+  const date=new Date().toISOString().slice(0,10);
+  link.href=URL.createObjectURL(blob);
+  link.download=`truffled_backup_${date}.${ext}`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+  alert(`Data exported as .${ext}`);
+}
+
+function importData(){
+  const input=document.createElement("input");
+  input.type="file";
+  input.accept=".save,.json,.data";
+  input.onchange=async e=>{
+    const f=e.target.files[0];
+    if(!f)return;
+    const r=new FileReader();
+    r.onload=async ev=>{
+      try{
+        const d=JSON.parse(ev.target.result);
+        Object.entries(d.cookies||{}).forEach(([n,v])=>{
+          document.cookie=`${n}=${v}; path=/;`;
+        });
+        Object.entries(d.localStorage||{}).forEach(([k,v])=>{
+          localStorage.setItem(k,v);
+        });
+        Object.entries(d.sessionStorage||{}).forEach(([k,v])=>{
+          sessionStorage.setItem(k,v);
+        });
+        alert("import vaild!");
+        setTimeout(()=>location.reload(),1000);
+      }catch(err){
+        alert("corrupted file");
+      }
+    };
+    r.readAsText(f);
+  };
+  input.click();
+}
 </script>
 
 </body>
