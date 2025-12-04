@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JQRGD Backup Tool</title>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<style>
+  body { background:#0b0f14; color:#d7e2f0; font-family: monospace; padding:20px }
+  button { padding:10px 14px; background:#1b2a3a; color:#fff; border:1px solid #345; cursor:pointer; margin-right:10px }
+  button:hover { background:#24374d }
+</style>
+</head>
+<body>
+
+<h2>JQRGD Backup & Restore</h2>
+<button id="exportBtn">Export .jqrgd</button>
+<input id="importFile" type="file" accept=".jqrgd" style="display:none;">
+<button id="importBtn">Import .jqrgd</button>
+
+<pre id="log"></pre>
+
+<script>
+const log = msg => {
+  document.getElementById("log").textContent += msg + "\n";
+};
+
+/* -----------------------------
+   READ LOCAL STORAGE
+----------------------------- */
+function exportLocalStorage() {
+  let obj = {};
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    obj[k] = localStorage.getItem(k);
+  }
+  return obj;
+}
+
+/* -----------------------------
+   READ ALL INDEXEDDB
+----------------------------- */
+async function getIndexedDBList() {
+  if (!indexedDB.databases) return [];
+  return await indexedDB.databases();
+}
+
+function readStore(db, storeName) {
+  return new Promise(resolve => {
+    const tx = db.transaction(storeName, "readonly");
+    const store = tx.objectStore(storeName);
+    const req = store.getAll();
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => resolve([]);
+  });
+}
+
+async function exportIndexedDB() {
+  const result = {};
+  const dbs = await getIndexedDBList();
+
+  for (const dbInfo of dbs) {
+    const name = dbInfo.name;
+    const version = dbInfo.version;
+    const openReq = indexedDB.open(name, version);
+
+    const db = await new Promise((res, rej) => {
+      openReq.onsuccess = e => res(e.target.result);
+      openReq.onerror = () => res(null);
+    });
+
+    if (!db) continue;
+
+    result[name] = {};
+
+    for (const storeName of db.objectStoreNames) {
+      const items = await readStore(db, storeName);
+      result[name][storeName] = items;
+    }
+
+    db.close();
+  }
+  return result;
+}
+
+/* -----------------------------
+   EXPORT AS .jqrgd (ZIP)
+----------------------------- */
+async function exportAll() {
+  log("Exporting...");
+
+  const zip = new JSZip();
+
+  zip.file("localStorage.json", JSON.stringify(exportLocalStorage(), null, 2));
+
+  const idb = await exportIndexedDB();
+  for (const dbName in idb) {
+    for (const store in idb[dbName]) {
+      const path = `indexeddb/${dbName}/${store}.json`;
+      zip.file(path, JSON.stringify(idb[dbName][store], null, 2));
+    }
+  }
+
+  const blob = await zip.generateAsync({ type: "blob" });
+
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "backup.jqrgd";
+  a.click();
+  log("Export complete: backup.jqrgd");
+}
+
+/* -----------------------------
+   IMPORT .jqrgd FILE
+----------------------------- */
+document.getElementById("importBtn").onclick = () =>
+  document.getElementById("importFile").click();
+
+document.getElementById("importFile").onchange = async e => {
+  const file = e.target.files[0];
+  if (!file || !file.name.endsWith(".jqrgd")) {
+    log("Invalid file. Must be .jqrgd");
+    return;
+  }
+
+  log("Importing...");
+
+  const data = await file.arrayBuffer();
+  const zip = await JSZip.loadAsync(data);
+
+  /* Restore LocalStorage */
+  if (zip.files["localStorage.json"]) {
+    const text = await zip.files["localStorage.json"].async("string");
+    const obj = JSON.parse(text);
+    for (const k in obj) localStorage.setItem(k, obj[k]);
+    log("LocalStorage restored.");
+  }
+
+  /* Restore IndexedDB */
+  for (const filename in zip.files) {
+    if (!filename.startsWith("indexeddb/")) continue;
+    if (!filename.endsWith(".json")) continue;
+
+    const parts = filename.split("/");
+    const dbName = parts[1];
+    const storeName = parts[2].replace(".json", "");
+
+    const text = await zip.files[filename].async("string");
+    const records = JSON.parse(text);
+
+    await restoreStore(dbName, storeName, records);
+  }
+
+  log("Import complete.");
+};
+
+/* -----------------------------
+   RESTORE A SINGLE STORE
+----------------------------- */
+async function restoreStore(dbName, storeName, records) {
+  return new Promise(resolve => {
+    const openReq = indexedDB.open(dbName);
+
+    openReq.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(storeName)) {
+        db.createObjectStore(storeName, { autoIncrement: true });
+      }
+    };
+
+    openReq.onsuccess = e => {
+      const db = e.target.result;
+
+      const tx = db.transaction(storeName, "readwrite");
+      const store = tx.objectStore(storeName);
+      records.forEach(r => store.add(r));
+
+      tx.oncomplete = () => {
+        db.close();
+        resolve();
+      };
+    };
+  });
+}
+
+document.getElementById("exportBtn").onclick = exportAll;
+</script>
+
+</body>
+</html>
