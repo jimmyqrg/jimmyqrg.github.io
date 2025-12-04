@@ -1,6 +1,8 @@
 // -----------------------
 // Authorization check
 // -----------------------
+let user = localStorage.getItem("user");
+
 if (typeof user === "undefined" || user !== "authorized") {
     window.location.href = "https://jimmyqrg.github.io/404-denined";
 }
