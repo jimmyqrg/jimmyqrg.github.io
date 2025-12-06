@@ -511,7 +511,7 @@
   });
 
   // Check if the user is authorized in localStorage
-  const authorized = localStorage.getItem("userAuthorized") === "true";
+  const authorized = localStorage.getItem("user") === "authorized";
   if (authorized) {
     // Hide the overlay so the construction zone is interactive
     const overlay = document.querySelector(".construction-overlay");
