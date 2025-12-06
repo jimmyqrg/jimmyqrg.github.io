@@ -108,9 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
     === patched openGame() ================================
     ===================================================== */
 
-const originalOpenGame = window.openGame;
+const originalOpenGame = openGame;
 
-window.openGame = function(url) {
+openGame = function(url) {
   const win = window.open("about:blank", "_blank");
   if (!win) return;
 

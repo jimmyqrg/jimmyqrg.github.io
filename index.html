@@ -166,6 +166,8 @@
     .modal-content {
       width: 100%;
       max-width: 680px;
+      max-height: 80vh;       /* NEW */
+      overflow-y: auto;       /* NEW */
       border-radius: var(--panel-radius);
       background: linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.35));
       border: 2px solid rgba(255,255,255,0.12);
@@ -178,7 +180,6 @@
       transition: all 0.36s cubic-bezier(.2,.9,.2,1);
       position: relative;
       backdrop-filter: blur(6px);
-      /* static blue-purple neon border (glow) */
       box-shadow:
         0 8px 40px rgba(0,0,0,0.6),
         0 0 18px rgba(77, 140, 255, 0.12),
