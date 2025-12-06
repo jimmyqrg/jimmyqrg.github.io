@@ -55,6 +55,22 @@
       text-shadow: 0 0 8px rgba(0,0,0,0.7);
     }
 
+    .cloakIconOption {
+      width:100px;
+      height:100px;
+      object-fit:contain;
+      border-radius:10px;
+      border:3px solid transparent;
+      cursor:pointer;
+    }
+
+    .cloakIconOption.active {
+      border-color:#4caf50;
+    }
+
+    #customCloakLabel.active {
+      border-color:#4caf50 !important;
+    }
 
     /* ---------- Original Button (preserved) ---------- */
     .btn {
@@ -423,12 +439,49 @@
       <input id="accessCode" type="password" placeholder="Enter code" style="width:100%; padding:8px; margin-top:5px; border-radius:8px;">
       <button id="authorizeBtn" class="btn" style="margin-top:15px;">AUTHORIZE</button>
       <button id="unauthorizeBtn" class="btn" style="margin-top:10px;">UNAUTHORIZE</button>
+      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
       <br><br><br>
+
+      <!-- === Tab Cloak === -->
+      <label><b>about:blank Tab Cloak</b></label><br><br>
+
+      <!-- Title -->
+      <p><b>Tab Name</b></p>
+      <input id="cloakTitle" type="text" placeholder="Enter tab title"
+        style="width:100%; padding:8px; margin-top:5px; border-radius:8px;">
+
+      <br><br>
+
+      <!-- Icons -->
+      <p><b>Tab Icon</b></p>
+
+      <div id="cloakIconContainer" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
+
+        <!-- Preset icons -->
+        <img class="cloakIconOption" data-src="cloak-images/default.png" src="cloak-images/default.png">
+        <img class="cloakIconOption" data-src="cloak-images/docs.png" src="cloak-images/docs.png">
+        <img class="cloakIconOption" data-src="cloak-images/drive.png" src="cloak-images/drive.png">
+        <img class="cloakIconOption" data-src="cloak-images/forms.png" src="cloak-images/forms.png">
+        <img class="cloakIconOption" data-src="cloak-images/pausd.png" src="cloak-images/pausd.png">
+        <img class="cloakIconOption" data-src="cloak-images/schoology.png" src="cloak-images/schoology.png">
+
+        <!-- Custom upload -->
+        <label id="customCloakLabel" style="
+            width:100%; height:100px; border:2px dashed #aaa;
+            display:flex; justify-content:center; align-items:center;
+            border-radius:10px; cursor:pointer;">
+          <span style="opacity:0.6;">Custom Icon</span>
+          <input id="customCloakInput" type="file" accept="image/*" style="display:none;">
+        </label>
+
+      </div>
+
+      <br>
+
 
       <!-- Lisence -->
       <label><b>Lisence</b></label>
       <p>All rights held by <b>ikunbeautiful@gmail.com</b><br>No part of this website may be copied, reused, redistributed, modified, or commercially exploited <b>without prior written permission from the owner</b>.</p>
-      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
 
     </div>
   </div>
