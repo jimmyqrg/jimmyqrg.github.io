@@ -98,8 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ===================================================== */
 
 // Ensure global openGame exists
-if (typeof window.openGame !== "function") {
-  window.openGame = function(url) { // fallback in case original does not exist
+if (typeof openGame !== "function") {
+  openGame = function(url) { // fallback in case original does not exist
     const win = window.open("about:blank", "_blank");
     if (!win) return;
 
@@ -127,8 +127,8 @@ if (typeof window.openGame !== "function") {
   };
 } else {
   // Patch existing openGame
-  const originalOpenGame = window.openGame;
-  window.openGame = function(url) {
+  const originalOpenGame = openGame;
+  openGame = function(url) {
     const win = window.open("about:blank", "_blank");
     if (!win) return;
 
