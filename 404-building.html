@@ -43,7 +43,7 @@
   <script>
     // Get the "back" link from URL
     const params = new URLSearchParams(window.location.search);
-    const backLink = params.get("back") || "https://jimmyqrg.github.io";
+    const backLink = params.get("back") || "./";
 
     document.getElementById("backBtn").onclick = () => {
       window.location.href = backLink;
