@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://jimmyqrg.github.io/js/openGame.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -142,8 +143,7 @@
   <h1>EAGLERCRAFT RELEASE</h1>
   <button class="btn" onclick="openGame('r1-5-2.html')">RELEASE 1.5.2</button>
   <button class="btn" onclick="openGame('r1-8-8.html')">RELEASE 1.8.8</button>
-  <button class="btn" onclick="openExact()">RELEASE 1.12.2</button>
-  <button class="btn" onclick="openGame('r1-12-2.html')">CLICK IF THE PREVIOUS WEBSITE IS BLOCKED [1.12.2]</button>
+  <button class="btn" onclick="openGame('r1-12-2.html')">RELEASE 1.12.2</button>
 
   <h2>TOUCHSCREEN MODE</h2>
   <button class="btn" onclick="openGame('r1-8-8-t1.html')">EAGLER MOBILE 1.8.8</button>
@@ -157,40 +157,6 @@
   <p>Click <a href="https://jimmyqrg.github.io/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
 
   <script>
-    function openGame(url) {
-      if (url.startsWith("http")) {
-        // External site
-        const win = window.open('about:blank', '_blank');
-        const iframe = win.document.createElement('iframe');
-        iframe.style.position = "fixed";
-        iframe.style.top = 0;
-        iframe.style.left = 0;
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.src = url;
-        win.document.body.style.margin = "0";
-        win.document.body.appendChild(iframe);
-      } else {
-        // Local file
-        const win = window.open('about:blank', '_blank');
-        const iframe = win.document.createElement('iframe');
-        iframe.style.position = "fixed";
-        iframe.style.top = 0;
-        iframe.style.left = 0;
-        iframe.style.width = "100%";
-        iframe.style.height = "100%";
-        iframe.style.border = "none";
-        iframe.src = url;
-        win.document.body.style.margin = "0";
-        win.document.body.appendChild(iframe);
-      }
-    }
-    function openExact() {
-      const url = "https://jimmyqrg.neocities.org/r1-12-2";
-      // Use window.open with 'noopener' to avoid URL rewriting
-      window.open(url, "_blank", "noopener,noreferrer");
-    }
     // Get the "back" link from URL
     const params = new URLSearchParams(window.location.search);
     const backLink = params.get("back") || "https://jimmyqrg.github.io";
