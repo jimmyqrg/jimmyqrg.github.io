@@ -1,5 +1,5 @@
 // ================================
-// Anti-Pop-up / Anti-New-Tab Script
+// Ultimate Anti-New-Tab / Anti-Pop-up
 // ================================
 
 (function() {
@@ -10,15 +10,29 @@
         console.log("Blocked attempt to open a new tab/window:", url);
         return null;
     };
+    Object.defineProperty(window, "open", {value: blockedOpen, writable: false, configurable: false});
 
-    Object.defineProperty(window, "open", {
-        value: blockedOpen,
-        writable: false,      // cannot be overwritten
-        configurable: false,  // cannot be deleted
-        enumerable: true
+    // --- Block showModalDialog ---
+    if ("showModalDialog" in window) {
+        Object.defineProperty(window, "showModalDialog", {
+            value: blockedOpen,
+            writable: false,
+            configurable: false
+        });
+    }
+
+    // --- Block location changes ---
+    const blockedAssign = function(url) {
+        console.log("Blocked attempt to change location:", url);
+    };
+    Object.defineProperty(window.location, "assign", {value: blockedAssign, writable: false, configurable: false});
+    Object.defineProperty(window.location, "replace", {value: blockedAssign, writable: false, configurable: false});
+    Object.defineProperty(window, "location", {
+        get() { return window.location; },
+        set(url) { console.log("Blocked attempt to set window.location:", url); }
     });
 
-    // --- Block target="_blank" links ---
+    // --- Block <a target="_blank"> clicks ---
     document.addEventListener("click", function(e) {
         let el = e.target;
         while (el && el !== document) {
@@ -30,43 +44,54 @@
         }
     });
 
-    // --- Block window.showModalDialog (older pop-up method) ---
-    if ("showModalDialog" in window) {
-        Object.defineProperty(window, "showModalDialog", {
-            value: function(url, arg, options) {
-                console.log("Blocked attempt to show modal dialog:", url);
-                return null;
-            },
-            writable: false,
-            configurable: false,
-            enumerable: true
-        });
-    }
-
-    // --- Prevent location hacks ---
-    const blockedAssign = function(url) {
-        console.log("Blocked attempt to change location:", url);
-    };
-    Object.defineProperty(window.location, "assign", {
-        value: blockedAssign,
-        writable: false,
-        configurable: false
-    });
-    Object.defineProperty(window.location, "replace", {
-        value: blockedAssign,
-        writable: false,
-        configurable: false
-    });
-
-    // Optional: prevent iframe-based pop-ups
-    const blockedAppend = function(el) {
+    // --- Block dynamically added iframes ---
+    const originalAppend = Node.prototype.appendChild;
+    Node.prototype.appendChild = function(el) {
         if (el.tagName === "IFRAME") {
             console.log("Blocked iframe append:", el.src);
-            return;
+            return el;
         }
-        return Node.prototype.appendChild.call(this, el);
+        return originalAppend.call(this, el);
     };
-    Node.prototype.appendChild = blockedAppend;
 
-    console.log("Anti-pop-up protection active!");
+    // --- Block setTimeout / setInterval that call window.open ---
+    const originalSetTimeout = window.setTimeout;
+    const originalSetInterval = window.setInterval;
+    window.setTimeout = function(fn, delay, ...args) {
+        const wrapped = function() {
+            try { fn.apply(this, args); } catch(e) { console.log("Blocked dangerous timeout call"); }
+        };
+        return originalSetTimeout.call(this, wrapped, delay);
+    };
+    window.setInterval = function(fn, delay, ...args) {
+        const wrapped = function() {
+            try { fn.apply(this, args); } catch(e) { console.log("Blocked dangerous interval call"); }
+        };
+        return originalSetInterval.call(this, wrapped, delay);
+    };
+
+    // --- Block eval / Function creating window.open ---
+    const originalEval = window.eval;
+    window.eval = function(code) {
+        if (typeof code === "string" && code.includes("window.open")) {
+            console.log("Blocked window.open via eval");
+            return null;
+        }
+        return originalEval.call(this, code);
+    };
+    const OriginalFunction = Function;
+    window.Function = function(...args) {
+        const body = args[args.length-1];
+        if (typeof body === "string" && body.includes("window.open")) {
+            console.log("Blocked window.open via Function constructor");
+            return function() {};
+        }
+        return OriginalFunction.apply(this, args);
+    };
+
+    // --- Block onunload / onbeforeunload tricks ---
+    window.onbeforeunload = null;
+    window.onunload = null;
+
+    console.log("Ultimate anti-pop-up / anti-new-tab protection active!");
 })();
