@@ -11,15 +11,46 @@ let panicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
 // Load redirect link
 let panicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
 
+// Function to fix/normalize redirect links
+function fixRedirectLink(link) {
+  if (!link) return "https://www.jimmyqrg.com";
+  
+  // If it's already a full URL with protocol, use it as is
+  if (link.startsWith("http://") || link.startsWith("https://")) {
+    return link;
+  }
+  
+  // If it starts with a path (e.g., "jqrg-games/eaglercraft")
+  // or is a relative path, prepend the base URL
+  if (link.startsWith("/") || link.includes("/")) {
+    // Remove leading slash if present
+    const cleanPath = link.startsWith("/") ? link.substring(1) : link;
+    return `https://jimmyqrg.github.io/${cleanPath}`;
+  }
+  
+  // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol
+  if (link.includes(".") && !link.includes("/")) {
+    return `https://${link}`;
+  }
+  
+  // Default fallback
+  return "https://www.jimmyqrg.com";
+}
+
 // Listen for panic key press
 document.addEventListener("keydown", (e) => {
-  // If no redirect link is set, do nothing
-  if (!panicLink) return;
+  // Always check localStorage directly to get the latest values
+  // (storage events don't fire in the same window)
+  const currentPanicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
+  const currentPanicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
+  
+  // Fix the redirect link if it's incorrect
+  const redirectLink = fixRedirectLink(currentPanicLink);
 
   // Match the key code (e.code)
-  if (e.code === panicKey) {
+  if (e.code === currentPanicKey) {
     // Immediately redirect
-    window.location.href = panicLink;
+    window.location.href = redirectLink;
   }
 });
 
