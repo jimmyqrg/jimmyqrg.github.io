@@ -2,7 +2,7 @@
   "name": "JimmyQrg",
   "short_name": "JQRG",
   "description": "JimmyQrg's Game Hub",
-  "start_url": "/index.html",
+  "start_url": "/index.html?page=extend",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
@@ -11,20 +11,15 @@
   "icons": [
     {
       "src": "/jq.ico",
-      "sizes": "any",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "/jq.ico",
       "sizes": "192x192",
       "type": "image/x-icon",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "/jq.ico",
       "sizes": "512x512",
       "type": "image/x-icon",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
