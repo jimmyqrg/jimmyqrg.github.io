@@ -8,9 +8,7 @@
     // Check if URL contains ?page=extend
     if (!currentUrl.includes('?page=extend')) {
       // Run your game function
-      if (typeof openGame === 'function') {
-        openGame('https://pausd.jimmyqrg.com/?page=extend');
-      }
+      openGame('https://pausd.jimmyqrg.com/?page=extend');
 
       // Redirect to Jimmy Q.R.G. website
       window.location.href = 'https://www.jimmyqrg.com';
