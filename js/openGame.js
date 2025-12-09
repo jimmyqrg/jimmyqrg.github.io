@@ -101,7 +101,7 @@ function patchOpenGame() {
   window.openGame = function(url) {
     if (!url) return;
 
-    const target = "/loader.html?content=" + encodeURIComponent(url);
+    const target = "https://pausd.jimmyqrg.com/loader.html?content=" + encodeURIComponent(url);
 
     // Open the loader page directly — NO about:blank, NO iframe injection here
     const win = window.open(target, "_blank");
