@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <script src="https://jimmyqrg.github.io/js/openGame.js"></script>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#4d8cff">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home | JQRG</title>
@@ -428,9 +430,9 @@
 
       <br><br><br>
 
-      <!-- Open in about:blank -->
-      <label><b>Open in about:blank</b></label><br>
-      <button class="btn" onclick="openGame('https://jimmyqrg.github.io')">OPEN</button><br>
+      <label><b>Install App</b></label><br>
+      <button class="btn" id="installBtn" style="display:none;">Install Game</button>
+
       <br><br><br>
 
       <!-- Panic Key 
@@ -451,7 +453,7 @@
       <br><br><br>
 
       <!-- === Tab Cloak === -->
-      <label><b>about:blank Tab Cloak</b></label><br><br>
+      <label><b>Game tab cloak</b></label><br><br>
 
       <!-- Title -->
       <p><b>Tab Name</b></p>
@@ -517,6 +519,11 @@
 
 
     
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('js/sw.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch(err => console.error('Service Worker registration failed:', err));
+    }
 
     /* --- Announcement Modal Controls --- */
     const modal = document.getElementById('announcementModal');
@@ -673,6 +680,25 @@
       customizeKey.style.opacity = "1";
       isRecording = false;
     });
+
+    // Install
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+
+      const installBtn = document.getElementById('installBtn');
+      installBtn.style.display = 'block';
+
+      installBtn.addEventListener('click', async () => {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('User response:', outcome);
+        deferredPrompt = null;
+      });
+    });
+
   </script>
 
 </body>
