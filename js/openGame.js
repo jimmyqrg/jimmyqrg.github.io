@@ -63,9 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
       reader.readAsDataURL(file);
     });
 
-    // Drag & drop
-    customLabel.addEventListener("dragover", e => { e.preventDefault(); customLabel.style.opacity = 0.7; });
-    customLabel.addEventListener("dragleave", e => { customLabel.style.opacity = 1; });
+    // Drag & drop custom icon
+    customLabel.addEventListener("dragover", e => { 
+      e.preventDefault(); 
+      customLabel.style.opacity = 0.7; 
+    });
+    customLabel.addEventListener("dragleave", () => { 
+      customLabel.style.opacity = 1; 
+    });
     customLabel.addEventListener("drop", e => {
       e.preventDefault();
       customLabel.style.opacity = 1;
@@ -87,44 +92,25 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-    === patched openGame() ================================
+    === NEW openGame() for loader compatibility ==========
     ===================================================== */
 
 function patchOpenGame() {
-  // Save original if exists
   const original = typeof openGame === "function" ? openGame : null;
 
   window.openGame = function(url) {
-    const win = window.open("about:blank", "_blank");
+    if (!url) return;
+
+    const target = "loader.html?content=" + encodeURIComponent(url);
+
+    // Open the loader page directly — NO about:blank, NO iframe injection here
+    const win = window.open(target, "_blank");
+
     if (!win) return;
 
-    // Set title and favicon from localStorage
-    win.document.title = localStorage.getItem("cloakTitle") || "Loading...";
-    const icon = localStorage.getItem("cloakIcon");
-    if (icon) {
-      const link = win.document.createElement("link");
-      link.rel = "icon";
-      link.href = icon;
-      win.document.head.appendChild(link);
-    }
-
-    // Inject iframe
-    const iframe = win.document.createElement("iframe");
-    iframe.style.position = "fixed";
-    iframe.style.top = 0;
-    iframe.style.left = 0;
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "none";
-    iframe.src = url;
-
-    win.document.body.style.margin = "0";
-    win.document.body.appendChild(iframe);
-
-    // Optionally call original openGame
+    // Optional: call original handler if it existed
     if (original) original(url);
   };
 }
 
-// Run patch immediately
 patchOpenGame();

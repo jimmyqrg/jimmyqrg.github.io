@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title></title>
+
+  <!-- Favicon element that we’ll replace dynamically -->
+  <link id="cloakFavicon" rel="icon" href="">
+  <style>
+    html,body { height:100%; margin:0; }
+    .center { display:flex; align-items:center; justify-content:center; height:100%; }
+    #message { font-family:system-ui,Segoe UI,Roboto,Arial; color:#333; }
+    iframe { width:100%; height:100%; border:0; display:block; }
+  </style>
+</head>
+<body>
+  <div id="app" class="center">
+    <div id="message">Loading...</div>
+  </div>
+
+  <script>
+    // Apply tab cloak immediately
+    (function applyCloak() {
+      const title = localStorage.getItem("cloakTitle");
+      const icon  = localStorage.getItem("cloakIcon");
+
+      if (title) document.title = title;
+
+      if (icon) {
+        const favicon = document.getElementById("cloakFavicon");
+        favicon.href = icon;
+      }
+    })();
+
+    // Main loader system
+    (function () {
+      const app = document.getElementById('app');
+
+      function showError(text) {
+        app.innerHTML = '<div id="message">' + text + '</div>';
+      }
+
+      // Read ?content=
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get('content');
+
+      if (!raw) {
+        showError('Error: no "content" parameter provided.');
+        return;
+      }
+
+      // Decode and validate URL
+      let decoded;
+      try { decoded = decodeURIComponent(raw); }
+      catch { showError('Error: could not decode the content parameter.'); return; }
+
+      let url;
+      try { url = new URL(decoded); }
+      catch { showError('Error: invalid URL.'); return; }
+
+      if (!["http:", "https:"].includes(url.protocol)) {
+        showError('Error: URL must start with http:// or https://');
+        return;
+      }
+
+      // Create iframe and load the URL directly (no about:blank)
+      const iframe = document.createElement('iframe');
+      iframe.src = url.href;
+
+      iframe.addEventListener('error', () => {
+        showError('Error: failed to load the provided URL.');
+      });
+
+      app.innerHTML = '';
+      app.appendChild(iframe);
+    })();
+  </script>
+</body>
+</html>
