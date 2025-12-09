@@ -103,12 +103,29 @@ function patchOpenGame() {
 
     const target = "/loader.html?content=" + encodeURIComponent(url);
 
-    // Open the loader page directly — NO about:blank, NO iframe injection here
-    const win = window.open(target, "_blank");
+    const popupFeatures = [
+      "popup=yes",
+      "toolbar=no",
+      "location=no",
+      "menubar=no",
+      "status=no",
+      "scrollbars=yes",
+      "resizable=yes",
+      "width=900",
+      "height=600",
+      "left=" + (window.screenX + 80),
+      "top=" + (window.screenY + 60)
+    ].join(",");
 
-    if (!win) return;
+    const win = window.open(target, "_blank", popupFeatures);
 
-    // Optional: call original handler if it existed
+    // If popup blocked
+    if (!win) {
+      alert("Please enable popups to open the game.");
+      return;
+    }
+
+    // Optional: call your original handler if it exists
     if (original) original(url);
   };
 }
