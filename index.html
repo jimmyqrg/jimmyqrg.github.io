@@ -431,7 +431,7 @@
       <br><br><br>
 
       <label><b>Install App</b></label><br>
-      <button class="btn" id="installBtn">Install</button>
+      <button id="installBtn" style="display:none; position:fixed; top:16px; left:16px; z-index:2000; padding:8px 12px; border-radius:8px; background:#4d8cff; color:white; font-weight:600; cursor:pointer;">Install Game</button>
 
       <br><br><br>
 
@@ -688,16 +688,18 @@
       e.preventDefault();
       deferredPrompt = e;
 
-      const installBtn = document.getElementById('installBtn');
-      installBtn.style.display = 'block';
+      const btn = document.getElementById('installBtn');
+      btn.style.display = 'block';
 
-      installBtn.addEventListener('click', async () => {
+      btn.addEventListener('click', async () => {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
-        console.log('User response:', outcome);
+        console.log('Install outcome:', outcome);
         deferredPrompt = null;
+        btn.style.display = 'none';
       });
     });
+
 
   </script>
 
