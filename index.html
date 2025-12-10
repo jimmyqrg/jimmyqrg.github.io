@@ -787,18 +787,12 @@
     // === PWA Install Button ===
     let deferredPrompt = null;
     let installBtnListenerAdded = false;
-    const installBtn = document.getElementById('installBtn'); // Button in settings modal
-    const installAppBtn = document.getElementById('installAppBtn'); // Main install button
-    const installStatus = document.getElementById('installStatus');
+    const installAppBtn = document.getElementById('installAppBtn');
 
     // Function to handle install button click
     async function handleInstallClick() {
       if (!deferredPrompt) {
-        if (installStatus) {
-          installStatus.textContent = 'Install prompt not available. Please use your browser\'s menu to install.';
-          installStatus.style.display = 'block';
-          installStatus.style.color = '#ff4d4d';
-        }
+        alert('Install prompt not available. Please use your browser\'s menu to install.');
         return;
       }
 
@@ -809,23 +803,13 @@
       const { outcome } = await deferredPrompt.userChoice;
       
       if (outcome === 'accepted') {
-        if (installStatus) {
-          installStatus.textContent = '✓ Installation started!';
-          installStatus.style.display = 'block';
-          installStatus.style.color = '#4dff4d';
-        }
+        // Installation started - button will be hidden by appinstalled event
       } else {
-        if (installStatus) {
-          installStatus.textContent = 'Installation cancelled.';
-          installStatus.style.display = 'block';
-          installStatus.style.color = '#ffaa4d';
-        }
+        // User cancelled - button stays visible for retry
       }
 
-      // Clear the deferred prompt and hide buttons
+      // Clear the deferred prompt
       deferredPrompt = null;
-      if (installBtn) installBtn.style.display = 'none';
-      if (installAppBtn) installAppBtn.style.display = 'none';
     }
 
     // Check if app is already installed
@@ -833,13 +817,9 @@
       // Check if running in standalone mode (installed)
       if (window.matchMedia('(display-mode: standalone)').matches || 
           window.navigator.standalone === true) {
-        if (installStatus) {
-          installStatus.textContent = '✓ App is already installed';
-          installStatus.style.display = 'block';
-          installStatus.style.color = '#4dff4d';
+        if (installAppBtn) {
+          installAppBtn.style.display = 'none';
         }
-        if (installBtn) installBtn.style.display = 'none';
-        if (installAppBtn) installAppBtn.style.display = 'none';
         return true;
       }
       return false;
@@ -847,62 +827,35 @@
 
     // Check on load
     if (checkIfInstalled()) {
-      // App is already installed, no need to show install button
+      // App is already installed, hide install button
     } else {
       // Listen for the beforeinstallprompt event
       window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
         deferredPrompt = e;
 
-        // Show both install buttons
-        if (installBtn) installBtn.style.display = 'block';
-        if (installAppBtn) installAppBtn.style.display = 'block';
-        if (installStatus) installStatus.style.display = 'none';
+        // Show install button
+        if (installAppBtn) {
+          installAppBtn.style.display = 'block';
+        }
 
-        // Add click listeners only once
+        // Add click listener only once
         if (!installBtnListenerAdded) {
           installBtnListenerAdded = true;
           
-          // Add listener to main install button
           if (installAppBtn) {
             installAppBtn.addEventListener('click', handleInstallClick);
-          }
-          
-          // Add listener to settings modal install button
-          if (installBtn) {
-            installBtn.addEventListener('click', handleInstallClick);
           }
         }
       });
 
       // Handle app installed event (fires after installation)
       window.addEventListener('appinstalled', () => {
-        if (installStatus) {
-          installStatus.textContent = '✓ App installed successfully!';
-          installStatus.style.display = 'block';
-          installStatus.style.color = '#4dff4d';
+        if (installAppBtn) {
+          installAppBtn.style.display = 'none';
         }
-        if (installBtn) installBtn.style.display = 'none';
-        if (installAppBtn) installAppBtn.style.display = 'none';
         deferredPrompt = null;
       });
-
-      // If prompt is not available, show manual install instructions
-      setTimeout(() => {
-        if (!deferredPrompt && installAppBtn && installAppBtn.style.display === 'none') {
-          // Check if we're on a mobile device
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-          if (installStatus) {
-            if (isMobile) {
-              installStatus.textContent = 'Unable to install on your mobile.';
-            } else {
-              installStatus.textContent = 'Unable to install on your device';
-            }
-            installStatus.style.display = 'block';
-            installStatus.style.color = '#ffaa4d';
-          }
-        }
-      }, 1000);
     }
 
 
