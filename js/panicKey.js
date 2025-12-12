@@ -9,7 +9,7 @@ const PANIC_LINK_STORAGE = "panicKeyLink";
 let panicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
 
 // Load redirect link
-let panicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
+let panicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "https://www.jimmyqrg.com";
 
 // Function to fix/normalize redirect links
 function fixRedirectLink(link) {
