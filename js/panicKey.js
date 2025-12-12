@@ -42,7 +42,7 @@ document.addEventListener("keydown", (e) => {
   // Always check localStorage directly to get the latest values
   // (storage events don't fire in the same window)
   const currentPanicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
-  const currentPanicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
+  const currentPanicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "https://www.jimmyqrg.com";
   
   // Fix the redirect link if it's incorrect
   const redirectLink = fixRedirectLink(currentPanicLink);
