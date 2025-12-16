@@ -101,7 +101,7 @@ function patchOpenGame() {
   window.openGame = function(url) {
     if (!url) return;
 
-    const target = "/loader.html?content=" + encodeURIComponent(url);
+    const target = "https://jimmyqrg.github.io/loader.html?content=" + encodeURIComponent(url);
 
     const popupFeatures = [
       "popup=yes",
