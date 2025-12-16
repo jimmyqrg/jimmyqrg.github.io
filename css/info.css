@@ -13,6 +13,55 @@ body {
   padding-top: 70px;
 }
 
+.back-btn {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  padding: 12px 18px;
+  font-family: "Press Start 2P", monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #ffffff;
+  background: linear-gradient(
+    135deg,
+    rgba(160, 60, 255, 0.35),
+    rgba(80, 0, 150, 0.35)
+  );
+  border: 1px solid rgba(200, 120, 255, 0.6);
+  border-radius: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 0 10px rgba(170, 0, 255, 0.5),
+    inset 0 0 12px rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+  z-index: 1000;
+  user-select: none;
+}
+
+.back-btn:hover {
+  transform: translateX(-3px) scale(1.05);
+  background: linear-gradient(
+    135deg,
+    rgba(190, 90, 255, 0.5),
+    rgba(110, 0, 200, 0.5)
+  );
+  box-shadow:
+    0 0 16px rgba(200, 0, 255, 0.8),
+    inset 0 0 14px rgba(255, 255, 255, 0.12);
+}
+
+.back-btn:active {
+  transform: translateX(-6px) scale(0.95);
+  box-shadow:
+    0 0 8px rgba(160, 0, 220, 0.6),
+    inset 0 0 18px rgba(0, 0, 0, 0.3);
+}
+
+
 .container {
   width: 92%;
   max-width: 780px;
