@@ -12,7 +12,7 @@
   <style>
   body {
     margin: 0;
-    background: url("background2.png") no-repeat center center fixed;
+    background: url("https://pausd.jimmyqrg.com/jqrg-games/background2.png") no-repeat center center fixed;
     background-size: cover;
     color: white;
     font-family: "Josefin Sans", sans-serif;
@@ -284,16 +284,102 @@
     text-shadow: 0 0 8px rgba(0,0,0,0.8);
     border-radius: 12px;
   }
-  @keyframes newBadgePulse {
-    0% { opacity: 0.85; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.1); }
-    100% { opacity: 0.85; transform: scale(1); }
+  
+  /* AD Banner Styles */
+  .ad-banner {
+    background: linear-gradient(135deg, rgba(77, 140, 255, 0.15), rgba(138, 77, 255, 0.15), rgba(255, 77, 184, 0.15));
+    border: 3px solid transparent;
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 0 25px rgba(77, 140, 255, 0.3),
+      0 0 15px rgba(138, 77, 255, 0.2),
+      inset 0 0 15px rgba(255, 255, 255, 0.1);
+    animation: adPulse 3s ease-in-out infinite alternate;
+    transition: all 0.4s ease;
   }
-  @keyframes newBadgeShimmer {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(1.4); }
-    100% { filter: brightness(1); }
+
+  .ad-banner:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+      0 0 35px rgba(77, 140, 255, 0.5),
+      0 0 25px rgba(138, 77, 255, 0.3),
+      0 0 15px rgba(255, 77, 184, 0.2),
+      inset 0 0 20px rgba(255, 255, 255, 0.15);
+    animation-play-state: paused;
   }
+
+  .ad-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+  }
+
+  .ad-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 
+      0 0 10px rgba(77, 140, 255, 0.8),
+      0 0 20px rgba(138, 77, 255, 0.6),
+      0 0 30px rgba(255, 77, 184, 0.4);
+    letter-spacing: 1px;
+    /* REMOVED the problematic gradient text styling */
+    color: white; /* Simple white text with glow instead */
+    display: inline-block;
+  }
+
+  .ad-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-top: 5px;
+    color: #e0e0ff;
+  }
+
+  .ad-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: linear-gradient(135deg, #ff4db8, #8a4dff);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 77, 184, 0.5);
+    animation: badgeFloat 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes adPulse {
+    0% {
+      border-color: rgba(77, 140, 255, 0.5);
+      box-shadow: 
+        0 0 20px rgba(77, 140, 255, 0.3),
+        0 0 10px rgba(138, 77, 255, 0.2),
+        inset 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+      border-color: rgba(255, 77, 184, 0.7);
+      box-shadow: 
+        0 0 30px rgba(255, 77, 184, 0.4),
+        0 0 20px rgba(77, 140, 255, 0.3),
+        inset 0 0 15px rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  @keyframes badgeFloat {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-5px) rotate(2deg);
+    }
+  }
+
   .back-btn {
     position: fixed;
     top: 20px;
@@ -332,6 +418,16 @@
   <a href="https://pausd.jimmyqrg.com/?page=extend" class="back-btn">⬅ Back</a>
 
   <h1>Unblocked Games</h1>
+  
+  <!-- AD Banner -->
+  <div class="ad-banner">
+    <a href="jimmyqrg.github.io/chat/" class="ad-link" target="_blank">
+      <div class="ad-title">JOIN THE JLS GROUP CHAT!!</div>
+      <div class="ad-subtitle">A browser chat app made by my friend</div>
+      <div class="ad-badge">NEW</div>
+    </a>
+  </div>
+
   <!--
   <spam class="image"><img class="image" src="https://jimmyqrg.github.io/game-images/games/" alt="THAT'S NOT MY NEIGHBOR" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/', '_blank')"></spam>
   <spam class="image"><img class="image" src="https://jimmyqrg.github.io/game-images/games/" alt="THAT'S NOT MY NEIGHBOR" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/')"></spam>
@@ -467,8 +563,12 @@
 	
   <h2>PENDING, NOT RELEASED</h2>
   <div class="btn-grid">
-    <spam class="image"><img class="image" src="https://jimmyqrg.github.io/game-images/games/browser.png" alt="Coursera.gq" onclick="openGame('https://jimmyqrg.github.io/strategies/tools/browser.html')"></spam>
     <spam class="image"><img class="image" src="https://jimmyqrg.github.io/game-images/games/wmcbg.png" alt="World's Most Confusing Button Game" onclick="openGame('https://jimmyqrg.github.io/wmcbg/')"></spam>
+  </div>
+  <div class="btn-grid">
+    <button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/trigger-rally.html')">Trigger Rally</button>
+    <button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hex-gl.html')">Hex GL</button>
+    <button class="btn btn-new" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/browser-quest.html')">Browser Quest</button>
   </div>
 
   <br><br><br>
@@ -485,43 +585,82 @@
 
   <p>Click <a href="https://jimmyqrg.github.io/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
 <script>
-  document.querySelectorAll('.image').forEach(box => {
-    const img = box.querySelector('img');
-    if (img && img.alt) {
-      box.setAttribute('data-alt', img.alt);
+  // Email domain restriction - Check for @pausd.org users
+  function checkEmailRestriction() {
+    // Get user email from localStorage or prompt (you'll need to implement this based on your auth system)
+    const userEmail = localStorage.getItem("userEmail") || "";
+    
+    // Check if email ends with @pausd.org
+    if (userEmail.toLowerCase().endsWith("@pausd.org")) {
+      // Show 403 error
+      document.body.innerHTML = `
+        <div style="text-align: center; padding: 100px; color: white; font-family: 'Josefin Sans', sans-serif;">
+          <h1 style="font-size: 3rem; color: #ff4d4d;">403 - Access Denied</h1>
+          <p style="font-size: 1.5rem; margin-top: 20px;">
+            Access to this resource is restricted for @pausd.org email addresses.
+          </p>
+          <p style="margin-top: 30px; opacity: 0.8;">
+            Please use a different email address to access this site.
+          </p>
+          <a href="https://pausd.jimmyqrg.com/?page=extend" style="display: inline-block; margin-top: 40px; padding: 12px 24px; background: rgba(255,255,255,0.1); border: 2px solid white; border-radius: 6px; color: white; text-decoration: none;">
+            Return to Home
+          </a>
+        </div>
+      `;
+      return false;
+    }
+    return true;
+  }
+
+  // Run email check when page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    // Check if we should run the email restriction (you can enable/disable this as needed)
+    const enableEmailRestriction = true; // Set to false to disable the restriction
+    
+    if (enableEmailRestriction) {
+      checkEmailRestriction();
+    }
+    
+    // Continue with existing code...
+    document.querySelectorAll('.image').forEach(box => {
+      const img = box.querySelector('img');
+      if (img && img.alt) {
+        box.setAttribute('data-alt', img.alt);
+      }
+    });
+
+    document.querySelectorAll('.collection-img').forEach(box => {
+      const img = box.querySelector('img');
+      if (img && img.alt) {
+        box.setAttribute('data-alt', img.alt);
+      }
+    });
+
+    // Check if the user is authorized in localStorage
+    const authorized = localStorage.getItem("user") === "authorized";
+    if (authorized) {
+      // Hide the overlay so the construction zone is interactive
+      const overlay = document.querySelector(".construction-overlay");
+      if (overlay) {
+        overlay.style.display = "none";
+      }
+      // Enable pointer events on construction zone children
+      const zoneChildren = document.querySelectorAll(".construction-zone *");
+      zoneChildren.forEach(el => el.style.pointerEvents = "auto");
+    }
+    
+    // Get the URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const version = params.get('version');
+
+    // Check if version equals "3.2.4"
+    if (version === "1.0.1") {
+      window.location.href = "https://jimmyqrg.github.io/jqrg-games/aF7kL2pQ9mXr8HsVzT1wYcB5jDn4GqE0Uo.html";
+    }
+    if (version === "1.0.0") {
+      window.location.href = "https://jimmyqrg.github.io/jqrg-games/J4mT9vQ2xZpL6rFwK1bHs8yC0nAeR7uYdG.html";
     }
   });
-
-  document.querySelectorAll('.collection-img').forEach(box => {
-    const img = box.querySelector('img');
-    if (img && img.alt) {
-      box.setAttribute('data-alt', img.alt);
-    }
-  });
-
-  // Check if the user is authorized in localStorage
-  const authorized = localStorage.getItem("user") === "authorized";
-  if (authorized) {
-    // Hide the overlay so the construction zone is interactive
-    const overlay = document.querySelector(".construction-overlay");
-    if (overlay) {
-      overlay.style.display = "none";
-    }
-    // Enable pointer events on construction zone children
-    const zoneChildren = document.querySelectorAll(".construction-zone *");
-    zoneChildren.forEach(el => el.style.pointerEvents = "auto");
-  }
-  // Get the URL parameters
-  const params = new URLSearchParams(window.location.search);
-  const version = params.get('version');
-
-  // Check if version equals "3.2.4"
-  if (version === "1.0.1") {
-    window.location.href = "https://jimmyqrg.github.io/jqrg-games/aF7kL2pQ9mXr8HsVzT1wYcB5jDn4GqE0Uo.html";
-  }
-  if (version === "1.0.0") {
-    window.location.href = "https://jimmyqrg.github.io/jqrg-games/J4mT9vQ2xZpL6rFwK1bHs8yC0nAeR7uYdG.html";
-  }
 
 </script>
 
