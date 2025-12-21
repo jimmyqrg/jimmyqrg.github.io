@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="/js/open-game.js"></script>
+  <script src="/js/panicKey.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home | Infinite Campus</title>
@@ -137,12 +139,12 @@
   </style>
 </head>
 <body>
-  <!-- Fixed Back button -->
+  <!-- Back button -->
   <a href="https://ela.jimmyqrg.com/?page=extend" class="back-btn">⬅ Back</a>
 
   <h1>OTHER UNBLOCKS</h1>
 
-  <button class="btn" onclick="openGame('https://ela.jimmyqrg.com/dino/')">
+  <button class="btn" onclick="openGame('/dino/')">
     OFFLINE DINOSOUR GAME
   </button>
 
@@ -150,26 +152,11 @@
     GN-MATH
   </button>
 
-  <button class="btn" onclick="openGame('https://ela.jimmyqrg.com/unblocks/i-ready-games/')">
+  <button class="btn" onclick="openGame('/unblocks/i-ready-games/')">
     I-READY GAMES
   </button>
 
   <p>Wanna create your own game website? Totorial: <a href="https://docs.google.com/document/d/1ky210XqK9hBFeYQBO_oxZM8o9GmbKGaDafuoqEtcBgI/edit?tab=t.0" style="color:white;">Click me</a>.</p>
 
-  <script>
-    function openGame(url) {
-      const win = window.open('about:blank', '_blank');
-      const iframe = win.document.createElement('iframe');
-      iframe.style.position = "fixed";
-      iframe.style.top = 0;
-      iframe.style.left = 0;
-      iframe.style.width = "100%";
-      iframe.style.height = "100%";
-      iframe.style.border = "none";
-      iframe.src = url.startsWith("http") ? url : "https://" + url;
-      win.document.body.style.margin = "0";
-      win.document.body.appendChild(iframe);
-    }
-  </script>
 </body>
 </html>
