@@ -96,28 +96,28 @@
     <h1>Information</h1>
     <ul>
 
-      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example1.html'">
+      <li class="item" onclick="location.href='https://ela.jimmyqrg.com/strategies/articles/example1.html'">
         <a>
           <span class="item-title">Example Article #1</span><br>
           <span class="item-desc">Description about topic goes here...</span>
         </a>
       </li>
 
-      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example2.html'">
+      <li class="item" onclick="location.href='https://ela.jimmyqrg.com/strategies/articles/example2.html'">
         <a>
           <span class="item-title">Example Article #2</span><br>
           <span class="item-desc">Description about topic goes here...</span>
         </a>
       </li>
 
-      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example3.html'">
+      <li class="item" onclick="location.href='https://ela.jimmyqrg.com/strategies/articles/example3.html'">
         <a>
           <span class="item-title">Example Article #3</span><br>
           <span class="item-desc">Description about topic goes here...</span>
         </a>
       </li>
 
-      <li class="item" onclick="location.href='https://jimmyqrg.github.io/strategies/articles/example4.html'">
+      <li class="item" onclick="location.href='https://ela.jimmyqrg.com/strategies/articles/example4.html'">
         <a>
           <span class="item-title">Example Article #4</span><br>
           <span class="item-desc">Description about topic goes here...</span>

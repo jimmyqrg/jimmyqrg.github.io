@@ -215,7 +215,7 @@
 <body>
 
   <!-- Back Button -->
-  <div class="back-btn" onclick="location.href='https://jimmyqrg.github.io/strategies/'">
+  <div class="back-btn" onclick="location.href='https://ela.jimmyqrg.com/strategies/'">
     ⬅ Back
   </div>
 
