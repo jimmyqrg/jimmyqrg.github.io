@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://ela.jimmyqrg.com/js/openGame.js"></script>
+  <script src="/js/openGame.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -138,7 +138,7 @@
 </head>
 <body>
   <!-- Back button -->
-  <button class="back-btn" id="back-btn" onclick="location.href='https://ela.jimmyqrg.com/jqrg-games/'">⬅ Back</button>
+  <button class="back-btn" id="back-btn" onclick="location.href='/jqrg-games/'">⬅ Back</button>
 
   <h1>EAGLERCRAFT RELEASE</h1>
   <button class="btn" onclick="openGame('r1-5-2.html')">RELEASE 1.5.2</button>
@@ -154,12 +154,12 @@
     HACKED CLIENT (DRAGONX)
   </button>
 
-  <p>Click <a href="https://ela.jimmyqrg.com/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
+  <p>Click <a href="/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
 
   <script>
     // Get the "back" link from URL
     const params = new URLSearchParams(window.location.search);
-    const backLink = params.get("back") || "https://ela.jimmyqrg.com";
+    const backLink = params.get("back") || "https://ela.jimmyqrg.com/?page=extend";
 
     document.getElementById("back-btn").onclick = () => {
       window.location.href = backLink;
