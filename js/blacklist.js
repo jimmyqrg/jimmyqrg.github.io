@@ -15,7 +15,7 @@
       //     <p style="margin-top: 30px; opacity: 0.8;">
       //       Please use a different email address to access this site.
       //     </p>
-      //     <a href="https://ela.jimmyqrg.com/?page=extend" style="display: inline-block; margin-top: 40px; padding: 12px 24px; background: rgba(255,255,255,0.1); border: 2px solid white; border-radius: 6px; color: white; text-decoration: none;">
+      //     <a href="https://student.jimmyqrg.com/?page=extend" style="display: inline-block; margin-top: 40px; padding: 12px 24px; background: rgba(255,255,255,0.1); border: 2px solid white; border-radius: 6px; color: white; text-decoration: none;">
       //       Return to Home
       //     </a>
       //   </div>
