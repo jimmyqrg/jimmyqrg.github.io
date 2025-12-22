@@ -47,6 +47,9 @@ document.addEventListener("keydown", (e) => {
   // Fix the redirect link if it's incorrect
   const redirectLink = fixRedirectLink(currentPanicLink);
 
+  if (currentPanicKey === "window.close"){
+    window.close();
+  }
   // Match the key code (e.code)
   if (e.code === currentPanicKey) {
     // Immediately redirect
