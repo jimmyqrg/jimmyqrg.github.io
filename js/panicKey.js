@@ -45,7 +45,7 @@ document.addEventListener("keydown", (e) => {
   const currentPanicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "https://www.jimmyqrg.com";
   
   // Fix the redirect link if it's incorrect
-  const redirectLink = fixRedirectLink(currentPanicLink);
+  //const redirectLink = fixRedirectLink(currentPanicLink);
 
   if (currentPanicKey === "window.close"){
     window.close();
