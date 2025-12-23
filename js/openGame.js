@@ -5,6 +5,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const CLOAK_TITLE_KEY = "cloakTitle";
   const CLOAK_ICON_KEY = "cloakIcon";
 
+  /* =====================================================
+      === OPEN GAME TYPE SETTING ==========================
+      ===================================================== */
+  const OPEN_GAME_TYPE_KEY = "openGameType";
+  const openGameTypeSelect = document.getElementById("openGameType");
+
+  if (openGameTypeSelect) {
+    // Load saved type (default: popup)
+    const savedType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
+    openGameTypeSelect.value = savedType;
+
+    // Save on change
+    openGameTypeSelect.addEventListener("change", () => {
+      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameTypeSelect.value);
+    });
+  }
+
   const cloakTitleInput = document.getElementById("cloakTitle");
   const iconOptions = document.querySelectorAll(".cloakIconOption");
   const customLabel = document.getElementById("customCloakLabel");
@@ -90,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.warn("Cloak UI not found. Skipping tab cloak initialization.");
   }
 });
+
 
 /* =====================================================
     === NEW openGame() for loader compatibility ==========

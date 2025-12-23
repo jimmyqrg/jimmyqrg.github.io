@@ -504,6 +504,20 @@
       <input type="text" id="panicLinkInput" style="width:100%; padding:8px; margin-top:5px; border-radius:8px;" placeholder="https://example.com" />
       <br><br><br>
 
+      <!-- Open Game Type -->
+      <label><b>Open Game Type</b></label><br>
+      <p style="margin-top:10px; opacity:0.8;">
+      Choose how games are opened.
+      </p>
+
+      <select id="openGameType"
+        style="width:100%; padding:8px; margin-top:8px; border-radius:8px;">
+        <option value="popup">Popup</option>
+        <option value="aboutblank">about:blank</option>
+      </select>
+
+      <br><br><br>
+
       <!-- === Tab Cloak === -->
       <label><b>Game tab cloak</b></label><br><br>
 
@@ -865,6 +879,23 @@
         deferredPrompt = null;
       });
     }
+
+    // ===============================
+    // Open Game Type Setting
+    // ===============================
+    const OPEN_GAME_TYPE_KEY = "openGameType";
+
+    // Default = popup
+    const openGameTypeSelect = document.getElementById("openGameType");
+
+    // Load saved value
+    const savedOpenGameType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
+    openGameTypeSelect.value = savedOpenGameType;
+
+    // Save on change
+    openGameTypeSelect.addEventListener("change", () => {
+      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameTypeSelect.value);
+    });
 
 
   </script>
