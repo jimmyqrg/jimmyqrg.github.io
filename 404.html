@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="panicKey.js"></script>
-  <script src="base.js"></script>
+  <script src="panicKey.js"></script>\
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 | Page Not Found</title>
@@ -100,6 +99,13 @@
   <button class="btn" onclick="location.href='https://student.jimmyqrg.com/suggest-games/'">
     Suggest a Game
   </button>
-
 </body>
+<script>
+  (function () {
+    const allowedDomain = "student.jimmyqrg.com";
+    if (location.hostname !== allowedDomain) {
+      location.replace("/Index.html"); // capital I
+    }
+  })();
+</script>
 </html>
