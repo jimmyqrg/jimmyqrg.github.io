@@ -910,6 +910,12 @@
       localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameTypeSelect.value);
     });
 
+    (function () {
+      const allowedDomain = "student.jimmyqrg.com";
+      if (location.hostname !== allowedDomain) {
+        location.replace("/Index.html"); // capital I
+      }
+    })();
 
   </script>
 
