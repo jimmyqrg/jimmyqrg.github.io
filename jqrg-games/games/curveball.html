@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Curveball 3D</title>
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: black; /* letterbox color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* no scrollbars */
+  }
+
+  .game-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Flash game keeps 861:615 ratio */
+  object, embed {
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+
+  /* wrapper to maintain aspect ratio */
+  .aspect-ratio-wrapper {
+    width: 100%;
+    height: 100%;
+    max-width: calc(100vh * 861 / 615); /* width based on viewport height */
+    max-height: calc(100vw * 615 / 861); /* height based on viewport width */
+  }
+</style>
+<script src="https://games.engineering.com/flash/ruffle/ruffle.js"></script>
+</head>
+<body>
+
+<div class="game-container">
+  <div class="aspect-ratio-wrapper">
+    <object 
+      type="application/x-shockwave-flash"
+      data="https://games.engineering.com/curveball/curveball.swf"
+      width="100%"
+      height="100%">
+        <param name="movie" value="https://games.engineering.com/curveball/curveball.swf" />
+        <param name="wmode" value="opaque" />
+        <param name="scale" value="showall" />
+        <param name="allowFullScreen" value="true" />
+        <embed 
+          src="https://games.engineering.com/curveball/curveball.swf"
+          type="application/x-shockwave-flash"
+          wmode="opaque"
+          scale="showall"
+          allowFullScreen="true"
+          width="100%"
+          height="100%">
+        </embed>
+    </object>
+  </div>
+</div>
+
+</body>
+</html>
