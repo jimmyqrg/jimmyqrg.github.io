@@ -1,20 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
+    <base href="https://geometrylitegame.org/game/geometry-dash-lite/">
     <title>Geometry Dash</title>
-    <link rel="icon" type="https://truffled.lol/games/geodash/image/png" href="https://e3334afd.cf-nate.pages.dev/0/g/geodash/game/splash.png">
     <meta name="description" content="Play Geometry Dash Lite Online For Free on Chromebook, PC, Windows, Desktop in Chrome and modern browsers.">
-    <link rel="canonical" href="https://gamecomets.com/game/geometry-dash-lite/" />
-    <meta name="robots" content="noindex, nofollow">
+     <meta name="robots" content="noindex, nofollow">
     <meta charset="utf-8">
-    <script src="https://truffled.lol/js/all.min.jsn.jsn.jsn.jsn.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://truffled.lol/games/geodash/themes/geometrydashlite.io/rs/css/home.css?v=1">
 </head>
-<meta name="cf-2fa-verify" content="GpoihhhSRQknehLQkEtXM">
 
 <body>
     <style>
@@ -165,16 +160,16 @@
         }
     </style>
     <div id="gameContainer"></div>
-    <div id="loader"><img class="logo" src="https://truffled.lol/games/geodash/image/loading.png?v=1">
+    <div id="loader"><img class="logo" src="image/loading.png?v=1">
         <div class="spinner"></div>
         <div class=" pos_progress">
             <div class="progress">
-                <div class="posfull"><img class="full" src="https://truffled.lol/games/geodash/image/process_bar_back.png"></div>
-                <div class="posbox"><img class="box_process" src="https://truffled.lol/games/geodash/themes/image/process_bar_front.png"></div>
+                <div class="posfull"><img class="full" src="image/process_bar_back.png"></div>
+                <div class="posbox"><img class="box_process" src="image/process_bar_front.png"></div>
             </div>
         </div>
-        <script src="https://truffled.lol/games/geodash/themes/Build/UnityLoader.js"></script>
-        <script>
+        <script src="Build/UnityLoader.js" type="0f4c123ad0154192cbfc3ba1-text/javascript"></script>
+        <script type="0f4c123ad0154192cbfc3ba1-text/javascript">
             var gameInstance = UnityLoader.instantiate("gameContainer", "Build/GeometryDashLite.json", {
                 onProgress: UnityProgress
             });
@@ -198,7 +193,7 @@
                 }
             }
         </script>
-        <script>
+        <script type="0f4c123ad0154192cbfc3ba1-text/javascript">
             document.addEventListener('DOMContentLoaded', function() {
                 let buttondiv = document.getElementsByTagName('button');
                 for (let i = 0; i < buttondiv.length; i++) {
@@ -216,42 +211,7 @@
                 }, 1000);
             });
         </script>
-        <script src="https://truffled.lol/games/geodash/themes/themes/geometrydashlite.io/rs/js/jquery-3.4.1.min.js"></script>
-        <script>
-            function ToggleInfo() {
-                if ($('button.hide-main-panel').children('i')[0].textContent != 'Info') {
-                    $("div.main-panel").css('width', '0px');
-                    $("div.main-panel-ads").css('display', 'none');
-                    $("div.main-panel-content").css('display', 'none');
-                    $('button.hide-main-panel').children('i').html('Info');
-                    console.log('Info');
-                } else {
-                    $("div.main-panel").css('width', $("div.main-panel").css('max-width'));
-                    $("div.main-panel-ads").css('display', 'block');
-                    $("div.main-panel-content").css('display', 'block');
-                    $('button.hide-main-panel').children('i').html('>>');
-                    console.log('>>');
-                }
-            }
-
-            function ShowInfo() {
-                $("div.main-panel").css('width', $("div.main-panel").css('max-width'));
-                $("div.main-panel-ads").css('display', 'block');
-                $("div.main-panel-content").css('display', 'block');
-                $('button.hide-main-panel').children('i').html('>>');
-            }
-
-            function HideInfo() {
-                $("div.main-panel").css('width', '0px');
-                $("div.main-panel-ads").css('display', 'none');
-                $("div.main-panel-content").css('display', 'none');
-                $('button.hide-main-panel').children('i').html('Info');
-            }
-            $('button.hide-main-panel').click(function() {
-                console.log('a');
-                ToggleInfo();
-            });
-        </script>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="0f4c123ad0154192cbfc3ba1-|49" defer></script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"0d5068b8bf4043bc889852a988aaec39","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 
 </html>
