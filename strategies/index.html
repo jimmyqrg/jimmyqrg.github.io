@@ -13,7 +13,7 @@
 <body>
   <div class="container">
 
-    <button class="back-btn" onclick="location.href='https://jimmyqrg.github.io/'">← Back</button>
+    <button class="back-btn" onclick="navigateSmart('https://jimmyqrg.github.io/')">← Back</button>l
 
     <h1>Information</h1>
     <ul>
@@ -41,5 +41,36 @@
 
     </ul>
   </div>
+  <script>
+  function navigateSmart(targetUrl) {
+    try {
+      // Check if inside an iframe
+      if (window.self !== window.top) {
+        const iframe = window.frameElement; // closest iframe
+  
+        if (iframe && window.parent) {
+          const parentHost = window.parent.location.hostname;
+  
+          // Allow only jimmyqrg.com and its subdomains
+          const allowed =
+            parentHost === "jimmyqrg.com" ||
+            parentHost === "www.jimmyqrg.com" ||
+            parentHost.endsWith(".jimmyqrg.com");
+  
+          if (allowed) {
+            // Change ONLY the iframe URL
+            iframe.src = targetUrl;
+            return;
+          }
+        }
+      }
+    } catch (e) {
+      // Cross-origin access error → fallback
+    }
+  
+    // Default: change full page URL
+    window.location.href = targetUrl;
+  }
+  </script>    
 </body>
 </html>
