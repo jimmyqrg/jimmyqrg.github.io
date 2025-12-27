@@ -119,7 +119,7 @@ function patchOpenGame() {
   window.openGame = function(url) {
     if (!url) return;
 
-    const target = "https://jimmyqrg.github.io/loader.html?content=" + encodeURIComponent(url);
+    const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
 
     const popupFeatures = [
       "popup=yes",
