@@ -917,6 +917,14 @@
     //   }
     // })();
 
+    (function () {
+      const targetHost = "student.jimmyqrg.com";
+
+      if (window.location.hostname !== targetHost) {
+        window.location.href = "https://" + targetHost;
+      }
+    })();
+
   </script>
 
 </body>
