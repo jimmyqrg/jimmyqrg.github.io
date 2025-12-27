@@ -53,7 +53,7 @@
         0 0 45px rgba(138, 77, 255, 0.6),
         0 0 65px rgba(255, 77, 184, 0.4);
     border: 4px solid rgba(255, 255, 255, 0.3);
-    filter: brightness(41%);
+    /* REMOVED: filter: brightness(41%); */
     transition: filter 0.15s ease;
   }
   .image:hover img::before {
@@ -102,31 +102,39 @@
     z-index: 1;
     pointer-events: none;
   }
+  /* CHANGED: Updated text overlay */
   .image::after {
     content: attr(data-alt);
     position: absolute;
-    inset: 0;
-    width: 80%;
-    left: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(60px);
+    background: rgba(0, 0, 0, 0.5); /* 30% opacity black */
     color: white;
     font-size: 1rem;
     font-weight: bold;
+    padding: 12px 16px;
+    border-radius: 10px; /* Corner radius */
     opacity: 0;
     pointer-events: none;
     z-index: 10;
     max-width: 80%;
     word-wrap: break-word;
     text-align: center;
-    padding: 0 10px;
     box-sizing: border-box;
-    transform: translateZ(20px); /* Bring text slightly forward in 3D space */
-    transition: opacity 0.35s ease;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.275, 0.985, 0.42, 1.375);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: auto;
+    white-space: normal;
+    line-height: 1.4;
+    transform: translate(-50%, -50%) scale(0.95);
   }
   .image:hover::after {
     opacity: 1;
+    transform: translate(-50%, -50%) translateZ(50px) scale(1.05);
   }
   .collection-img {
     position: relative;
@@ -175,7 +183,7 @@
         0 0 45px rgba(138, 77, 255, 0.6),
         0 0 65px rgba(255, 77, 184, 0.4);
     border: 4px solid rgba(255, 255, 255, 0.3);
-    filter: brightness(41%);
+    /* REMOVED: filter: brightness(41%); */
     transition: filter 0.15s ease;
   }
   .collection-img img::after {
@@ -200,31 +208,39 @@
     z-index: 1;
     pointer-events: none;
   }
+  /* CHANGED: Updated collection text overlay */
   .collection-img::after {
     content: attr(data-alt);
     position: absolute;
-    inset: 0;
-    width: 80%;
-    left: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateZ(60px);
+    background: rgba(0, 0, 0, 0.5); /* Slightly more opaque for larger text */
     color: white;
     font-size: 1.6rem;
     font-weight: bold;
+    padding: 15px 20px;
+    border-radius: 12px; /* Corner radius */
     opacity: 0;
     pointer-events: none;
     z-index: 10;
     max-width: 80%;
     word-wrap: break-word;
     text-align: center;
-    padding: 0 10px;
     box-sizing: border-box;
-    transform: translateZ(20px); /* Bring text slightly forward in 3D space */
-    transition: opacity 0.35s ease;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.275, 0.985, 0.42, 1.375);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: auto;
+    white-space: normal;
+    line-height: 1.4;
+    transform: translate(-50%, -50%) scale(0.95);
   }
   .collection-img:hover::after {
     opacity: 1;
+    transform: translate(-50%, -50%) translateZ(50px) scale(1.05);
   }
   .image:hover img::after, .collection-img:hover img::after {
     opacity: 1;
@@ -273,60 +289,60 @@
     overflow: hidden;
     box-sizing: border-box;
   }
-	.btn:hover {
-		color: #fff;
-		border-color: transparent;
-		background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-		background-size: 400% 100%;
-		transform: translateY(-4px) scale(1.07);
-		letter-spacing: 1px;
-		box-shadow:
-			0 0 10px rgba(77, 140, 255, 0.6),
-			0 0 20px rgba(138, 77, 255, 0.5),
-			0 0 35px rgba(255, 77, 184, 0.4),
-			inset 0 0 10px rgba(255, 255, 255, 0.2);
-		animation:
-			gradientTravel 4s linear infinite,
-			outlinePulse 2.5s ease-in-out infinite alternate,
-			shineSweep 6s ease-in-out infinite;
-	}
-	@keyframes gradientTravel {
-		0% {
-			background-position: 0% 50%;
-			box-shadow:
-				0 0 15px rgba(77, 140, 255, 0.6),
-				0 0 30px rgba(138, 77, 255, 0.4),
-				0 0 50px rgba(255, 77, 184, 0.3);
-		}
-		100% {
-			background-position: 200% 50%;
-			box-shadow:
-				0 0 20px rgba(255, 77, 184, 0.7),
-				0 0 40px rgba(77, 140, 255, 0.5),
-				0 0 60px rgba(138, 77, 255, 0.4);
-		}
-	}
-	@keyframes outlinePulse {
-		0% {
-			box-shadow:
-				0 0 10px rgba(77, 140, 255, 0.7),
-				0 0 25px rgba(138, 77, 255, 0.4),
-				0 0 45px rgba(255, 77, 184, 0.3),
-				0 0 0 3px rgba(77, 140, 255, 0.1);
-		}
-		100% {
-			box-shadow:
-				0 0 18px rgba(255, 77, 184, 0.8),
-				0 0 40px rgba(77, 140, 255, 0.6),
-				0 0 65px rgba(138, 77, 255, 0.4),
-				0 0 0 5px rgba(255, 77, 184, 0.15);
-		}
-	}
-	@keyframes shineSweep {
-		0% { filter: brightness(1); }
-		50% { filter: brightness(1.4); }
-		100% { filter: brightness(1); }
-	}
+  .btn:hover {
+    color: #fff;
+    border-color: transparent;
+    background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+    background-size: 400% 100%;
+    transform: translateY(-4px) scale(1.07);
+    letter-spacing: 1px;
+    box-shadow:
+      0 0 10px rgba(77, 140, 255, 0.6),
+      0 0 20px rgba(138, 77, 255, 0.5),
+      0 0 35px rgba(255, 77, 184, 0.4),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+    animation:
+      gradientTravel 4s linear infinite,
+      outlinePulse 2.5s ease-in-out infinite alternate,
+      shineSweep 6s ease-in-out infinite;
+  }
+  @keyframes gradientTravel {
+    0% {
+      background-position: 0% 50%;
+      box-shadow:
+        0 0 15px rgba(77, 140, 255, 0.6),
+        0 0 30px rgba(138, 77, 255, 0.4),
+        0 0 50px rgba(255, 77, 184, 0.3);
+    }
+    100% {
+      background-position: 200% 50%;
+      box-shadow:
+        0 0 20px rgba(255, 77, 184, 0.7),
+        0 0 40px rgba(77, 140, 255, 0.5),
+        0 0 60px rgba(138, 77, 255, 0.4);
+    }
+  }
+  @keyframes outlinePulse {
+    0% {
+      box-shadow:
+        0 0 10px rgba(77, 140, 255, 0.7),
+        0 0 25px rgba(138, 77, 255, 0.4),
+        0 0 45px rgba(255, 77, 184, 0.3),
+        0 0 0 3px rgba(77, 140, 255, 0.1);
+    }
+    100% {
+      box-shadow:
+        0 0 18px rgba(255, 77, 184, 0.8),
+        0 0 40px rgba(77, 140, 255, 0.6),
+        0 0 65px rgba(138, 77, 255, 0.4),
+        0 0 0 5px rgba(255, 77, 184, 0.15);
+    }
+  }
+  @keyframes shineSweep {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(1.4); }
+    100% { filter: brightness(1); }
+  }
   .btn-new {
     position: relative;
     overflow: visible !important;
@@ -344,7 +360,7 @@
     background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
     border-radius: 12px;
     box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     animation: newBadgePulse 2.5s ease-in-out infinite;
     transition: all 0.15s ease;
     pointer-events: none;
@@ -373,7 +389,7 @@
     background: linear-gradient(135deg, #4d8cff, #8a4dff, #ff4db8);
     border-radius: 6px;
     box-shadow: 0 0 8px rgba(138, 77, 255, 0.5);
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
     animation: newBadgePulse 2.5s ease-in-out infinite;
     transition: all 0.15s ease;
     pointer-events: none;
@@ -412,7 +428,7 @@
     text-shadow: 0 0 8px rgba(0,0,0,0.8);
     border-radius: 12px;
   }
-  
+
   .back-btn {
     position: fixed;
     top: 20px;
@@ -431,7 +447,7 @@
     color: black;
   }
   .btn-grid {
-    perspective: 1000px;
+    perspective: 1250px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
     gap: 2px;
@@ -647,7 +663,7 @@
     }
   }
 
-/* Particle Effects */
+  /* Particle Effects */
   .particle {
     position: absolute;
     width: 8px;
@@ -670,9 +686,10 @@
     }
   }
 
-/* Enhanced glow when all images are lit */
+  /* Enhanced glow when all images are lit */
   .all-lit-glow {
     animation: allLitGlow 0.5s ease-in-out infinite alternate !important;
+    filter: none !important; /* Ensure no brightness filter */
   }
 
   @keyframes allLitGlow {
@@ -682,7 +699,6 @@
         0 0 60px rgba(255, 87, 51, 0.7),
         0 0 90px rgba(138, 43, 226, 0.5),
         0 0 120px rgba(0, 255, 255, 0.3) !important;
-      filter: brightness(1.5) !important;
     }
     100% {
       box-shadow: 
@@ -690,7 +706,6 @@
         0 0 80px rgba(255, 87, 51, 0.8),
         0 0 120px rgba(138, 43, 226, 0.6),
         0 0 160px rgba(0, 255, 255, 0.4) !important;
-      filter: brightness(2) !important;
     }
   }
   </style>
@@ -897,9 +912,9 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        // Calculate rotation angles (max 15 degrees)
-        const rotateY = ((x - centerX) / centerX) * 15; // Left/Right tilt
-        const rotateX = ((centerY - y) / centerY) * 15; // Up/Down tilt
+        // Calculate rotation angles (max 20 degrees for faster response)
+        const rotateY = ((x - centerX) / centerX) * 20; // Left/Right tilt
+        const rotateX = ((centerY - y) / centerY) * 20; // Up/Down tilt
         
         // Apply rotation with CSS custom properties
         button.style.setProperty('--rotateX', `${rotateX}deg`);
@@ -911,16 +926,16 @@
         button.style.setProperty('--rotateX', '0deg');
         button.style.setProperty('--rotateY', '0deg');
         
-        // Add a smooth return animation
-        button.style.transition = 'transform 0.5s ease';
+        // Add a smooth return animation (faster reset)
+        button.style.transition = 'transform 0.3s ease';
         setTimeout(() => {
-          button.style.transition = 'transform 0.15s ease';
-        }, 500);
+          button.style.transition = 'transform 0.1s ease';
+        }, 300);
       });
       
-      // Reset transition when mouse enters
+      // Reset transition when mouse enters (faster transition)
       button.addEventListener('mouseenter', () => {
-        button.style.transition = 'transform 0.15s ease';
+        button.style.transition = 'transform 0.1s ease';
       });
     });
   });
@@ -941,13 +956,13 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        // Calculate rotation angles (max 15 degrees)
-        const rotateY = ((x - centerX) / centerX) * 15;
-        const rotateX = ((centerY - y) / centerY) * 15;
+        // Calculate rotation angles (max 20 degrees for faster response)
+        const rotateY = ((x - centerX) / centerX) * 20;
+        const rotateX = ((centerY - y) / centerY) * 20;
         
         // Calculate tilt intensity for shine speed
-        const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 30;
-        const shineSpeed = tiltIntensity * 0.3; // Max 0.3s adjustment
+        const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 40;
+        const shineSpeed = tiltIntensity * 0.2; // Faster adjustment
         
         // Apply rotation with CSS custom properties
         button.style.setProperty('--rotateX', `${rotateX}deg`);
@@ -955,7 +970,7 @@
         button.style.setProperty('--tilt-speed', `${shineSpeed}s`);
         
         // Add dynamic glow color based on tilt direction
-        const hue = (rotateY * 12 + 200) % 360;
+        const hue = (rotateY * 15 + 200) % 360; // Faster hue change
         const img = button.querySelector('img');
         if (img) {
           img.style.boxShadow = 
@@ -980,16 +995,16 @@
                 '0 0 65px rgba(255, 77, 184, 0.4)';
         }
         
-        // Add a smooth return animation
-        button.style.transition = 'transform 0.5s ease';
+        // Add a smooth return animation (faster reset)
+        button.style.transition = 'transform 0.3s ease';
         setTimeout(() => {
-            button.style.transition = 'transform 0.15s ease';
-        }, 500);
+            button.style.transition = 'transform 0.1s ease';
+        }, 300);
       });
       
-      // Reset transition when mouse enters
+      // Reset transition when mouse enters (faster transition)
       button.addEventListener('mouseenter', () => {
-        button.style.transition = 'transform 0.15s ease';
+        button.style.transition = 'transform 0.1s ease';
       });
     });
   });
@@ -1043,7 +1058,7 @@
       window.location.href = "J4mT9vQ2xZpL6rFwK1bHs8yC0nAeR7uYdG.html";
     }
   });
-  
+
   // Achievement System for Lighting All Images
   let litImages = new Set();
   let achievementTriggered = false;
@@ -1170,6 +1185,51 @@
     }
   }
 
+  // Fast response animation loop addition (keeping original structure)
+  let globalMouseX = 0;
+  let globalMouseY = 0;
+  let animationId = null;
+
+  // Add fast global mouse tracking
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add global mouse tracking for instant response
+    document.addEventListener('mousemove', (e) => {
+      globalMouseX = e.clientX;
+      globalMouseY = e.clientY;
+    });
+    
+    // Optional: Add a fast update loop for smoother response
+    function fastUpdateLoop() {
+      const imageButtons = document.querySelectorAll('.image, .collection-img');
+      
+      imageButtons.forEach((button) => {
+        const rect = button.getBoundingClientRect();
+        
+        if (
+          globalMouseX >= rect.left &&
+          globalMouseX <= rect.right &&
+          globalMouseY >= rect.top &&
+          globalMouseY <= rect.bottom
+        ) {
+          // Optional: Add extra fast response updates here
+          // This complements the existing event listeners
+        }
+      });
+      
+      animationId = requestAnimationFrame(fastUpdateLoop);
+    }
+    
+    // Start the fast update loop
+    if (!animationId) {
+      animationId = requestAnimationFrame(fastUpdateLoop);
+    }
+    
+    // Clean up on page unload
+    window.addEventListener('beforeunload', () => {
+      if (animationId) cancelAnimationFrame(animationId);
+    });
+  });
+
   document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('lightItUpAchievement')) {
       achievementTriggered = true;
@@ -1191,17 +1251,17 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        const rotateY = ((x - centerX) / centerX) * 15;
-        const rotateX = ((centerY - y) / centerY) * 15;
+        const rotateY = ((x - centerX) / centerX) * 20; // Increased from 15 to 20
+        const rotateX = ((centerY - y) / centerY) * 20; // Increased from 15 to 20
         
-        const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 30;
-        const shineSpeed = tiltIntensity * 0.3;
+        const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 40; // Adjusted for 20 max
+        const shineSpeed = tiltIntensity * 0.2; // Faster adjustment
         
         button.style.setProperty('--rotateX', `${rotateX}deg`);
         button.style.setProperty('--rotateY', `${rotateY}deg`);
         button.style.setProperty('--tilt-speed', `${shineSpeed}s`);
         
-        const hue = (rotateY * 12 + 200) % 360;
+        const hue = (rotateY * 15 + 200) % 360; // Faster hue change
         const img = button.querySelector('img');
         if (img) {
           img.style.boxShadow = 
@@ -1224,14 +1284,14 @@
             '0 0 65px rgba(255, 77, 184, 0.4)';
         }
         
-        button.style.transition = 'transform 0.5s ease';
+        button.style.transition = 'transform 0.3s ease'; // Faster reset
         setTimeout(() => {
-          button.style.transition = 'transform 0.15s ease';
-        }, 500);
+          button.style.transition = 'transform 0.1s ease'; // Faster base transition
+        }, 300);
       });
       
       button.addEventListener('mouseenter', () => {
-        button.style.transition = 'transform 0.15s ease';
+        button.style.transition = 'transform 0.1s ease'; // Faster transition on enter
       });
     });
   });
