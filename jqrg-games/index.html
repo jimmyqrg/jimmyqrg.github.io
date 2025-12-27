@@ -708,6 +708,19 @@
         0 0 160px rgba(0, 255, 255, 0.4) !important;
     }
   }
+  /* Add this to the end of your existing CSS */
+  .image, .collection-img {
+    cursor: pointer !important;
+    position: relative;
+  }
+
+  .image::after, .collection-img::after {
+    pointer-events: none !important;
+  }
+
+  .image > img, .collection-img > img {
+    pointer-events: auto !important;
+  }
   </style>
 </head>
 <body>
@@ -1294,6 +1307,69 @@
         button.style.transition = 'transform 0.1s ease'; // Faster transition on enter
       });
     });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Make image containers clickable
+    const imageContainers = document.querySelectorAll('.image, .collection-img');
+    
+    imageContainers.forEach(container => {
+      // Get the onclick function from the image
+      const img = container.querySelector('img');
+      if (!img) return;
+      
+      // Store the original click handler
+      const originalOnClick = img.onclick;
+      const originalOnClickAttr = img.getAttribute('onclick');
+      
+      // Transfer click from image to container
+      if (originalOnClick || originalOnClickAttr) {
+        // Remove click from image
+        img.onclick = null;
+        img.removeAttribute('onclick');
+        
+        // Add click to container
+        if (originalOnClick) {
+          container.onclick = originalOnClick;
+        } else if (originalOnClickAttr) {
+          container.setAttribute('onclick', originalOnClickAttr);
+        }
+      }
+      
+      // Also handle window.open calls
+      if (img.hasAttribute('onclick') && img.getAttribute('onclick').includes('window.open')) {
+        const onclickCode = img.getAttribute('onclick');
+        container.setAttribute('onclick', onclickCode);
+        img.removeAttribute('onclick');
+      }
+      
+      // Also handle openGame calls
+      if (img.hasAttribute('onclick') && img.getAttribute('onclick').includes('openGame')) {
+        const onclickCode = img.getAttribute('onclick');
+        container.setAttribute('onclick', onclickCode);
+        img.removeAttribute('onclick');
+      }
+    });
+    
+    // Make sure CSS allows container clicks
+    const style = document.createElement('style');
+    style.textContent = `
+      .image, .collection-img {
+        cursor: pointer !important;
+        position: relative;
+      }
+      
+      .image::after, .collection-img::after {
+        pointer-events: none !important;
+      }
+      
+      /* Optional: Add visual feedback for clicking */
+      .image:active, .collection-img:active {
+        transform: scale(0.98) !important;
+        transition: transform 0.1s ease !important;
+      }
+    `;
+    document.head.appendChild(style);
   });
 
 </script>
