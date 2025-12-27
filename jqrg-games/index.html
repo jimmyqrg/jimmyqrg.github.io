@@ -27,19 +27,80 @@
     max-width: 76%;
     height: auto;
     border-radius: 20px;
-    box-shadow: 0 0 15px rgb(255, 255, 255);
-    border: 4px solid white;
+    border: 4px solid transparent; /* Changed from white to transparent */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
   }
   .image {
     position: relative;
     display: inline-block;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
   }
   .image:hover {
-    transform: scale(1.05);
+    transform: 
+        perspective(1000px) 
+        rotateX(var(--rotateX, 0deg)) 
+        rotateY(var(--rotateY, 0deg)) 
+        scale(1.05);
     transition: transform 0.3s ease, filter 0.3s ease, opacity 0.35s ease;
   }
   .image:hover img {
+    box-shadow: 
+        0 0 25px rgba(77, 140, 255, 0.8),
+        0 0 45px rgba(138, 77, 255, 0.6),
+        0 0 65px rgba(255, 77, 184, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.3);
     filter: brightness(41%);
+    transition: filter 0.3s ease;
+  }
+  .image:hover img::before {
+    transform: rotate(30deg) translateX(150%) translateY(150%);
+    transition: transform calc(0.5s + var(--tilt-speed, 0s)) ease;
+  }
+  .image img::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 100%
+    );
+    transform: rotate(30deg) translateX(-150%) translateY(-150%);
+    transition: transform 0.8s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .image img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 20%,
+      transparent 40%,
+      rgba(255, 255, 255, 0.05) 60%,
+      transparent 80%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
   }
   .image::after {
     content: attr(data-alt);
@@ -61,22 +122,83 @@
     text-align: center;
     padding: 0 10px;
     box-sizing: border-box;
+    transform: translateZ(20px); /* Bring text slightly forward in 3D space */
+    transition: opacity 0.35s ease;
   }
   .image:hover::after {
     opacity: 1;
   }
   .collection-img {
+    position: relative;
+    transition: transform 0.3s ease;
+    transform-style: preserve-3d;
+    display: inline-block;
+    perspective: 1000px;
     max-width: 54%;
     margin-top: 12px;
-    position: relative;
-    display: inline-block;
   }
   .collection-img:hover {
-    transform: scale(1.05);
+    transform: 
+      perspective(1000px) 
+      rotateX(var(--rotateX, 0deg)) 
+      rotateY(var(--rotateY, 0deg)) 
+      scale(1.05);
     transition: transform 0.3s ease, filter 0.3s ease, opacity 0.35s ease;
   }
+  .collection-img:hover img::before {
+    transform: rotate(30deg) translateX(150%) translateY(150%);
+    transition: transform calc(0.5s + var(--tilt-speed, 0s)) ease;
+  }
+  .collection-img img::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 55%,
+      transparent 100%
+    );
+    transform: rotate(30deg) translateX(-150%) translateY(-150%);
+    transition: transform 0.8s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
   .collection-img:hover img {
+    box-shadow: 
+        0 0 25px rgba(77, 140, 255, 0.8),
+        0 0 45px rgba(138, 77, 255, 0.6),
+        0 0 65px rgba(255, 77, 184, 0.4);
+    border: 4px solid rgba(255, 255, 255, 0.3);
     filter: brightness(41%);
+    transition: filter 0.3s ease;
+  }
+  .collection-img img::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.05) 20%,
+      transparent 40%,
+      rgba(255, 255, 255, 0.05) 60%,
+      transparent 80%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
   }
   .collection-img::after {
     content: attr(data-alt);
@@ -88,7 +210,7 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.6em;
+    font-size: 1.6rem;
     font-weight: bold;
     opacity: 0;
     pointer-events: none;
@@ -98,8 +220,13 @@
     text-align: center;
     padding: 0 10px;
     box-sizing: border-box;
+    transform: translateZ(20px); /* Bring text slightly forward in 3D space */
+    transition: opacity 0.35s ease;
   }
   .collection-img:hover::after {
+    opacity: 1;
+  }
+  .image:hover img::after, .collection-img:hover img::after {
     opacity: 1;
   }
   h1 {
@@ -304,6 +431,7 @@
     color: black;
   }
   .btn-grid {
+    perspective: 1000px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
     gap: 2px;
@@ -317,6 +445,253 @@
     font-size: 0.9rem;
     opacity: 0.8;
     text-shadow: 0 0 4px rgba(0,0,0,0.6);
+  }
+  /* Achievement Overlay Styles */
+  .achievement-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, 
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.7) 30%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0.3) 70%,
+      transparent 100%);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    animation: pulseBackground 4s ease-in-out;
+  }
+
+  .achievement-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: linear-gradient(135deg, 
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(20, 0, 40, 0.9) 50%,
+      rgba(0, 0, 0, 0.95) 100%);
+    padding: 40px 60px;
+    border-radius: 30px;
+    box-shadow: 
+      0 0 80px rgba(255, 215, 0, 0.8),
+      0 0 150px rgba(255, 87, 51, 0.6),
+      0 0 220px rgba(138, 43, 226, 0.4),
+      inset 0 0 40px rgba(255, 255, 255, 0.2);
+    border: 4px solid transparent;
+    background-clip: padding-box;
+    z-index: 10000;
+    opacity: 0;
+    animation: achievementEntrance 2s ease-out forwards,borderGlow 3s linear infinite;
+  }
+
+  .achievement-title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3.5rem;
+    background: linear-gradient(45deg, 
+      #ff0000, #ff8000, #ffff00, #00ff00, 
+      #00ffff, #0080ff, #8000ff, #ff00ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.7),
+      0 0 40px rgba(255, 0, 0, 0.5),
+      0 0 60px rgba(255, 165, 0, 0.3);
+    animation: titleGradient 2s linear infinite, titlePulse 1.5s ease-in-out infinite alternate;
+  }
+
+  .achievement-subtitle {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+    opacity: 0.9;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    animation: subtitleFloat 3s ease-in-out infinite;
+  }
+
+  /* Achievement Animations */
+  @keyframes achievementEntrance {
+    0% {
+      transform: translate(-50%, -50%) scale(0.5) rotate(-180deg);
+      opacity: 0;
+    }
+    20% {
+      transform: translate(-50%, -50%) scale(1.1) rotate(0deg);
+      opacity: 1;
+    }
+    30% {
+      transform: translate(-50%, -50%) scale(0.95) rotate(0deg);
+    }
+    40% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    80% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(0.8) rotate(180deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulseBackground {
+    0% {
+      opacity: 0;
+      background-size: 100% 100%;
+    }
+    20% {
+      opacity: 1;
+      background-size: 150% 150%;
+    }
+    50% {
+      opacity: 0.8;
+      background-size: 200% 200%;
+    }
+    80% {
+      opacity: 1;
+      background-size: 250% 250%;
+    }
+    100% {
+      opacity: 0;
+      background-size: 300% 300%;
+    }
+  }
+
+  @keyframes titleGradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes titlePulse {
+    0% {
+      transform: scale(1);
+      text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.7),
+        0 0 40px rgba(255, 0, 0, 0.5),
+        0 0 60px rgba(255, 165, 0, 0.3);
+    }
+    100% {
+      transform: scale(1.05);
+      text-shadow: 
+        0 0 30px rgba(255, 255, 255, 0.9),
+        0 0 60px rgba(255, 0, 0, 0.7),
+        0 0 90px rgba(255, 165, 0, 0.5),
+        0 0 120px rgba(0, 255, 255, 0.3);
+    }
+  }
+
+  @keyframes subtitleFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes borderGlow {
+    0% {
+      border-color: rgba(255, 0, 0, 0.8);
+      box-shadow: 
+        0 0 80px rgba(255, 0, 0, 0.8),
+        0 0 150px rgba(255, 87, 51, 0.6),
+        0 0 220px rgba(138, 43, 226, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+    }
+    25% {
+      border-color: rgba(255, 165, 0, 0.8);
+      box-shadow: 
+        0 0 80px rgba(255, 165, 0, 0.8),
+        0 0 150px rgba(255, 200, 0, 0.6),
+        0 0 220px rgba(255, 215, 0, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      border-color: rgba(0, 255, 0, 0.8);
+      box-shadow: 
+        0 0 80px rgba(0, 255, 0, 0.8),
+        0 0 150px rgba(0, 200, 83, 0.6),
+        0 0 220px rgba(0, 150, 136, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+    }
+    75% {
+      border-color: rgba(0, 191, 255, 0.8);
+      box-shadow: 
+        0 0 80px rgba(0, 191, 255, 0.8),
+        0 0 150px rgba(30, 136, 229, 0.6),
+        0 0 220px rgba(57, 73, 171, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+      border-color: rgba(255, 0, 0, 0.8);
+      box-shadow: 
+        0 0 80px rgba(255, 0, 0, 0.8),
+        0 0 150px rgba(255, 87, 51, 0.6),
+        0 0 220px rgba(138, 43, 226, 0.4),
+        inset 0 0 40px rgba(255, 255, 255, 0.2);
+    }
+  }
+
+/* Particle Effects */
+  .particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: gold;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    animation: particleFloat 2s ease-out forwards;
+  }
+
+  @keyframes particleFloat {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx, 0), var(--ty, -100px)) scale(0);
+      opacity: 0;
+    }
+  }
+
+/* Enhanced glow when all images are lit */
+  .all-lit-glow {
+    animation: allLitGlow 0.5s ease-in-out infinite alternate !important;
+  }
+
+  @keyframes allLitGlow {
+    0% {
+      box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.9),
+        0 0 60px rgba(255, 87, 51, 0.7),
+        0 0 90px rgba(138, 43, 226, 0.5),
+        0 0 120px rgba(0, 255, 255, 0.3) !important;
+      filter: brightness(1.5) !important;
+    }
+    100% {
+      box-shadow: 
+        0 0 40px rgba(255, 215, 0, 1),
+        0 0 80px rgba(255, 87, 51, 0.8),
+        0 0 120px rgba(138, 43, 226, 0.6),
+        0 0 160px rgba(0, 255, 255, 0.4) !important;
+      filter: brightness(2) !important;
+    }
   }
   </style>
 </head>
@@ -504,6 +879,121 @@
   <p>Click <a href="/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
 <script>
 
+  // 3D Tilt Effect for Image Buttons
+  document.addEventListener('DOMContentLoaded', function() {
+    // Your existing DOMContentLoaded code...
+    
+    // Add 3D tilt effect to all image buttons
+    const imageButtons = document.querySelectorAll('.image, .collection-img');
+    
+    imageButtons.forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left; // x position within the element
+        const y = e.clientY - rect.top; // y position within the element
+        
+        // Calculate rotation values based on mouse position
+        // The further from center, the more rotation
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // Calculate rotation angles (max 15 degrees)
+        const rotateY = ((x - centerX) / centerX) * 15; // Left/Right tilt
+        const rotateX = ((centerY - y) / centerY) * 15; // Up/Down tilt
+        
+        // Apply rotation with CSS custom properties
+        button.style.setProperty('--rotateX', `${rotateX}deg`);
+        button.style.setProperty('--rotateY', `${rotateY}deg`);
+      });
+      
+      // Reset rotation when mouse leaves
+      button.addEventListener('mouseleave', () => {
+        button.style.setProperty('--rotateX', '0deg');
+        button.style.setProperty('--rotateY', '0deg');
+        
+        // Add a smooth return animation
+        button.style.transition = 'transform 0.5s ease';
+        setTimeout(() => {
+          button.style.transition = 'transform 0.3s ease';
+        }, 500);
+      });
+      
+      // Reset transition when mouse enters
+      button.addEventListener('mouseenter', () => {
+        button.style.transition = 'transform 0.3s ease';
+      });
+    });
+  });
+
+  // 3D Tilt Effect with Diamond Shine Coordination
+  document.addEventListener('DOMContentLoaded', function() {
+    // Your existing DOMContentLoaded code...
+    
+    // Add 3D tilt effect to all image buttons
+    const imageButtons = document.querySelectorAll('.image, .collection-img');
+    
+    imageButtons.forEach(button => {
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        // Calculate rotation angles (max 15 degrees)
+        const rotateY = ((x - centerX) / centerX) * 15;
+        const rotateX = ((centerY - y) / centerY) * 15;
+        
+        // Calculate tilt intensity for shine speed
+        const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 30;
+        const shineSpeed = tiltIntensity * 0.3; // Max 0.3s adjustment
+        
+        // Apply rotation with CSS custom properties
+        button.style.setProperty('--rotateX', `${rotateX}deg`);
+        button.style.setProperty('--rotateY', `${rotateY}deg`);
+        button.style.setProperty('--tilt-speed', `${shineSpeed}s`);
+        
+        // Add dynamic glow color based on tilt direction
+        const hue = (rotateY * 12 + 200) % 360;
+        const img = button.querySelector('img');
+        if (img) {
+          img.style.boxShadow = 
+            `0 0 25px hsla(${hue}, 100%, 70%, 0.8),
+              0 0 45px hsla(${(hue + 60) % 360}, 100%, 65%, 0.6),
+              0 0 65px hsla(${(hue + 120) % 360}, 100%, 60%, 0.4)`;
+        }
+      });
+        
+      // Reset rotation when mouse leaves
+      button.addEventListener('mouseleave', () => {
+        button.style.setProperty('--rotateX', '0deg');
+        button.style.setProperty('--rotateY', '0deg');
+        button.style.setProperty('--tilt-speed', '0s');
+        
+        // Reset glow to default
+        const img = button.querySelector('img');
+        if (img) {
+            img.style.boxShadow = 
+                '0 0 25px rgba(77, 140, 255, 0.8),' +
+                '0 0 45px rgba(138, 77, 255, 0.6),' +
+                '0 0 65px rgba(255, 77, 184, 0.4)';
+        }
+        
+        // Add a smooth return animation
+        button.style.transition = 'transform 0.5s ease';
+        setTimeout(() => {
+            button.style.transition = 'transform 0.3s ease';
+        }, 500);
+      });
+      
+      // Reset transition when mouse enters
+      button.addEventListener('mouseenter', () => {
+        button.style.transition = 'transform 0.3s ease';
+      });
+    });
+  });
+
   // Run email check when page loads
   document.addEventListener('DOMContentLoaded', function() {
     // Check if we should run the email restriction (you can enable/disable this as needed)
@@ -552,6 +1042,198 @@
     if (version === "1.0.0") {
       window.location.href = "J4mT9vQ2xZpL6rFwK1bHs8yC0nAeR7uYdG.html";
     }
+  });
+  
+  // Achievement System for Lighting All Images
+  let litImages = new Set();
+  let achievementTriggered = false;
+
+  function checkAllImagesLit() {
+    const allImages = document.querySelectorAll('.image, .collection-img');
+    const allLit = litImages.size === allImages.length;
+    
+    if (allLit && !achievementTriggered) {
+      triggerAchievement();
+      achievementTriggered = true;
+      
+      localStorage.setItem('lightItUpAchievement', 'completed');
+      
+      allImages.forEach(img => {
+        const imageElement = img.querySelector('img');
+        if (imageElement) {
+          imageElement.classList.add('all-lit-glow');
+        }
+      });
+      
+      setTimeout(() => {
+        allImages.forEach(img => {
+          const imageElement = img.querySelector('img');
+          if (imageElement) {
+            imageElement.classList.remove('all-lit-glow');
+          }
+        });
+      }, 5000);
+    }
+    
+    return allLit;
+  }
+
+  function triggerAchievement() {
+    const overlay = document.createElement('div');
+    overlay.className = 'achievement-overlay';
+    
+    const container = document.createElement('div');
+    container.className = 'achievement-container';
+    
+    const title = document.createElement('div');
+    title.className = 'achievement-title';
+    title.textContent = 'LIGHT IT UP!';
+    
+    const subtitle = document.createElement('div');
+    subtitle.className = 'achievement-subtitle';
+    subtitle.textContent = 'All Images Illuminated!';
+    
+    container.appendChild(title);
+    container.appendChild(subtitle);
+    document.body.appendChild(overlay);
+    document.body.appendChild(container);
+    
+    createParticles();
+    playAchievementSound();
+    
+    setTimeout(() => {
+      overlay.remove();
+      container.remove();
+    }, 6000);
+  }
+
+  function createParticles() {
+    const particleCount = 100;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 100 + Math.random() * 300;
+      const tx = Math.cos(angle) * distance;
+      const ty = Math.sin(angle) * distance;
+      
+      particle.style.left = `calc(50% + ${Math.random() * 200 - 100}px)`;
+      particle.style.top = `calc(50% + ${Math.random() * 200 - 100}px)`;
+      particle.style.setProperty('--tx', `${tx}px`);
+      particle.style.setProperty('--ty', `${ty}px`);
+      
+      const colors = ['#ff0000', '#ff8000', '#ffff00', '#00ff00', '#00ffff', '#0080ff', '#8000ff', '#ff00ff'];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+      
+      const size = 4 + Math.random() * 8;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      particle.style.animationDelay = `${Math.random() * 1}s`;
+      
+      document.body.appendChild(particle);
+      
+      setTimeout(() => {
+        particle.remove();
+      }, 2000);
+    }
+  }
+
+  function playAchievementSound() {
+    try {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const now = audioContext.currentTime;
+      
+      const frequencies = [523.25, 659.25, 783.99, 1046.50];
+      
+      frequencies.forEach((freq, index) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.setValueAtTime(freq, now);
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0, now);
+        gainNode.gain.linearRampToValueAtTime(0.3, now + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, now + 1 + index * 0.2);
+        
+        oscillator.start(now + index * 0.1);
+        oscillator.stop(now + 2 + index * 0.2);
+      });
+    } catch (e) {
+      console.log('Audio not supported or muted');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (localStorage.getItem('lightItUpAchievement')) {
+      achievementTriggered = true;
+    }
+    
+    const imageButtons = document.querySelectorAll('.image, .collection-img');
+    
+    imageButtons.forEach((button, index) => {
+      button.addEventListener('mouseenter', () => {
+        litImages.add(index);
+        checkAllImagesLit();
+      });
+      
+      button.addEventListener('mousemove', (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const rotateY = ((x - centerX) / centerX) * 15;
+        const rotateX = ((centerY - y) / centerY) * 15;
+        
+        const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 30;
+        const shineSpeed = tiltIntensity * 0.3;
+        
+        button.style.setProperty('--rotateX', `${rotateX}deg`);
+        button.style.setProperty('--rotateY', `${rotateY}deg`);
+        button.style.setProperty('--tilt-speed', `${shineSpeed}s`);
+        
+        const hue = (rotateY * 12 + 200) % 360;
+        const img = button.querySelector('img');
+        if (img) {
+          img.style.boxShadow = 
+            `0 0 25px hsla(${hue}, 100%, 70%, 0.8),
+            0 0 45px hsla(${(hue + 60) % 360}, 100%, 65%, 0.6),
+            0 0 65px hsla(${(hue + 120) % 360}, 100%, 60%, 0.4)`;
+        }
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.setProperty('--rotateX', '0deg');
+        button.style.setProperty('--rotateY', '0deg');
+        button.style.setProperty('--tilt-speed', '0s');
+        
+        const img = button.querySelector('img');
+        if (img) {
+          img.style.boxShadow = 
+            '0 0 25px rgba(77, 140, 255, 0.8),' +
+            '0 0 45px rgba(138, 77, 255, 0.6),' +
+            '0 0 65px rgba(255, 77, 184, 0.4)';
+        }
+        
+        button.style.transition = 'transform 0.5s ease';
+        setTimeout(() => {
+          button.style.transition = 'transform 0.3s ease';
+        }, 500);
+      });
+      
+      button.addEventListener('mouseenter', () => {
+        button.style.transition = 'transform 0.3s ease';
+      });
+    });
   });
 
 </script>
