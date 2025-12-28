@@ -13,7 +13,7 @@
 <body>
   <div class="container">
 
-    <button class="back-btn" onclick="navigateSmart('https://jimmyqrg.github.io/?page=extend')">← Back</button>l
+    <button class="back-btn" id="back-btn">← Back</button>l
 
     <h1>Information</h1>
     <ul>
@@ -42,35 +42,13 @@
     </ul>
   </div>
   <script>
-  function navigateSmart(targetUrl) {
-    try {
-      // Check if inside an iframe
-      if (window.self !== window.top) {
-        const iframe = window.frameElement; // closest iframe
-  
-        if (iframe && window.parent) {
-          const parentHost = window.parent.location.hostname;
-  
-          // Allow only jimmyqrg.com and its subdomains
-          const allowed =
-            parentHost === "jimmyqrg.com" ||
-            parentHost === "www.jimmyqrg.com" ||
-            parentHost.endsWith(".jimmyqrg.com");
-  
-          if (allowed) {
-            // Change ONLY the iframe URL
-            iframe.src = targetUrl;
-            return;
-          }
-        }
-      }
-    } catch (e) {
-      // Cross-origin access error → fallback
-    }
-  
-    // Default: change full page URL
-    window.location.href = targetUrl;
-  }
+  // Get the "back" link from URL
+  const params = new URLSearchParams(window.location.search);
+    const backLink = params.get("back") || "/?page=extend";
+
+    document.getElementById("back-btn").onclick = () => {
+      window.location.href = backLink;
+    };
   </script>    
 </body>
 </html>
