@@ -109,19 +109,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-    === IMPROVED openGame() with type setting support =====
+    === FIXED openGame() function =======================
     ===================================================== */
 
-function patchOpenGame() {
-  const original = typeof openGame === "function" ? openGame : null;
-
+// FIRST, make sure openGame exists immediately
+if (typeof window.openGame !== 'function') {
   window.openGame = function(url) {
     if (!url) return;
-
+    
     // Get user's preferred open type
-    const openType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
+    const openType = localStorage.getItem("openGameType") || "popup";
     const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
-
+    
     if (openType === "newtab") {
       // Open in new tab
       const win = window.open(target, "_blank");
@@ -145,19 +144,69 @@ function patchOpenGame() {
         "left=" + (window.screenX + 80),
         "top=" + (window.screenY + 60)
       ].join(",");
-
+      
       const win = window.open(target, "_blank", popupFeatures);
-
+      
       // If popup blocked
       if (!win) {
         alert("Please enable popups to open the game.");
         return;
       }
     }
-
-    // Optional: call your original handler if it exists
-    if (original) original(url);
   };
 }
 
-patchOpenGame();
+// THEN, patch it if needed (this runs immediately, not in DOMContentLoaded)
+(function patchOpenGame() {
+  // Keep a reference to the original if it exists
+  const original = typeof window.openGame === 'function' ? window.openGame : null;
+  
+  // Overwrite with our version
+  window.openGame = function(url) {
+    if (!url) return;
+    
+    // Get user's preferred open type
+    const openType = localStorage.getItem("openGameType") || "popup";
+    const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
+    
+    if (openType === "newtab") {
+      // Open in new tab
+      const win = window.open(target, "_blank");
+      
+      if (!win) {
+        alert("Please enable popups to open the game.");
+        return;
+      }
+    } else {
+      // Default: open in popup
+      const popupFeatures = [
+        "popup=yes",
+        "toolbar=no",
+        "location=no",
+        "menubar=no",
+        "status=no",
+        "scrollbars=yes",
+        "resizable=yes",
+        "width=900",
+        "height=600",
+        "left=" + (window.screenX + 80),
+        "top=" + (window.screenY + 60)
+      ].join(",");
+      
+      const win = window.open(target, "_blank", popupFeatures);
+      
+      // If popup blocked
+      if (!win) {
+        alert("Please enable popups to open the game.");
+        return;
+      }
+    }
+    
+    // Call original if it existed
+    if (original) original(url);
+  };
+})();
+
+// DEBUG: Log when script loads and if openGame exists
+console.log("openGame.js loaded");
+console.log("openGame function exists:", typeof openGame === 'function');
