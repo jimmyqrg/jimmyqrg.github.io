@@ -109,59 +109,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-    === FIXED openGame() function =======================
+    === SINGLE openGame() function - FIXED ==============
     ===================================================== */
 
-// FIRST, make sure openGame exists immediately
-if (typeof window.openGame !== 'function') {
-  window.openGame = function(url) {
-    if (!url) return;
-    
-    // Get user's preferred open type
-    const openType = localStorage.getItem("openGameType") || "popup";
-    const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
-    
-    if (openType === "newtab") {
-      // Open in new tab
-      const win = window.open(target, "_blank");
-      
-      if (!win) {
-        // alert("Please enable popups to open the game.");
-        return;
-      }
-    } else {
-      // Default: open in popup
-      const popupFeatures = [
-        "popup=yes",
-        "toolbar=no",
-        "location=no",
-        "menubar=no",
-        "status=no",
-        "scrollbars=yes",
-        "resizable=yes",
-        "width=900",
-        "height=600",
-        "left=" + (window.screenX + 80),
-        "top=" + (window.screenY + 60)
-      ].join(",");
-      
-      const win = window.open(target, "_blank", popupFeatures);
-      
-      // If popup blocked
-      if (!win) {
-        alert("Please enable popups to open the game.");
-        return;
-      }
-    }
-  };
-}
-
-// THEN, patch it if needed (this runs immediately, not in DOMContentLoaded)
-(function patchOpenGame() {
-  // Keep a reference to the original if it exists
-  const original = typeof window.openGame === 'function' ? window.openGame : null;
+// This runs immediately when script loads
+(function() {
+  // Save reference to original function if it exists
+  const originalOpenGame = typeof window.openGame === 'function' ? window.openGame : null;
   
-  // Overwrite with our version
+  // Define our openGame function
   window.openGame = function(url) {
     if (!url) return;
     
@@ -169,14 +125,13 @@ if (typeof window.openGame !== 'function') {
     const openType = localStorage.getItem("openGameType") || "popup";
     const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
     
+    console.log("Opening game with type:", openType, "URL:", url);
+    
+    let win = null;
+    
     if (openType === "newtab") {
       // Open in new tab
-      const win = window.open(target, "_blank");
-      
-      if (!win) {
-        alert("Please enable popups to open the game.");
-        return;
-      }
+      win = window.open(target, "_blank");
     } else {
       // Default: open in popup
       const popupFeatures = [
@@ -193,20 +148,21 @@ if (typeof window.openGame !== 'function') {
         "top=" + (window.screenY + 60)
       ].join(",");
       
-      const win = window.open(target, "_blank", popupFeatures);
-      
-      // If popup blocked
-      if (!win) {
-        alert("Please enable popups to open the game.");
-        return;
-      }
+      win = window.open(target, "_blank", popupFeatures);
     }
     
-    // Call original if it existed
-    if (original) original(url);
+    // If popup blocked
+    if (!win) {  
+      // alert("Please enable popups to open the game.");
+      return;
+    }
+    
+    // Call original function ONCE if it exists
+    if (originalOpenGame && originalOpenGame !== window.openGame) {
+      console.log("Calling original openGame function");
+      originalOpenGame(url);
+    }
   };
+  
+  console.log("openGame function initialized");
 })();
-
-// DEBUG: Log when script loads and if openGame exists
-console.log("openGame.js loaded");
-console.log("openGame function exists:", typeof openGame === 'function');
