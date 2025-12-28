@@ -108,9 +108,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 /* =====================================================
-    === NEW openGame() for loader compatibility ==========
+    === IMPROVED openGame() with type setting support =====
     ===================================================== */
 
 function patchOpenGame() {
@@ -119,28 +118,41 @@ function patchOpenGame() {
   window.openGame = function(url) {
     if (!url) return;
 
+    // Get user's preferred open type
+    const openType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
     const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
 
-    const popupFeatures = [
-      "popup=yes",
-      "toolbar=no",
-      "location=no",
-      "menubar=no",
-      "status=no",
-      "scrollbars=yes",
-      "resizable=yes",
-      "width=900",
-      "height=600",
-      "left=" + (window.screenX + 80),
-      "top=" + (window.screenY + 60)
-    ].join(",");
+    if (openType === "newtab") {
+      // Open in new tab
+      const win = window.open(target, "_blank");
+      
+      if (!win) {
+        alert("Please enable popups to open the game.");
+        return;
+      }
+    } else {
+      // Default: open in popup
+      const popupFeatures = [
+        "popup=yes",
+        "toolbar=no",
+        "location=no",
+        "menubar=no",
+        "status=no",
+        "scrollbars=yes",
+        "resizable=yes",
+        "width=900",
+        "height=600",
+        "left=" + (window.screenX + 80),
+        "top=" + (window.screenY + 60)
+      ].join(",");
 
-    const win = window.open(target, "_blank", popupFeatures);
+      const win = window.open(target, "_blank", popupFeatures);
 
-    // If popup blocked
-    if (!win) {
-      alert("Please enable popups to open the game.");
-      return;
+      // If popup blocked
+      if (!win) {
+        alert("Please enable popups to open the game.");
+        return;
+      }
     }
 
     // Optional: call your original handler if it exists
