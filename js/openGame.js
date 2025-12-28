@@ -126,7 +126,7 @@ if (typeof window.openGame !== 'function') {
       const win = window.open(target, "_blank");
       
       if (!win) {
-        alert("Please enable popups to open the game.");
+        // alert("Please enable popups to open the game.");
         return;
       }
     } else {
