@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Get user's preferred open type
     const openType = localStorage.getItem("openGameType") || "popup";
-    const target = "https://proxy.ikunbeautiful.workers.dev/?content=" + encodeURIComponent(url) + "&url=https://student.jimmyqrg.com/loader.html";
+    const target = "https://proxy.ikunbeautiful.workers.dev/?url=" + encodeURIComponent(url)
     
     console.log("Opening game with type:", openType, "URL:", url);
     
