@@ -8,17 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =====================================================
       === OPEN GAME TYPE SETTING ==========================
       ===================================================== */
-  const OPEN_GAME_TYPE_KEY = "openGameType";
-  const openGameTypeSelect = document.getElementById("openGameType");
+  const OPEN_GAME_TYPE_KEY = "openGameLoaderType";
+  const openGameLoaderTypeSelect = document.getElementById("openGameLoaderType");
 
-  if (openGameTypeSelect) {
+  if (openGameLoaderTypeSelect) {
     // Load saved type (default: popup)
     const savedType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
-    openGameTypeSelect.value = savedType;
+    openGameLoaderTypeSelect.value = savedType;
 
     // Save on change
-    openGameTypeSelect.addEventListener("change", () => {
-      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameTypeSelect.value);
+    openGameLoaderTypeSelect.addEventListener("change", () => {
+      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameLoaderTypeSelect.value);
     });
   }
 
@@ -109,21 +109,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-    === SINGLE openGame() function - FIXED ==============
+    === SINGLE openGameLoader() function - FIXED ==============
     ===================================================== */
 
 // This runs immediately when script loads
 (function() {
   // Save reference to original function if it exists
-  const originalOpenGame = typeof window.openGame === 'function' ? window.openGame : null;
+  const originalopenGameLoader = typeof window.openGameLoader === 'function' ? window.openGameLoader : null;
   
-  // Define our openGame function
-  window.openGame = function(url) {
+  // Define our openGameLoader function
+  window.openGameLoader = function(url) {
     if (!url) return;
     
     // Get user's preferred open type
-    const openType = localStorage.getItem("openGameType") || "popup";
-    const target = "https://proxy.ikunbeautiful.workers.dev/?url=" + encodeURIComponent(url)
+    const openType = localStorage.getItem("openGameLoaderType") || "popup";
+    const target = "/loader.html?content=" + encodeURIComponent(url)
     
     console.log("Opening game with type:", openType, "URL:", url);
     
@@ -158,11 +158,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // Call original function ONCE if it exists
-    if (originalOpenGame && originalOpenGame !== window.openGame) {
-      console.log("Calling original openGame function");
-      originalOpenGame(url);
+    if (originalopenGameLoader && originalopenGameLoader !== window.openGameLoader) {
+      console.log("Calling original openGameLoader function");
+      originalopenGameLoader(url);
     }
   };
   
-  console.log("openGame function initialized");
+  console.log("openGameLoader function initialized");
 })();
