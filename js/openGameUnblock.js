@@ -8,17 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =====================================================
       === OPEN GAME TYPE SETTING ==========================
       ===================================================== */
-  const OPEN_GAME_TYPE_KEY = "openGameUnblockType";
-  const openGameUnblockTypeSelect = document.getElementById("openGameUnblockType");
+  const OPEN_GAME_TYPE_KEY = "openGameLoaderType";
+  const openGameLoaderTypeSelect = document.getElementById("openGameLoaderType");
 
-  if (openGameUnblockTypeSelect) {
+  if (openGameLoaderTypeSelect) {
     // Load saved type (default: popup)
     const savedType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
-    openGameUnblockTypeSelect.value = savedType;
+    openGameLoaderTypeSelect.value = savedType;
 
     // Save on change
-    openGameUnblockTypeSelect.addEventListener("change", () => {
-      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameUnblockTypeSelect.value);
+    openGameLoaderTypeSelect.addEventListener("change", () => {
+      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameLoaderTypeSelect.value);
     });
   }
 
@@ -109,21 +109,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-    === SINGLE openGameUnblock() function - FIXED ==============
+    === SINGLE openGameLoader() function - FIXED ==============
     ===================================================== */
 
 // This runs immediately when script loads
 (function() {
   // Save reference to original function if it exists
-  const originalopenGameUnblock = typeof window.openGameUnblock === 'function' ? window.openGameUnblock : null;
+  const originalopenGameLoader = typeof window.openGameLoader === 'function' ? window.openGameLoader : null;
   
-  // Define our openGameUnblock function
-  window.openGameUnblock = function(url) {
+  // Define our openGameLoader function
+  window.openGameLoader = function(url) {
     if (!url) return;
     
     // Get user's preferred open type
-    const openType = localStorage.getItem("openGameUnblockType") || "popup";
-    const target = "https://proxy.ikunbeautiful.workers.dev/?url=" + encodeURIComponent(url)
+    const openType = localStorage.getItem("openGameLoaderType") || "popup";
+    const target = "/loader.html?content=" + encodeURIComponent(url)
     
     console.log("Opening game with type:", openType, "URL:", url);
     
@@ -158,11 +158,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
     // Call original function ONCE if it exists
-    if (originalopenGameUnblock && originalopenGameUnblock !== window.openGameUnblock) {
-      console.log("Calling original openGameUnblock function");
-      originalopenGameUnblock(url);
+    if (originalopenGameLoader && originalopenGameLoader !== window.openGameLoader) {
+      console.log("Calling original openGameLoader function");
+      originalopenGameLoader(url);
     }
   };
   
-  console.log("openGameUnblock function initialized");
+  console.log("openGameLoader function initialized");
 })();
