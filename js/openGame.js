@@ -109,26 +109,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* =====================================================
-    === SINGLE openGameLoader() function - FIXED ==============
+    === SINGLE openGame() function - FIXED ==============
     ===================================================== */
 
 // This runs immediately when script loads
 (function() {
   // Save reference to original function if it exists
-  const originalopenGameLoader = typeof window.openGameLoader === 'function' ? window.openGameLoader : null;
-  
-  // Define our openGameLoader function
-  window.openGameLoader = function(url) {
+  const originalopenGame = typeof window.openGame === 'function' ? window.openGame : null;
+
+  // Define our openGame function
+  window.openGame = function(url) {
     if (!url) return;
-    
+
     // Get user's preferred open type
     const openType = localStorage.getItem("openGameLoaderType") || "popup";
     const target = "/loader.html?content=" + encodeURIComponent(url)
-    
+
     console.log("Opening game with type:", openType, "URL:", url);
-    
+
     let win = null;
-    
+
     if (openType === "newtab") {
       // Open in new tab
       win = window.open(target, "_blank");
@@ -147,22 +147,22 @@ document.addEventListener("DOMContentLoaded", () => {
         "left=" + (window.screenX + 80),
         "top=" + (window.screenY + 60)
       ].join(",");
-      
+
       win = window.open(target, "_blank", popupFeatures);
     }
-    
+
     // If popup blocked
-    if (!win) {  
-      // alert("Please enable popups to open the game.");
+    if (!win) {
+      alert("Please enable popups to open the game.");
       return;
     }
-    
+
     // Call original function ONCE if it exists
-    if (originalopenGameLoader && originalopenGameLoader !== window.openGameLoader) {
-      console.log("Calling original openGameLoader function");
-      originalopenGameLoader(url);
+    if (originalopenGame && originalopenGame !== window.openGame) {
+      console.log("Calling original openGame function");
+      originalopenGame(url);
     }
   };
-  
-  console.log("openGameLoader function initialized");
+
+  console.log("openGame function initialized");
 })();

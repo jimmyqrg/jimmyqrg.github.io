@@ -1,9 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="js/openGameUnblock.js"></script>
-  <script src="js/openGameLoader.js"></script>
-  <link rel="manifest" href="appmanifest.json">
+  <script>
+    (function() {
+    const currentUrl = window.location.href;
+
+    // Check if URL contains ?page=extend
+    if (!currentUrl.includes('?page=extend')) {
+      // Run your game function
+      if (typeof openGame === 'function') {
+        openGame('?page=extend');
+      }
+
+      // Redirect to Jimmy Q.R.G. website
+      window.location.href = 'https://www.jimmyqrg.com';
+    }
+  })();
+  </script>
+  <script src="https://jimmyqrg.github.io/js/openGame.js"></script>
+  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#4d8cff">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,22 +74,6 @@
       text-shadow: 0 0 8px rgba(0,0,0,0.7);
     }
 
-    hr {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      border: 1px solid #ffffff;
-      width: 100%;
-    }
-
-    .settings-header {
-      margin-top: 28px;
-      margin-bottom: 28px;
-      font-size: 2.0rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-shadow: 0 0 8px rgba(0,0,0,0.7);
-    }
-
     .cloakIconOption {
       width:100px;
       height:100px;
@@ -95,7 +94,8 @@
     /* ---------- Original Button (preserved) ---------- */
     .btn {
       display: inline-block;
-      width: 300px; 
+      width: 100%;
+      max-width: 250px;
       padding: 12px 28px;
       border: 2px solid var(--button-border);
       border-radius: 10px;
@@ -386,27 +386,27 @@
 
   <span id="settingsBtn">⚙️</span>
 
-  <h1>JIMMYQRG</h1>
+  <h1>JIMMYQRG.GITHUB.IO</h1>
 
   <h2>MAIN PORTAL</h2>
 
-  <a href="jqrg-games/"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
+  <a href="https://jimmyqrg.github.io/jqrg-games"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
   <br>
-  <a href="strategies/"><button class="btn">SCHOOL CHROMEBOOK SPECIAL STRATEGIES</button></a>
-  <br>
-  <a href="tools/"><button class="btn">TOOLS</button></a>
+  <a href="https://jimmyqrg.github.io/strategies"><button class="btn">SCHOOL CHROMEBOOK SPECIAL STRATEGIES</button></a>
   <br>
 
   <h1>OTHERS</h1>
+
+  <a href="https://jimmyqrg.github.io/download"><button class="btn">DOWNLOAD FILES</button></a>
+  <br>
+  <a href="https://jimmyqrg.github.io/unblocks"><button class="btn">OTHER UNBLOCKS</button></a>
+  <br>
+  <a href="https://jimmyqrg.github.io/HTML-unblocker"><button class="btn">HTML UNBLOCKER</button></a>
+  <br>
+  <a href="https://jimmyqrg.github.io/test/jqrgd.html"><button class="btn">JQRGD TEST</button></a>
+  <br>
   
-  <a href="lx/"><button class="btn">CONTACTS</button></a>
-  <br>
-  <a href="unblocks/"><button class="btn">OTHER UNBLOCKS</button></a>
-  <br>
-  <a href="test/jqrgd.html"><button class="btn">JQRGD TEST</button></a>
-  <br>
-  
-  <p><span class="announcement-link">Announcements (Click to reopen)</span><br><br>If you want to join me and make the website together, click <a href="join/" target="_blank" style="color:#4d8cff; text-decoration:underline;">here</a>!</p>
+  <p><span class="announcement-link">Announcements (Click to reopen)</span><br><br>If you want to join me and make the website together, click <a href="https://jimmyqrg.github.io/join/" target="_blank" style="color:#4d8cff; text-decoration:underline;">here</a>!</p>
 
 
 
@@ -419,31 +419,39 @@
   <div class="modal-overlay" id="announcementModal">
     <div class="modal-content" id="announcementContent">
       <span class="close-btn" id="closeModal">&times;</span>
-      <h2 style="text-align:center;">📢 Announcements</h2>
-      <p>More informations and updates can be found <a href="https://chat.jiushifen.com/invite/haG5F-FQ" target="_blank" style="color:#5d9cff; text-decoration:underline;">here</a>. (You'll have to sign in first)</p>
+      <!--<h2 style="text-align:center;">📢 Announcements</h2>-->
+      <h2 style="text-align:center;">BIG ANNOUNCEMENT</h2>
+      <p>I'm sorry that your game data is now unaccessble. I had to switch to another link, because on 12/8/2025 the games were blocked. What scared me is that about:blank is blocked by Linewize 6th period at 12/8/2025, although they had to unblock it because that affected Google Docs.</p>
+      <p>But don't get me wrong, your game data is not lost forever onless you powerwash your device, I might find a way to export the datas in this month.</p>
+      <p>If any games end up not working, please message ikunbeautiful@gmail.com</p>
+      <!--
+      <p>Welcome to <strong>JimmyQrg</strong>! Check here for updates, new game releases, and important information.</p>
+      <p>More informations and updates can be found 
+        <a href="https://docs.google.com/document/d/1Xv3x76SwL2CkZPIJq0uMNBt_YQNRfWrR5H5mXILuxfw/edit?tab=t.w5htvyo8czbl" 
+           target="_blank" 
+           style="color:#4d8cff; text-decoration:underline;">here</a>.</p>
       <hr style="border: 1px solid rgba(255,255,255,0.3);">
       <p>✨ Latest updates:</p>
         <ul>
-          <li>FHDlikestrains copied the website without permittion, the real website is <a style="color:#5d9cff" href="https://spicy.jimmyqrg.com/?page=extend">https://spicy.jimmyqrg.com/?page=extend</a></li>
-          <li>Slightly improved UI</li>
-          <li>Added contacts</li>
-          <li>Added game Drive Mad</li>
-          <li>Added game Curveball 3D</li>
-          <li>Added open game type settings</li>
+          <li>Added game: CatGun Island</li>
+          <li>Added game: Stickman Hook</li>
+          <li>Added about:blank tab cloak in settings</li>
           <li>Exporting data and Importing data is now on testing</li>
         </ul>
       <p>🚀Future Update</p>
         <ul>
-          <li>Having a page for exporting and importing data.</li>
-          <li>Fix Scratch geometry dash</li>
+          <li></li>
         </ul>
       <p>⏱️History</p>
         <ul>
-          <li>Fixed in total <b>873</b> bugs</li>
-          <li>Added in total <b>70</b> games</li>
+          <li>Fixed in total <b>730</b> bugs</li>
+          <li>Added in total <b>53</b> games</li>
         </ul>
+      -->
     </div>
   </div>
+
+
 
 
 
@@ -458,8 +466,6 @@
 
       <h2 style="text-align:center;">⚙️ Settings</h2>
 
-      <hr>
-
       <!-- Auto popup setting -->
       <label><b>Auto pop up announcements:</b></label><br>
       <select id="announcementSetting" style="width:100%; padding:8px; margin-top:8px; border-radius:8px;">
@@ -470,18 +476,15 @@
       <br><br><br>
 
       <!-- Open in popup -->
-      <label><b>Open website as an game: </b></label>
-      <button class="btn" onclick="openGameUnblock('https://spicy.jimmyqrg.com?page=extend')">JIMMYQRG</button>
+      <label><b>Open the website in pop up mode</b>
+      <button class="btn" onclick="openGame('https://pausd.jimmyqrg.com/?page=extend')">OPEN</button>
       <br><br><br>
       
       <!-- Install App -->
       <label><b>Install App</b></label><br>
-      <!--
       <p style="margin-top:10px; opacity:0.8; font-size:0.9rem;">Install this website as an app on your device for quick access.</p>
-      <button class="btn" id="installAppBtn">Install App</button>
+      <button class="btn" id="installAppBtn" style="display:none;">Install App</button>
       <p id="installStatus" style="margin-top:10px; opacity:0.7; font-size:0.85rem; display:none;"></p>
-      -->
-      <p style="margin-top:10px; opacity:0.8; font-size:0.9rem;">To install this app, click the three dots on the right top corner, click <b>Cast, Save, and Share</b>, and click <b>Install this page as an app</b>.</p>
 
       <br><br><br>
 
@@ -494,18 +497,12 @@
       <input type="text" id="panicLinkInput" style="width:100%; padding:8px; margin-top:5px; border-radius:8px;" placeholder="https://example.com" />
       <br><br><br>
 
-      <!-- Open Game Type -->
-      <label><b>Open Game Type</b></label><br>
-      <p style="margin-top:10px; opacity:0.8;">
-      Choose how games are opened.
-      </p>
-
-      <select id="openGameType"
-        style="width:100%; padding:8px; margin-top:8px; border-radius:8px;">
-        <option value="popup">Popup Window</option>
-        <option value="newtab">New Tab</option>
-      </select>
-
+      <!-- Access code -->
+      <label><b>Access code:</b></label>
+      <input id="accessCode" type="password" placeholder="Enter code" style="width:100%; padding:8px; margin-top:5px; border-radius:8px;">
+      <button id="authorizeBtn" class="btn" style="margin-top:15px;">AUTHORIZE</button>
+      <button id="unauthorizeBtn" class="btn" style="margin-top:10px;">UNAUTHORIZE</button>
+      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
       <br><br><br>
 
       <!-- === Tab Cloak === -->
@@ -524,13 +521,12 @@
       <div id="cloakIconContainer" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
 
         <!-- Preset icons -->
-        <img class="cloakIconOption" data-src="cloak-images/default.png" src="cloak-images/default.png">
-        <img class="cloakIconOption" data-src="cloak-images/docs.png" src="cloak-images/docs.png">
-        <img class="cloakIconOption" data-src="cloak-images/forms.png" src="cloak-images/forms.png">
-        <img class="cloakIconOption" data-src="cloak-images/drive.png" src="cloak-images/drive.png">
-        <img class="cloakIconOption" data-src="cloak-images/pausd.png" src="cloak-images/pausd.png">
-        <img class="cloakIconOption" data-src="cloak-images/schoology.png" src="cloak-images/schoology.png">
-        <img class="cloakIconOption" data-src="cloak-images/gmail.png" src="cloak-images/gmail.png">
+        <img class="cloakIconOption" data-src="https://jimmyqrg.github.io/cloak-images/default.png" src="cloak-images/default.png">
+        <img class="cloakIconOption" data-src="https://jimmyqrg.github.io/cloak-images/docs.png" src="cloak-images/docs.png">
+        <img class="cloakIconOption" data-src="https://jimmyqrg.github.io/cloak-images/drive.png" src="cloak-images/drive.png">
+        <img class="cloakIconOption" data-src="https://jimmyqrg.github.io/cloak-images/forms.png" src="cloak-images/forms.png">
+        <img class="cloakIconOption" data-src="https://jimmyqrg.github.io/cloak-images/pausd.png" src="cloak-images/pausd.png">
+        <img class="cloakIconOption" data-src="https://jimmyqrg.github.io/cloak-images/schoology.png" src="cloak-images/schoology.png">
 
         <!-- Custom upload -->
         <label id="customCloakLabel" style="
@@ -543,18 +539,8 @@
 
       </div>
 
-      <br><br>
+      <br>
 
-      <hr>
-      <p class="settings-header">Others</p>
-
-      <!-- Access code -->
-      <label><b>Access code:</b></label>
-      <input id="accessCode" type="password" placeholder="Enter code" style="width:100%; padding:8px; margin-top:5px; border-radius:8px;">
-      <button id="authorizeBtn" class="btn" style="margin-top:15px;">AUTHORIZE</button>
-      <button id="unauthorizeBtn" class="btn" style="margin-top:10px;">UNAUTHORIZE</button>
-      <p style="margin-top:20px; opacity:0.8;">For interaction in construction zone</p>
-      <br><br><br>
 
       <!-- Lisence -->
       <label><b>Lisence</b></label>
@@ -572,12 +558,10 @@
     
 
 
-
     
 
     
-    let hasBigAnnouncement = false;
-
+    let hasBigAnnouncement = true;
 
 
 
@@ -734,7 +718,7 @@
 
       // Stop this event from triggering the redirect listener
       e.stopImmediatePropagation();
-      
+
       panicKey = e.code;
       localStorage.setItem(PANIC_KEY_STORAGE, panicKey);
 
@@ -767,7 +751,7 @@
       if (link.startsWith("/") || link.includes("/")) {
         // Remove leading slash if present
         const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-        return `https://spicy.jimmyqrg.com/${cleanPath}`;
+        return `https://jimmyqrg.github.io/${cleanPath}`;
       }
       
       // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol
@@ -802,11 +786,16 @@
     let deferredPrompt = null;
     let installBtnListenerAdded = false;
     const installAppBtn = document.getElementById('installAppBtn');
+    const installStatus = document.getElementById('installStatus');
 
     // Function to handle install button click
     async function handleInstallClick() {
       if (!deferredPrompt) {
-        alert('Install prompt not available. Please use your browser\'s menu to install.');
+        if (installStatus) {
+          installStatus.textContent = 'Install prompt not available. Please use your browser\'s menu to install.';
+          installStatus.style.display = 'block';
+          installStatus.style.color = '#ff4d4d';
+        }
         return;
       }
 
@@ -815,25 +804,37 @@
 
       // Wait for the user to respond
       const { outcome } = await deferredPrompt.userChoice;
-      
+
       if (outcome === 'accepted') {
-        // Installation started - button will be hidden by appinstalled event
+        if (installStatus) {
+          installStatus.textContent = '✓ Installation started!';
+          installStatus.style.display = 'block';
+          installStatus.style.color = '#4dff4d';
+        }
       } else {
-        // User cancelled - button stays visible for retry
+        if (installStatus) {
+          installStatus.textContent = 'Installation cancelled.';
+          installStatus.style.display = 'block';
+          installStatus.style.color = '#ffaa4d';
+        }
       }
 
-      // Clear the deferred prompt
+      // Clear the deferred prompt and hide button
       deferredPrompt = null;
+      if (installAppBtn) installAppBtn.style.display = 'none';
     }
 
     // Check if app is already installed
     function checkIfInstalled() {
       // Check if running in standalone mode (installed)
-      if (window.matchMedia('(display-mode: standalone)').matches || 
+      if (window.matchMedia('(display-mode: standalone)').matches ||
           window.navigator.standalone === true) {
-        if (installAppBtn) {
-          installAppBtn.style.display = 'none';
+        if (installStatus) {
+          installStatus.textContent = '✓ App is already installed';
+          installStatus.style.display = 'block';
+          installStatus.style.color = '#4dff4d';
         }
+        if (installAppBtn) installAppBtn.style.display = 'none';
         return true;
       }
       return false;
@@ -841,7 +842,7 @@
 
     // Check on load
     if (checkIfInstalled()) {
-      // App is already installed, hide install button
+      // App is already installed
     } else {
       // Listen for the beforeinstallprompt event
       window.addEventListener('beforeinstallprompt', (e) => {
@@ -849,14 +850,13 @@
         deferredPrompt = e;
 
         // Show install button
-        if (installAppBtn) {
-          installAppBtn.style.display = 'block';
-        }
+        if (installAppBtn) installAppBtn.style.display = 'block';
+        if (installStatus) installStatus.style.display = 'none';
 
         // Add click listener only once
         if (!installBtnListenerAdded) {
           installBtnListenerAdded = true;
-          
+
           if (installAppBtn) {
             installAppBtn.addEventListener('click', handleInstallClick);
           }
@@ -865,48 +865,32 @@
 
       // Handle app installed event (fires after installation)
       window.addEventListener('appinstalled', () => {
-        if (installAppBtn) {
-          installAppBtn.style.display = 'none';
+        if (installStatus) {
+          installStatus.textContent = '✓ App installed successfully!';
+          installStatus.style.display = 'block';
+          installStatus.style.color = '#4dff4d';
         }
+        if (installAppBtn) installAppBtn.style.display = 'none';
         deferredPrompt = null;
       });
+
+      // Fallback instructions if prompt doesn't appear
+      setTimeout(() => {
+        if (!deferredPrompt && installAppBtn && installAppBtn.style.display !== 'none') {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+          if (installStatus) {
+            if (isMobile) {
+              installStatus.textContent = 'Use your browser menu (⋮ or ⋯) and select "Add to Home Screen" or "Install App"';
+            } else {
+              installStatus.textContent = 'Use your browser menu (⋮) and select "Install [App Name]"';
+            }
+            installStatus.style.display = 'block';
+            installStatus.style.color = '#ffaa4d';
+          }
+        }
+      }, 2000);
     }
 
-    // ===============================
-    // Open Game Type Setting
-    // ===============================
-    const OPEN_GAME_TYPE_KEY = "openGameType";
-
-    // Default = popup
-    const openGameTypeSelect = document.getElementById("openGameType");
-
-    // Load saved value
-    const savedOpenGameType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
-    openGameTypeSelect.value = savedOpenGameType;
-
-    // Save on change
-    openGameTypeSelect.addEventListener("change", () => {
-      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameTypeSelect.value);
-    });
-
-    // (function () {
-    //   const jM = "spicy.jimmyqrg.com";
-    //   const cT = "chat.jiushifen.com";
-    //   const jS = "www.jiushifen.com";
-    //   const pX = "proxy.jimmyqrg.com";
-    //   const cF = "proxy.ikunbeautiful.workers.dev";
-    //   if (location.hostname !== jM && location.hostname !== cT && location.hostname !== jS && location.hostname !== pX && location.hostname !== cF) {
-    //     location.replace("/Index.html"); // capital I
-    //   }
-    // })();
-
-    (function () {
-      const targetHost = "spicy.jimmyqrg.com";
-
-      if (window.location.hostname !== targetHost) {
-        window.location.href = "https://" + targetHost;
-      }
-    })();
 
   </script>
 
