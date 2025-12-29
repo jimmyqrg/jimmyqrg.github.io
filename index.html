@@ -1,22 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    (function() {
-      const currentUrl = window.location.href;
-  
-      // Check if URL contains ?page=extend
-      if (!currentUrl.includes('?page=extend')) {
-        // Run your game function
-        if (typeof openGame === 'function') {
-          openGame('?page=extend');
-        }
-  
-        // Redirect to Jimmy Q.R.G. website
-        window.location.href = 'https://www.jimmyqrg.com';
-      }
-    })();
-  </script>
   <script src="js/openGame.js"></script>
   <link rel="manifest" href="appmanifest.json">
   <meta name="theme-color" content="#4d8cff">
