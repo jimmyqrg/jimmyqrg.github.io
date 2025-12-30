@@ -526,12 +526,12 @@
       <div id="cloakIconContainer" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
 
         <!-- Preset icons -->
-        <img class="cloakIconOption" data-path="/cloak-images/default.png" data-src="https://spicy.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png">
-        <img class="cloakIconOption" data-path="/cloak-images/docs.png" data-src="https://spicy.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png">
-        <img class="cloakIconOption" data-path="/cloak-images/drive.png" data-src="https://spicy.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png">
-        <img class="cloakIconOption" data-path="/cloak-images/forms.png" data-src="https://spicy.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png">
-        <img class="cloakIconOption" data-path="/cloak-images/pausd.png" data-src="https://spicy.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png">
-        <img class="cloakIconOption" data-path="/cloak-images/schoology.png" data-src="https://spicy.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png">
 
         <!-- Custom upload -->
         <label id="customCloakLabel" style="
@@ -597,10 +597,12 @@
           link.href = `https://${domain}${path}`;
         });
         
-        // Update all images with data-path attribute (for cloak icons)
-        document.querySelectorAll('img[data-path]').forEach(img => {
-          const path = img.getAttribute('data-path');
-          img.setAttribute('data-src', `https://${domain}${path}`);
+        // Update all cloak icon images with data-src attribute (for tab cloak settings)
+        document.querySelectorAll('img.cloakIconOption[data-src]').forEach(img => {
+          const dataSrc = img.getAttribute('data-src');
+          if (dataSrc && dataSrc.includes('spicy.jimmyqrg.com')) {
+            img.setAttribute('data-src', dataSrc.replace(/https?:\/\/spicy\.jimmyqrg\.com/g, `https://${domain}`));
+          }
         });
         
         // Update currentDomainCache for panicKey.js
