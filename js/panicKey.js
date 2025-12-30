@@ -25,7 +25,7 @@ function fixRedirectLink(link) {
   if (link.startsWith("/") || link.includes("/")) {
     // Remove leading slash if present
     const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-    return `https://jimmyqrg.github.io/${cleanPath}`;
+    return `https://spicy.jimmyqrg.com/${cleanPath}`;
   }
   
   // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol
