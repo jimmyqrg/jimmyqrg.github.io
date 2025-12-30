@@ -445,7 +445,7 @@
   <div class="modal-overlay" id="announcementModal">
     <div class="modal-content" id="announcementContent">
       <span class="close-btn" id="closeModal">&times;</span>
-      <h2 style="text-align:center;">📢 Announcements</h2>
+      <!-- <h2 style="text-align:center;">📢 Announcements</h2>
       <p>Welcome to <strong>JimmyQrg</strong>! Check here for updates, new game releases, and important information.</p>
       <p>More informations and updates can be found 
         <a href="https://docs.google.com/document/d/1Xv3x76SwL2CkZPIJq0uMNBt_YQNRfWrR5H5mXILuxfw/edit?tab=t.w5htvyo8czbl" 
@@ -468,7 +468,9 @@
           <li>Fixed in total <b>730</b> bugs</li>
           <li>Added in total <b>53</b> games</li>
         </ul>
-     
+      -->
+      <h2 style="text-align:center;">BIG ANNOUNCEMENT</h2>
+      <p>The version of this website is backed up a little, so if you find some features are missing or doesn't work, please contact me.</p>
     </div>
   </div>
 
@@ -596,10 +598,6 @@
         const response = await fetch('/currentDomain.txt');
         const domain = (await response.text()).trim();
         currentDomain = domain;
-        
-        // Update domain title
-        const domainTitle = document.getElementById('domainTitle');
-        if (domainTitle) domainTitle.textContent = domain;
         
         // Update all links with data-path attribute
         document.querySelectorAll('a[data-path]').forEach(link => {
