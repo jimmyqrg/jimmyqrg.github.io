@@ -61,24 +61,38 @@ document.addEventListener("DOMContentLoaded", () => {
       // Prevent image from being draggable
       img.setAttribute('draggable', 'false');
       
+      // Use capture phase to prevent any other handlers
       img.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+        e.stopImmediatePropagation();
         const src = img.dataset.src;
         localStorage.setItem(CLOAK_ICON_KEY, src);
         highlightIcon(src);
-      });
+        return false;
+      }, true); // Use capture phase
       
       // Also prevent context menu and middle-click
       img.addEventListener("contextmenu", (e) => {
         e.preventDefault();
-      });
+        e.stopPropagation();
+        return false;
+      }, true);
       
       img.addEventListener("auxclick", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }, true);
+      
+      // Prevent mousedown from causing any navigation
+      img.addEventListener("mousedown", (e) => {
         if (e.button === 1) { // Middle mouse button
           e.preventDefault();
+          e.stopPropagation();
+          return false;
         }
-      });
+      }, true);
     });
 
     // Custom upload
