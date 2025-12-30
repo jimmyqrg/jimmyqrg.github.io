@@ -58,10 +58,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Choose preset icon
     iconOptions.forEach(img => {
-      img.addEventListener("click", () => {
+      // Prevent image from being draggable
+      img.setAttribute('draggable', 'false');
+      
+      img.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const src = img.dataset.src;
         localStorage.setItem(CLOAK_ICON_KEY, src);
         highlightIcon(src);
+      });
+      
+      // Also prevent context menu and middle-click
+      img.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+      });
+      
+      img.addEventListener("auxclick", (e) => {
+        if (e.button === 1) { // Middle mouse button
+          e.preventDefault();
+        }
       });
     });
 

@@ -97,6 +97,11 @@
       border-radius:10px;
       border:3px solid transparent;
       cursor:pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      pointer-events: auto;
     }
 
     .cloakIconOption.active {
@@ -527,12 +532,12 @@
       <div id="cloakIconContainer" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
 
         <!-- Preset icons -->
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png" draggable="false">
 
         <!-- Custom upload -->
         <label id="customCloakLabel" style="
