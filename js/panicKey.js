@@ -2,6 +2,23 @@
 // Panic Key Logic
 // -------------------------------
 
+// Load current domain utility
+let currentDomainCache = null;
+async function getCurrentDomain() {
+  if (currentDomainCache) {
+    return currentDomainCache;
+  }
+  try {
+    const response = await fetch('/currentDomain.txt');
+    const domain = (await response.text()).trim();
+    currentDomainCache = domain;
+    return domain;
+  } catch (error) {
+    console.error('Failed to load currentDomain.txt, using fallback:', error);
+    return 'spicy.jimmyqrg.com'; // Fallback
+  }
+}
+
 const PANIC_KEY_STORAGE = "panicKey";
 const PANIC_LINK_STORAGE = "panicKeyLink";
 
@@ -25,7 +42,8 @@ function fixRedirectLink(link) {
   if (link.startsWith("/") || link.includes("/")) {
     // Remove leading slash if present
     const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-    return `https://spicy.jimmyqrg.com/${cleanPath}`;
+    const domain = currentDomainCache || 'spicy.jimmyqrg.com'; // Use cached domain or fallback
+    return `https://${domain}/${cleanPath}`;
   }
   
   // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol

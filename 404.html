@@ -94,9 +94,21 @@
   <h1>404</h1>
   <h2>Page Not Found</h2>
 
-  <button class="btn" onclick="location.href='https://spicy.jimmyqrg.com/?page=extend'">
+  <button class="btn" id="backHomeBtn">
     ⬅ Back to Home
   </button>
+  <script src="/js/updateDomainUrls.js"></script>
+  <script>
+    document.getElementById('backHomeBtn').onclick = async () => {
+      try {
+        const response = await fetch('/currentDomain.txt');
+        const domain = (await response.text()).trim();
+        window.location.href = `https://${domain}/?page=extend`;
+      } catch {
+        window.location.href = 'https://spicy.jimmyqrg.com/?page=extend';
+      }
+    };
+  </script>
   
   <button class="btn" onclick="location.href='https://student.jimmyqrg.com/suggest-games/'">
     Suggest a Game

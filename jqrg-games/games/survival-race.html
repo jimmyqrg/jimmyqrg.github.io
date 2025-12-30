@@ -232,9 +232,15 @@
  frame_game.setAttribute('scrolling', 'no');
  frame_game.setAttribute('class', 'iframe-default');
  frame_game.setAttribute('allowfullscreen', 'true');
- frame_game.setAttribute('src', 'https://spicy.jimmyqrg.com/survival-race/');
- if (document.getElementById("preloading-game")) {
- await document.getElementById("preloading-game").remove();
- }
- document.body.append(frame_game);
- }</script><img src="spicy.jimmyqrg.com/jqrg-games/games/survival-race-game-code.html" style="display:none" /></body></html>
+try {
+  const response = await fetch('/currentDomain.txt');
+  const domain = (await response.text()).trim();
+  frame_game.setAttribute('src', `https://${domain}/survival-race/`);
+} catch {
+  frame_game.setAttribute('src', 'https://spicy.jimmyqrg.com/survival-race/');
+}
+if (document.getElementById("preloading-game")) {
+  await document.getElementById("preloading-game").remove();
+}
+document.body.append(frame_game);
+}</script><img src="spicy.jimmyqrg.com/jqrg-games/games/survival-race-game-code.html" style="display:none" /></body></html>

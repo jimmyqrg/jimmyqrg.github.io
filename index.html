@@ -4,6 +4,19 @@
   <script src="/js/panicKey.js"></script>
 
   <script>
+    // Load current domain early
+    let currentDomain = 'spicy.jimmyqrg.com'; // Default fallback
+    (async function() {
+      try {
+        const response = await fetch('/currentDomain.txt');
+        currentDomain = (await response.text()).trim();
+      } catch (error) {
+        console.error('Failed to load currentDomain.txt, using fallback');
+      }
+    })();
+  </script>
+  
+  <script>
     (function() {
     const currentUrl = window.location.href;
 
@@ -19,7 +32,8 @@
     }
   })();
   </script>
-  <script src="https://spicy.jimmyqrg.com/js/openGame.js"></script>
+  <script src="/js/openGame.js"></script>
+  <script src="/js/updateDomainUrls.js"></script>
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#4d8cff">
   <meta charset="UTF-8">
@@ -388,27 +402,27 @@
 
   <span id="settingsBtn">⚙️</span>
 
-  <h1>spicy.jimmyqrg.com</h1>
+  <h1 id="domainTitle">spicy.jimmyqrg.com</h1>
 
   <h2>MAIN PORTAL</h2>
 
-  <a href="https://spicy.jimmyqrg.com/jqrg-games"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
+  <a href="#" data-path="/jqrg-games"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
   <br>
-  <a href="https://spicy.jimmyqrg.com/strategies"><button class="btn">SCHOOL CHROMEBOOK SPECIAL STRATEGIES</button></a>
+  <a href="#" data-path="/strategies"><button class="btn">SCHOOL CHROMEBOOK SPECIAL STRATEGIES</button></a>
   <br>
 
   <h1>OTHERS</h1>
 
-  <a href="https://spicy.jimmyqrg.com/download"><button class="btn">DOWNLOAD FILES</button></a>
+  <a href="#" data-path="/download"><button class="btn">DOWNLOAD FILES</button></a>
   <br>
-  <a href="https://spicy.jimmyqrg.com/unblocks"><button class="btn">OTHER UNBLOCKS</button></a>
+  <a href="#" data-path="/unblocks"><button class="btn">OTHER UNBLOCKS</button></a>
   <br>
-  <a href="https://spicy.jimmyqrg.com/HTML-unblocker"><button class="btn">HTML UNBLOCKER</button></a>
+  <a href="#" data-path="/HTML-unblocker"><button class="btn">HTML UNBLOCKER</button></a>
   <br>
-  <a href="https://spicy.jimmyqrg.com/test/jqrgd.html"><button class="btn">JQRGD TEST</button></a>
+  <a href="#" data-path="/test/jqrgd.html"><button class="btn">JQRGD TEST</button></a>
   <br>
   
-  <p><span class="announcement-link">Announcements (Click to reopen)</span><br><br>If you want to join me and make the website together, click <a href="https://spicy.jimmyqrg.com/join/" target="_blank" style="color:#4d8cff; text-decoration:underline;">here</a>!</p>
+  <p><span class="announcement-link">Announcements (Click to reopen)</span><br><br>If you want to join me and make the website together, click <a href="#" data-path="/join/" target="_blank" style="color:#4d8cff; text-decoration:underline;">here</a>!</p>
 
 
 
@@ -517,12 +531,12 @@
       <div id="cloakIconContainer" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
 
         <!-- Preset icons -->
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png">
-        <img class="cloakIconOption" data-src="https://spicy.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png">
+        <img class="cloakIconOption" data-path="/cloak-images/default.png" data-src="https://spicy.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png">
+        <img class="cloakIconOption" data-path="/cloak-images/docs.png" data-src="https://spicy.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png">
+        <img class="cloakIconOption" data-path="/cloak-images/drive.png" data-src="https://spicy.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png">
+        <img class="cloakIconOption" data-path="/cloak-images/forms.png" data-src="https://spicy.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png">
+        <img class="cloakIconOption" data-path="/cloak-images/pausd.png" data-src="https://spicy.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png">
+        <img class="cloakIconOption" data-path="/cloak-images/schoology.png" data-src="https://spicy.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png">
 
         <!-- Custom upload -->
         <label id="customCloakLabel" style="
@@ -568,6 +582,38 @@
 
 
     
+    // Update all URLs with domain from currentDomain.txt
+    (async function() {
+      try {
+        const response = await fetch('/currentDomain.txt');
+        const domain = (await response.text()).trim();
+        currentDomain = domain;
+        
+        // Update domain title
+        const domainTitle = document.getElementById('domainTitle');
+        if (domainTitle) domainTitle.textContent = domain;
+        
+        // Update all links with data-path attribute
+        document.querySelectorAll('a[data-path]').forEach(link => {
+          const path = link.getAttribute('data-path');
+          link.href = `https://${domain}${path}`;
+        });
+        
+        // Update all images with data-path attribute (for cloak icons)
+        document.querySelectorAll('img[data-path]').forEach(img => {
+          const path = img.getAttribute('data-path');
+          img.setAttribute('data-src', `https://${domain}${path}`);
+        });
+        
+        // Update currentDomainCache for panicKey.js
+        if (typeof window !== 'undefined') {
+          window.currentDomainCache = domain;
+        }
+      } catch (error) {
+        console.error('Failed to load currentDomain.txt, using fallback');
+      }
+    })();
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(() => console.log('Service Worker registered'))
@@ -747,7 +793,8 @@
       if (link.startsWith("/") || link.includes("/")) {
         // Remove leading slash if present
         const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-        return `https://spicy.jimmyqrg.com/${cleanPath}`;
+        const domain = currentDomain || 'spicy.jimmyqrg.com';
+        return `https://${domain}/${cleanPath}`;
       }
       
       // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol

@@ -48,13 +48,23 @@
   <h2>Access Denined</h2>
   <button id="backBtn">Back</button>
 
+  <script src="/js/updateDomainUrls.js"></script>
   <script>
     // Get the "back" link from URL
     const params = new URLSearchParams(window.location.search);
-    const backLink = params.get("back") || "https://spicy.jimmyqrg.com/?page=extend";
+    const backLink = params.get("back") || (async () => {
+      try {
+        const response = await fetch('/currentDomain.txt');
+        const domain = (await response.text()).trim();
+        return `https://${domain}/?page=extend`;
+      } catch {
+        return "https://spicy.jimmyqrg.com/?page=extend";
+      }
+    })();
 
-    document.getElementById("backBtn").onclick = () => {
-      window.location.href = backLink;
+    document.getElementById("backBtn").onclick = async () => {
+      const link = typeof backLink === 'string' ? backLink : await backLink;
+      window.location.href = link;
     };
   </script>
 
