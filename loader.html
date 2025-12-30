@@ -23,17 +23,29 @@
   </div>
 
   <script>
-    // Apply tab cloak immediately
+    // Apply tab cloak immediately (before any other scripts run)
     (function applyCloak() {
       const title = localStorage.getItem("cloakTitle");
       const icon  = localStorage.getItem("cloakIcon");
 
-      if (title) document.title = title;
+      if (title) {
+        document.title = title;
+      }
 
       if (icon) {
         const favicon = document.getElementById("cloakFavicon");
-        favicon.href = icon;
+        if (favicon) {
+          favicon.href = icon;
+        }
+        // Also update all existing favicon links
+        const existingFavicons = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
+        existingFavicons.forEach(link => {
+          link.href = icon;
+        });
       }
+      
+      // Listen for iframe load and apply cloak to iframe's title if possible
+      // (Note: Cross-origin restrictions may prevent this)
     })();
 
     // Main loader system

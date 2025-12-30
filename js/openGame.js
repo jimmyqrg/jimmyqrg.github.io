@@ -157,6 +157,24 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Apply tab cloak immediately to the new window (if possible)
+    // Note: Due to cross-origin restrictions, we can't directly modify the window
+    // But loader.html will apply the cloak via localStorage when it loads
+    try {
+      // Try to apply cloak immediately if we have access
+      const cloakTitle = localStorage.getItem("cloakTitle");
+      const cloakIcon = localStorage.getItem("cloakIcon");
+      
+      if (win && !win.closed) {
+        // Use postMessage to send cloak settings to loader.html if needed
+        // But loader.html already reads from localStorage, so this is redundant
+        // The cloak will be applied by loader.html when it loads
+      }
+    } catch (e) {
+      // Cross-origin restriction - loader.html will handle it via localStorage
+      console.log("Tab cloak will be applied by loader.html");
+    }
+
     // Call original function ONCE if it exists
     if (originalopenGame && originalopenGame !== window.openGame) {
       console.log("Calling original openGame function");

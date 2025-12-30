@@ -582,6 +582,9 @@
 
 
     
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+    
     // Update all URLs with domain from currentDomain.txt
     (async function() {
       try {
@@ -934,6 +937,7 @@
       }, 2000);
     }
 
+    }); // End DOMContentLoaded
 
   </script>
 
