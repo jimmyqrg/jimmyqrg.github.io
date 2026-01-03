@@ -1,4 +1,4 @@
-// Utility script to update all URLs containing spicy.jimmyqrg.com with domain from currentDomain.txt
+// Utility script to update all URLs containing az7qm9r2xfk8lwt4hcp.jimmyqrg.com with domain from currentDomain.txt
 (function() {
   const updateUrls = async function() {
   try {
@@ -14,8 +14,8 @@
     // Replace all URLs in onclick attributes
     document.querySelectorAll('[onclick]').forEach(element => {
       const onclick = element.getAttribute('onclick');
-      if (onclick && onclick.includes('spicy.jimmyqrg.com')) {
-        const updated = onclick.replace(/https?:\/\/spicy\.jimmyqrg\.com/g, `https://${domain}`);
+      if (onclick && onclick.includes('az7qm9r2xfk8lwt4hcp.jimmyqrg.com')) {
+        const updated = onclick.replace(/https?:\/\/az7qm9r2xfk8lwt4hcp\.jimmyqrg\.com/g, `https://${domain}`);
         element.setAttribute('onclick', updated);
       }
     });
@@ -23,24 +23,24 @@
     // Replace all URLs in href attributes
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
-      if (href && href.includes('spicy.jimmyqrg.com')) {
-        link.setAttribute('href', href.replace(/https?:\/\/spicy\.jimmyqrg\.com/g, `https://${domain}`));
+      if (href && href.includes('az7qm9r2xfk8lwt4hcp.jimmyqrg.com')) {
+        link.setAttribute('href', href.replace(/https?:\/\/az7qm9r2xfk8lwt4hcp\.jimmyqrg\.com/g, `https://${domain}`));
       }
     });
     
     // Replace all URLs in src attributes
     document.querySelectorAll('[src]').forEach(element => {
       const src = element.getAttribute('src');
-      if (src && src.includes('spicy.jimmyqrg.com')) {
-        element.setAttribute('src', src.replace(/https?:\/\/spicy\.jimmyqrg\.com/g, `https://${domain}`));
+      if (src && src.includes('az7qm9r2xfk8lwt4hcp.jimmyqrg.com')) {
+        element.setAttribute('src', src.replace(/https?:\/\/az7qm9r2xfk8lwt4hcp\.jimmyqrg\.com/g, `https://${domain}`));
       }
     });
     
     // Replace all URLs in data-src attributes
     document.querySelectorAll('[data-src]').forEach(element => {
       const dataSrc = element.getAttribute('data-src');
-      if (dataSrc && dataSrc.includes('spicy.jimmyqrg.com')) {
-        element.setAttribute('data-src', dataSrc.replace(/https?:\/\/spicy\.jimmyqrg\.com/g, `https://${domain}`));
+      if (dataSrc && dataSrc.includes('az7qm9r2xfk8lwt4hcp.jimmyqrg.com')) {
+        element.setAttribute('data-src', dataSrc.replace(/https?:\/\/az7qm9r2xfk8lwt4hcp\.jimmyqrg\.com/g, `https://${domain}`));
       }
     });
     
@@ -54,15 +54,15 @@
     
     let node;
     while (node = walker.nextNode()) {
-      if (node.textContent.includes('spicy.jimmyqrg.com')) {
-        node.textContent = node.textContent.replace(/spicy\.jimmyqrg\.com/g, domain);
+      if (node.textContent.includes('az7qm9r2xfk8lwt4hcp.jimmyqrg.com')) {
+        node.textContent = node.textContent.replace(/az7qm9r2xfk8lwt4hcp\.jimmyqrg\.com/g, domain);
       }
     }
     
   } catch (error) {
     console.error('Failed to load currentDomain.txt, using fallback:', error);
-    window.currentDomain = 'spicy.jimmyqrg.com';
-    window.currentDomainCache = 'spicy.jimmyqrg.com';
+    window.currentDomain = 'az7qm9r2xfk8lwt4hcp.jimmyqrg.com';
+    window.currentDomainCache = 'az7qm9r2xfk8lwt4hcp.jimmyqrg.com';
   }
   };
   
