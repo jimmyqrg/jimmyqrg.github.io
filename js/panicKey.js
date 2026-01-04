@@ -15,7 +15,7 @@ async function getCurrentDomain() {
     return domain;
   } catch (error) {
     console.error('Failed to load currentDomain.txt, using fallback:', error);
-    return 'az7qm9r2xfk8lwt4hcp.jimmyqrg.com'; // Fallback
+    return 'teacher.jimmyqrg.com'; // Fallback
   }
 }
 
@@ -42,7 +42,7 @@ function fixRedirectLink(link) {
   if (link.startsWith("/") || link.includes("/")) {
     // Remove leading slash if present
     const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-    const domain = currentDomainCache || 'az7qm9r2xfk8lwt4hcp.jimmyqrg.com'; // Use cached domain or fallback
+    const domain = currentDomainCache || 'teacher.jimmyqrg.com'; // Use cached domain or fallback
     return `https://${domain}/${cleanPath}`;
   }
   

@@ -5,7 +5,7 @@
 
   <script>
     // Load current domain early
-    let currentDomain = 'az7qm9r2xfk8lwt4hcp.jimmyqrg.com'; // Default fallback
+    let currentDomain = 'teacher.jimmyqrg.com'; // Default fallback
     (async function() {
       try {
         const response = await fetch('/currentDomain.txt');
@@ -500,7 +500,7 @@
 
       <!-- Open in popup -->
       <label><b>Open the website in loader mode</b></label>
-      <button class="btn" onclick="openGame('https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/?page=extend')">OPEN</button>
+      <button class="btn" onclick="openGame('https://teacher.jimmyqrg.com/?page=extend')">OPEN</button>
       <br><br><br>
 
       <br><br><br>
@@ -538,12 +538,12 @@
       <div id="cloakIconContainer" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;">
 
         <!-- Preset icons -->
-        <img class="cloakIconOption" data-src="https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png" draggable="false">
-        <img class="cloakIconOption" data-src="https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png" draggable="false">
-        <img class="cloakIconOption" data-src="https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png" draggable="false">
-        <img class="cloakIconOption" data-src="https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png" draggable="false">
-        <img class="cloakIconOption" data-src="https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png" draggable="false">
-        <img class="cloakIconOption" data-src="https://az7qm9r2xfk8lwt4hcp.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://teacher.jimmyqrg.com/cloak-images/default.png" src="cloak-images/default.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://teacher.jimmyqrg.com/cloak-images/docs.png" src="cloak-images/docs.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://teacher.jimmyqrg.com/cloak-images/drive.png" src="cloak-images/drive.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://teacher.jimmyqrg.com/cloak-images/forms.png" src="cloak-images/forms.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://teacher.jimmyqrg.com/cloak-images/pausd.png" src="cloak-images/pausd.png" draggable="false">
+        <img class="cloakIconOption" data-src="https://teacher.jimmyqrg.com/cloak-images/schoology.png" src="cloak-images/schoology.png" draggable="false">
 
         <!-- Custom upload -->
         <label id="customCloakLabel" style="
@@ -608,8 +608,8 @@
         // Update all cloak icon images with data-src attribute (for tab cloak settings)
         document.querySelectorAll('img.cloakIconOption[data-src]').forEach(img => {
           const dataSrc = img.getAttribute('data-src');
-          if (dataSrc && dataSrc.includes('az7qm9r2xfk8lwt4hcp.jimmyqrg.com')) {
-            img.setAttribute('data-src', dataSrc.replace(/https?:\/\/az7qm9r2xfk8lwt4hcp\.jimmyqrg\.com/g, `https://${domain}`));
+          if (dataSrc && dataSrc.includes('teacher.jimmyqrg.com')) {
+            img.setAttribute('data-src', dataSrc.replace(/https?:\/\/teacher\.jimmyqrg\.com/g, `https://${domain}`));
           }
         });
         
@@ -801,7 +801,7 @@
       if (link.startsWith("/") || link.includes("/")) {
         // Remove leading slash if present
         const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-        const domain = currentDomain || 'az7qm9r2xfk8lwt4hcp.jimmyqrg.com';
+        const domain = currentDomain || 'teacher.jimmyqrg.com';
         return `https://${domain}/${cleanPath}`;
       }
       
