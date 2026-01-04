@@ -13,13 +13,13 @@ async function getCurrentDomain() {
     return domain;
   } catch (error) {
     console.error('Failed to load currentDomain.txt, using fallback:', error);
-    return 'teacher.jimmyqrg.com'; // Fallback
+    return 'learn.jimmyqrg.com'; // Fallback
   }
 }
 
 // Synchronous version (requires domain to be loaded first)
 function getCurrentDomainSync() {
-  return currentDomainCache || 'teacher.jimmyqrg.com';
+  return currentDomainCache || 'learn.jimmyqrg.com';
 }
 
 // Helper function to build full URL

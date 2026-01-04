@@ -1,4 +1,4 @@
-// Utility script to update all URLs containing teacher.jimmyqrg.com with domain from currentDomain.txt
+// Utility script to update all URLs containing learn.jimmyqrg.com with domain from currentDomain.txt
 (function() {
   const updateUrls = async function() {
   try {
@@ -14,7 +14,7 @@
     // Replace all URLs in onclick attributes
     document.querySelectorAll('[onclick]').forEach(element => {
       const onclick = element.getAttribute('onclick');
-      if (onclick && onclick.includes('teacher.jimmyqrg.com')) {
+      if (onclick && onclick.includes('learn.jimmyqrg.com')) {
         const updated = onclick.replace(/https?:\/\/teacher\.jimmyqrg\.com/g, `https://${domain}`);
         element.setAttribute('onclick', updated);
       }
@@ -23,7 +23,7 @@
     // Replace all URLs in href attributes
     document.querySelectorAll('a[href]').forEach(link => {
       const href = link.getAttribute('href');
-      if (href && href.includes('teacher.jimmyqrg.com')) {
+      if (href && href.includes('learn.jimmyqrg.com')) {
         link.setAttribute('href', href.replace(/https?:\/\/teacher\.jimmyqrg\.com/g, `https://${domain}`));
       }
     });
@@ -31,7 +31,7 @@
     // Replace all URLs in src attributes
     document.querySelectorAll('[src]').forEach(element => {
       const src = element.getAttribute('src');
-      if (src && src.includes('teacher.jimmyqrg.com')) {
+      if (src && src.includes('learn.jimmyqrg.com')) {
         element.setAttribute('src', src.replace(/https?:\/\/teacher\.jimmyqrg\.com/g, `https://${domain}`));
       }
     });
@@ -39,7 +39,7 @@
     // Replace all URLs in data-src attributes
     document.querySelectorAll('[data-src]').forEach(element => {
       const dataSrc = element.getAttribute('data-src');
-      if (dataSrc && dataSrc.includes('teacher.jimmyqrg.com')) {
+      if (dataSrc && dataSrc.includes('learn.jimmyqrg.com')) {
         element.setAttribute('data-src', dataSrc.replace(/https?:\/\/teacher\.jimmyqrg\.com/g, `https://${domain}`));
       }
     });
@@ -54,15 +54,15 @@
     
     let node;
     while (node = walker.nextNode()) {
-      if (node.textContent.includes('teacher.jimmyqrg.com')) {
+      if (node.textContent.includes('learn.jimmyqrg.com')) {
         node.textContent = node.textContent.replace(/teacher\.jimmyqrg\.com/g, domain);
       }
     }
     
   } catch (error) {
     console.error('Failed to load currentDomain.txt, using fallback:', error);
-    window.currentDomain = 'teacher.jimmyqrg.com';
-    window.currentDomainCache = 'teacher.jimmyqrg.com';
+    window.currentDomain = 'learn.jimmyqrg.com';
+    window.currentDomainCache = 'learn.jimmyqrg.com';
   }
   };
   
