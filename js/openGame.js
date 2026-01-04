@@ -8,17 +8,17 @@ document.addEventListener("DOMContentLoaded", () => {
   /* =====================================================
       === OPEN GAME TYPE SETTING ==========================
       ===================================================== */
-  const OPEN_GAME_TYPE_KEY = "openGameLoaderType";
-  const openGameLoaderTypeSelect = document.getElementById("openGameLoaderType");
+  const OPEN_GAME_TYPE_KEY = "openGameType";
+  const openGameTypeSelect = document.getElementById("openGameType");
 
-  if (openGameLoaderTypeSelect) {
+  if (openGameTypeSelect) {
     // Load saved type (default: popup)
     const savedType = localStorage.getItem(OPEN_GAME_TYPE_KEY) || "popup";
-    openGameLoaderTypeSelect.value = savedType;
+    openGameTypeSelect.value = savedType;
 
     // Save on change
-    openGameLoaderTypeSelect.addEventListener("change", () => {
-      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameLoaderTypeSelect.value);
+    openGameTypeSelect.addEventListener("change", () => {
+      localStorage.setItem(OPEN_GAME_TYPE_KEY, openGameTypeSelect.value);
     });
   }
 
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!url) return;
 
     // Get user's preferred open type
-    const openType = localStorage.getItem("openGameLoaderType") || "popup";
+    const openType = localStorage.getItem("openGameType") || "popup";
     const target = "/loader.html?content=" + encodeURIComponent(url)
 
     console.log("Opening game with type:", openType, "URL:", url);
