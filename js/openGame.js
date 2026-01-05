@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Get user's preferred open type
     const openType = localStorage.getItem("openGameType") || "popup";
-    const target = "/loader.html?content=" + encodeURIComponent(url)
+    const target = "/loader/?content=" + encodeURIComponent(url)
 
     console.log("Opening game with type:", openType, "URL:", url);
 
@@ -189,20 +189,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Apply tab cloak immediately to the new window (if possible)
     // Note: Due to cross-origin restrictions, we can't directly modify the window
-    // But loader.html will apply the cloak via localStorage when it loads
+    // But loader will apply the cloak via localStorage when it loads
     try {
       // Try to apply cloak immediately if we have access
       const cloakTitle = localStorage.getItem("cloakTitle");
       const cloakIcon = localStorage.getItem("cloakIcon");
       
       if (win && !win.closed) {
-        // Use postMessage to send cloak settings to loader.html if needed
-        // But loader.html already reads from localStorage, so this is redundant
-        // The cloak will be applied by loader.html when it loads
+        // Use postMessage to send cloak settings to loader if needed
+        // But loader already reads from localStorage, so this is redundant
+        // The cloak will be applied by loader when it loads
       }
     } catch (e) {
-      // Cross-origin restriction - loader.html will handle it via localStorage
-      console.log("Tab cloak will be applied by loader.html");
+      // Cross-origin restriction - loader will handle it via localStorage
+      console.log("Tab cloak will be applied by loader");
     }
 
     // Call original function ONCE if it exists
