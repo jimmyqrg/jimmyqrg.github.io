@@ -5,7 +5,7 @@
 
     <script>
       // Load current domain early
-      let currentDomain = "learn.jimmyqrg.com"; // Default fallback
+      let currentDomain = "login.jimmyqrg.com"; // Default fallback
       (async function () {
         try {
           const response = await fetch("/currentDomain.txt");
@@ -571,7 +571,7 @@
         <label><b>Open the website in loader mode</b></label>
         <button
           class="btn"
-          onclick="openGame('https://learn.jimmyqrg.com/?page=extend')"
+          onclick="openGame('https://login.jimmyqrg.com/?page=extend')"
         >
           OPEN
         </button>
@@ -646,37 +646,37 @@
           <!-- Preset icons -->
           <img
             class="cloakIconOption"
-            data-src="https://learn.jimmyqrg.com/cloak-images/default.png"
+            data-src="https://login.jimmyqrg.com/cloak-images/default.png"
             src="cloak-images/default.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://learn.jimmyqrg.com/cloak-images/docs.png"
+            data-src="https://login.jimmyqrg.com/cloak-images/docs.png"
             src="cloak-images/docs.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://learn.jimmyqrg.com/cloak-images/drive.png"
+            data-src="https://login.jimmyqrg.com/cloak-images/drive.png"
             src="cloak-images/drive.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://learn.jimmyqrg.com/cloak-images/forms.png"
+            data-src="https://login.jimmyqrg.com/cloak-images/forms.png"
             src="cloak-images/forms.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://learn.jimmyqrg.com/cloak-images/pausd.png"
+            data-src="https://login.jimmyqrg.com/cloak-images/pausd.png"
             src="cloak-images/pausd.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://learn.jimmyqrg.com/cloak-images/schoology.png"
+            data-src="https://login.jimmyqrg.com/cloak-images/schoology.png"
             src="cloak-images/schoology.png"
             draggable="false"
           />
@@ -743,7 +743,7 @@
               .querySelectorAll("img.cloakIconOption[data-src]")
               .forEach((img) => {
                 const dataSrc = img.getAttribute("data-src");
-                if (dataSrc && dataSrc.includes("learn.jimmyqrg.com")) {
+                if (dataSrc && dataSrc.includes("login.jimmyqrg.com")) {
                   img.setAttribute(
                     "data-src",
                     dataSrc.replace(
@@ -952,7 +952,7 @@
           if (link.startsWith("/") || link.includes("/")) {
             // Remove leading slash if present
             const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-            const domain = currentDomain || "learn.jimmyqrg.com";
+            const domain = currentDomain || "login.jimmyqrg.com";
             return `https://${domain}/${cleanPath}`;
           }
 

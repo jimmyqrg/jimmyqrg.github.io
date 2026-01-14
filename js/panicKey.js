@@ -9,13 +9,13 @@ async function getCurrentDomain() {
     return currentDomainCache;
   }
   try {
-    const response = await fetch('/currentDomain.txt');
+    const response = await fetch("/currentDomain.txt");
     const domain = (await response.text()).trim();
     currentDomainCache = domain;
     return domain;
   } catch (error) {
-    console.error('Failed to load currentDomain.txt, using fallback:', error);
-    return 'learn.jimmyqrg.com'; // Fallback
+    console.error("Failed to load currentDomain.txt, using fallback:", error);
+    return "login.jimmyqrg.com"; // Fallback
   }
 }
 
@@ -31,26 +31,26 @@ let panicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
 // Function to fix/normalize redirect links
 function fixRedirectLink(link) {
   if (!link) return "https://www.jimmyqrg.com";
-  
+
   // If it's already a full URL with protocol, use it as is
   if (link.startsWith("http://") || link.startsWith("https://")) {
     return link;
   }
-  
+
   // If it starts with a path (e.g., "jqrg-games/eaglercraft")
   // or is a relative path, prepend the base URL
   if (link.startsWith("/") || link.includes("/")) {
     // Remove leading slash if present
     const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-    const domain = currentDomainCache || 'learn.jimmyqrg.com'; // Use cached domain or fallback
+    const domain = currentDomainCache || "login.jimmyqrg.com"; // Use cached domain or fallback
     return `https://${domain}/${cleanPath}`;
   }
-  
+
   // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol
   if (link.includes(".") && !link.includes("/")) {
     return `https://${link}`;
   }
-  
+
   // Default fallback
   return "https://www.jimmyqrg.com";
 }
@@ -59,9 +59,10 @@ function fixRedirectLink(link) {
 document.addEventListener("keydown", (e) => {
   // Always check localStorage directly to get the latest values
   // (storage events don't fire in the same window)
-  const currentPanicKey = localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
+  const currentPanicKey =
+    localStorage.getItem(PANIC_KEY_STORAGE) || "ShiftRight";
   const currentPanicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
-  
+
   // Fix the redirect link if it's incorrect
   const redirectLink = fixRedirectLink(currentPanicLink);
 
