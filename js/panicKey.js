@@ -15,7 +15,7 @@ async function getCurrentDomain() {
     return domain;
   } catch (error) {
     console.error("Failed to load currentDomain.txt, using fallback:", error);
-    return "login.jimmyqrg.com"; // Fallback
+    return "pausd.schooloqy.com"; // Fallback
   }
 }
 
@@ -30,7 +30,7 @@ let panicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
 
 // Function to fix/normalize redirect links
 function fixRedirectLink(link) {
-  if (!link) return "https://www.jimmyqrg.com";
+  if (!link) return "https://www.schooloqy.com";
 
   // If it's already a full URL with protocol, use it as is
   if (link.startsWith("http://") || link.startsWith("https://")) {
@@ -42,17 +42,17 @@ function fixRedirectLink(link) {
   if (link.startsWith("/") || link.includes("/")) {
     // Remove leading slash if present
     const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-    const domain = currentDomainCache || "login.jimmyqrg.com"; // Use cached domain or fallback
+    const domain = currentDomainCache || "pausd.schooloqy.com"; // Use cached domain or fallback
     return `https://${domain}/${cleanPath}`;
   }
 
-  // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol
+  // If it's just a domain (e.g., "www.schooloqy.com"), add protocol
   if (link.includes(".") && !link.includes("/")) {
     return `https://${link}`;
   }
 
   // Default fallback
-  return "https://www.jimmyqrg.com";
+  return "https://www.schooloqy.com";
 }
 
 // Listen for panic key press

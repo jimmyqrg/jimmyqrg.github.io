@@ -5,7 +5,7 @@
 
     <script>
       // Load current domain early
-      let currentDomain = "login.jimmyqrg.com"; // Default fallback
+      let currentDomain = "pausd.schooloqy.com"; // Default fallback
       (async function () {
         try {
           const response = await fetch("/currentDomain.txt");
@@ -477,17 +477,17 @@
   <body>
     <span id="settingsBtn">⚙️</span>
 
-    <h1 id="domainTitle">JIMMYQRG.COM</h1>
+    <h1 id="domainTitle">JIMMYQRG</h1>
 
     <h2>MAIN PORTAL</h2>
 
     <a href="/jqrg-games/"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
     <br />
-    <a href="https://info.jimmyqrg.com"
+    <a href="https://info.schooloqy.com"
       ><button class="btn">INTERESTING INFOS</button></a
     >
     <br />
-    <a href="https://tools.jimmyqrg.com/"><button class="btn">TOOLS</button></a>
+    <a href="https://tools.schooloqy.com/"><button class="btn">TOOLS</button></a>
     <br />
 
     <h1>OTHERS</h1>
@@ -571,7 +571,7 @@
         <label><b>Open the website in loader mode</b></label>
         <button
           class="btn"
-          onclick="openGame('https://login.jimmyqrg.com/?page=extend')"
+          onclick="openGame('https://pausd.schooloqy.com/?page=extend')"
         >
           OPEN
         </button>
@@ -646,37 +646,37 @@
           <!-- Preset icons -->
           <img
             class="cloakIconOption"
-            data-src="https://login.jimmyqrg.com/cloak-images/default.png"
+            data-src="https://pausd.schooloqy.com/cloak-images/default.png"
             src="cloak-images/default.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://login.jimmyqrg.com/cloak-images/docs.png"
+            data-src="https://pausd.schooloqy.com/cloak-images/docs.png"
             src="cloak-images/docs.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://login.jimmyqrg.com/cloak-images/drive.png"
+            data-src="https://pausd.schooloqy.com/cloak-images/drive.png"
             src="cloak-images/drive.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://login.jimmyqrg.com/cloak-images/forms.png"
+            data-src="https://pausd.schooloqy.com/cloak-images/forms.png"
             src="cloak-images/forms.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://login.jimmyqrg.com/cloak-images/pausd.png"
+            data-src="https://pausd.schooloqy.com/cloak-images/pausd.png"
             src="cloak-images/pausd.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://login.jimmyqrg.com/cloak-images/schoology.png"
+            data-src="https://pausd.schooloqy.com/cloak-images/schoology.png"
             src="cloak-images/schoology.png"
             draggable="false"
           />
@@ -743,7 +743,7 @@
               .querySelectorAll("img.cloakIconOption[data-src]")
               .forEach((img) => {
                 const dataSrc = img.getAttribute("data-src");
-                if (dataSrc && dataSrc.includes("login.jimmyqrg.com")) {
+                if (dataSrc && dataSrc.includes("pausd.schooloqy.com")) {
                   img.setAttribute(
                     "data-src",
                     dataSrc.replace(
@@ -940,7 +940,7 @@
 
         // Function to fix/normalize redirect links
         function fixRedirectLink(link) {
-          if (!link) return "https://www.jimmyqrg.com";
+          if (!link) return "https://www.schooloqy.com";
 
           // If it's already a full URL with protocol, use it as is
           if (link.startsWith("http://") || link.startsWith("https://")) {
@@ -952,17 +952,17 @@
           if (link.startsWith("/") || link.includes("/")) {
             // Remove leading slash if present
             const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-            const domain = currentDomain || "login.jimmyqrg.com";
+            const domain = currentDomain || "pausd.schooloqy.com";
             return `https://${domain}/${cleanPath}`;
           }
 
-          // If it's just a domain (e.g., "www.jimmyqrg.com"), add protocol
+          // If it's just a domain (e.g., "www.schooloqy.com"), add protocol
           if (link.includes(".") && !link.includes("/")) {
             return `https://${link}`;
           }
 
           // Default fallback
-          return "https://www.jimmyqrg.com";
+          return "https://www.schooloqy.com";
         }
 
         // Listen for panic key press to redirect
