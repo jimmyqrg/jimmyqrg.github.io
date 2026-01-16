@@ -30,7 +30,7 @@ let panicLink = localStorage.getItem(PANIC_LINK_STORAGE) || "";
 
 // Function to fix/normalize redirect links
 function fixRedirectLink(link) {
-  if (!link) return "https://www.schooloqy.com";
+  if (!link) return "https://pausd.schoology.com";
 
   // If it's already a full URL with protocol, use it as is
   if (link.startsWith("http://") || link.startsWith("https://")) {
@@ -52,7 +52,7 @@ function fixRedirectLink(link) {
   }
 
   // Default fallback
-  return "https://www.schooloqy.com";
+  return "https://pausd.schoology.com";
 }
 
 // Listen for panic key press

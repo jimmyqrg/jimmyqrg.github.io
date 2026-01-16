@@ -29,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (cloakTitleInput && customLabel && customInput) {
     // Load saved data
-    const savedTitle = localStorage.getItem(CLOAK_TITLE_KEY) || "";
-    const savedIcon = localStorage.getItem(CLOAK_ICON_KEY) || "";
+    const savedTitle = localStorage.getItem(CLOAK_TITLE_KEY) || "Grades | Schoology";
+    const savedIcon = localStorage.getItem(CLOAK_ICON_KEY) || "/cloak-images/schoology.png";
 
     cloakTitleInput.value = savedTitle;
 

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <script src="/js/panicKey.js"></script>
+    <script src="/js/mainPageCloak.js"></script>
 
     <script>
       // Load current domain early
@@ -567,6 +568,22 @@
 
         <br /><br /><br />
 
+        <!-- Open Game Type -->
+        <label><b>Open Game Type</b></label><br />
+        <p style="margin-top: 10px; opacity: 0.8">
+          Choose how games open when you click on them.
+        </p>
+        <select
+          id="openGameType"
+          class="styled-select"
+          style="width: 100%; padding: 8px; margin-top: 8px; border-radius: 8px"
+        >
+          <option value="popup">Popup Window</option>
+          <option value="newtab">New Tab</option>
+        </select>
+
+        <br /><br /><br />
+
         <!-- Open in popup -->
         <label><b>Open the website in loader mode</b></label>
         <button
@@ -615,6 +632,23 @@
         <p style="margin-top: 20px; opacity: 0.8">
           For interaction in construction zone
         </p>
+        <br /><br /><br />
+
+        <!-- Main Page Cloak -->
+        <label><b>Use cloak for main page</b></label><br />
+        <p style="margin-top: 10px; opacity: 0.8">
+          When enabled, the main page title will show "Home | Schoology" and use the Schoology icon.<br />
+          This applies to all pages except game files.
+        </p>
+        <input
+          type="checkbox"
+          id="mainPageCloak"
+          style="margin-top: 10px; width: 20px; height: 20px; cursor: pointer;"
+        />
+        <label for="mainPageCloak" style="margin-left: 8px; cursor: pointer;">
+          Enable main page cloak
+        </label>
+
         <br /><br /><br />
 
         <!-- === Tab Cloak === -->
@@ -855,6 +889,18 @@
           localStorage.setItem("autoAnnouncement", announcementSetting.value);
         });
 
+        /* === Main Page Cloak Setting === */
+        const mainPageCloakCheckbox = document.getElementById("mainPageCloak");
+        const mainPageCloakEnabled = localStorage.getItem("mainPageCloak") === "true";
+        if (mainPageCloakCheckbox) {
+          mainPageCloakCheckbox.checked = mainPageCloakEnabled;
+          mainPageCloakCheckbox.addEventListener("change", () => {
+            localStorage.setItem("mainPageCloak", mainPageCloakCheckbox.checked ? "true" : "false");
+            // Reload page to apply changes
+            window.location.reload();
+          });
+        }
+
         /* --- Access Code System --- */
         const authorizeBtn = document.getElementById("authorizeBtn");
         const unauthorizeBtn = document.getElementById("unauthorizeBtn");
@@ -890,7 +936,7 @@
         customizeKey.textContent = panicKey;
 
         // Load saved link
-        linkInput.value = localStorage.getItem(PANIC_LINK_STORAGE) || "";
+        linkInput.value = localStorage.getItem(PANIC_LINK_STORAGE) || "https://pausd.schoology.com";
 
         // Save link on input
         linkInput.addEventListener("input", () => {
@@ -940,7 +986,7 @@
 
         // Function to fix/normalize redirect links
         function fixRedirectLink(link) {
-          if (!link) return "https://www.schooloqy.com";
+          if (!link) return "https://pausd.schoology.com";
 
           // If it's already a full URL with protocol, use it as is
           if (link.startsWith("http://") || link.startsWith("https://")) {
@@ -962,7 +1008,7 @@
           }
 
           // Default fallback
-          return "https://www.schooloqy.com";
+          return "https://pausd.schoology.com";
         }
 
         // Listen for panic key press to redirect
