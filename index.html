@@ -414,6 +414,28 @@
           0 0 18px rgba(77, 140, 255, 0.12), 0 0 36px rgba(138, 77, 255, 0.08);
       }
 
+      /* Checkbox styling */
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: var(--glow-start);
+        border: 2px solid rgba(255, 255, 255, 0.12);
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.45);
+        transition: all 0.25s ease;
+      }
+
+      input[type="checkbox"]:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 12px rgba(77, 140, 255, 0.2);
+      }
+
+      input[type="checkbox"]:checked {
+        background: linear-gradient(135deg, var(--glow-start), var(--glow-end));
+        border-color: transparent;
+      }
+
       .small-note {
         color: rgba(255, 255, 255, 0.75);
         font-size: 13px;
@@ -557,7 +579,8 @@
         ><br />
         <select
           id="announcementSetting"
-          style="width: 100%; padding: 8px; margin-top: 8px; border-radius: 8px"
+          class="styled-select"
+          style="margin-top: 8px"
         >
           <option value="always">Always</option>
           <option value="big">Only when there is a big announcement</option>
@@ -573,7 +596,7 @@
         <select
           id="openGameType"
           class="styled-select"
-          style="width: 100%; padding: 8px; margin-top: 8px; border-radius: 8px"
+          style="margin-top: 8px"
         >
           <option value="popup">Popup Window</option>
           <option value="newtab">New Tab</option>
@@ -607,7 +630,8 @@
         <input
           type="text"
           id="panicLinkInput"
-          style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 8px"
+          class="styled-input"
+          style="margin-top: 5px"
           placeholder="https://example.com"
         />
         <br /><br /><br />
@@ -617,8 +641,9 @@
         <input
           id="accessCode"
           type="password"
+          class="styled-input"
           placeholder="Enter code"
-          style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 8px"
+          style="margin-top: 5px"
         />
         <button id="authorizeBtn" class="btn" style="margin-top: 15px">
           AUTHORIZE
@@ -640,7 +665,7 @@
         <input
           type="checkbox"
           id="mainPageCloak"
-          style="margin-top: 10px; width: 20px; height: 20px; cursor: pointer;"
+          style="margin-top: 10px"
         />
         <label for="mainPageCloak" style="margin-left: 8px; cursor: pointer;">
           Enable main page cloak
@@ -657,8 +682,9 @@
         <input
           id="cloakTitle"
           type="text"
+          class="styled-input"
           placeholder="Enter tab title"
-          style="width: 100%; padding: 8px; margin-top: 5px; border-radius: 8px"
+          style="margin-top: 5px"
         />
 
         <br /><br />
