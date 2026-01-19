@@ -414,6 +414,23 @@
           0 0 18px rgba(77, 140, 255, 0.12), 0 0 36px rgba(138, 77, 255, 0.08);
       }
 
+      /* Dropdown option styling */
+      select.styled-select option {
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        padding: 10px;
+      }
+
+      select.styled-select option:hover,
+      select.styled-select option:focus {
+        background: rgba(77, 140, 255, 0.3);
+      }
+
+      select.styled-select option:checked {
+        background: linear-gradient(135deg, var(--glow-start), var(--glow-end));
+        color: white;
+      }
+
       /* Checkbox styling */
       input[type="checkbox"] {
         width: 20px;
