@@ -501,6 +501,26 @@
         font-family: var(--font);
       }
 
+      /* Settings section headers */
+      #settingsContent h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+        text-align: left;
+        opacity: 0.95;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      #settingsContent hr {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        margin: 25px 0;
+      }
+
       /* responsive tweaks */
       @media (max-width: 520px) {
         .modal-content {
@@ -511,8 +531,32 @@
           max-width: 100%;
           padding: 10px 18px;
         }
+        #settingsContent h3 {
+          font-size: 1.2rem;
+        }
+      }
+
+      /* Custom Cursor with Color Inversion */
+      body.custom-cursor-enabled * {
+        cursor: url('/cursor.png') 24 24, auto !important; /* 24 24 is the hotspot (center of 48px cursor) */
       }
     </style>
+    <script>
+      // Apply cursor setting immediately on page load (before DOMContentLoaded)
+      (function() {
+        const enableCursor = localStorage.getItem("enableCursor") !== "false";
+        if (enableCursor) {
+          // Try to add immediately if body exists, otherwise wait for DOMContentLoaded
+          if (document.body) {
+            document.body.classList.add("custom-cursor-enabled");
+          } else {
+            document.addEventListener("DOMContentLoaded", function() {
+              document.body.classList.add("custom-cursor-enabled");
+            });
+          }
+        }
+      })();
+    </script>
   </head>
   <body>
     <span id="settingsBtn">⚙️</span>
@@ -593,86 +637,23 @@
 
         <h2 style="text-align: center">⚙️ Settings</h2>
 
-        <!-- Auto popup setting -->
-        <label><b>Auto pop up announcements:</b></label
-        ><br />
-        <select
-          id="announcementSetting"
-          class="styled-select"
-          style="margin-top: 8px"
-        >
-          <option value="always">Always</option>
-          <option value="big">Only when there is a big announcement</option>
-        </select>
+        <!-- ========== APPEARANCE ========== -->
+        <h3>🎨 Appearance</h3>
 
-        <br /><br /><br />
-
-        <!-- Open Game Type -->
-        <label><b>Open Game Type</b></label><br />
+        <!-- Enable Cursor -->
+        <label><b>Enable Cursor</b></label><br />
         <p style="margin-top: 10px; opacity: 0.8">
-          Choose how games open when you click on them.
+          Show the custom cursor on all pages.
         </p>
-        <select
-          id="openGameType"
-          class="styled-select"
-          style="margin-top: 8px"
-        >
-          <option value="popup">Popup Window</option>
-          <option value="newtab">New Tab</option>
-        </select>
-
-        <br /><br /><br />
-
-        <!-- Open in popup -->
-        <label><b>Open the website in loader mode</b></label>
-        <button
-          class="btn"
-          onclick="openGame('https://pausd.schooloqy.com/?page=extend')"
-        >
-          OPEN
-        </button>
-        <br /><br /><br />
-
-        <br /><br /><br />
-
-        <!-- Panic Key -->
-        <label><b>Panic Key</b></label
-        ><br />
-        <p style="margin-top: 20px; opacity: 0.8">
-          A key that auto-redirect to an website right when you press it. This
-          will exit the website immediately in an emergency.<br /><br />THIS
-          WORKS IN PAGES ONLY, NOT IN GAMES.<br />
-        </p>
-        <p>Customize key</p>
-        <button id="panicKeyBtn" class="btn customizeKey"></button><br />
-        <p>Customize website</p>
         <input
-          type="text"
-          id="panicLinkInput"
-          class="styled-input"
-          style="margin-top: 5px"
-          placeholder="https://example.com"
+          type="checkbox"
+          id="enableCursor"
+          style="margin-top: 10px"
         />
-        <br /><br /><br />
+        <label for="enableCursor" style="margin-left: 8px; cursor: pointer;">
+          Enable custom cursor
+        </label>
 
-        <!-- Access code -->
-        <label><b>Access code:</b></label>
-        <input
-          id="accessCode"
-          type="password"
-          class="styled-input"
-          placeholder="Enter code"
-          style="margin-top: 5px"
-        />
-        <button id="authorizeBtn" class="btn" style="margin-top: 15px">
-          AUTHORIZE
-        </button>
-        <button id="unauthorizeBtn" class="btn" style="margin-top: 10px">
-          UNAUTHORIZE
-        </button>
-        <p style="margin-top: 20px; opacity: 0.8">
-          For interaction in construction zone
-        </p>
         <br /><br /><br />
 
         <!-- Main Page Cloak -->
@@ -692,7 +673,7 @@
 
         <br /><br /><br />
 
-        <!-- === Tab Cloak === -->
+        <!-- Game tab cloak -->
         <label><b>Game tab cloak</b></label
         ><br /><br />
 
@@ -783,9 +764,102 @@
 
         <br />
 
+        <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
+
+        <!-- ========== GAME SETTINGS ========== -->
+        <h3>🎮 Game Settings</h3>
+
+        <!-- Open Game Type -->
+        <label><b>Open Game Type</b></label><br />
+        <p style="margin-top: 10px; opacity: 0.8">
+          Choose how games open when you click on them.
+        </p>
+        <select
+          id="openGameType"
+          class="styled-select"
+          style="margin-top: 8px"
+        >
+          <option value="popup">Popup Window</option>
+          <option value="newtab">New Tab</option>
+        </select>
+
+        <br /><br /><br />
+
+        <!-- Open in popup -->
+        <label><b>Open the website in loader mode</b></label>
+        <button
+          class="btn"
+          onclick="openGame('https://pausd.schooloqy.com/?page=extend')"
+        >
+          OPEN
+        </button>
+
+        <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
+
+        <!-- ========== ANNOUNCEMENTS ========== -->
+        <h3>📢 Announcements</h3>
+
+        <!-- Auto popup setting -->
+        <label><b>Auto pop up announcements:</b></label
+        ><br />
+        <select
+          id="announcementSetting"
+          class="styled-select"
+          style="margin-top: 8px"
+        >
+          <option value="always">Always</option>
+          <option value="big">Only when there is a big announcement</option>
+        </select>
+
+        <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
+
+        <!-- ========== SECURITY & EMERGENCY ========== -->
+        <h3>🔒 Security & Emergency</h3>
+
+        <!-- Panic Key -->
+        <label><b>Panic Key</b></label
+        ><br />
+        <p style="margin-top: 10px; opacity: 0.8">
+          A key that auto-redirect to an website right when you press it. This
+          will exit the website immediately in an emergency.<br /><br />THIS
+          WORKS IN PAGES ONLY, NOT IN GAMES.<br />
+        </p>
+        <p>Customize key</p>
+        <button id="panicKeyBtn" class="btn customizeKey"></button><br />
+        <p>Customize website</p>
+        <input
+          type="text"
+          id="panicLinkInput"
+          class="styled-input"
+          style="margin-top: 5px"
+          placeholder="https://example.com"
+        />
+        <br /><br /><br />
+
+        <!-- Access code -->
+        <label><b>Access code:</b></label>
+        <p style="margin-top: 10px; opacity: 0.8">
+          For interaction in construction zone
+        </p>
+        <input
+          id="accessCode"
+          type="password"
+          class="styled-input"
+          placeholder="Enter code"
+          style="margin-top: 5px"
+        />
+        <button id="authorizeBtn" class="btn" style="margin-top: 15px">
+          AUTHORIZE
+        </button>
+        <button id="unauthorizeBtn" class="btn" style="margin-top: 10px">
+          UNAUTHORIZE
+        </button>
+
+        <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
+
         <!-- Lisence -->
         <label><b>Lisence</b></label>
-        <p>
+        <p style="margin-top: 10px;">
           All rights held by <b>ikunbeautiful@gmail.com</b><br />No part of this
           website may be copied, reused, redistributed, modified, or
           commercially exploited
@@ -930,6 +1004,31 @@
         announcementSetting.addEventListener("change", () => {
           localStorage.setItem("autoAnnouncement", announcementSetting.value);
         });
+
+        /* === Enable Cursor Setting === */
+        const enableCursorCheckbox = document.getElementById("enableCursor");
+        // Default to true if not set
+        const enableCursorEnabled = localStorage.getItem("enableCursor") !== "false";
+        if (enableCursorCheckbox) {
+          enableCursorCheckbox.checked = enableCursorEnabled;
+          // Apply cursor state on load
+          if (enableCursorEnabled) {
+            document.body.classList.add("custom-cursor-enabled");
+          }
+          enableCursorCheckbox.addEventListener("change", () => {
+            const isEnabled = enableCursorCheckbox.checked;
+            localStorage.setItem("enableCursor", isEnabled ? "true" : "false");
+            // Toggle cursor class
+            if (isEnabled) {
+              document.body.classList.add("custom-cursor-enabled");
+            } else {
+              document.body.classList.remove("custom-cursor-enabled");
+            }
+          });
+        } else {
+          // If checkbox not found, apply default (enabled)
+          document.body.classList.add("custom-cursor-enabled");
+        }
 
         /* === Main Page Cloak Setting === */
         const mainPageCloakCheckbox = document.getElementById("mainPageCloak");
