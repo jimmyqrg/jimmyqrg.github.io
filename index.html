@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="/js/panicKey.js"></script>
-    <script src="/js/mainPageCloak.js"></script>
+    <script src="js/panicKey.js"></script>
+    <script src="js/mainPageCloak.js"></script>
 
     <script>
       // Load current domain early
@@ -45,543 +45,68 @@
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap"
       rel="stylesheet"
     />
-
-    <style>
-      :root {
-        --font: "Josefin Sans", sans-serif;
-
-        /* panel glow (static blue -> purple) */
-        --glow-start: #4d8cff; /* blue */
-        --glow-end: #8a4dff; /* purple */
-
-        /* button rainbow preserved on hover, we keep original gradient there */
-        --button-border: white;
-        --panel-radius: 12px;
-      }
-
-      /* ---------- Base ---------- */
-      * {
-        box-sizing: border-box;
-        font-family: var(--font);
-      }
-      html,
-      body {
-        height: 100%;
-      }
-      body {
-        margin: 0;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        background: url("background.png") no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-        font-family: var(--font);
-        text-align: center;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-
-      h1 {
-        margin-bottom: 40px;
-        font-size: 2.8rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-      }
-
-      h2 {
-        margin-bottom: 40px;
-        font-size: 2.3rem;
-        font-weight: 600;
-        letter-spacing: 2px;
-        text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
-      }
-
-      .cloakIconOption {
-        width: 100px;
-        height: 100px;
-        object-fit: contain;
-        border-radius: 10px;
-        border: 3px solid transparent;
-        cursor: pointer;
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        pointer-events: auto;
-        -webkit-user-drag: none;
-        -khtml-user-drag: none;
-        -moz-user-drag: none;
-        -o-user-drag: none;
-      }
-
-      .cloakIconOption.active {
-        border-color: #4caf50;
-      }
-
-      #customCloakLabel.active {
-        border-color: #4caf50 !important;
-      }
-
-      /* ---------- Original Button (preserved) ---------- */
-      .btn {
-        display: inline-block;
-        width: 270px;
-        padding: 12px 28px;
-        border: 2px solid var(--button-border);
-        border-radius: 10px;
-        background: rgba(0, 0, 0, 0.6);
-        color: white;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: transform 0.5s ease, box-shadow 0.8s ease,
-          background 1s ease, border-color 0.8s ease, letter-spacing 0.8s ease;
-        background-size: 300% 300%;
-        overflow: hidden;
-        box-sizing: border-box;
-      }
-
-      .btn:hover {
-        color: #fff;
-        border-color: transparent;
-        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-        background-size: 400% 100%;
-        transform: translateY(-4px) scale(1.07);
-        letter-spacing: 1px;
-        box-shadow: 0 0 10px rgba(77, 140, 255, 0.6),
-          0 0 20px rgba(138, 77, 255, 0.5), 0 0 35px rgba(255, 77, 184, 0.4),
-          inset 0 0 10px rgba(255, 255, 255, 0.2);
-        animation: gradientTravel 4s linear infinite,
-          outlinePulse 2.5s ease-in-out infinite alternate,
-          shineSweep 6s ease-in-out infinite;
-      }
-
-      @keyframes gradientTravel {
-        0% {
-          background-position: 0% 50%;
-        }
-        100% {
-          background-position: 200% 50%;
-        }
-      }
-      @keyframes outlinePulse {
-        0% {
-          box-shadow: 0 0 10px rgba(77, 140, 255, 0.7),
-            0 0 25px rgba(138, 77, 255, 0.4), 0 0 45px rgba(255, 77, 184, 0.3),
-            0 0 0 3px rgba(77, 140, 255, 0.1);
-        }
-        100% {
-          box-shadow: 0 0 18px rgba(255, 77, 184, 0.8),
-            0 0 40px rgba(77, 140, 255, 0.6), 0 0 65px rgba(138, 77, 255, 0.4),
-            0 0 0 5px rgba(255, 77, 184, 0.15);
-        }
-      }
-      @keyframes shineSweep {
-        0% {
-          filter: brightness(1);
-        }
-        50% {
-          filter: brightness(1.4);
-        }
-        100% {
-          filter: brightness(1);
-        }
-      }
-
-      /* ---------- Announcement link ---------- */
-      .announcement-link {
-        color: white;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-
-      /* ---------- Modals (panels that match button style) ---------- */
-      .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        opacity: 0;
-        animation-fill-mode: forwards;
-        padding: 24px;
-      }
-
-      .modal-overlay.show {
-        display: flex;
-        animation: fadeIn 0.35s forwards;
-      }
-      .modal-overlay.hide {
-        animation: fadeOut 0.35s forwards;
-      }
-
-      .modal-content {
-        width: 100%;
-        max-width: 680px;
-        max-height: 80vh; /* NEW */
-        overflow-y: auto; /* NEW */
-        border-radius: var(--panel-radius);
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.45),
-          rgba(0, 0, 0, 0.35)
-        );
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        padding: 26px;
-        color: white;
-        text-align: left;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
-        transform: scale(0.95);
-        opacity: 0;
-        transition: all 0.36s cubic-bezier(0.2, 0.9, 0.2, 1);
-        position: relative;
-        backdrop-filter: blur(6px);
-        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6),
-          0 0 18px rgba(77, 140, 255, 0.12), 0 0 36px rgba(138, 77, 255, 0.08);
-        border-image: linear-gradient(90deg, var(--glow-start), var(--glow-end))
-          1;
-      }
-
-      .modal-content.show {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      .modal-content.active {
-        /* gentle animated glow between the two static colors (subtle) */
-        animation: panelGlow 3s ease-in-out infinite alternate;
-      }
-
-      @keyframes panelGlow {
-        0% {
-          box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6),
-            0 0 18px rgba(77, 140, 255, 0.14), 0 0 36px rgba(138, 77, 255, 0.09);
-          border-color: rgba(255, 255, 255, 0.12);
-        }
-        100% {
-          box-shadow: 0 8px 55px rgba(0, 0, 0, 0.6),
-            0 0 26px rgba(138, 77, 255, 0.18), 0 0 48px rgba(77, 140, 255, 0.12);
-          border-color: rgba(255, 255, 255, 0.14);
-        }
-      }
-
-      .close-btn {
-        position: absolute;
-        top: 12px;
-        right: 14px;
-        font-size: 22px;
-        color: white;
-        cursor: pointer;
-        transition: transform 0.25s ease, color 0.25s ease;
-        padding: 6px 8px;
-        border-radius: 8px;
-        background: rgba(0, 0, 0, 0.18);
-      }
-      .close-btn:hover {
-        color: var(--glow-end);
-        transform: scale(1.12);
-        background: rgba(0, 0, 0, 0.25);
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      @keyframes fadeOut {
-        from {
-          opacity: 1;
-        }
-        to {
-          opacity: 0;
-        }
-      }
-
-      /* ---------- Settings gear ---------- */
-      #settingsBtn {
-        position: fixed;
-        top: 18px;
-        right: 22px;
-        font-size: 30px;
-        cursor: pointer;
-        color: white;
-        z-index: 2000;
-        transition: transform 0.28s ease;
-        padding: 6px 8px;
-        border-radius: 8px;
-      }
-      #settingsBtn:hover {
-        transform: rotate(24deg) scale(1.14);
-        color: var(--glow-end);
-      }
-
-      /* ---------- Install App Button ---------- */
-      #installAppBtn {
-        position: fixed;
-        top: 18px;
-        left: 22px;
-        padding: 10px 20px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        color: white;
-        background: linear-gradient(135deg, #4d8cff, #8a4dff);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 10px;
-        z-index: 2000;
-        display: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(77, 140, 255, 0.4);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      #installAppBtn:hover {
-        transform: translateY(-2px) scale(1.05);
-        box-shadow: 0 6px 20px rgba(77, 140, 255, 0.6);
-        background: linear-gradient(135deg, #5d9cff, #9a5dff);
-      }
-      #installAppBtn:active {
-        transform: translateY(0) scale(1);
-      }
-
-      /* ---------- Styled form controls matching button look ---------- */
-      .settings-row {
-        margin-bottom: 14px;
-      }
-
-      select.styled-select,
-      input.styled-input {
-        width: 100%;
-        padding: 10px 12px;
-        border-radius: 10px;
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.55),
-          rgba(0, 0, 0, 0.4)
-        );
-        color: white;
-        outline: none;
-        font-family: var(--font);
-        font-size: 15px;
-        transition: transform 0.25s ease, box-shadow 0.3s ease,
-          border-color 0.3s ease;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02),
-          0 4px 18px rgba(0, 0, 0, 0.5);
-        background-image: linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.02),
-          rgba(255, 255, 255, 0.01)
-        );
-      }
-
-      /* arrow on select (custom) */
-      .select-wrap {
-        position: relative;
-      }
-      .select-wrap::after {
-        content: "▾";
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: rgba(255, 255, 255, 0.75);
-        pointer-events: none;
-        font-size: 12px;
-      }
-
-      select.styled-select:focus,
-      input.styled-input:focus {
-        transform: translateY(-2px);
-        border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 6px 30px rgba(0, 0, 0, 0.6),
-          0 0 18px rgba(77, 140, 255, 0.12), 0 0 36px rgba(138, 77, 255, 0.08);
-      }
-
-      /* Dropdown option styling */
-      select.styled-select option {
-        background: rgba(0, 0, 0, 0.9);
-        color: white;
-        padding: 10px;
-      }
-
-      select.styled-select option:hover,
-      select.styled-select option:focus {
-        background: rgba(77, 140, 255, 0.3);
-      }
-
-      select.styled-select option:checked {
-        background: linear-gradient(135deg, var(--glow-start), var(--glow-end));
-        color: white;
-      }
-
-      /* Checkbox styling */
-      input[type="checkbox"] {
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-        accent-color: var(--glow-start);
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        border-radius: 4px;
-        background: rgba(0, 0, 0, 0.45);
-        transition: all 0.25s ease;
-      }
-
-      input[type="checkbox"]:hover {
-        border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 0 12px rgba(77, 140, 255, 0.2);
-      }
-
-      input[type="checkbox"]:checked {
-        background: linear-gradient(135deg, var(--glow-start), var(--glow-end));
-        border-color: transparent;
-      }
-
-      .small-note {
-        color: rgba(255, 255, 255, 0.75);
-        font-size: 13px;
-        margin-top: 10px;
-      }
-
-      /* authorize buttons inside settings (styled like small buttons) */
-      .micro-btn {
-        display: inline-block;
-        padding: 8px 12px;
-        border-radius: 10px;
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        background: rgba(0, 0, 0, 0.45);
-        color: white;
-        font-weight: 600;
-        cursor: pointer;
-        margin-right: 10px;
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
-      }
-      .micro-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6),
-          0 0 12px rgba(77, 140, 255, 0.12);
-        border-color: transparent;
-        background: linear-gradient(90deg, var(--glow-start), var(--glow-end));
-        color: white;
-      }
-
-      /* small label style */
-      .label {
-        display: block;
-        margin-bottom: 6px;
-        font-weight: 600;
-      }
-
-      /* for spacing on page when using many buttons */
-      .vspace {
-        height: 10px;
-      }
-
-      /* ensure Josefin everywhere for any text nodes */
-      button,
-      select,
-      input,
-      textarea {
-        font-family: var(--font);
-      }
-
-      /* Settings section headers */
-      #settingsContent h3 {
-        margin-top: 25px;
-        margin-bottom: 15px;
-        font-size: 1.4rem;
-        text-align: left;
-        opacity: 0.95;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        padding-bottom: 8px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      #settingsContent hr {
-        border: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.15);
-        margin: 25px 0;
-      }
-
-      /* responsive tweaks */
-      @media (max-width: 520px) {
-        .modal-content {
-          padding: 18px;
-          max-width: 92%;
-        }
-        .btn {
-          max-width: 100%;
-          padding: 10px 18px;
-        }
-        #settingsContent h3 {
-          font-size: 1.2rem;
-        }
-      }
-
-      /* Custom Cursor with Color Inversion */
-      body.custom-cursor-enabled * {
-        cursor: url('/cursor.png') 24 24, auto !important; /* 24 24 is the hotspot (center of 48px cursor) */
-      }
-    </style>
-    <script>
-      // Apply cursor setting immediately on page load (before DOMContentLoaded)
-      (function() {
-        const enableCursor = localStorage.getItem("enableCursor") !== "false";
-        if (enableCursor) {
-          // Try to add immediately if body exists, otherwise wait for DOMContentLoaded
-          if (document.body) {
-            document.body.classList.add("custom-cursor-enabled");
-          } else {
-            document.addEventListener("DOMContentLoaded", function() {
-              document.body.classList.add("custom-cursor-enabled");
-            });
-          }
-        }
-      })();
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/style.js"></script>
   </head>
   <body>
+    <div class="bg-effects"></div>
     <span id="settingsBtn">⚙️</span>
 
     <h1 id="domainTitle">JIMMYQRG</h1>
 
     <h2>MAIN PORTAL</h2>
 
-    <a href="jqrg-games/"><button class="btn">JQRG UNBLOCKED GAMES</button></a>
-    <br />
-    <a href="https://info.schooloqy.com"
-      ><button class="btn">INTERESTING INFOS</button></a
-    >
-    <br />
-    <a href="https://tools.schooloqy.com/"><button class="btn">TOOLS</button></a>
-    <br />
-
-    <h1>OTHERS</h1>
-
-    <a href="test/jqrgd.html"><button class="btn">JQRGD TEST</button></a>
-    <br />
-    <a href="unblocks/"><button class="btn">OTHER UNBLOCKS</button></a>
-    <br />
-    <a href="lx/"><button class="btn">CONTACTS</button></a>
-    <br />
+    <div class="blocks-container">
+      <a href="jqrg-games/" class="block-link">
+        <div class="block">
+          <div class="block-icon">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <div class="block-text">JQRG UNBLOCKED GAMES</div>
+        </div>
+      </a>
+      <a href="https://info.schooloqy.com" class="block-link">
+        <div class="block">
+          <div class="block-icon">
+            <i class="fas fa-circle-info"></i>
+          </div>
+          <div class="block-text">INTERESTING INFOS</div>
+        </div>
+      </a>
+      <a href="https://tools.schooloqy.com/" class="block-link">
+        <div class="block">
+          <div class="block-icon">
+            <i class="fas fa-wrench"></i>
+          </div>
+          <div class="block-text">TOOLS</div>
+        </div>
+      </a>
+      <a href="unblocks/" class="block-link">
+        <div class="block">
+          <div class="block-icon">
+            <i class="fas fa-unlock"></i>
+          </div>
+          <div class="block-text">OTHER UNBLOCKS</div>
+        </div>
+      </a>
+      <a href="lx/" class="block-link">
+        <div class="block">
+          <div class="block-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="block-text">CONTACTS</div>
+        </div>
+      </a>
+      <a href="test/jqrgd.html" class="block-link">
+        <div class="block">
+          <div class="block-icon">
+            <i class="fas fa-flask"></i>
+          </div>
+          <div class="block-text">JQRGD TEST</div>
+        </div>
+      </a>
+    </div>
 
     <p>
       <span class="announcement-link">Announcements (Click to reopen)</span
@@ -595,18 +120,28 @@
       >!
     </p>
 
+    <!-- === Footer === -->
+    <footer class="site-footer">
+      <div class="footer-content">
+        <p class="footer-copyright">copyright ikunbeautiful@gmail.com 2026</p>
+        <a href="https://www.github.com/jimmyqrg/" target="_blank" rel="noopener noreferrer" class="footer-github-link">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+    </footer>
+
     <!-- === Announcement Modal === -->
     <div class="modal-overlay" id="announcementModal">
       <div class="modal-content" id="announcementContent">
         <span class="close-btn" id="closeModal">&times;</span>
         <h2 style="text-align:center;">📢 Announcements</h2>
-        <p>Welcome to <strong>JimmyQrg</strong>! Check here for updates, new game releases, and important information.</p>
-        <p>More informations and updates can be found 
-          <a href="https://docs.google.com/document/d/1Xv3x76SwL2CkZPIJq0uMNBt_YQNRfWrR5H5mXILuxfw/edit?tab=t.w5htvyo8czbl" 
-            target="_blank" 
-            style="color:#4d8cff; text-decoration:underline;">here</a>.</p>
-        <hr style="border: 1px solid rgba(255,255,255,0.3);">
-        <p>✨ Latest updates:</p>
+      <p>Welcome to <strong>JimmyQrg</strong>! Check here for updates, new game releases, and important information.</p>
+      <p>More informations and updates can be found 
+        <a href="https://docs.google.com/document/d/1Xv3x76SwL2CkZPIJq0uMNBt_YQNRfWrR5H5mXILuxfw/edit?tab=t.w5htvyo8czbl" 
+           target="_blank" 
+           style="color:#4d8cff; text-decoration:underline;">here</a>.</p>
+      <hr style="border: 1px solid rgba(255,255,255,0.3);">
+      <p>✨ Latest updates:</p>
         <ul>
           <li>Added game: Bottle Flip 3D</li>
           <li>Added game: Tunnel Rush</li>
@@ -624,7 +159,7 @@
         <ul>
           <li></li>
         </ul> -->
-        <p>⏱️History</p>
+      <p>⏱️History</p>
         <ul>
           <!-- <li>Fixed in total <b>753</b> bugs</li> -->
           <li>Added in total <b>61</b> games</li>
@@ -1007,30 +542,6 @@
           localStorage.setItem("autoAnnouncement", announcementSetting.value);
         });
 
-        /* === Enable Cursor Setting === */
-        const enableCursorCheckbox = document.getElementById("enableCursor");
-        // Default to true if not set
-        const enableCursorEnabled = localStorage.getItem("enableCursor") !== "false";
-        if (enableCursorCheckbox) {
-          enableCursorCheckbox.checked = enableCursorEnabled;
-          // Apply cursor state on load
-          if (enableCursorEnabled) {
-            document.body.classList.add("custom-cursor-enabled");
-          }
-          enableCursorCheckbox.addEventListener("change", () => {
-            const isEnabled = enableCursorCheckbox.checked;
-            localStorage.setItem("enableCursor", isEnabled ? "true" : "false");
-            // Toggle cursor class
-            if (isEnabled) {
-              document.body.classList.add("custom-cursor-enabled");
-            } else {
-              document.body.classList.remove("custom-cursor-enabled");
-            }
-          });
-        } else {
-          // If checkbox not found, apply default (enabled)
-          document.body.classList.add("custom-cursor-enabled");
-        }
 
         /* === Main Page Cloak Setting === */
         const mainPageCloakCheckbox = document.getElementById("mainPageCloak");
