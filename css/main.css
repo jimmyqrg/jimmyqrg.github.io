@@ -492,14 +492,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.5);
         display: none;
         justify-content: center;
         align-items: center;
         z-index: 1000;
         opacity: 0;
         animation-fill-mode: forwards;
-        padding: 24px;
+        padding: 30px;
       }
 
       .modal-overlay.show {
@@ -512,20 +512,13 @@
 
       .modal-content {
         width: 100%;
-        max-width: 680px;
-        max-height: 80vh; /* NEW */
-        overflow-y: auto; /* NEW */
+        max-width: 750px;
+        max-height: 85vh;
+        overflow-y: auto;
         border-radius: var(--panel-radius);
-        background: linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.45),
-          rgba(0, 0, 0, 0.35)
-        );
-        border: 2px solid rgba(255, 255, 255, 0.12);
-        padding: 26px;
+        padding: 30px;
         color: white;
         text-align: left;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
         transform: scale(0.95);
         opacity: 0;
         transition: all 0.36s cubic-bezier(0.2, 0.9, 0.2, 1);
@@ -533,8 +526,44 @@
         backdrop-filter: blur(6px);
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6),
           0 0 18px rgba(77, 140, 255, 0.12), 0 0 36px rgba(138, 77, 255, 0.08);
-        border-image: linear-gradient(90deg, var(--glow-start), var(--glow-end))
-          1;
+      }
+
+      .modal-content::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: var(--panel-radius);
+        padding: 2px;
+        background: linear-gradient(135deg, rgba(77, 140, 255, 0.6), rgba(138, 77, 255, 0.6), rgba(77, 140, 255, 0.6));
+        background-size: 200% 200%;
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        z-index: -1;
+        animation: borderGlow 3s ease-in-out infinite;
+      }
+
+      .modal-content::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: var(--panel-radius);
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.45),
+          rgba(0, 0, 0, 0.35)
+        );
+        z-index: -2;
+      }
+
+      @keyframes borderGlow {
+        0%, 100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
       }
 
       .modal-content.show {
@@ -551,12 +580,10 @@
         0% {
           box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6),
             0 0 18px rgba(77, 140, 255, 0.14), 0 0 36px rgba(138, 77, 255, 0.09);
-          border-color: rgba(255, 255, 255, 0.12);
         }
         100% {
           box-shadow: 0 8px 55px rgba(0, 0, 0, 0.6),
             0 0 26px rgba(138, 77, 255, 0.18), 0 0 48px rgba(77, 140, 255, 0.12);
-          border-color: rgba(255, 255, 255, 0.14);
         }
       }
 
@@ -1164,6 +1191,13 @@ body {
         z-index: 1;
       }
       h2 {
+        margin: 50px 0 35px 0;
+        font-size: 2.3rem;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        position: relative;
+        z-index: 1;
+      }
+      #gameSection {
         margin: 200px 0 140px 0;
         font-size: 2.3rem;
         text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);

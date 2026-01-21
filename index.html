@@ -465,17 +465,28 @@
         const openBtn = document.querySelector(".announcement-link");
         const closeBtn = document.getElementById("closeModal");
 
+        let isAnnouncementModalOpen = false;
+        let isAnnouncementModalAnimating = false;
+
         function openModal() {
+          if (isAnnouncementModalOpen || isAnnouncementModalAnimating) return;
+          isAnnouncementModalAnimating = true;
+          isAnnouncementModalOpen = true;
+          
           modal.classList.remove("hide");
           content.classList.remove("hide");
           modal.style.display = "flex";
           setTimeout(() => {
             modal.classList.add("show");
             content.classList.add("show", "active");
+            isAnnouncementModalAnimating = false;
           }, 10);
         }
 
         function closeModal() {
+          if (!isAnnouncementModalOpen || isAnnouncementModalAnimating) return;
+          isAnnouncementModalAnimating = true;
+          
           modal.classList.remove("show");
           content.classList.remove("show", "active");
           content.classList.add("hide");
@@ -483,6 +494,8 @@
           setTimeout(() => {
             modal.style.display = "none";
             content.classList.remove("hide");
+            isAnnouncementModalOpen = false;
+            isAnnouncementModalAnimating = false;
           }, 400);
         }
 
@@ -496,11 +509,24 @@
           window.addEventListener("load", openModal);
         }
 
-        openBtn.addEventListener("click", openModal);
-        closeBtn.addEventListener("click", closeModal);
+        openBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openModal();
+        });
+        
+        closeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeModal();
+        });
+
+        content.addEventListener("click", (e) => {
+          e.stopPropagation();
+        });
 
         window.addEventListener("click", (e) => {
-          if (e.target === modal) closeModal();
+          if (e.target === modal && !isAnnouncementModalAnimating) {
+            closeModal();
+          }
         });
 
         /* === SETTINGS MODAL === */
@@ -509,15 +535,28 @@
         const settingsContent = document.getElementById("settingsContent");
         const closeSettings = document.getElementById("closeSettings");
 
-        settingsBtn.addEventListener("click", () => {
+        let isSettingsModalOpen = false;
+        let isSettingsModalAnimating = false;
+
+        function openSettingsModal() {
+          if (isSettingsModalOpen || isSettingsModalAnimating) return;
+          isSettingsModalAnimating = true;
+          isSettingsModalOpen = true;
+          
+          settingsModal.classList.remove("hide");
+          settingsContent.classList.remove("hide");
           settingsModal.style.display = "flex";
           setTimeout(() => {
             settingsModal.classList.add("show");
             settingsContent.classList.add("show", "active");
+            isSettingsModalAnimating = false;
           }, 10);
-        });
+        }
 
-        closeSettings.addEventListener("click", () => {
+        function closeSettingsModal() {
+          if (!isSettingsModalOpen || isSettingsModalAnimating) return;
+          isSettingsModalAnimating = true;
+          
           settingsModal.classList.remove("show");
           settingsContent.classList.remove("show", "active");
           settingsContent.classList.add("hide");
@@ -525,11 +564,33 @@
           setTimeout(() => {
             settingsModal.style.display = "none";
             settingsContent.classList.remove("hide");
+            isSettingsModalOpen = false;
+            isSettingsModalAnimating = false;
           }, 400);
+        }
+
+        settingsBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (isSettingsModalOpen) {
+            closeSettingsModal();
+          } else {
+            openSettingsModal();
+          }
+        });
+
+        closeSettings.addEventListener("click", (e) => {
+          e.stopPropagation();
+          closeSettingsModal();
+        });
+
+        settingsContent.addEventListener("click", (e) => {
+          e.stopPropagation();
         });
 
         window.addEventListener("click", (e) => {
-          if (e.target === settingsModal) closeSettings.click();
+          if (e.target === settingsModal && !isSettingsModalAnimating) {
+            closeSettingsModal();
+          }
         });
 
         /* === SETTINGS FUNCTIONALITY === */
