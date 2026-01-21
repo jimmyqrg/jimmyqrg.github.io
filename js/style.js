@@ -15,21 +15,21 @@
       })();
 
 // ===== Background Effects with Mouse Tracking =====
-// Background effects with mouse tracking
-(function() {
+let bgEffectsInitialized = false;
+function initBgEffects() {
+  if (bgEffectsInitialized) return;
   const bgEffectsContainer = document.querySelector('.bg-effects');
   if (!bgEffectsContainer) return;
+  bgEffectsInitialized = true;
 
   const centerX = window.innerWidth / 2;
   const centerY = window.innerHeight / 2;
   let baseRadius = Math.min(window.innerWidth, window.innerHeight) * 0.4;
 
-  // Create effect elements
   const effects = [];
   const numEffects = 5;
   const numDiamonds = 4;
 
-  // Create circular gradient effects
   for (let i = 0; i < numEffects; i++) {
     const effect = document.createElement('div');
     effect.className = `bg-effect bg-effect-${i + 1}`;
@@ -41,11 +41,10 @@
       radius: baseRadius + offset,
       baseOffset: offset,
       isDiamond: false,
-      towardMouse: i % 2 === 0 // Alternate between toward and away from mouse
+      towardMouse: i % 2 === 0
     });
   }
 
-  // Create diamond effects
   for (let i = 0; i < numDiamonds; i++) {
     const diamond = document.createElement('div');
     diamond.className = `bg-effect-diamond bg-effect-diamond-${i + 1}`;
@@ -57,7 +56,7 @@
       radius: baseRadius * 0.7 + offset,
       baseOffset: offset,
       isDiamond: true,
-      towardMouse: i % 2 !== 0 // Alternate
+      towardMouse: i % 2 !== 0
     });
   }
 
@@ -68,85 +67,57 @@
   function updateEffects() {
     const screenCenterX = window.innerWidth / 2;
     const screenCenterY = window.innerHeight / 2;
-    
-    // Calculate mouse distance from center
     const mouseDx = mouseX - screenCenterX;
     const mouseDy = mouseY - screenCenterY;
     const mouseDistance = Math.sqrt(mouseDx * mouseDx + mouseDy * mouseDy);
-    
-    // Calculate new base radius based on mouse distance (with dampening)
-    // Max distance from center is roughly screen diagonal / 2
     const maxDistance = Math.sqrt(screenCenterX * screenCenterX + screenCenterY * screenCenterY);
     const normalizedMouseDistance = mouseDistance / maxDistance;
-    
-    // Adjust radius: when mouse is far, radius increases; when close, decreases
-    // Dampening factor: change is 0.35x the mouse distance change
-    const targetRadiusMultiplier = 1 + (normalizedMouseDistance - 0.5) * 0.7; // Range roughly 0.65 to 1.35
+    const targetRadiusMultiplier = 1 + (normalizedMouseDistance - 0.5) * 0.7;
     const targetBaseRadius = baseRadius * targetRadiusMultiplier;
-    
-    // Smoothly interpolate toward target radius (dampened response)
     currentBaseRadius += (targetBaseRadius - currentBaseRadius) * 0.08;
-    
-    // Calculate angle from center to mouse
     const mouseAngle = Math.atan2(mouseDy, mouseDx);
 
-    effects.forEach((effect, index) => {
+    effects.forEach((effect) => {
       let currentAngle = effect.angle;
-      
-      // Calculate angle adjustment based on mouse position
       if (effect.towardMouse) {
-        // Move toward mouse (with some offset for natural movement)
         const angleDiff = mouseAngle - currentAngle;
         let normalizedDiff = angleDiff;
         while (normalizedDiff > Math.PI) normalizedDiff -= Math.PI * 2;
         while (normalizedDiff < -Math.PI) normalizedDiff += Math.PI * 2;
-        currentAngle += normalizedDiff * 0.15; // Gradual movement
+        currentAngle += normalizedDiff * 0.15;
       } else {
-        // Move away from mouse (opposite direction)
         const angleDiff = (mouseAngle + Math.PI) - currentAngle;
         let normalizedDiff = angleDiff;
         while (normalizedDiff > Math.PI) normalizedDiff -= Math.PI * 2;
         while (normalizedDiff < -Math.PI) normalizedDiff += Math.PI * 2;
-        currentAngle += normalizedDiff * 0.12; // Slightly slower
+        currentAngle += normalizedDiff * 0.12;
       }
 
-      // Keep angle in valid range
       effect.angle = currentAngle;
-
-      // Calculate adjusted radius for this effect (maintaining relative offset)
       let adjustedRadius;
       if (effect.isDiamond) {
-        // Diamond effects use baseRadius * 0.7 with offset
         adjustedRadius = currentBaseRadius * 0.7 + effect.baseOffset;
       } else {
-        // Circle effects use baseRadius with offset
         adjustedRadius = currentBaseRadius + effect.baseOffset;
       }
 
-      // Calculate position on circle
       const x = screenCenterX + Math.cos(currentAngle) * adjustedRadius;
       const y = screenCenterY + Math.sin(currentAngle) * adjustedRadius;
-
-      // Update element position (centered)
-      // Use fixed dimensions: circles are 200px, diamonds are 150px
       const size = effect.isDiamond ? 75 : 100;
       effect.element.style.left = (x - size) + 'px';
       effect.element.style.top = (y - size) + 'px';
     });
   }
 
-  // Track mouse movement
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     updateEffects();
   });
 
-  // Handle window resize
   window.addEventListener('resize', () => {
     const newBaseRadius = Math.min(window.innerWidth, window.innerHeight) * 0.4;
     baseRadius = newBaseRadius;
-    // Recalculate effect radii maintaining offsets
     effects.forEach((effect) => {
       if (effect.isDiamond) {
         effect.radius = baseRadius * 0.7 + effect.baseOffset;
@@ -158,22 +129,24 @@
     updateEffects();
   });
 
-  // Initial positioning
   updateEffects();
 
-  // Smooth animation loop
   let lastTime = performance.now();
   function animate() {
     const currentTime = performance.now();
     const deltaTime = currentTime - lastTime;
     lastTime = currentTime;
-
-    // Update effects smoothly
     updateEffects();
     requestAnimationFrame(animate);
   }
   animate();
-})();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBgEffects);
+} else {
+  initBgEffects();
+}
 
 // ===== DOMContentLoaded handlers =====
       document.addEventListener("DOMContentLoaded", function () {
