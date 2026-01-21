@@ -1722,16 +1722,16 @@ body {
 
       .strategies-shell {
         width: 100%;
-        max-width: 960px;
-        background: rgba(0, 0, 0, 0.35);
+        max-width: 780px; /* closer to the original container width */
+        background: rgba(0, 0, 0, 0.32);
         border-radius: var(--panel-radius);
-        padding: 24px;
+        padding: 18px 16px;
         border: 1px solid rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.65),
-          0 0 24px rgba(77, 140, 255, 0.25),
-          0 0 36px rgba(138, 77, 255, 0.18);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 14px 38px rgba(0, 0, 0, 0.6),
+          0 0 18px rgba(77, 140, 255, 0.2),
+          0 0 26px rgba(138, 77, 255, 0.14);
         position: relative;
         overflow: hidden;
       }
@@ -1749,25 +1749,25 @@ body {
         list-style: none;
         padding: 0;
         margin: 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
         position: relative;
         z-index: 2;
       }
 
       .strategy-item {
         position: relative;
-        padding: 18px 16px;
-        border-radius: 14px;
-        background: rgba(0, 0, 0, 0.45);
+        padding: 14px 12px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.42);
         border: 1px solid rgba(255, 255, 255, 0.12);
-        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.55),
-          0 0 16px rgba(77, 140, 255, 0.18),
-          0 0 22px rgba(138, 77, 255, 0.14);
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5),
+          0 0 12px rgba(77, 140, 255, 0.16),
+          0 0 16px rgba(138, 77, 255, 0.12);
         overflow: hidden;
         transform-style: preserve-3d;
-        transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+        transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
         cursor: pointer;
       }
 
@@ -1783,11 +1783,11 @@ body {
       }
 
       .strategy-item:hover {
-        border-color: rgba(255, 255, 255, 0.32);
-        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.6),
-          0 0 24px rgba(77, 140, 255, 0.35),
-          0 0 34px rgba(138, 77, 255, 0.25);
-        background: linear-gradient(135deg, rgba(77, 140, 255, 0.15), rgba(138, 77, 255, 0.1));
+        border-color: rgba(255, 255, 255, 0.24);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55),
+          0 0 18px rgba(77, 140, 255, 0.28),
+          0 0 24px rgba(138, 77, 255, 0.18);
+        background: linear-gradient(135deg, rgba(77, 140, 255, 0.12), rgba(138, 77, 255, 0.08));
       }
 
       .strategy-item:hover::before {
