@@ -1724,6 +1724,7 @@ body {
       .strategies-shell {
         width: 100%;
         max-width: 780px; /* closer to the original container width */
+        min-height: 100vh;
         background: rgba(0, 0, 0, 0.32);
         border-radius: var(--panel-radius);
         padding: 18px 16px;
