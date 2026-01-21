@@ -397,4 +397,19 @@
       });
     });
   }
+
+  // Wrap modal contents in .modal-body for scrolling while keeping outline
+  function ensureModalBody(id) {
+    const content = document.getElementById(id);
+    if (!content || content.querySelector('.modal-body')) return;
+    const body = document.createElement('div');
+    body.className = 'modal-body';
+    while (content.firstChild) {
+      body.appendChild(content.firstChild);
+    }
+    content.appendChild(body);
+  }
+
+  ensureModalBody('announcementContent');
+  ensureModalBody('settingsContent');
       });

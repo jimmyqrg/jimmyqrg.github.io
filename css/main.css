@@ -515,8 +515,8 @@
       .modal-content {
         width: 100%;
         max-width: 750px;
-        max-height: 85vh;
-        overflow-y: auto;
+        max-height: 90vh;
+        overflow: hidden;
         border-radius: var(--panel-radius);
         padding: 30px;
         color: white;
@@ -557,6 +557,13 @@
           rgba(0, 0, 0, 0.35)
         );
         z-index: -2;
+      }
+
+      .modal-body {
+        max-height: 75vh;
+        overflow-y: auto;
+        padding-right: 10px;
+        padding-top: 6px;
       }
 
       @keyframes borderGlow {
