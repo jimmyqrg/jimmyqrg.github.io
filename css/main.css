@@ -1716,8 +1716,9 @@ body {
         color: white;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         padding: 40px 20px 80px;
+        overflow-y: auto;
       }
 
       .strategies-shell {
@@ -1733,7 +1734,8 @@ body {
           0 0 18px rgba(77, 140, 255, 0.2),
           0 0 26px rgba(138, 77, 255, 0.14);
         position: relative;
-        overflow: hidden;
+        overflow: visible;
+        perspective: 1000px;
       }
 
       .strategies-shell::before {
@@ -1760,12 +1762,12 @@ body {
         position: relative;
         padding: 14px 12px;
         border-radius: 12px;
-        background: rgba(0, 0, 0, 0.42);
+        background: rgba(0, 0, 0, 0.32);
         border: 1px solid rgba(255, 255, 255, 0.12);
         box-shadow: 0 8px 18px rgba(0, 0, 0, 0.5),
           0 0 12px rgba(77, 140, 255, 0.16),
           0 0 16px rgba(138, 77, 255, 0.12);
-        overflow: hidden;
+        overflow: visible;
         transform-style: preserve-3d;
         transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
         cursor: pointer;
@@ -1782,6 +1784,27 @@ body {
         pointer-events: none;
       }
 
+      /* subtle bottom reflection */
+      .strategy-item::after {
+        content: '';
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        bottom: -40%;
+        height: 40%;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.25),
+          rgba(255, 255, 255, 0)
+        );
+        opacity: 0;
+        transform-origin: top;
+        transform: scaleY(-1) translateZ(-1px);
+        filter: blur(6px);
+        pointer-events: none;
+        transition: opacity 0.35s ease;
+      }
+
       .strategy-item:hover {
         border-color: rgba(255, 255, 255, 0.24);
         box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55),
@@ -1792,6 +1815,10 @@ body {
 
       .strategy-item:hover::before {
         opacity: 1;
+      }
+
+      .strategy-item:hover::after {
+        opacity: 0.7;
       }
 
       .item-title {
