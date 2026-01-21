@@ -6,7 +6,7 @@
 
     <script>
       // Load current domain early
-      let currentDomain = "pausd.schooloqy.com"; // Default fallback
+      let currentDomain = "jimmyqrg.github.io"; // Default fallback
       (async function () {
         try {
           const response = await fetch("/currentDomain.txt");
@@ -240,37 +240,37 @@
           <!-- Preset icons -->
           <img
             class="cloakIconOption"
-            data-src="https://pausd.schooloqy.com/cloak-images/default.png"
+            data-src="https://jimmyqrg.github.io/cloak-images/default.png"
             src="cloak-images/default.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://pausd.schooloqy.com/cloak-images/docs.png"
+            data-src="https://jimmyqrg.github.io/cloak-images/docs.png"
             src="cloak-images/docs.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://pausd.schooloqy.com/cloak-images/drive.png"
+            data-src="https://jimmyqrg.github.io/cloak-images/drive.png"
             src="cloak-images/drive.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://pausd.schooloqy.com/cloak-images/forms.png"
+            data-src="https://jimmyqrg.github.io/cloak-images/forms.png"
             src="cloak-images/forms.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://pausd.schooloqy.com/cloak-images/pausd.png"
+            data-src="https://jimmyqrg.github.io/cloak-images/pausd.png"
             src="cloak-images/pausd.png"
             draggable="false"
           />
           <img
             class="cloakIconOption"
-            data-src="https://pausd.schooloqy.com/cloak-images/schoology.png"
+            data-src="https://jimmyqrg.github.io/cloak-images/schoology.png"
             src="cloak-images/schoology.png"
             draggable="false"
           />
@@ -430,7 +430,7 @@
               .querySelectorAll("img.cloakIconOption[data-src]")
               .forEach((img) => {
                 const dataSrc = img.getAttribute("data-src");
-                if (dataSrc && dataSrc.includes("pausd.schooloqy.com")) {
+                if (dataSrc && dataSrc.includes("jimmyqrg.github.io")) {
                   img.setAttribute(
                     "data-src",
                     dataSrc.replace(
@@ -713,7 +713,7 @@
           if (link.startsWith("/") || link.includes("/")) {
             // Remove leading slash if present
             const cleanPath = link.startsWith("/") ? link.substring(1) : link;
-            const domain = currentDomain || "pausd.schooloqy.com";
+            const domain = currentDomain || "jimmyqrg.github.io";
             return `https://${domain}/${cleanPath}`;
           }
 

@@ -4,7 +4,7 @@
 let user = localStorage.getItem("user");
 
 if (typeof user === "undefined" || user !== "authorized") {
-  window.location.href = "https://pausd.schooloqy.com/403";
+  window.location.href = "https://jimmyqrg.github.io/403";
 }
 
 // -----------------------

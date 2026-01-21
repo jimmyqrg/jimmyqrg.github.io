@@ -10,13 +10,13 @@
     return domain;
   } catch (error) {
     console.error("Failed to load currentDomain.txt, using fallback:", error);
-    return "pausd.schooloqy.com"; // Fallback
+    return "jimmyqrg.github.io"; // Fallback
   }
 }
 
 // Synchronous version (requires domain to be loaded first)
 function getCurrentDomainSync() {
-  return currentDomainCache || "pausd.schooloqy.com";
+  return currentDomainCache || "jimmyqrg.github.io";
 }
 
 // Helper function to build full URL

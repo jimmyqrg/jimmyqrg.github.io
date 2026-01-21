@@ -1,4 +1,4 @@
-// Utility script to update all URLs containing pausd.schooloqy.com with domain from currentDomain.txt
+// Utility script to update all URLs containing jimmyqrg.github.io with domain from currentDomain.txt
 (function () {
   const updateUrls = async function () {
     try {
@@ -14,7 +14,7 @@
       // Replace all URLs in onclick attributes
       document.querySelectorAll("[onclick]").forEach((element) => {
         const onclick = element.getAttribute("onclick");
-        if (onclick && onclick.includes("pausd.schooloqy.com")) {
+        if (onclick && onclick.includes("jimmyqrg.github.io")) {
           const updated = onclick.replace(
             /https?:\/\/teacher\.jimmyqrg\.com/g,
             `https://${domain}`
@@ -26,7 +26,7 @@
       // Replace all URLs in href attributes
       document.querySelectorAll("a[href]").forEach((link) => {
         const href = link.getAttribute("href");
-        if (href && href.includes("pausd.schooloqy.com")) {
+        if (href && href.includes("jimmyqrg.github.io")) {
           link.setAttribute(
             "href",
             href.replace(
@@ -40,7 +40,7 @@
       // Replace all URLs in src attributes
       document.querySelectorAll("[src]").forEach((element) => {
         const src = element.getAttribute("src");
-        if (src && src.includes("pausd.schooloqy.com")) {
+        if (src && src.includes("jimmyqrg.github.io")) {
           element.setAttribute(
             "src",
             src.replace(
@@ -54,7 +54,7 @@
       // Replace all URLs in data-src attributes
       document.querySelectorAll("[data-src]").forEach((element) => {
         const dataSrc = element.getAttribute("data-src");
-        if (dataSrc && dataSrc.includes("pausd.schooloqy.com")) {
+        if (dataSrc && dataSrc.includes("jimmyqrg.github.io")) {
           element.setAttribute(
             "data-src",
             dataSrc.replace(
@@ -75,7 +75,7 @@
 
       let node;
       while ((node = walker.nextNode())) {
-        if (node.textContent.includes("pausd.schooloqy.com")) {
+        if (node.textContent.includes("jimmyqrg.github.io")) {
           node.textContent = node.textContent.replace(
             /teacher\.jimmyqrg\.com/g,
             domain
@@ -84,8 +84,8 @@
       }
     } catch (error) {
       console.error("Failed to load currentDomain.txt, using fallback:", error);
-      window.currentDomain = "pausd.schooloqy.com";
-      window.currentDomainCache = "pausd.schooloqy.com";
+      window.currentDomain = "jimmyqrg.github.io";
+      window.currentDomainCache = "jimmyqrg.github.io";
     }
   };
 

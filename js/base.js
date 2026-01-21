@@ -1,5 +1,5 @@
 (function () {
-  const allowedDomain = "pausd.schooloqy.com";
+  const allowedDomain = "jimmyqrg.github.io";
 
   // Current hostname (no protocol, no path)
   const currentDomain = window.location.hostname;
