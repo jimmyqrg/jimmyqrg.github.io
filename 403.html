@@ -7,51 +7,16 @@
   <meta charset="UTF-8">
   <title>Access Denined</title>
   <script src="/js/panicKey.js"></script>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0a0020;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    h2 {
-      font-size: 1.5rem;
-      text-shadow: 0 0 8px rgba(0,0,0,0.6);
-      margin-bottom: 40px;
-    }
-    button {
-      padding: 12px 25px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #0066ff;
-      color: white;
-    }
-    button:hover {
-      background: #0040aa;
-    }
-    /* Custom Cursor */
-      * {
-        cursor: url('/cursor.png') 24 24, auto !important;
-      }
-</style>
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/style.js"></script>
 </head>
-<body>
-
-  <h1>403</h1>
-  <h2>Access Denined</h2>
-  <button id="backBtn">Back</button>
+<body class="strategies-page">
+  <div class="bg-effects"></div>
+  <div class="strategies-shell">
+    <h1>403</h1>
+    <h2>Access Denied</h2>
+    <button id="backBtn" class="back-btn">Back</button>
+  </div>
 
   <script src="/js/updateDomainUrls.js"></script>
   <script>
