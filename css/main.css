@@ -1723,8 +1723,8 @@ body {
         background-size: cover;
         color: white;
         display: flex;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: center;
         padding: 120px 20px 80px;
         overflow-y: auto;
       }
@@ -1994,6 +1994,7 @@ body {
         align-items: flex-start;
         padding: 80px 20px 40px;
         position: relative;
+        text-align: left;
       }
 
       body.content-page .container {
@@ -2014,11 +2015,25 @@ body {
       }
 
       body.content-page h1 {
-        text-align: left;
+        text-align: left !important;
         font-size: 2.5rem;
         letter-spacing: 2px;
         margin-bottom: 25px;
         text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+      }
+
+      body.content-page .subtitle {
+        text-align: left !important;
+      }
+
+      body.content-page .box {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      body.content-page .box > * {
+        margin: 0;
       }
 
       body.content-page h2 {

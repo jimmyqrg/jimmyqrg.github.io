@@ -129,7 +129,7 @@ function initBgEffects() {
     });
     currentBaseRadius = baseRadius;
     updateEffects();
-  });
+          });
 
   updateEffects();
 
@@ -201,8 +201,8 @@ if (document.readyState === 'loading') {
       
       block.addEventListener('mouseleave', () => {
         block.style.transform = '';
-      });
-    });
+          });
+        });
   }
 
   // === 3D Tilt Effect for Images (jqrg-games/index.html) ===
