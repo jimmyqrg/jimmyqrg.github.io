@@ -2033,7 +2033,7 @@ body {
       body.content-page .box {
         display: flex;
         flex-direction: column;
-        gap: 18px;
+        gap: 10px;
         line-height: 1.75;
       }
 
@@ -2043,7 +2043,18 @@ body {
 
       body.content-page .box p,
       body.content-page .box li {
-        margin: 0 0 6px;
+        margin: 0 0 14px !important;
+      }
+
+      body.content-page .box h2,
+      body.content-page .box h3 {
+        margin: 18px 0 10px !important;
+      }
+
+      body.content-page .box ul,
+      body.content-page .box ol {
+        margin: 0 0 14px !important;
+        padding-left: 22px;
       }
 
       body.content-page h2 {
