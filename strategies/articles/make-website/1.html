@@ -10,34 +10,12 @@
   <meta charset="UTF-8">
   <title>How to Create Your Very Own Gaming Website - JQRG</title>
   <link rel="icon" type="image/png" href="/info.ico">
+  <link rel="stylesheet" href="../../../../css/main.css">
+  <script src="../../../../js/style.js"></script>
   <style>
-
     image {
       max-width: 100%;
       border-radius: 10px;
-    }
-
-    body {
-      margin: 0;
-      margin-top: 20px;
-      font-family: Josefin Sans, stylesheet;
-      background: radial-gradient(circle at center, #1a0033, #000010);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 80px;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 750px;
-      padding: 30px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(150, 0, 255, 0.3);
-      animation: fadeIn 1.5s ease-out;
     }
 
     @keyframes fadeIn {
@@ -48,6 +26,10 @@
     @keyframes contentLoad {
       from { opacity: 0; transform: translateY(15px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    body.content-page .container {
+      animation: fadeIn 1.5s ease-out;
     }
 
     h1 {
@@ -230,7 +212,8 @@
       }
 </style>
 </head>
-<body>
+<body class="content-page">
+  <div class="bg-effects"></div>
 
   <!-- Back Button -->
   <div class="back-btn" onclick="location.href='/strategies/articles/make-website/'">

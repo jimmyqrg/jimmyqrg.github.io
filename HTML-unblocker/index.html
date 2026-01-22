@@ -12,71 +12,18 @@
 <title>HTML File Opener</title>
 <link href="https://fonts.googleapis.com/css2?family=Consolas&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Aboreto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/main.css">
+<script src="/js/style.js"></script>
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
+  body.upload-page {
     background: url('tech-keyboard.png') no-repeat center center fixed;
     background-size: cover;
     font-family: 'Aboreto', cursive;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
   }
-
-  h1 {
-    font-size: 1.5em;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-    margin-bottom: 30px;
-  }
-  
-  .back-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.7);
-      border: 2px solid white;
-      border-radius: 6px;
-      color: white;
-      padding: 8px 20px;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-  
-    .back-btn:hover {
-      background: white;
-      color: black;
-    }
-
-  .upload-btn {
-    background-color: rgba(0, 0, 0, 0.6);
-    border: 2px solid white;
-    color: white;
-    padding: 15px 30px;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-
-  .upload-btn:hover {
-    background-color: white;
-    color: black;
-  }
-
-  input[type="file"] {
-    display: none;
-  }
-/* Custom Cursor */
-      * {
-        cursor: url('/cursor.png') 24 24, auto !important;
-      }
 </style>
 </head>
-<body>
+<body class="upload-page">
+  <div class="bg-effects"></div>
   <h1>Upload Your HTML File</h1>
   <a href="https://jimmyqrg.github.io/?page=extend" class="back-btn">⬅ Back</a>
 

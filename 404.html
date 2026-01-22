@@ -3,98 +3,17 @@
 <head>
   <script src="/js/mainPageCloak.js"></script>
   <script src="/js/openGame.js"></script>
-
   <script src="/js/panicKey.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 | Page Not Found</title>
   <link rel="icon" type="image/ico" href="https://jimmyqrg.github.io/info.ico">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background: url("https://jimmyqrg.github.io/background.png") no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      font-family: "Josefin Sans", sans-serif;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-    h1 {
-      font-size: 4rem;
-      text-shadow: 0 0 8px rgba(0,0,0,0.6);
-      margin-bottom: 10px;
-    }
-    h2 {
-      font-size: 1.5rem;
-      text-shadow: 0 0 8px rgba(0,0,0,0.6);
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      display: inline-block;
-      width: 250px;
-      padding: 12px 28px;
-      border: 2px solid white;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition:
-        transform 0.5s ease,
-        background 1s ease,
-        border-color 0.8s ease,
-        letter-spacing 0.8s ease,
-        box-shadow 0.8s ease;
-      background-size: 300% 300%;
-      box-sizing: border-box;
-      margin: 8px;
-    }
-    .btn:hover {
-      color: #fff;
-      border-color: transparent;
-      background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-      background-size: 400% 100%;
-      transform: translateY(-4px) scale(1.07);
-      letter-spacing: 1px;
-      box-shadow:
-        0 0 10px rgba(77, 140, 255, 0.6),
-        0 0 20px rgba(138, 77, 255, 0.5),
-        0 0 35px rgba(255, 77, 184, 0.4),
-        inset 0 0 10px rgba(255, 255, 255, 0.2);
-      animation:
-        gradientTravel 4s linear infinite,
-        outlinePulse 2.5s ease-in-out infinite alternate,
-        shineSweep 6s ease-in-out infinite;
-    }
-    @keyframes gradientTravel {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 200% 50%; }
-    }
-    @keyframes outlinePulse {
-      0% { box-shadow: 0 0 15px rgba(77, 140, 255, 0.6); }
-      100% { box-shadow: 0 0 30px rgba(255, 77, 184, 0.7); }
-    }
-    @keyframes shineSweep {
-      0% { filter: brightness(1); }
-      50% { filter: brightness(1.4); }
-      100% { filter: brightness(1); }
-    }
-    /* Custom Cursor */
-      * {
-        cursor: url('/cursor.png') 24 24, auto !important;
-      }
-</style>
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/style.js"></script>
 </head>
-<body>
+<body class="error-page">
+  <div class="bg-effects"></div>
 
   <h1>404</h1>
   <h2>Page Not Found</h2>

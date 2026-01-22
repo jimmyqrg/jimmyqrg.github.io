@@ -13,62 +13,16 @@
   <title>Eaglercraft | JQRG Games</title>
   <link rel="icon" type="image/png" href="/jq.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <script src="/js/style.js"></script>
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      /* background: url("background3.png") no-repeat center center fixed; */
+    body.portal-page {
       background: url("/eaglercraft-background.png") no-repeat center center fixed;
       background-size: cover;
-      color: white;
-      font-family: "Josefin Sans", sans-serif;
-      text-align: center;
     }
-    h1 {
-      margin-bottom: 25px;
-      font-size: 2.5rem;
-      text-shadow: 0 0 8px rgba(0,0,0,0.6);
-    }
-    h2 {
-      margin-top: 40px;
-      margin-bottom: 15px;
-      font-size: 1.8rem;
-      text-shadow: 0 0 6px rgba(0,0,0,0.6);
-    }
-    .btn {
-      display: inline-block; /* keep for compatibility */
-      width: 270px; /* make all buttons stretch to grid cell width */
-      max-width: 250px; /* optional: limit the max width */
-      padding: 12px 28px;
-      border: 2px solid white;
-      border-radius: 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition:
-          transform 0.5s ease,
-          box-shadow 0.8s ease,
-          background 1s ease,
-          border-color 0.8s ease,
-          letter-spacing 0.8s ease;
-      background-size: 300% 300%;
-      overflow: hidden;
-      box-sizing: border-box; /* ensures padding is included in width */
-    }
-	  .btn:hover {
-      color: #fff;
-      border-color: transparent;
+    .btn:hover {
       background: linear-gradient(90deg, #ffb84d, #ff4d4d, #ff4dd5, #d34dff);
       background-size: 400% 100%;
-      transform: translateY(-4px) scale(1.07);
-      letter-spacing: 1px;
       box-shadow:
         0 0 10px rgba(255, 193, 77, 0.6),
         0 0 20px rgba(249, 77, 255, 0.5),
@@ -124,30 +78,10 @@
         filter: brightness(1);
       }
     }
-    .back-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      background: rgba(0,0,0,0.7);
-      border: 2px solid white;
-      border-radius: 6px;
-      color: white;
-      padding: 8px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .back-btn:hover {
-      background: white;
-      color: black;
-    }
-    /* Custom Cursor */
-      * {
-        cursor: url('/cursor.png') 24 24, auto !important;
-      }
-</style>
+  </style>
 </head>
-<body>
+<body class="portal-page">
+  <div class="bg-effects"></div>
   <!-- Back button -->
   <button class="back-btn" id="back-btn">⬅ Back</button>
 
@@ -166,7 +100,7 @@
 
   <h2>OTHER</h2>
   <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/dragonx.html')">Hacked Client (DragonX)</button>
-  <button class="btn" onclick="window.open('https://info.schooloqy.com/ec/servers/')">Server List</button>
+  <button class="btn" onclick="window.open('https://jimmyqrg.github.io/info/ec/servers/')">Server List</button>
 
   <p>Click <a href="/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
 

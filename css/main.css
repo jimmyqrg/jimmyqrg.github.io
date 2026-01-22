@@ -1049,6 +1049,7 @@ body {
       /* CHANGED: Updated text overlay */
       .image::after {
         content: attr(data-alt);
+        /* Fallback: if data-alt is empty, try alt attribute via JavaScript */
         position: absolute;
         top: 50%;
         left: 50%;
@@ -1087,7 +1088,7 @@ body {
         transform-style: preserve-3d;
         display: inline-block;
         perspective: 1000px;
-        max-width: 54%;
+        max-width: 76%;
         margin-top: 12px;
       }
       .collection-img:hover {
@@ -1151,6 +1152,7 @@ body {
       /* CHANGED: Updated collection text overlay */
       .collection-img::after {
         content: attr(data-alt);
+        /* Fallback: if data-alt is empty, try alt attribute via JavaScript */
         position: absolute;
         top: 50%;
         left: 50%;
@@ -1362,6 +1364,10 @@ body {
         margin: 0 auto;
         cursor: not-allowed;
       }
+      .construction-zone > *:not(.construction-overlay) {
+        position: relative;
+        z-index: 1;
+      }
       .construction-zone * {
         pointer-events: none;
       }
@@ -1380,6 +1386,7 @@ body {
         color: #ffcc00;
         text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
         border-radius: 12px;
+        z-index: 10;
       }
 
       .back-btn {
@@ -1772,54 +1779,80 @@ body {
         transform-style: preserve-3d;
         transition: transform 0.28s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
         cursor: pointer;
+        perspective: 1000px;
       }
 
+      /* Diamond shine overlay */
       .strategy-item::before {
         content: '';
         position: absolute;
-        inset: -30%;
-        background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 60%);
-        transform: translate3d(0,0,0);
-        transition: opacity 0.4s ease;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          135deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.1) 45%,
+          rgba(255, 255, 255, 0.5) 50%,
+          rgba(255, 255, 255, 0.1) 55%,
+          transparent 70%
+        );
+        transform: rotate(45deg);
         opacity: 0;
+        transition: opacity 0.6s ease, transform 0.6s ease;
         pointer-events: none;
+        z-index: 1;
       }
 
-      /* subtle bottom reflection */
+      /* Bottom reflection */
       .strategy-item::after {
         content: '';
         position: absolute;
         left: 8px;
         right: 8px;
-        bottom: -40%;
-        height: 40%;
+        bottom: -50%;
+        height: 50%;
         background: linear-gradient(
           to bottom,
-          rgba(255, 255, 255, 0.25),
+          rgba(255, 255, 255, 0.4),
+          rgba(255, 255, 255, 0.15),
           rgba(255, 255, 255, 0)
         );
         opacity: 0;
         transform-origin: top;
-        transform: scaleY(-1) translateZ(-1px);
-        filter: blur(6px);
+        transform: scaleY(-1) translateZ(-20px);
+        filter: blur(8px);
         pointer-events: none;
-        transition: opacity 0.35s ease;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        z-index: 0;
+        border-radius: 0 0 12px 12px;
+      }
+
+      /* Make content float on top in 3D */
+      .strategy-item > * {
+        position: relative;
+        z-index: 2;
+        transform-style: preserve-3d;
       }
 
       .strategy-item:hover {
-        border-color: rgba(255, 255, 255, 0.24);
-        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55),
-          0 0 18px rgba(77, 140, 255, 0.28),
-          0 0 24px rgba(138, 77, 255, 0.18);
-        background: linear-gradient(135deg, rgba(77, 140, 255, 0.12), rgba(138, 77, 255, 0.08));
+        border-color: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6),
+          0 0 24px rgba(77, 140, 255, 0.35),
+          0 0 32px rgba(138, 77, 255, 0.25),
+          0 0 48px rgba(170, 0, 255, 0.15);
+        background: linear-gradient(135deg, rgba(77, 140, 255, 0.18), rgba(138, 77, 255, 0.12));
       }
 
       .strategy-item:hover::before {
-        opacity: 1;
+        opacity: 0.8;
+        transform: rotate(45deg) translateX(20%) translateY(20%);
       }
 
       .strategy-item:hover::after {
-        opacity: 0.7;
+        opacity: 0.9;
+        transform: scaleY(-1) translateZ(-30px) scale(1.1);
       }
 
       .item-title {
@@ -1828,6 +1861,10 @@ body {
         font-size: 1.05rem;
         letter-spacing: 0.3px;
         margin-bottom: 6px;
+        position: relative;
+        z-index: 3;
+        transform-style: preserve-3d;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
       }
 
       .item-desc {
@@ -1835,6 +1872,10 @@ body {
         opacity: 0.82;
         font-size: 0.95rem;
         line-height: 1.4;
+        position: relative;
+        z-index: 3;
+        transform-style: preserve-3d;
+        transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
       }
 
       @media (max-width: 640px) {
@@ -1852,7 +1893,194 @@ body {
       .collection-img > img {
         pointer-events: auto !important;
       }
-        /* Custom Cursor */
-      * {
-        cursor: url('/cursor.png') 24 24, auto !important;
+
+      /* ---------- Error Pages (404, 404-safe, 67, interesting) ---------- */
+      body.error-page {
+        margin: 0;
+        min-height: 100vh;
+        background: url("/background.png") no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        font-family: var(--font);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+        overflow-y: auto;
+      }
+
+      body.error-page h1 {
+        font-size: 4rem;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      body.error-page h2 {
+        font-size: 1.5rem;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+        margin-bottom: 40px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ---------- Simple Portal Pages (button-only pages) ---------- */
+      body.portal-page {
+        margin: 0;
+        min-height: 100vh;
+        background: url("/background.png") no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        font-family: var(--font);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        position: relative;
+      }
+
+      body.portal-page h1 {
+        margin-bottom: 40px;
+        font-size: 2.8rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+        position: relative;
+        z-index: 1;
+      }
+
+      body.portal-page h2 {
+        margin-top: 40px;
+        margin-bottom: 15px;
+        font-size: 1.8rem;
+        text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+        position: relative;
+        z-index: 1;
+      }
+
+      body.portal-page p {
+        margin-top: 40px;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        position: relative;
+        z-index: 1;
+      }
+
+      body.portal-page footer {
+        margin-top: 40px;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ---------- Content Pages (articles, etc.) ---------- */
+      body.content-page {
+        margin: 0;
+        min-height: 100vh;
+        background: url("/background.png") no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        font-family: var(--font);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 80px 20px 40px;
+        position: relative;
+      }
+
+      body.content-page .container {
+        width: 90%;
+        max-width: 750px;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.32);
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 14px 38px rgba(0, 0, 0, 0.6),
+          0 0 18px rgba(77, 140, 255, 0.2),
+          0 0 26px rgba(138, 77, 255, 0.14);
+        position: relative;
+        z-index: 1;
+      }
+
+      body.content-page h1 {
+        text-align: center;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+        margin-bottom: 25px;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+      }
+
+      body.content-page h2 {
+        font-size: 1.8rem;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+      }
+
+      body.content-page p {
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      body.content-page a {
+        color: #4d8cff;
+        text-decoration: underline;
+      }
+
+      body.content-page a:hover {
+        color: #8a4dff;
+      }
+
+      /* ---------- HTML Upload/Opener Pages ---------- */
+      body.upload-page {
+        margin: 0;
+        min-height: 100vh;
+        background: url("/background.png") no-repeat center center fixed;
+        background-size: cover;
+        color: white;
+        font-family: var(--font);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      body.upload-page h1 {
+        font-size: 1.5em;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 1;
+      }
+
+      body.upload-page .upload-btn {
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 2px solid white;
+        color: white;
+        padding: 15px 30px;
+        font-size: 14px;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        font-family: var(--font);
+        margin: 10px;
+      }
+
+      body.upload-page .upload-btn:hover {
+        background-color: white;
+        color: black;
+      }
+
+      body.upload-page input[type="file"] {
+        display: none;
       }

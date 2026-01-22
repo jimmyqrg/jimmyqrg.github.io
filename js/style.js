@@ -2,7 +2,9 @@
 // Apply cursor setting immediately on page load (before DOMContentLoaded)
       (function() {
         const enableCursor = localStorage.getItem("enableCursor") !== "false";
-        if (enableCursor) {
+        // Always enable cursor for strategies pages and error pages
+        const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
+        if (enableCursor || isStrategiesPage) {
           // Try to add immediately if body exists, otherwise wait for DOMContentLoaded
           if (document.body) {
             document.body.classList.add("custom-cursor-enabled");
@@ -172,7 +174,11 @@ if (document.readyState === 'loading') {
     });
   } else {
     // If checkbox not found, apply default (enabled)
-    document.body.classList.add("custom-cursor-enabled");
+    // Also always enable for strategies pages and error pages
+    const isStrategiesPage = document.body.classList.contains("strategies-page");
+    if (enableCursorEnabled || isStrategiesPage) {
+      document.body.classList.add("custom-cursor-enabled");
+    }
   }
 
   // === 3D Mouse Tracking for Blocks (index.html only) ===
@@ -351,7 +357,15 @@ if (document.readyState === 'loading') {
     }
   }
 
-  // Strategy cards 3D tilt with slight lift
+  // Copy alt to data-alt for image alt display
+  const images = document.querySelectorAll('.image img, .collection-img img');
+  images.forEach(img => {
+    if (img.alt && !img.parentElement.getAttribute('data-alt')) {
+      img.parentElement.setAttribute('data-alt', img.alt);
+    }
+  });
+
+  // Strategy cards 3D tilt with enhanced lift and rotation
   const strategyCards = document.querySelectorAll('.strategy-item');
   if (strategyCards.length > 0) {
     strategyCards.forEach(card => {
@@ -361,15 +375,32 @@ if (document.readyState === 'loading') {
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 10;
+        
+        // More pronounced rotation
+        const rotateX = ((y - centerY) / centerY) * -18;
+        const rotateY = ((x - centerX) / centerX) * 18;
+        
+        // Enhanced lift and scale
+        const lift = -12;
+        const scale = 1.05;
+        
+        // Make all content float on top in 3D
+        const contentElements = card.querySelectorAll('.item-title, .item-desc');
+        const contentLift = Math.abs(rotateX) + Math.abs(rotateY);
+        contentElements.forEach(el => {
+          el.style.transform = `translateZ(${35 + contentLift * 0.6}px)`;
+        });
 
         card.style.transform =
-          `translateY(-8px) translateZ(24px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          `translateY(${lift}px) translateZ(30px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
       });
 
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
+        const contentElements = card.querySelectorAll('.item-title, .item-desc');
+        contentElements.forEach(el => {
+          el.style.transform = '';
+        });
       });
     });
   }

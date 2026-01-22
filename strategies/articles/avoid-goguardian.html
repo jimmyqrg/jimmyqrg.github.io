@@ -10,29 +10,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <title>How to avoid GoGuardian - JQRG</title>
   <link rel="icon" type="image/png" href="/info.ico">
+  <link rel="stylesheet" href="../../../css/main.css">
+  <script src="../../../js/style.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: Josefin Sans, stylesheet;
-      background: radial-gradient(circle at center, #1a0033, #000010);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 80px;
-    }
-
-    .container {
-      width: 90%;
-      max-width: 750px;
-      padding: 30px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(150, 0, 255, 0.3);
-      animation: fadeIn 1.5s ease-out;
-    }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -43,11 +23,11 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      text-align: center;
-      font-size: 46px;
-      letter-spacing: 3px;
-      margin-bottom: 25px;
+    body.content-page .container {
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    body.content-page h1 {
       padding-bottom: 10px;
       border-bottom: 2px solid rgba(255,255,255,0.25);
       text-shadow: 0 0 10px rgba(180, 0, 255, 0.7);
@@ -56,7 +36,7 @@
 
     .subtitle {
       text-align: center;
-      font-size: 30px;
+      font-size: 1.8rem;
       letter-spacing: 2px;
       margin-top: -10px;
       margin-bottom: 25px;
@@ -66,16 +46,12 @@
       animation: contentLoad 1.2s ease-out;
     }
 
-    h2 {
-      margin-top: 30px;
-      font-size: 26px;
+    body.content-page h2 {
       color: #d580ff;
       animation: contentLoad 1.2s ease-out;
     }
 
-    p, ul {
-      font-size: 18px;
-      line-height: 28px;
+    body.content-page p, body.content-page ul {
       animation: contentLoad 1.3s ease-out;
     }
 
@@ -222,7 +198,8 @@
       }
 </style>
 </head>
-<body>
+<body class="content-page">
+  <div class="bg-effects"></div>
 
   <!-- Back Button -->
 
