@@ -875,8 +875,9 @@
       }
 
       /* Custom Cursor with Color Inversion */
+      body.custom-cursor-enabled,
       body.custom-cursor-enabled * {
-        cursor: url('/cursor.png') 24 24, auto !important; /* 24 24 is the hotspot (center of 48px cursor) */
+        cursor: url('/cursor.png') 256 256, auto !important; /* 256 256 is the hotspot (center of 512px cursor) */
       }
 
 
