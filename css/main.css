@@ -1992,7 +1992,7 @@ body {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        padding: 80px 20px 40px;
+        padding: 120px 20px 60px;
         position: relative;
         text-align: left;
       }
@@ -2012,6 +2012,7 @@ body {
         position: relative;
         z-index: 1;
         text-align: left;
+        margin-top: 10px;
       }
 
       body.content-page h1 {
