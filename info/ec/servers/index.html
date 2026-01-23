@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Server List | JimmyQrg Infos</title>
+    <link rel="icon" href="https://jimmyqrg.github.io/info.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../../css/main.css">
+    <script src="../../../js/style.js" defer></script>
+</head>
+<body class="info-page">
+    <div class="bg-effects"></div>
+    <div class="main-container">
+        <header>
+            <div class="diamond-icon"></div>
+            <h1 class="header-title">SERVER LIST</h1>
+            <p class="header-subtitle">JimmyQrg Info</p>
+            <p style="color: #a0d2ff; max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
+                Free server list that are enterable in eaglercraft
+            </p>
+        </header>
+        
+        <div class="server-list-container" id="server-list">
+            <!-- Server cards will be dynamically inserted here -->
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 JimmyQrg</p>
+        </div>
+    </div>
+
+    <script>
+        // Server data from your list (excluding vote counts)
+        const servers = [
+            { name: "AdderaIMC", ip: "wss://adderall.ir" },
+            { name: "Voidsent MC", ip: "wss://mc.voidsent.net" },
+            { name: "Lamp Network", ip: "wss://mc.lamplifesteol.xyz" },
+            { name: "VanillaMC", ip: "wss://vanillamc.org" },
+            { name: "TuffNET", ip: "wss://tuff.ws" },
+            { name: "Dumbshit Survival X", ip: "wss://mc.dssx.uk" },
+            { name: "Communist MC", ip: "wss://cmc.tf" },
+            { name: "GG SMP", ip: "wss://ggsmp.net" },
+            { name: "Lifested", ip: "wss://play.heartamp.net" },
+            { name: "Radiant Network", ip: "wss://eagler.radianinet.club" },
+            { name: "Thanatos-Network", ip: "wss://web.thanatos-network.xyz" },
+            { name: "Jonarchy", ip: "wss://8b4t.org" },
+            { name: "Fyre Network", ip: "wss://fyrecraft.imcalledfyre.com/eagler" },
+            { name: "AkaziMC", ip: "wss://akazimc.eagler.host" },
+            { name: "Zpanesite", ip: "wss://eagler.2plt.com" },
+            { name: "CrackedPvP", ip: "wss://play.crackedpvp.club" },
+            { name: "DuckyMC", ip: "wss://eagler.duckymc.xyz" },
+            { name: "Velkor Network", ip: "wss://velkor.club" },
+            { name: "SealCraft + NootServer", ip: "wss://mc.sealcentral.co" },
+            { name: "KerCraft", ip: "wss://eagler.kercraft.workers.dev/" },
+            { name: "Hyrise Network", ip: "wss://hyrise.fun" },
+            { name: "PulseStrip", ip: "wss://pulsingsmp.xyz" },
+            { name: "SweftMC", ip: "wss://study-tools.sweft.org" },
+            { name: "EB Bridging", ip: "wss://ec.eb-bridging.pro" },
+            { name: "Hyper NW", ip: "wss://egg.hyper-network.xyz" },
+            { name: "Bus SMP", ip: "wss://bus-smp.eagler.host" },
+            { name: "Vortexium Network", ip: "wss://30086.ddmod.es" },
+            { name: "PrysmMC", ip: "wss://prysm.lol" },
+            { name: "GODS NATION", ip: "wss://gods.modernnations.xyz" },
+            { name: "Zentic Network", ip: "wss://zentic.cc" },
+            { name: "Contract bell", ip: "wss://contractbell.bytommy.uk" },
+            { name: "NullCraft FACTIONS", ip: "wss://eag.xapktech.xyz/" },
+            { name: "DylanMC Lifested S1", ip: "wss://play.monacoeducation.info" },
+            { name: "JasonSMP", ip: "wss://jasonsmp.eagler.host" },
+            { name: "Spadalia HCSMP", ip: "wss://spadalia-hcsmp.eagler.host" },
+            { name: "SME MC (1.8)", ip: "wss://sme-mc.us/e" },
+            { name: "LightSMP", ip: "wss://lightsmp.eagler.host" },
+            { name: "The EagMP", ip: "wss://mc.theludos.com/" },
+            { name: "BlockByBlox", ip: "wss://blockbyblox.eagler.host" },
+            { name: "GALA SERVER", ip: "wss://gala.eagler.host" },
+            { name: "TS_Gamer Craft", ip: "wss://tsgamercraft.eagler.host" },
+            { name: "creayun CLASSIC", ip: "wss://play.shinnowisnotthetime" },
+            { name: "SHADOW NETWORK 2", ip: "wss://play.shadownetwork.shop" },
+            { name: "toxide", ip: "wss://toxide.eagler.host" },
+            { name: "Thunder Network", ip: "wss://play.thundernetwork.store/" },
+            { name: "AsianF4rmer", ip: "wss://asianfarmer.lol" },
+            { name: "Spaddila HCSMP", ip: "wss://spaddila-hcsmp.eagler.host" },
+            { name: "SkiNet", ip: "wss://mc.skiinet.ru" },
+            { name: "TeamHolyTOP", ip: "wss://eagler.teamholy.top" },
+            { name: "AnarchMC", ip: "wss://web.aesthetiful.com" },
+            { name: "Adventure Islands", ip: "wss://adventureislands.eu:25567/" },
+            { name: "Kuklinc Server", ip: "wss://gannet-literate-ape.ngrok-free.app" },
+            { name: "WegCraft", ip: "wss://craft.slaysisters.website" },
+            { name: "MLMC Season 2", ip: "wss://31095.ddmod.es" },
+            { name: "SuckMyCraft", ip: "wss://eagler.suckmycraft.online/" },
+            { name: "DazedSMP", ip: "wss://dazed.galacticnet.cfd" },
+            { name: "GalaxyMC Server", ip: "wss://galaxymc.eagler.host" },
+            { name: "RitalinMC", ip: "wss://eagler.ritalinmc.club" },
+            { name: "Alphrix Network", ip: "wss://mc.alphrixnetwork.site" },
+            { name: "Huntsols", ip: "wss://craft.huntsols-bot.xyz" },
+            { name: "HighSides SMP", ip: "wss://highsides.theludos.com/" },
+            { name: "VelocityCraft", ip: "wss://velocity.pixinetworks.eu" },
+            { name: "IMC.RE", ip: "wss://ws.imc.re/server" },
+            { name: "AvernusMC", ip: "wss://play.avernusmc.net" },
+            { name: "PixelVerseMC", ip: "wss://thijmens.nl:4444" },
+            { name: "VelcroftSMP", ip: "wss://mc.velcroftnetwork.xyz" },
+            { name: "Lune Network", ip: "wss://lunenet.galacticnet.cfd" },
+            { name: "DragonFireMC", ip: "wss://eagler.dragonfire.world" },
+            { name: "CastersMC", ip: "wss://mc.castersmc.org" }
+        ];
+
+        // Generate server cards
+        const serverListContainer = document.getElementById('server-list');
+        
+        servers.forEach(server => {
+            const serverCard = document.createElement('div');
+            serverCard.className = 'server-card';
+            
+            // Get a random icon for each server
+            const icons = ['fas fa-server', 'fas fa-gamepad', 'fas fa-dice-d20', 'fas fa-cube', 'fas fa-gem', 'fas fa-crown'];
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            
+            serverCard.innerHTML = `
+                <h3 class="server-name"><i class="${randomIcon}"></i> ${server.name}</h3>
+                <div class="server-ip">${server.ip}</div>
+                <button class="copy-btn" data-ip="${server.ip}">
+                    <i class="fas fa-copy"></i> Copy IP Address
+                </button>
+            `;
+            
+            serverListContainer.appendChild(serverCard);
+        });
+
+        // Copy IP functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('copy-btn') || e.target.parentElement.classList.contains('copy-btn')) {
+                const button = e.target.classList.contains('copy-btn') ? e.target : e.target.parentElement;
+                const ip = button.getAttribute('data-ip');
+                
+                // Copy to clipboard
+                navigator.clipboard.writeText(ip).then(() => {
+                    const originalText = button.innerHTML;
+                    button.innerHTML = '<i class="fas fa-check"></i> IP Copied!';
+                    button.style.background = 'linear-gradient(90deg, #00cc00, #00ff00)';
+                    
+                    // Trigger ripple effect
+                    button.classList.add('clicked');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                        button.style.background = 'linear-gradient(90deg, #0080ff, #00aaff)';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy IP: ', err);
+                    button.innerHTML = '<i class="fas fa-times"></i> Failed to Copy';
+                    button.style.background = 'linear-gradient(90deg, #ff0000, #ff4000)';
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-copy"></i> Copy IP Address';
+                        button.style.background = 'linear-gradient(90deg, #0080ff, #00aaff)';
+                    }, 2000);
+                });
+            }
+        });
+
+        // 3D tilt effect on server cards
+        document.querySelectorAll('.server-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenterX = cardRect.left + cardRect.width / 2;
+                const cardCenterY = cardRect.top + cardRect.height / 2;
+                
+                const angleX = (e.clientY - cardCenterY) * 0.02;
+                const angleY = (cardCenterX - e.clientX) * 0.02;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -2,9 +2,11 @@
 // Apply cursor setting immediately on page load (before DOMContentLoaded)
       (function() {
         const enableCursor = localStorage.getItem("enableCursor") !== "false";
-        // Always enable cursor for strategies pages and error pages
+        // Always enable cursor for key themed pages
         const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
-        if (enableCursor || isStrategiesPage) {
+        const isErrorPage = document.body && document.body.classList.contains("error-page");
+        const isInfoPage = document.body && document.body.classList.contains("info-page");
+        if (enableCursor || isStrategiesPage || isErrorPage || isInfoPage) {
           // Try to add immediately if body exists, otherwise wait for DOMContentLoaded
           if (document.body) {
             document.body.classList.add("custom-cursor-enabled");
@@ -174,9 +176,11 @@ if (document.readyState === 'loading') {
     });
   } else {
     // If checkbox not found, apply default (enabled)
-    // Also always enable for strategies pages and error pages
+    // Also always enable for themed pages
     const isStrategiesPage = document.body.classList.contains("strategies-page");
-    if (enableCursorEnabled || isStrategiesPage) {
+    const isErrorPage = document.body.classList.contains("error-page");
+    const isInfoPage = document.body.classList.contains("info-page");
+    if (enableCursorEnabled || isStrategiesPage || isErrorPage || isInfoPage) {
       document.body.classList.add("custom-cursor-enabled");
     }
   }
