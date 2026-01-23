@@ -136,23 +136,23 @@
                 navigator.clipboard.writeText(ip).then(() => {
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> IP Copied!';
-                    button.style.background = 'linear-gradient(90deg, #00cc00, #00ff00)';
+                    button.style.background = 'linear-gradient(90deg, #00c853, #29ff6a)';
                     
                     // Trigger ripple effect
                     button.classList.add('clicked');
                     
                     setTimeout(() => {
                         button.innerHTML = originalText;
-                        button.style.background = 'linear-gradient(90deg, #0080ff, #00aaff)';
+                        button.style.background = 'linear-gradient(90deg, #6a2cff, #2f8bff)';
                     }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy IP: ', err);
                     button.innerHTML = '<i class="fas fa-times"></i> Failed to Copy';
-                    button.style.background = 'linear-gradient(90deg, #ff0000, #ff4000)';
+                    button.style.background = 'linear-gradient(90deg, #ff3b3b, #ff6b2d)';
                     
                     setTimeout(() => {
                         button.innerHTML = '<i class="fas fa-copy"></i> Copy IP Address';
-                        button.style.background = 'linear-gradient(90deg, #0080ff, #00aaff)';
+                        button.style.background = 'linear-gradient(90deg, #6a2cff, #2f8bff)';
                     }, 2000);
                 });
             }

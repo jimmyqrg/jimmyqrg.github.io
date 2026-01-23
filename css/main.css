@@ -2114,13 +2114,14 @@ body {
 
       body.info-page .portal-panel,
       body.info-page .server-card {
-        background: rgba(10, 15, 40, 0.75);
+        background: linear-gradient(165deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.45)),
+          rgba(10, 15, 40, 0.75);
         border-radius: 22px;
         padding: 35px;
         backdrop-filter: blur(14px);
         border: 2px solid rgba(0, 200, 255, 0.25);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6),
-          inset 0 0 60px rgba(0, 100, 255, 0.1);
+          inset 0 0 60px rgba(0, 100, 255, 0.12);
         transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         position: relative;
         overflow: hidden;
@@ -2158,6 +2159,35 @@ body {
         transition: opacity 0.5s;
       }
 
+      body.info-page .server-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #00ffff, #0080ff, #00ffff);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s ease;
+      }
+
+      body.info-page .server-card::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: -35%;
+        height: 35%;
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
+        opacity: 0;
+        transform-origin: top;
+        transform: scaleY(-1) translateZ(-1px);
+        filter: blur(7px);
+        pointer-events: none;
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+
       body.info-page .portal-panel:hover,
       body.info-page .server-card:hover {
         transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
@@ -2173,6 +2203,15 @@ body {
 
       body.info-page .portal-panel:hover::after {
         opacity: 0.5;
+      }
+
+      body.info-page .server-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      body.info-page .server-card:hover::after {
+        opacity: 0.8;
+        transform: scaleY(-1) translateZ(-24px) scale(1.06);
       }
 
       body.info-page .panel-icon {
@@ -2229,6 +2268,10 @@ body {
         overflow: hidden;
         text-transform: uppercase;
         width: 100%;
+      }
+
+      body.info-page .copy-btn {
+        background: linear-gradient(90deg, #6a2cff, #2f8bff);
       }
 
       body.info-page .panel-button i,
