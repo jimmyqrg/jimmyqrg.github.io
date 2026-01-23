@@ -68,6 +68,19 @@
       text-decoration: underline;
       cursor: pointer;
     }
+
+    a {
+      text-decoration: none;
+    }
+
+    .blocks-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+      margin: 20px auto;
+    }
   </style>
 </head>
 <body class="portal-page">
@@ -75,41 +88,40 @@
 
   <h1>CONTACT ZONE</h1>
 
-  <a href="as/" target= "_blank">
-    <div class="block">
-      <div class="block-icon">
-        <i class="fas fa-hand-paper"></i>
+  <div class="blocks-container">
+    <a href="as/" target= "_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-hand-paper"></i>
+        </div>
+        <div class="block-text">Assistance & Reports</div>
       </div>
-      <div class="block-text">Assistance & Reports</div>
-    </div>
-  </a>
-  <br>
-  <a href="/suggest-games" target= "_blank">
-    <div class="block">
-      <div class="block-icon">
-        <i class="fas fa-lightbulb"></i>
+    </a>
+    <a href="/suggest-games" target= "_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <div class="block-text">Suggest Games</div>
       </div>
-      <div class="block-text">Suggest Games</div>
-    </div>
-  </a>
-  <br>
-  <a href="doc/" target= "_blank">
-    <div class="block">
-      <div class="block-icon">
-        <i class="fas fa-circle-info"></i>
+    </a>
+    <a href="doc/" target= "_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-circle-info"></i>
+        </div>
+        <div class="block-text">Website Info Doc</div>
       </div>
-      <div class="block-text">Website Info Doc</div>
-    </div>
-  </a>
-  <br>
-  <a href="/chat/jimmyqrg" target= "_blank">
-    <div class="block">
-      <div class="block-icon">
-        <i class="fas fa-message"></i>
+    </a>
+    <a href="/chat/jimmyqrg" target= "_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-message"></i>
+        </div>
+        <div class="block-text">Chat App</div>
       </div>
-      <div class="block-text">Chat App</div>
-    </div>
-  </a>
+    </a>
+  </div>
 
   <footer>My email: ikunbeautiful@gmail.com</footer>
 
