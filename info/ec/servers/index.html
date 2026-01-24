@@ -21,8 +21,8 @@
             </p>
         </header>
         
-        <div class="server-list-container" id="server-list">
-            <!-- Server cards will be dynamically inserted here -->
+        <div class="blocks-container" id="server-list">
+            <!-- Server blocks will be dynamically inserted here -->
         </div>
         
         <div class="footer">
@@ -104,31 +104,36 @@
             { name: "CastersMC", ip: "wss://mc.castersmc.org" }
         ];
 
-        // Generate server cards
+        // Generate server blocks
         const serverListContainer = document.getElementById('server-list');
         
         servers.forEach(server => {
-            const serverCard = document.createElement('div');
-            serverCard.className = 'server-card';
+            const block = document.createElement('div');
+            block.className = 'block';
             
             // Get a random icon for each server
             const icons = ['fas fa-server', 'fas fa-gamepad', 'fas fa-dice-d20', 'fas fa-cube', 'fas fa-gem', 'fas fa-crown'];
             const randomIcon = icons[Math.floor(Math.random() * icons.length)];
             
-            serverCard.innerHTML = `
-                <h3 class="server-name"><i class="${randomIcon}"></i> ${server.name}</h3>
-                <div class="server-ip">${server.ip}</div>
-                <button class="copy-btn" data-ip="${server.ip}">
+            block.innerHTML = `
+                <div class="block-icon">
+                    <i class="${randomIcon}"></i>
+                </div>
+                <div class="block-text">${server.name}</div>
+                <div style="margin-top: 10px; font-size: 0.85rem; opacity: 0.8; word-break: break-all;">${server.ip}</div>
+                <button class="copy-btn" data-ip="${server.ip}" style="margin-top: 12px; padding: 8px 16px; font-size: 0.9rem;">
                     <i class="fas fa-copy"></i> Copy IP Address
                 </button>
             `;
             
-            serverListContainer.appendChild(serverCard);
+            serverListContainer.appendChild(block);
         });
 
         // Copy IP functionality
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('copy-btn') || e.target.parentElement.classList.contains('copy-btn')) {
+                e.preventDefault();
+                e.stopPropagation();
                 const button = e.target.classList.contains('copy-btn') ? e.target : e.target.parentElement;
                 const ip = button.getAttribute('data-ip');
                 
@@ -137,9 +142,6 @@
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> IP Copied!';
                     button.style.background = 'linear-gradient(90deg, #00c853, #29ff6a)';
-                    
-                    // Trigger ripple effect
-                    button.classList.add('clicked');
                     
                     setTimeout(() => {
                         button.innerHTML = originalText;
@@ -156,24 +158,6 @@
                     }, 2000);
                 });
             }
-        });
-
-        // 3D tilt effect on server cards
-        document.querySelectorAll('.server-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => {
-                const cardRect = card.getBoundingClientRect();
-                const cardCenterX = cardRect.left + cardRect.width / 2;
-                const cardCenterY = cardRect.top + cardRect.height / 2;
-                
-                const angleX = (e.clientY - cardCenterY) * 0.02;
-                const angleY = (cardCenterX - e.clientX) * 0.02;
-                
-                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-15px)`;
-            });
-            
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-            });
         });
     </script>
 </body>

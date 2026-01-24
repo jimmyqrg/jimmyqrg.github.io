@@ -11,8 +11,6 @@
 </head>
 <body class="info-page">
     <div class="bg-effects"></div>
-    <!-- Connection lines between panels -->
-    <div class="connection-lines" id="connection-lines"></div>
     
     <div class="main-container">
         <header>
@@ -24,8 +22,8 @@
             </p>
         </header>
         
-        <div class="panels-container" id="panels-container">
-            <!-- Portal panels will be dynamically inserted here -->
+        <div class="blocks-container" id="panels-container">
+            <!-- Blocks will be dynamically inserted here -->
         </div>
         
         <div class="footer">
@@ -54,157 +52,36 @@
             },
         ];
 
-        // Generate portal panels
+        // Generate blocks
         const panelsContainer = document.getElementById('panels-container');
         
         portalPanels.forEach(panel => {
-            const portalPanel = document.createElement('div');
-            portalPanel.className = 'portal-panel';
-            portalPanel.id = panel.id;
+            // Skip "Coming Soon" panels
+            if (panel.pageUrl === "") return;
             
-            // Check if pageUrl is empty (for "Coming Soon" panel)
-            if (panel.pageUrl === "") {
-                portalPanel.innerHTML = `
-                    <div>
-                        <div class="panel-icon">
-                            <i class="${panel.icon}"></i>
-                        </div>
-                        <h3 class="panel-title">${panel.title}</h3>
-                        <p class="panel-description">${panel.description}</p>
-                    </div>
-                `;
-            } else {
-                portalPanel.innerHTML = `
-                    <div>
-                        <div class="panel-icon">
-                            <i class="${panel.icon}"></i>
-                        </div>
-                        <h3 class="panel-title">${panel.title}</h3>
-                        <p class="panel-description">${panel.description}</p>
-                    </div>
-                    <button class="panel-button" data-page="${panel.pageUrl}">
-                        Enter Portal <i class="fas fa-arrow-right"></i>
-                    </button>
-                `;
-            }
+            const blockLink = document.createElement('a');
+            blockLink.href = panel.pageUrl;
+            blockLink.className = 'block-link';
+            
+            const block = document.createElement('div');
+            block.className = 'block';
+            block.id = panel.id;
+            
+            block.innerHTML = `
+                <div class="block-icon">
+                    <i class="${panel.icon}"></i>
+                </div>
+                <div class="block-text">${panel.title}</div>
+            `;
             
             // Set custom color for icon
-            portalPanel.querySelector('.panel-icon i').style.color = panel.color;
-            
-            panelsContainer.appendChild(portalPanel);
-        });
-
-        // Create connection lines between panels
-        function createConnectionLines() {
-            const linesContainer = document.getElementById('connection-lines');
-            const panels = document.querySelectorAll('.portal-panel');
-            
-            // Clear existing lines
-            linesContainer.innerHTML = '';
-            
-            // Create lines between some panels for visual effect
-            for (let i = 0; i < panels.length - 1; i += 2) {
-                const panel1 = panels[i];
-                const panel2 = panels[i + 1];
-                
-                const rect1 = panel1.getBoundingClientRect();
-                const rect2 = panel2.getBoundingClientRect();
-                
-                const x1 = rect1.left + rect1.width / 2;
-                const y1 = rect1.top + rect1.height / 2;
-                const x2 = rect2.left + rect2.width / 2;
-                const y2 = rect2.top + rect2.height / 2;
-                
-                // Calculate distance and angle
-                const dx = x2 - x1;
-                const dy = y2 - y1;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-                
-                // Create line element
-                const line = document.createElement('div');
-                line.className = 'connection-line';
-                line.style.width = `${distance}px`;
-                line.style.left = `${x1}px`;
-                line.style.top = `${y1}px`;
-                line.style.transform = `rotate(${angle}deg)`;
-                line.style.animationDelay = `${i * 0.2}s`;
-                
-                linesContainer.appendChild(line);
+            const iconElement = block.querySelector('.block-icon i');
+            if (iconElement) {
+                iconElement.style.color = panel.color;
             }
-        }
-
-        // 3D tilt effect on portal panels
-        document.querySelectorAll('.portal-panel').forEach(panel => {
-            panel.addEventListener('mousemove', (e) => {
-                const panelRect = panel.getBoundingClientRect();
-                const panelCenterX = panelRect.left + panelRect.width / 2;
-                const panelCenterY = panelRect.top + panelRect.height / 2;
-                
-                const angleX = (e.clientY - panelCenterY) * 0.03;
-                const angleY = (panelCenterX - e.clientX) * 0.03;
-                
-                panel.style.transform = `perspective(1200px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateY(-25px) scale(1.03)`;
-            });
             
-            panel.addEventListener('mouseleave', () => {
-                panel.style.transform = 'perspective(1200px) rotateX(0) rotateY(0) translateY(0) scale(1)';
-            });
-        });
-
-        // Panel button click functionality
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('panel-button') || 
-                e.target.parentElement.classList.contains('panel-button')) {
-                
-                const button = e.target.classList.contains('panel-button') ? 
-                    e.target : e.target.parentElement;
-                
-                const pageUrl = button.getAttribute('data-page');
-                
-                // Create portal transition effect
-                const portalEffect = document.createElement('div');
-                portalEffect.style.position = 'fixed';
-                portalEffect.style.top = '0';
-                portalEffect.style.left = '0';
-                portalEffect.style.width = '100%';
-                portalEffect.style.height = '100%';
-                portalEffect.style.background = 'radial-gradient(circle at center, #00ffff 0%, transparent 70%)';
-                portalEffect.style.opacity = '0';
-                portalEffect.style.zIndex = '99999';
-                portalEffect.style.transition = 'opacity 0.8s';
-                document.body.appendChild(portalEffect);
-                
-                // Animate the portal effect
-                setTimeout(() => {
-                    portalEffect.style.opacity = '0.9';
-                }, 10);
-                
-                // Simulate navigation (in a real implementation, this would redirect)
-                setTimeout(() => {
-                    // Here you would normally redirect to the page
-                    window.location.href = pageUrl;
-                    
-                    // For this demo, we'll show an alert
-                    const panelTitle = button.parentElement.querySelector('.panel-title').textContent;
-                    // alert(`Navigating to: ${panelTitle}\n\nIn a real implementation, this would take you to: ${pageUrl}`);
-                    
-                    // Remove portal effect
-                    portalEffect.style.opacity = '0';
-                    setTimeout(() => {
-                        document.body.removeChild(portalEffect);
-                    }, 800);
-                }, 800);
-            }
-        });
-
-        // Create connection lines on load and resize
-        window.addEventListener('load', createConnectionLines);
-        window.addEventListener('resize', createConnectionLines);
-
-        // Update connection lines on scroll
-        window.addEventListener('scroll', () => {
-            requestAnimationFrame(createConnectionLines);
+            blockLink.appendChild(block);
+            panelsContainer.appendChild(blockLink);
         });
     </script>
 </body>
