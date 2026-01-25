@@ -23,6 +23,10 @@
         const urlParams = new URLSearchParams(window.location.search);
         const pageParam = urlParams.get('page');
 
+        // Skip all redirects if any URL parameter value is "1"
+        const hasDirectAccess = Array.from(urlParams.values()).includes("1");
+        if (hasDirectAccess) return;
+
         // Check if URL does not include "page"
         if (!currentUrl.includes("page")) {
           window.location.href = "page/";
