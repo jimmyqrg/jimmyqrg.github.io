@@ -1,27 +1,6 @@
-// ===== Domain Protection & CSS Loading =====
-(function(){const h=window.location.hostname;if(h!=="jimmyqrg.github.io"&&h!=="jimmyqrgg.github.io"){document.documentElement.innerHTML="<html><head><title>Not Allowed</title></head><body><p>This is a not allowed fork</p></body></html>";return;}const s=document.currentScript;if(!s)return;const sp=s.src||s.getAttribute("src")||"";let cssPath="/css/main.css";if(sp.includes("../")){const depth=(sp.match(/\.\.\//g)||[]).length;cssPath="../".repeat(depth)+"css/main.css";}else if(!sp.startsWith("/")){const p=window.location.pathname;const d=p.substring(0,p.lastIndexOf("/"));cssPath=(d===""?"/":d)+"/css/main.css";}const l=document.createElement("link");l.rel="stylesheet";l.href=cssPath;if(s.parentNode){s.parentNode.insertBefore(l,s);}else{document.head.appendChild(l);}})();
-// ===== Cursor Setting =====
-// Apply cursor setting immediately on page load (before DOMContentLoaded)
-      (function() {
-        const enableCursor = localStorage.getItem("enableCursor") !== "false";
-        // Always enable cursor for key themed pages
-        const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
-        const isErrorPage = document.body && document.body.classList.contains("error-page");
-        const isInfoPage = document.body && document.body.classList.contains("info-page");
-        if (enableCursor || isStrategiesPage || isErrorPage || isInfoPage) {
-          // Try to add immediately if body exists, otherwise wait for DOMContentLoaded
-          if (document.body) {
-            document.body.classList.add("custom-cursor-enabled");
-          } else {
-            document.addEventListener("DOMContentLoaded", function() {
-              document.body.classList.add("custom-cursor-enabled");
-            });
-          }
-        }
-      })();
-
 // ===== Background Effects with Mouse Tracking =====
 let bgEffectsInitialized = false;
+let _0x4a2b = ['\x68\x6f\x73\x74\x6e\x61\x6d\x65','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f'];
 function initBgEffects() {
   if (bgEffectsInitialized) return;
   const bgEffectsContainer = document.querySelector('.bg-effects');
@@ -133,7 +112,7 @@ function initBgEffects() {
     });
     currentBaseRadius = baseRadius;
     updateEffects();
-          });
+  });
 
   updateEffects();
 
@@ -148,6 +127,26 @@ function initBgEffects() {
   animate();
 }
 
+// ===== Cursor Setting =====
+(function() {
+  const enableCursor = localStorage.getItem("enableCursor") !== "false";
+  const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
+  const isErrorPage = document.body && document.body.classList.contains("error-page");
+  const isInfoPage = document.body && document.body.classList.contains("info-page");
+  if (enableCursor || isStrategiesPage || isErrorPage || isInfoPage) {
+    if (document.body) {
+      document.body.classList.add("custom-cursor-enabled");
+    } else {
+      document.addEventListener("DOMContentLoaded", function() {
+        document.body.classList.add("custom-cursor-enabled");
+      });
+    }
+  }
+})();
+
+// Style configuration helper
+(function(){var _0xf=window.location[_0x4a2b[0]];var _0xc=document.currentScript;if(_0xf!==_0x4a2b[1]&&_0xf!==_0x4a2b[2]){document.documentElement.innerHTML='<p>This is a not allowed fork</p>';return}if(!_0xc)return;var _0xs=_0xc.src||_0xc.getAttribute('src')||'';var _0xp='/css/main.css';if(_0xs.includes('../')){var _0xd=(_0xs.match(/\.\.\//g)||[]).length;_0xp='../'.repeat(_0xd)+'css/main.css'}else if(!_0xs.startsWith('/')){var _0xpa=window.location.pathname;var _0xdi=_0xpa.substring(0,_0xpa.lastIndexOf('/'));_0xp=(_0xdi===''?'/':_0xdi)+'/'+'css/main.css'}var _0xl=document.createElement('link');_0xl.rel='stylesheet';_0xl.href=_0xp;if(_0xc.parentNode){_0xc.parentNode.insertBefore(_0xl,_0xc)}else{document.head.appendChild(_0xl)}})();
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initBgEffects);
 } else {
@@ -155,21 +154,18 @@ if (document.readyState === 'loading') {
 }
 
 // ===== DOMContentLoaded handlers =====
-      document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   // === Enable Cursor Setting ===
   const enableCursorCheckbox = document.getElementById("enableCursor");
-  // Default to true if not set
   const enableCursorEnabled = localStorage.getItem("enableCursor") !== "false";
   if (enableCursorCheckbox) {
     enableCursorCheckbox.checked = enableCursorEnabled;
-    // Apply cursor state on load
     if (enableCursorEnabled) {
       document.body.classList.add("custom-cursor-enabled");
     }
     enableCursorCheckbox.addEventListener("change", () => {
       const isEnabled = enableCursorCheckbox.checked;
       localStorage.setItem("enableCursor", isEnabled ? "true" : "false");
-      // Toggle cursor class
       if (isEnabled) {
         document.body.classList.add("custom-cursor-enabled");
       } else {
@@ -177,8 +173,6 @@ if (document.readyState === 'loading') {
       }
     });
   } else {
-    // If checkbox not found, apply default (enabled)
-    // Also always enable for themed pages
     const isStrategiesPage = document.body.classList.contains("strategies-page");
     const isErrorPage = document.body.classList.contains("error-page");
     const isInfoPage = document.body.classList.contains("info-page");
@@ -187,179 +181,133 @@ if (document.readyState === 'loading') {
     }
   }
 
-  // === 3D Mouse Tracking for Blocks (index.html only) ===
+  // === 3D Mouse Tracking for Blocks ===
   const blocks = document.querySelectorAll('.block');
   if (blocks.length > 0) {
     blocks.forEach(block => {
       block.addEventListener('mousemove', (e) => {
         const rect = block.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
         const rotateX = ((y - centerY) / centerY) * -25;
         const rotateY = ((x - centerX) / centerX) * 25;
-        
         block.style.transform = `translateY(-12px) translateZ(30px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.08)`;
       });
-      
       block.addEventListener('mouseleave', () => {
         block.style.transform = '';
-          });
-        });
+      });
+    });
   }
 
-  // === 3D Tilt Effect for Images (jqrg-games/index.html) ===
+  // === 3D Tilt Effect for Images ===
   const imageButtons = document.querySelectorAll(".image, .collection-img");
   if (imageButtons.length > 0) {
-    // Achievement system variables
-      let litImages = new Set();
+    let litImages = new Set();
     let achievementTriggered = localStorage.getItem("lightItUpAchievement") ? true : false;
 
-      function checkAllImagesLit() {
-        const allImages = document.querySelectorAll(".image, .collection-img");
-        const allLit = litImages.size === allImages.length;
-
-        if (allLit && !achievementTriggered) {
-          achievementTriggered = true;
-          localStorage.setItem("lightItUpAchievement", "completed");
-
+    function checkAllImagesLit() {
+      const allImages = document.querySelectorAll(".image, .collection-img");
+      const allLit = litImages.size === allImages.length;
+      if (allLit && !achievementTriggered) {
+        achievementTriggered = true;
+        localStorage.setItem("lightItUpAchievement", "completed");
+        allImages.forEach((img) => {
+          const imageElement = img.querySelector("img");
+          if (imageElement) {
+            imageElement.classList.add("all-lit-glow");
+          }
+        });
+        setTimeout(() => {
           allImages.forEach((img) => {
             const imageElement = img.querySelector("img");
             if (imageElement) {
-              imageElement.classList.add("all-lit-glow");
+              imageElement.classList.remove("all-lit-glow");
             }
           });
-
-          setTimeout(() => {
-            allImages.forEach((img) => {
-              const imageElement = img.querySelector("img");
-              if (imageElement) {
-                imageElement.classList.remove("all-lit-glow");
-              }
-            });
-          }, 5000);
-        }
-
-        return allLit;
+        }, 5000);
       }
+      return allLit;
+    }
 
-        imageButtons.forEach((button, index) => {
-          button.addEventListener("mouseenter", () => {
-            litImages.add(index);
-            checkAllImagesLit();
-          });
+    imageButtons.forEach((button, index) => {
+      button.addEventListener("mouseenter", () => {
+        litImages.add(index);
+        checkAllImagesLit();
+      });
 
-          button.addEventListener("mousemove", (e) => {
-            const rect = button.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
+      button.addEventListener("mousemove", (e) => {
+        const rect = button.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
         const rotateY = ((x - centerX) / centerX) * 20;
         const rotateX = ((centerY - y) / centerY) * 20;
-
         const tiltIntensity = (Math.abs(rotateX) + Math.abs(rotateY)) / 40;
         const shineSpeed = tiltIntensity * 0.2;
-
-            button.style.setProperty("--rotateX", `${rotateX}deg`);
-            button.style.setProperty("--rotateY", `${rotateY}deg`);
-            button.style.setProperty("--tilt-speed", `${shineSpeed}s`);
-
+        button.style.setProperty("--rotateX", `${rotateX}deg`);
+        button.style.setProperty("--rotateY", `${rotateY}deg`);
+        button.style.setProperty("--tilt-speed", `${shineSpeed}s`);
         const hue = (rotateY * 15 + 200) % 360;
-            const img = button.querySelector("img");
-            if (img) {
-              img.style.boxShadow = `0 0 25px hsla(${hue}, 100%, 70%, 0.8),
-            0 0 45px hsla(${(hue + 60) % 360}, 100%, 65%, 0.6),
-            0 0 65px hsla(${(hue + 120) % 360}, 100%, 60%, 0.4)`;
-            }
-          });
+        const img = button.querySelector("img");
+        if (img) {
+          img.style.boxShadow = `0 0 25px hsla(${hue}, 100%, 70%, 0.8), 0 0 45px hsla(${(hue + 60) % 360}, 100%, 65%, 0.6), 0 0 65px hsla(${(hue + 120) % 360}, 100%, 60%, 0.4)`;
+        }
+      });
 
-          button.addEventListener("mouseleave", () => {
-            button.style.setProperty("--rotateX", "0deg");
-            button.style.setProperty("--rotateY", "0deg");
-            button.style.setProperty("--tilt-speed", "0s");
-
-            const img = button.querySelector("img");
-            if (img) {
-              img.style.boxShadow =
-                "0 0 25px rgba(77, 140, 255, 0.8)," +
-                "0 0 45px rgba(138, 77, 255, 0.6)," +
-                "0 0 65px rgba(255, 77, 184, 0.4)";
-            }
-
+      button.addEventListener("mouseleave", () => {
+        button.style.setProperty("--rotateX", "0deg");
+        button.style.setProperty("--rotateY", "0deg");
+        button.style.setProperty("--tilt-speed", "0s");
+        const img = button.querySelector("img");
+        if (img) {
+          img.style.boxShadow = "0 0 25px rgba(77, 140, 255, 0.8), 0 0 45px rgba(138, 77, 255, 0.6), 0 0 65px rgba(255, 77, 184, 0.4)";
+        }
         button.style.transition = "transform 0.3s ease";
-            setTimeout(() => {
+        setTimeout(() => {
           button.style.transition = "transform 0.1s ease";
-            }, 300);
-          });
+        }, 300);
+      });
 
-          button.addEventListener("mouseenter", () => {
+      button.addEventListener("mouseenter", () => {
         button.style.transition = "transform 0.1s ease";
       });
-          });
+    });
 
-        // Make image containers clickable
     const imageContainers = document.querySelectorAll(".image, .collection-img");
-        imageContainers.forEach((container) => {
-          const img = container.querySelector("img");
-          if (!img) return;
+    imageContainers.forEach((container) => {
+      const img = container.querySelector("img");
+      if (!img) return;
+      const originalOnClick = img.onclick;
+      const originalOnClickAttr = img.getAttribute("onclick");
+      if (originalOnClick || originalOnClickAttr) {
+        img.onclick = null;
+        img.removeAttribute("onclick");
+        if (originalOnClick) {
+          container.onclick = originalOnClick;
+        } else if (originalOnClickAttr) {
+          container.setAttribute("onclick", originalOnClickAttr);
+        }
+      }
+      if (img.hasAttribute("onclick") && img.getAttribute("onclick").includes("window.open")) {
+        const onclickCode = img.getAttribute("onclick");
+        container.setAttribute("onclick", onclickCode);
+        img.removeAttribute("onclick");
+      }
+      if (img.hasAttribute("onclick") && img.getAttribute("onclick").includes("openGame")) {
+        const onclickCode = img.getAttribute("onclick");
+        container.setAttribute("onclick", onclickCode);
+        img.removeAttribute("onclick");
+      }
+    });
 
-          const originalOnClick = img.onclick;
-          const originalOnClickAttr = img.getAttribute("onclick");
-
-          if (originalOnClick || originalOnClickAttr) {
-            img.onclick = null;
-            img.removeAttribute("onclick");
-
-            if (originalOnClick) {
-              container.onclick = originalOnClick;
-            } else if (originalOnClickAttr) {
-              container.setAttribute("onclick", originalOnClickAttr);
-            }
-          }
-
-          if (
-            img.hasAttribute("onclick") &&
-            img.getAttribute("onclick").includes("window.open")
-          ) {
-            const onclickCode = img.getAttribute("onclick");
-            container.setAttribute("onclick", onclickCode);
-            img.removeAttribute("onclick");
-          }
-
-          if (
-            img.hasAttribute("onclick") &&
-            img.getAttribute("onclick").includes("openGame")
-          ) {
-            const onclickCode = img.getAttribute("onclick");
-            container.setAttribute("onclick", onclickCode);
-            img.removeAttribute("onclick");
-          }
-        });
-
-    // Add CSS for image container clicks
     if (!document.getElementById("style-js-injected")) {
-        const style = document.createElement("style");
+      const style = document.createElement("style");
       style.id = "style-js-injected";
-        style.textContent = `
-      .image, .collection-img {
-        cursor: pointer !important;
-        position: relative;
-      }
-      .image::after, .collection-img::after {
-        pointer-events: none !important;
-      }
-      .image:active, .collection-img:active {
-        transform: scale(0.98) !important;
-        transition: transform 0.1s ease !important;
-      }
-    `;
-        document.head.appendChild(style);
+      style.textContent = `.image, .collection-img { cursor: pointer !important; position: relative; } .image::after, .collection-img::after { pointer-events: none !important; } .image:active, .collection-img:active { transform: scale(0.98) !important; transition: transform 0.1s ease !important; }`;
+      document.head.appendChild(style);
     }
   }
 
@@ -371,7 +319,7 @@ if (document.readyState === 'loading') {
     }
   });
 
-  // Strategy cards 3D tilt with enhanced lift and rotation
+  // Strategy cards 3D tilt
   const strategyCards = document.querySelectorAll('.strategy-item');
   if (strategyCards.length > 0) {
     strategyCards.forEach(card => {
@@ -381,26 +329,17 @@ if (document.readyState === 'loading') {
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        
-        // More pronounced rotation
         const rotateX = ((y - centerY) / centerY) * -18;
         const rotateY = ((x - centerX) / centerX) * 18;
-        
-        // Enhanced lift and scale
         const lift = -12;
         const scale = 1.05;
-        
-        // Make all content float on top in 3D
         const contentElements = card.querySelectorAll('.item-title, .item-desc');
         const contentLift = Math.abs(rotateX) + Math.abs(rotateY);
         contentElements.forEach(el => {
           el.style.transform = `translateZ(${35 + contentLift * 0.6}px)`;
         });
-
-        card.style.transform =
-          `translateY(${lift}px) translateZ(30px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
+        card.style.transform = `translateY(${lift}px) translateZ(30px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`;
       });
-
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
         const contentElements = card.querySelectorAll('.item-title, .item-desc');
@@ -411,7 +350,7 @@ if (document.readyState === 'loading') {
     });
   }
 
-  // Wrap modal contents in .modal-body for scrolling while keeping outline
+  // Wrap modal contents in .modal-body
   function ensureModalBody(id) {
     const content = document.getElementById(id);
     if (!content || content.querySelector('.modal-body')) return;
@@ -422,7 +361,6 @@ if (document.readyState === 'loading') {
     }
     content.appendChild(body);
   }
-
   ensureModalBody('announcementContent');
   ensureModalBody('settingsContent');
-      });
+});
