@@ -1,3 +1,5 @@
+// ===== Domain Protection & CSS Loading =====
+(function(){const h=window.location.hostname;if(h!=="jimmyqrg.github.io"&&h!=="jimmyqrgg.github.io"){document.documentElement.innerHTML="<html><head><title>Not Allowed</title></head><body><p>This is a not allowed fork</p></body></html>";return;}const s=document.currentScript;if(!s)return;const sp=s.src||s.getAttribute("src")||"";let cssPath="/css/main.css";if(sp.includes("../")){const depth=(sp.match(/\.\.\//g)||[]).length;cssPath="../".repeat(depth)+"css/main.css";}else if(!sp.startsWith("/")){const p=window.location.pathname;const d=p.substring(0,p.lastIndexOf("/"));cssPath=(d===""?"/":d)+"/css/main.css";}const l=document.createElement("link");l.rel="stylesheet";l.href=cssPath;if(s.parentNode){s.parentNode.insertBefore(l,s);}else{document.head.appendChild(l);}})();
 // ===== Cursor Setting =====
 // Apply cursor setting immediately on page load (before DOMContentLoaded)
       (function() {

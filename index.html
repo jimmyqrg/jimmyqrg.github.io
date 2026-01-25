@@ -20,17 +20,26 @@
     <script>
       (function () {
         const currentUrl = window.location.href;
+        const urlParams = new URLSearchParams(window.location.search);
+        const pageParam = urlParams.get('page');
 
-        // // Check if URL contains ?page=extend
-        // if (!currentUrl.includes("?page=extend")) {
-        //   // Run your game function
-        //   if (typeof openGame === "function") {
-        //     openGame("?page=extend");
-        //   }
+        // Check if URL does not include "page"
+        if (!currentUrl.includes("page")) {
+          window.location.href = "page/";
+          return;
+        }
 
-        //   // Redirect to Jimmy Q.R.G. website
-        //   window.location.href = "https://www.jimmyqrg.com";
-        // }
+        // Check if current page is not iframed in
+        if (window.self === window.top) {
+          window.location.href = "page/";
+          return;
+        }
+
+        // Check if ?page=extend is not present
+        if (!pageParam || pageParam !== "extend") {
+          window.location.href = "?page=extend";
+          return;
+        }
       })();
     </script>
     <script src="/js/openGame.js"></script>
@@ -46,7 +55,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/main.css">
     <script src="js/style.js"></script>
   </head>
   <body>
