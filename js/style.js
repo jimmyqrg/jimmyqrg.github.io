@@ -392,6 +392,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const animationSpeed = 10; // milliseconds per frame
     const basePath = '/cursor/animated-cursor/';
 
+    // Preload all cursor images to prevent lag during animation
+    const cursorImages = [];
+    for (let i = 1; i <= totalFrames; i++) {
+      const img = new Image();
+      img.src = `${basePath}cursor${i}.png`;
+      cursorImages.push(img);
+    }
+
     // Function to check if element is hoverable (has pointer cursor)
     function isHoverableElement(element) {
       if (!element || element === document.body) return false;
