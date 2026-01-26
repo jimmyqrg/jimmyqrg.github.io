@@ -389,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let isHovering = false;
     let isAnimatingBack = false;
     const totalFrames = 20;
-    const animationSpeed = 50; // milliseconds per frame
+    const animationSpeed = 10; // milliseconds per frame
     const basePath = '/cursor/animated-cursor/';
 
     // Function to check if element is hoverable (has pointer cursor)
