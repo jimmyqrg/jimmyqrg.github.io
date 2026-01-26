@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="/js/mainPageCloak.js"></script>
+  <script src="/js/openGame.js"></script>
+  <script src="/js/panicKey.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | Page Not Found</title>
+  <link rel="stylesheet" href="/css/main.css" />
+    <link rel="icon" type="image/ico" href="https://jimmyqrg.github.io/info.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <script src="/js/style.js"></script>
+    <script src="/js/cursor.js"></script>
+</head>
+<body class="error-page">
+  <div class="bg-effects"></div>
+
+  <h1>Oops..</h1>
+  <h2>This game is under developement!</h2>
+
+  <button class="btn" id="backHomeBtn">
+    ⬅ Back
+  </button>
+  <script src="/js/updateDomainUrls.js"></script>
+  <script>
+    document.getElementById('backHomeBtn').onclick = async () => {
+      try {
+        const response = await fetch('/currentDomain.txt');
+        const domain = (await response.text()).trim();
+        window.location.href = `https://${domain}/jqrg-games/`;
+      } catch {
+        window.location.href = 'https://jimmyqrg.github.io/jqrg-games/';
+      }
+    };
+  </script>
+  
+  <button class="btn" onclick="location.href='https://jimmyqrg.github.io/suggest-games/'">
+    Suggest a Game
+  </button>
+</body>
+</html>
