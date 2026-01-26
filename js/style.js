@@ -389,7 +389,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let isHovering = false;
     let isAnimatingBack = false;
     const totalFrames = 20;
-    const animationSpeed = 10; // milliseconds per frame
+    const animationSpeed = 3; // milliseconds per frame4
     const basePath = '/cursor/animated-cursor/';
 
     // Preload all cursor images to prevent lag during animation
@@ -494,21 +494,104 @@ document.addEventListener("DOMContentLoaded", function () {
       }, animationSpeed);
     }
 
-    // Track mouse movement to detect hoverable elements
-    let lastHoverableElement = null;
-    let hoverCheckTimeout = null;
+    // Track current hoverable element
+    let currentHoverableElement = null;
+    let hoverCheckInterval = null;
     
-    function checkHoverState(e) {
-      if (hoverCheckTimeout) {
-        clearTimeout(hoverCheckTimeout);
-      }
+    // Function to check if element under cursor is hoverable
+    function checkElementUnderCursor(x, y) {
+      const element = document.elementFromPoint(x, y);
+      if (!element) return null;
       
-      hoverCheckTimeout = setTimeout(() => {
-        const element = e ? document.elementFromPoint(e.clientX, e.clientY) : document.elementFromPoint(window.mouseX || 0, window.mouseY || 0);
-        let hoverable = false;
-        let target = element;
+      let target = element;
+      while (target && target !== document.body) {
+        if (isHoverableElement(target)) {
+          return target;
+        }
+        target = target.parentElement;
+      }
+      return null;
+    }
+    
+    // Function to handle hover state changes
+    function handleHoverChange(isHoveringNow, element) {
+      if (isHoveringNow && !isHovering && !isAnimatingBack) {
+        // Starting to hover
+        currentHoverableElement = element;
+        document.body.classList.add('cursor-hovering');
+        animateForward();
+      } else if (!isHoveringNow && isHovering && !isAnimatingBack) {
+        // Stopping hover
+        currentHoverableElement = null;
+        document.body.classList.remove('cursor-hovering');
+        animateBackward();
+      }
+    }
+    
+    // Track mouse position
+    let mouseX = 0, mouseY = 0;
+    let lastCheckedElement = null;
+    
+    // Continuous hover checking (works even when mouse is stationary)
+    function startHoverChecking() {
+      if (hoverCheckInterval) return;
+      
+      hoverCheckInterval = setInterval(() => {
+        const hoverableElement = checkElementUnderCursor(mouseX, mouseY);
+        const isHoveringNow = hoverableElement !== null;
         
-        // Check element and parents for hoverable
+        // Only trigger if state actually changed
+        if (hoverableElement !== lastCheckedElement) {
+          lastCheckedElement = hoverableElement;
+          handleHoverChange(isHoveringNow, hoverableElement);
+        }
+      }, 50); // Check every 50ms
+    }
+    
+    // Track mouse movement
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      
+      // Immediate check on mouse move
+      const hoverableElement = checkElementUnderCursor(mouseX, mouseY);
+      const isHoveringNow = hoverableElement !== null;
+      
+      if (hoverableElement !== lastCheckedElement) {
+        lastCheckedElement = hoverableElement;
+        handleHoverChange(isHoveringNow, hoverableElement);
+      }
+    }, true);
+    
+    // Use mouseover/mouseout for immediate response (these events bubble)
+    function attachHoverListeners() {
+      // Use event delegation on document with capture phase
+      document.addEventListener('mouseover', function(e) {
+        let target = e.target;
+        let hoverable = false;
+        let hoverableTarget = null;
+        
+        while (target && target !== document.body) {
+          if (isHoverableElement(target)) {
+            hoverable = true;
+            hoverableTarget = target;
+            break;
+          }
+          target = target.parentElement;
+        }
+        
+        if (hoverable && !isHovering && !isAnimatingBack) {
+          currentHoverableElement = hoverableTarget;
+          lastCheckedElement = hoverableTarget;
+          document.body.classList.add('cursor-hovering');
+          animateForward();
+        }
+      }, true);
+      
+      document.addEventListener('mouseout', function(e) {
+        let target = e.target;
+        let hoverable = false;
+        
         while (target && target !== document.body) {
           if (isHoverableElement(target)) {
             hoverable = true;
@@ -517,75 +600,51 @@ document.addEventListener("DOMContentLoaded", function () {
           target = target.parentElement;
         }
         
-        if (hoverable && !isHovering && !isAnimatingBack) {
-          document.body.classList.add('cursor-hovering');
-          lastHoverableElement = element;
-          animateForward();
-        } else if (!hoverable && isHovering && !isAnimatingBack) {
-          document.body.classList.remove('cursor-hovering');
-          animateBackward();
+        if (hoverable) {
+          // Check if we're moving to another hoverable element
+          const relatedTarget = e.relatedTarget;
+          let movingToHoverable = false;
+          let checkTarget = relatedTarget;
+          
+          while (checkTarget && checkTarget !== document.body) {
+            if (isHoverableElement(checkTarget)) {
+              movingToHoverable = true;
+              break;
+            }
+            checkTarget = checkTarget.parentElement;
+          }
+          
+          if (!movingToHoverable && isHovering && !isAnimatingBack) {
+            currentHoverableElement = null;
+            lastCheckedElement = null;
+            document.body.classList.remove('cursor-hovering');
+            animateBackward();
+          }
         }
-      }, 10);
+      }, true);
     }
     
-    // Track mouse position
-    let mouseX = 0, mouseY = 0;
-    document.addEventListener('mousemove', function(e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      window.mouseX = mouseX;
-      window.mouseY = mouseY;
-      checkHoverState(e);
-    });
-
-    // Also use mouseover/mouseout for better detection
-    document.addEventListener('mouseover', function(e) {
-      let target = e.target;
-      let hoverable = false;
-      
-      while (target && target !== document.body) {
-        if (isHoverableElement(target)) {
-          hoverable = true;
-          break;
-        }
-        target = target.parentElement;
-      }
-      
-      if (hoverable && !isHovering && !isAnimatingBack) {
-        document.body.classList.add('cursor-hovering');
-        animateForward();
-      }
-    }, true);
-
-    document.addEventListener('mouseout', function(e) {
-      let target = e.target;
-      let hoverable = false;
-      
-      while (target && target !== document.body) {
-        if (isHoverableElement(target)) {
-          hoverable = true;
-          break;
-        }
-        target = target.parentElement;
-      }
-      
-      // Check if we're moving to another hoverable element
-      const relatedTarget = e.relatedTarget;
-      let movingToHoverable = false;
-      let checkTarget = relatedTarget;
-      
-      while (checkTarget && checkTarget !== document.body) {
-        if (isHoverableElement(checkTarget)) {
-          movingToHoverable = true;
-          break;
-        }
-        checkTarget = checkTarget.parentElement;
-      }
-      
-      if (hoverable && !movingToHoverable && isHovering && !isAnimatingBack) {
+    // Handle mouse leaving the page
+    document.addEventListener('mouseleave', function(e) {
+      if (isHovering && !isAnimatingBack) {
+        currentHoverableElement = null;
+        lastCheckedElement = null;
         document.body.classList.remove('cursor-hovering');
         animateBackward();
       }
-    }, true);
+    });
+    
+    // Start continuous checking and attach listeners
+    startHoverChecking();
+    attachHoverListeners();
+    
+    // Also check on initial load in case mouse is already over an element
+    setTimeout(() => {
+      const hoverableElement = checkElementUnderCursor(mouseX, mouseY);
+      if (hoverableElement) {
+        lastCheckedElement = hoverableElement;
+        handleHoverChange(true, hoverableElement);
+      }
+    }, 100);
   })();
 });
