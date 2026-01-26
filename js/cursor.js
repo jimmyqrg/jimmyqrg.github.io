@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let isHovering = false;
     let isAnimatingBack = false;
     const totalFrames = 20;
-    const animationSpeed = 3; // milliseconds per frame
+    const animationSpeed = 20; // milliseconds per frame
     const basePath = '/cursor/animated-cursor/';
     let lastFrameSet = 0; // Track last frame to prevent unnecessary updates
 
