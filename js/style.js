@@ -424,8 +424,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function setCursorFrame(frame) {
       currentFrame = Math.max(1, Math.min(totalFrames, frame));
       const cursorPath = `${basePath}cursor${currentFrame}.png`;
+      // Apply cursor during both hovering and animating back
       cursorStyle.textContent = `
-        body.custom-cursor-enabled.cursor-hovering * {
+        body.custom-cursor-enabled.cursor-hovering *,
+        body.custom-cursor-enabled.cursor-animating-back * {
           cursor: url('${cursorPath}') 32 32, pointer !important;
         }
       `;
@@ -436,6 +438,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (isAnimatingBack) {
         clearInterval(animationInterval);
         isAnimatingBack = false;
+        document.body.classList.remove('cursor-animating-back');
       }
       isHovering = true;
       currentFrame = 1;
@@ -463,6 +466,9 @@ document.addEventListener("DOMContentLoaded", function () {
         animationInterval = null;
       }
       
+      // Add class to keep cursor style active during backward animation
+      document.body.classList.add('cursor-animating-back');
+      
       animationInterval = setInterval(() => {
         currentFrame--;
         setCursorFrame(currentFrame);
@@ -471,8 +477,8 @@ document.addEventListener("DOMContentLoaded", function () {
           clearInterval(animationInterval);
           animationInterval = null;
           isAnimatingBack = false;
-          document.body.classList.remove('cursor-hovering');
-          // Reset to default cursor after reaching frame 1
+          // Remove both classes and reset cursor after reaching frame 1
+          document.body.classList.remove('cursor-hovering', 'cursor-animating-back');
           setTimeout(() => {
             cursorStyle.textContent = '';
           }, 50);
