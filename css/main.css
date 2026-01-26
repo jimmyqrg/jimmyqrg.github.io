@@ -877,12 +877,12 @@
       /* Custom Cursor with Color Inversion */
       body,
       body * {
-        cursor: url('/cursor-64.png') 32 32, auto;
+        cursor: url('/cursor/cursor-64.png') 32 32, auto;
       }
 
       body.custom-cursor-enabled,
       body.custom-cursor-enabled * {
-        cursor: url('/cursor-64.png') 32 32, auto !important; /* 32 32 is the hotspot (center of 64px cursor) */
+        cursor: url('/cursor/cursor-64.png') 32 32, auto !important; /* 32 32 is the hotspot (center of 64px cursor) */
       }
 
 

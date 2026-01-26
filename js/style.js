@@ -363,4 +363,215 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   ensureModalBody('announcementContent');
   ensureModalBody('settingsContent');
+
+  // ===== Animated Cursor on Hover =====
+  (function() {
+    // Only apply if custom cursor is enabled
+    const enableCursorEnabled = localStorage.getItem("enableCursor") !== "false";
+    const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
+    const isErrorPage = document.body && document.body.classList.contains("error-page");
+    const isInfoPage = document.body && document.body.classList.contains("info-page");
+    
+    if (!enableCursorEnabled && !isStrategiesPage && !isErrorPage && !isInfoPage) {
+      return; // Skip if cursor is disabled
+    }
+
+    // Create style element for dynamic cursor
+    let cursorStyle = document.getElementById('animated-cursor-style');
+    if (!cursorStyle) {
+      cursorStyle = document.createElement('style');
+      cursorStyle.id = 'animated-cursor-style';
+      document.head.appendChild(cursorStyle);
+    }
+
+    let currentFrame = 1;
+    let animationInterval = null;
+    let isHovering = false;
+    let isAnimatingBack = false;
+    const totalFrames = 20;
+    const animationSpeed = 50; // milliseconds per frame
+    const basePath = '/cursor/animated-cursor/';
+
+    // Function to check if element is hoverable (has pointer cursor)
+    function isHoverableElement(element) {
+      if (!element || element === document.body) return false;
+      
+      // Check common clickable elements
+      if (element.tagName === 'A' || 
+          element.tagName === 'BUTTON' || 
+          element.hasAttribute('onclick') ||
+          element.classList.contains('image') ||
+          element.classList.contains('collection-img') ||
+          element.classList.contains('block') ||
+          element.classList.contains('block-link')) {
+        return true;
+      }
+      
+      // Check computed style for cursor: pointer
+      try {
+        const style = window.getComputedStyle(element);
+        if (style.cursor === 'pointer' || style.cursor === 'grab') {
+          return true;
+        }
+      } catch (e) {
+        // Ignore errors
+      }
+      
+      return false;
+    }
+
+    // Function to set cursor frame
+    function setCursorFrame(frame) {
+      currentFrame = Math.max(1, Math.min(totalFrames, frame));
+      const cursorPath = `${basePath}cursor${currentFrame}.png`;
+      cursorStyle.textContent = `
+        body.custom-cursor-enabled.cursor-hovering * {
+          cursor: url('${cursorPath}') 32 32, pointer !important;
+        }
+      `;
+    }
+
+    // Function to animate forward (1 to 20)
+    function animateForward() {
+      if (isAnimatingBack) {
+        clearInterval(animationInterval);
+        isAnimatingBack = false;
+      }
+      isHovering = true;
+      currentFrame = 1;
+      setCursorFrame(1);
+      
+      animationInterval = setInterval(() => {
+        currentFrame++;
+        setCursorFrame(currentFrame);
+        
+        if (currentFrame >= totalFrames) {
+          clearInterval(animationInterval);
+          animationInterval = null;
+        }
+      }, animationSpeed);
+    }
+
+    // Function to animate backward (current to 1, then default)
+    function animateBackward() {
+      if (!isHovering && !isAnimatingBack) return;
+      isHovering = false;
+      isAnimatingBack = true;
+      
+      if (animationInterval) {
+        clearInterval(animationInterval);
+        animationInterval = null;
+      }
+      
+      animationInterval = setInterval(() => {
+        currentFrame--;
+        setCursorFrame(currentFrame);
+        
+        if (currentFrame <= 1) {
+          clearInterval(animationInterval);
+          animationInterval = null;
+          isAnimatingBack = false;
+          document.body.classList.remove('cursor-hovering');
+          // Reset to default cursor after reaching frame 1
+          setTimeout(() => {
+            cursorStyle.textContent = '';
+          }, 50);
+        }
+      }, animationSpeed);
+    }
+
+    // Track mouse movement to detect hoverable elements
+    let lastHoverableElement = null;
+    let hoverCheckTimeout = null;
+    
+    function checkHoverState(e) {
+      if (hoverCheckTimeout) {
+        clearTimeout(hoverCheckTimeout);
+      }
+      
+      hoverCheckTimeout = setTimeout(() => {
+        const element = e ? document.elementFromPoint(e.clientX, e.clientY) : document.elementFromPoint(window.mouseX || 0, window.mouseY || 0);
+        let hoverable = false;
+        let target = element;
+        
+        // Check element and parents for hoverable
+        while (target && target !== document.body) {
+          if (isHoverableElement(target)) {
+            hoverable = true;
+            break;
+          }
+          target = target.parentElement;
+        }
+        
+        if (hoverable && !isHovering && !isAnimatingBack) {
+          document.body.classList.add('cursor-hovering');
+          lastHoverableElement = element;
+          animateForward();
+        } else if (!hoverable && isHovering && !isAnimatingBack) {
+          document.body.classList.remove('cursor-hovering');
+          animateBackward();
+        }
+      }, 10);
+    }
+    
+    // Track mouse position
+    let mouseX = 0, mouseY = 0;
+    document.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      window.mouseX = mouseX;
+      window.mouseY = mouseY;
+      checkHoverState(e);
+    });
+
+    // Also use mouseover/mouseout for better detection
+    document.addEventListener('mouseover', function(e) {
+      let target = e.target;
+      let hoverable = false;
+      
+      while (target && target !== document.body) {
+        if (isHoverableElement(target)) {
+          hoverable = true;
+          break;
+        }
+        target = target.parentElement;
+      }
+      
+      if (hoverable && !isHovering && !isAnimatingBack) {
+        document.body.classList.add('cursor-hovering');
+        animateForward();
+      }
+    }, true);
+
+    document.addEventListener('mouseout', function(e) {
+      let target = e.target;
+      let hoverable = false;
+      
+      while (target && target !== document.body) {
+        if (isHoverableElement(target)) {
+          hoverable = true;
+          break;
+        }
+        target = target.parentElement;
+      }
+      
+      // Check if we're moving to another hoverable element
+      const relatedTarget = e.relatedTarget;
+      let movingToHoverable = false;
+      let checkTarget = relatedTarget;
+      
+      while (checkTarget && checkTarget !== document.body) {
+        if (isHoverableElement(checkTarget)) {
+          movingToHoverable = true;
+          break;
+        }
+        checkTarget = checkTarget.parentElement;
+      }
+      
+      if (hoverable && !movingToHoverable && isHovering && !isAnimatingBack) {
+        document.body.classList.remove('cursor-hovering');
+        animateBackward();
+      }
+    }, true);
+  })();
 });
