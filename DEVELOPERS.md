@@ -24,3 +24,8 @@ Example:
 ## Javascript code
 
 They are located in folder `js/`
+
+including:
+
+> 1. ban unauthorized people from entering testing areas
+> 2. 
