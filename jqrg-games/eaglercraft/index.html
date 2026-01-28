@@ -99,7 +99,7 @@
   <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-1-12-w.html')">WASM 1.12.2</button>
 
   <h2>OTHER</h2>
-  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/dragonx.html')">Hacked Client (DragonX)</button>
+  <button class="btn" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/eaglercraft/', '_self')">Hacked Clients</button>
   <button class="btn" onclick="window.open('https://jimmyqrg.github.io/info/ec/servers/')">Server List</button>
 
   <p>Click <a href="/suggest-games/" style="color:white;">here</a> to suggest games. I will do my best to add them.</p>
@@ -107,10 +107,10 @@
   <script>
     // Get the "back" link from URL
     const params = new URLSearchParams(window.location.search);
-    const backLink = params.get("back") || "https://jimmyqrg.github.io/jqrg-games/";
+    const backLink = params.get("back") || "../";
 
     document.getElementById("back-btn").onclick = () => {
-      window.location.href = "../";
+      window.location.href = backLink;
     };
   </script>
 </body>
