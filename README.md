@@ -1,9 +1,7 @@
-## JimmyQrg.com
-After you enter:
-- Click JOIN
-- In the sign up page, type a random name
-- enter jqrg@jqrg.jqrg for email
-- enter jqrg for password
+# JimmyQrg.github.io
+## Website
+
+If you ever get bored, try the settings. Although it's IMPOSSIBLE to get bored
 
 ### NOTE
 The `LISENCE` clearly indecates that this repo is not allowing any copy or forking, so please do not fork this repo.
