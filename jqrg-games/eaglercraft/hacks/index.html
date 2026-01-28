@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eaglercraft Hacked Client Launcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-image: url('/eaglercraft-background');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .version-selector {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #444;
+            font-weight: bold;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        .launch-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #8c8c8c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: not-allowed;
+            transition: background-color 0.2s;
+        }
+        
+        .launch-button.enabled {
+            background-color: #4CAF50;
+            cursor: pointer;
+        }
+        
+        .launch-button.enabled:hover {
+            background-color: #3d8b40;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+        
+        .status.waiting {
+            color: #666;
+        }
+        
+        .status.ready {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Eaglercraft Hacked Clients</h1>
+        
+        <div class="version-selector">
+            <label for="version-select">Choose Version:</label>
+            <select id="version-select">
+                <option value="" selected disabled>Choose Version</option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+                <option value=""></option>
+            </select>
+        </div>
+        
+        <button id="launch-btn" class="launch-button" disabled>LAUNCH</button>
+        
+        <div id="status" class="status waiting">Select a version</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const versionSelect = document.getElementById('version-select');
+            const launchButton = document.getElementById('launch-btn');
+            const statusDiv = document.getElementById('status');
+            
+            // Track selected URL
+            let selectedUrl = '';
+            
+            // Handle version selection
+            versionSelect.addEventListener('change', function() {
+                if (this.value) {
+                    // Enable launch button
+                    launchButton.disabled = false;
+                    launchButton.classList.add('enabled');
+                    
+                    // Update status
+                    statusDiv.textContent = 'Ready to launch: ' + this.options[this.selectedIndex].text;
+                    statusDiv.className = 'status ready';
+                    
+                    // Store selected URL
+                    selectedUrl = this.value;
+                } else {
+                    // Disable launch button
+                    launchButton.disabled = true;
+                    launchButton.classList.remove('enabled');
+                    
+                    // Update status
+                    statusDiv.textContent = 'Please select a version above';
+                    statusDiv.className = 'status waiting';
+                    
+                    // Clear selected URL
+                    selectedUrl = '';
+                }
+            });
+            
+            // Handle launch button click
+            launchButton.addEventListener('click', function() {
+                if (selectedUrl) {
+                    // Update status
+                    statusDiv.textContent = 'Launching... Redirecting now!';
+                    
+                    // Redirect to the selected URL after a brief delay
+                    setTimeout(function() {
+                        openGame(selectedUrl);
+                    }, 800);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
