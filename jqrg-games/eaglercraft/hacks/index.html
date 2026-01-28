@@ -182,7 +182,7 @@
                     
                     // Redirect to the selected URL after a brief delay
                     setTimeout(function() {
-                        openGame(selectedUrl);
+                        window.open(selectedUrl, "_self");
                     }, 800);
                 }
             });
