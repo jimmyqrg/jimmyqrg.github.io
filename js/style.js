@@ -171,6 +171,8 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         document.body.classList.remove("custom-cursor-enabled");
       }
+      // Dispatch event so cursor.js can react immediately
+      window.dispatchEvent(new CustomEvent('cursorSettingChanged'));
     });
   } else {
     const isStrategiesPage = document.body.classList.contains("strategies-page");

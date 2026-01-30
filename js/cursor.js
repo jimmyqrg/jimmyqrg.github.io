@@ -1,32 +1,94 @@
 // ===== Animated Cursor on Hover =====
 document.addEventListener("DOMContentLoaded", function() {
   (function() {
-    // Only apply if custom cursor is enabled
-    const enableCursorEnabled = localStorage.getItem("enableCursor") !== "false";
-    const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
-    const isErrorPage = document.body && document.body.classList.contains("error-page");
-    const isInfoPage = document.body && document.body.classList.contains("info-page");
+    // Function to check if cursor should be enabled
+    function isCursorEnabled() {
+      const enableCursorEnabled = localStorage.getItem("enableCursor") !== "false";
+      const isStrategiesPage = document.body && document.body.classList.contains("strategies-page");
+      const isErrorPage = document.body && document.body.classList.contains("error-page");
+      const isInfoPage = document.body && document.body.classList.contains("info-page");
+      return enableCursorEnabled || isStrategiesPage || isErrorPage || isInfoPage;
+    }
     
-    if (!enableCursorEnabled && !isStrategiesPage && !isErrorPage && !isInfoPage) {
-      return; // Skip if cursor is disabled
-    }
-
-    // Create style element for dynamic cursor
-    let cursorStyle = document.getElementById('animated-cursor-style');
-    if (!cursorStyle) {
-      cursorStyle = document.createElement('style');
-      cursorStyle.id = 'animated-cursor-style';
-      document.head.appendChild(cursorStyle);
-    }
-
+    // Style elements and state variables (declared at top level so they're accessible everywhere)
+    let defaultCursorStyle = null;
+    let cursorStyle = null;
     let currentFrame = 1;
     let animationInterval = null;
     let isHovering = false;
     let isAnimatingBack = false;
+    let hoverCheckInterval = null;
+    let currentHoverableElement = null;
+    let lastCheckedElement = null;
+    let mouseX = 0, mouseY = 0;
     const totalFrames = 20;
     const animationSpeed = 4; // milliseconds per frame
     const basePath = '/cursor/animated-cursor/';
     let lastFrameSet = 0; // Track last frame to prevent unnecessary updates
+    
+    // Function to disable cursor completely
+    function disableCursor() {
+      // Stop all animations
+      if (animationInterval) {
+        clearInterval(animationInterval);
+        animationInterval = null;
+      }
+      if (hoverCheckInterval) {
+        clearInterval(hoverCheckInterval);
+        hoverCheckInterval = null;
+      }
+      
+      // Remove all cursor styles
+      if (defaultCursorStyle && defaultCursorStyle.parentNode) {
+        defaultCursorStyle.remove();
+      }
+      if (cursorStyle && cursorStyle.parentNode) {
+        cursorStyle.remove();
+      }
+      
+      // Reset state
+      isHovering = false;
+      isAnimatingBack = false;
+      currentHoverableElement = null;
+      lastCheckedElement = null;
+      document.body.classList.remove('cursor-hovering', 'cursor-animating-back');
+    }
+    
+    // Function to enable cursor
+    function enableCursor() {
+      // Recreate style elements if needed
+      if (!defaultCursorStyle || !defaultCursorStyle.parentNode) {
+        defaultCursorStyle = document.getElementById('default-cursor-style');
+        if (!defaultCursorStyle) {
+          defaultCursorStyle = document.createElement('style');
+          defaultCursorStyle.id = 'default-cursor-style';
+          document.head.appendChild(defaultCursorStyle);
+        }
+      }
+      defaultCursorStyle.textContent = `
+        body.custom-cursor-enabled,
+        body.custom-cursor-enabled * {
+          cursor: url('/cursor/cursor-64.png') 32 32, auto !important;
+        }
+      `;
+      
+      if (!cursorStyle || !cursorStyle.parentNode) {
+        cursorStyle = document.getElementById('animated-cursor-style');
+        if (!cursorStyle) {
+          cursorStyle = document.createElement('style');
+          cursorStyle.id = 'animated-cursor-style';
+          document.head.appendChild(cursorStyle);
+        }
+      }
+    }
+    
+    // Preload all cursor images to prevent lag during animation
+    const cursorImages = [];
+    for (let i = 1; i <= totalFrames; i++) {
+      const img = new Image();
+      img.src = `${basePath}cursor${i}.png`;
+      cursorImages.push(img);
+    }
 
     // Preload all cursor images to prevent lag during animation
     const cursorImages = [];
@@ -34,6 +96,35 @@ document.addEventListener("DOMContentLoaded", function() {
       const img = new Image();
       img.src = `${basePath}cursor${i}.png`;
       cursorImages.push(img);
+    }
+
+    // Initialize cursor state
+    if (!isCursorEnabled()) {
+      // Ensure cursor is disabled
+      disableCursor();
+    } else {
+      // Create style element for default cursor (always visible when enabled)
+      defaultCursorStyle = document.getElementById('default-cursor-style');
+      if (!defaultCursorStyle) {
+        defaultCursorStyle = document.createElement('style');
+        defaultCursorStyle.id = 'default-cursor-style';
+        document.head.appendChild(defaultCursorStyle);
+      }
+      // Set default cursor to always show when custom cursor is enabled
+      defaultCursorStyle.textContent = `
+        body.custom-cursor-enabled,
+        body.custom-cursor-enabled * {
+          cursor: url('/cursor/cursor-64.png') 32 32, auto !important;
+        }
+      `;
+
+      // Create style element for dynamic cursor (hover animation)
+      cursorStyle = document.getElementById('animated-cursor-style');
+      if (!cursorStyle) {
+        cursorStyle = document.createElement('style');
+        cursorStyle.id = 'animated-cursor-style';
+        document.head.appendChild(cursorStyle);
+      }
     }
 
     // Function to check if element is hoverable (has pointer cursor)
@@ -66,6 +157,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Function to set cursor frame (throttled to prevent flashing)
     function setCursorFrame(frame) {
+      // Check if cursor is still enabled
+      if (!isCursorEnabled()) {
+        disableCursor();
+        return;
+      }
+      
       const frameNum = Math.max(1, Math.min(totalFrames, frame));
       
       // Only update if frame actually changed
@@ -87,6 +184,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       `;
     }
+    
 
     // Function to animate forward (1 to 20)
     function animateForward() {
@@ -165,10 +263,6 @@ document.addEventListener("DOMContentLoaded", function() {
       }, animationSpeed);
     }
 
-    // Track current hoverable element
-    let currentHoverableElement = null;
-    let hoverCheckInterval = null;
-    
     // Function to check if element under cursor is hoverable
     function checkElementUnderCursor(x, y) {
       const element = document.elementFromPoint(x, y);
@@ -202,15 +296,19 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }
     
-    // Track mouse position
-    let mouseX = 0, mouseY = 0;
-    let lastCheckedElement = null;
-    
     // Continuous hover checking (works even when mouse is stationary)
     function startHoverChecking() {
       if (hoverCheckInterval) return;
       
       hoverCheckInterval = setInterval(() => {
+        if (!isCursorEnabled()) {
+          // If cursor was disabled, stop checking and clean up
+          if (hoverCheckInterval) {
+            clearInterval(hoverCheckInterval);
+            hoverCheckInterval = null;
+          }
+          return;
+        }
         const hoverableElement = checkElementUnderCursor(mouseX, mouseY);
         const isHoveringNow = hoverableElement !== null;
         
@@ -222,8 +320,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }, 50); // Check every 50ms
     }
     
-    // Track mouse movement
+    // Track mouse movement (always attached, checks enabled state internally)
     document.addEventListener('mousemove', function(e) {
+      if (!isCursorEnabled()) return;
       mouseX = e.clientX;
       mouseY = e.clientY;
       
@@ -237,10 +336,12 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     }, true);
     
-    // Use mouseover/mouseout for immediate response (these events bubble)
+    // Use mouseover/mouseout for immediate response (always attached, checks enabled state)
     function attachHoverListeners() {
+      // These listeners are always attached, they check isCursorEnabled() internally
       // Use event delegation on document with capture phase
       document.addEventListener('mouseover', function(e) {
+        if (!isCursorEnabled()) return;
         let target = e.target;
         let hoverable = false;
         let hoverableTarget = null;
@@ -273,6 +374,7 @@ document.addEventListener("DOMContentLoaded", function() {
       }, true);
       
       document.addEventListener('mouseout', function(e) {
+        if (!isCursorEnabled()) return;
         let target = e.target;
         let hoverable = false;
         
@@ -308,8 +410,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }, true);
     }
     
-    // Handle mouse leaving the page
+    // Handle mouse leaving the page (always attached, checks enabled state)
     document.addEventListener('mouseleave', function(e) {
+      if (!isCursorEnabled()) return;
       if (isHovering && !isAnimatingBack) {
         currentHoverableElement = null;
         lastCheckedElement = null;
@@ -318,17 +421,49 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
     
-    // Start continuous checking and attach listeners
-    startHoverChecking();
+    // Attach listeners once (they check enabled state internally)
     attachHoverListeners();
     
-    // Also check on initial load in case mouse is already over an element
-    setTimeout(() => {
-      const hoverableElement = checkElementUnderCursor(mouseX, mouseY);
-      if (hoverableElement) {
-        lastCheckedElement = hoverableElement;
-        handleHoverChange(true, hoverableElement);
+    // Only start hover checking if cursor is enabled
+    if (isCursorEnabled()) {
+      startHoverChecking();
+      
+      // Also check on initial load in case mouse is already over an element
+      setTimeout(() => {
+        if (!isCursorEnabled()) return;
+        const hoverableElement = checkElementUnderCursor(mouseX, mouseY);
+        if (hoverableElement) {
+          lastCheckedElement = hoverableElement;
+          handleHoverChange(true, hoverableElement);
+        }
+      }, 100);
+    }
+    
+    // Listen for changes to cursor setting
+    function checkCursorSetting() {
+      const shouldBeEnabled = isCursorEnabled();
+      const isCurrentlyEnabled = document.body.classList.contains('custom-cursor-enabled');
+      
+      if (shouldBeEnabled && !isCurrentlyEnabled) {
+        // Cursor was just enabled
+        document.body.classList.add('custom-cursor-enabled');
+        enableCursor();
+        // Start hover checking if not already running
+        if (!hoverCheckInterval) {
+          startHoverChecking();
+        }
+      } else if (!shouldBeEnabled && isCurrentlyEnabled) {
+        // Cursor was just disabled
+        disableCursor();
+        document.body.classList.remove('custom-cursor-enabled');
       }
-    }, 100);
+    }
+    
+    // Check cursor setting periodically and on storage changes
+    setInterval(checkCursorSetting, 500);
+    window.addEventListener('storage', checkCursorSetting);
+    
+    // Also listen for the custom event that might be fired when setting changes
+    window.addEventListener('cursorSettingChanged', checkCursorSetting);
   })();
 });
