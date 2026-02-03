@@ -22,12 +22,250 @@
     <script src="../js/style.js"></script>
       <script src="../js/cursor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      /* Search & Filter Styles */
+      .search-filter-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin: 30px auto 50px;
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+        z-index: 100;
+      }
+
+      .search-bar {
+        flex: 1;
+        position: relative;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 14px 20px 14px 48px;
+        border-radius: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 1rem;
+        font-family: "Josefin Sans", sans-serif;
+        outline: none;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .search-bar input::placeholder {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .search-bar input:focus {
+        border-color: rgba(77, 140, 255, 0.6);
+        box-shadow: 0 0 20px rgba(77, 140, 255, 0.3),
+          0 0 40px rgba(138, 77, 255, 0.2);
+      }
+
+      .search-bar .search-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 1.1rem;
+        pointer-events: none;
+      }
+
+      .filter-btn {
+        position: relative;
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .filter-btn:hover {
+        border-color: rgba(77, 140, 255, 0.6);
+        background: rgba(77, 140, 255, 0.2);
+      }
+
+      .filter-btn.active {
+        border-color: rgba(138, 77, 255, 0.8);
+        background: linear-gradient(135deg, rgba(77, 140, 255, 0.3), rgba(138, 77, 255, 0.3));
+        box-shadow: 0 0 15px rgba(138, 77, 255, 0.4);
+      }
+
+      .filter-btn .filter-count {
+        background: linear-gradient(135deg, #4d8cff, #8a4dff);
+        color: white;
+        font-size: 0.7rem;
+        font-weight: bold;
+        padding: 2px 6px;
+        border-radius: 8px;
+        min-width: 18px;
+        text-align: center;
+        display: none;
+      }
+
+      .filter-btn.has-filters .filter-count {
+        display: inline-block;
+      }
+
+      .filter-dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        min-width: 240px;
+        background: rgba(10, 10, 20, 0.95);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        border-radius: 16px;
+        padding: 16px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6),
+          0 0 20px rgba(77, 140, 255, 0.15);
+        z-index: 1000;
+      }
+
+      .filter-dropdown.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .filter-dropdown h4 {
+        margin: 0 0 14px 0;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .filter-option {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        margin: 6px 0;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid transparent;
+      }
+
+      .filter-option:hover {
+        background: rgba(77, 140, 255, 0.15);
+        border-color: rgba(77, 140, 255, 0.3);
+      }
+
+      .filter-option.active {
+        background: linear-gradient(135deg, rgba(77, 140, 255, 0.25), rgba(138, 77, 255, 0.25));
+        border-color: rgba(138, 77, 255, 0.5);
+      }
+
+      .filter-checkbox {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .filter-option.active .filter-checkbox {
+        background: linear-gradient(135deg, #4d8cff, #8a4dff);
+        border-color: transparent;
+      }
+
+      .filter-checkbox i {
+        color: white;
+        font-size: 0.7rem;
+        opacity: 0;
+        transform: scale(0.5);
+        transition: all 0.2s ease;
+      }
+
+      .filter-option.active .filter-checkbox i {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .filter-label {
+        font-size: 0.95rem;
+        color: white;
+        font-weight: 500;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 1.2rem;
+        display: none;
+      }
+
+      .no-results i {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        display: block;
+        opacity: 0.4;
+      }
+
+      .game-item {
+        display: inline-block;
+      }
+
+      .game-item.hidden {
+        display: none !important;
+      }
+    </style>
   </head>
   <body>
     <div class="bg-effects"></div>
     <a href="/?page=extend" class="back-btn">⬅ Back</a>
 
     <h1>Unblocked Games</h1>
+
+    <!-- Search & Filter -->
+    <div class="search-filter-container">
+      <div class="search-bar">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Search games..." autocomplete="off">
+      </div>
+      <button class="filter-btn" id="filterBtn">
+        <i class="fas fa-sliders-h"></i>
+        <span class="filter-count" id="filterCount">0</span>
+      </button>
+      <div class="filter-dropdown" id="filterDropdown">
+        <h4>Filter by</h4>
+        <div class="filter-option" data-filter="featured">
+          <div class="filter-checkbox"><i class="fas fa-check"></i></div>
+          <span class="filter-label">Featured Games</span>
+        </div>
+        <div class="filter-option" data-filter="touchscreen">
+          <div class="filter-checkbox"><i class="fas fa-check"></i></div>
+          <span class="filter-label">Touchscreen Games</span>
+        </div>
+      </div>
+    </div>
 
   <!-- TEMPLATE
   <spam class="image"><img class="image" src="/game-images/games/" alt="" onclick="window.open('games/')"></spam>
@@ -48,161 +286,109 @@
     <spam class="image"><img class="image" src="/game-images/games/jls.png" alt="JLS Chat" onclick="openGame('/chat/jls.html')"/></spam>
     <spam class="image"><img class="image" src="/game-images/games/jq.png" alt="JimmyQrg" onclick="openGame('/chat/jimmyqrg.html')"/></spam>
 
-    <h2 id="gameSection">FEATURED GAMES</h2> 
-
-    <div class="btn-grid">
-      <spam class="image"><img class="image" src="/game-images/games/rammerhead.png" alt="RammerHead Unblocker" onclick="window.open('https://wiki.schooloqy.com')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/10-minutes-till-dawn.png" alt="10 Minutes Till Dawn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/a-dance-of-fire-and-ice.png" alt="A Dance of Fire and Ice" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/asriel.png" alt="Asriel Dreemurr Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/asriel', '_blank')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/undertale.png" alt="Undertale" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/deltarune.png" alt="Deltarune" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/deltarune.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/angry-birds.png" alt="Angry Birds" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/angry-birds.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/backrooms.png" alt="Backrooms 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/backrooms.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/browser-quest.png" alt="Browser Quest" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/browser-quest.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/bridd-jump.png" alt="Bridd Jump" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/browser-quest.png" alt="Browser Quest" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/browser-quest.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/drift-boss.png" alt="Drift Boss" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/drive-mad.png" alt="Drive Mad" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/drive-mad.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/fnf.png" alt="Friday Night Funkin" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/half-life.png" alt="Half Life" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/half-life.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/hollow-knight.png" alt="Hollow Knight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/hypper-sandbox.png" alt="Hypper Sandbox" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hypper-sandbox.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/karlson.png" alt="Karlson" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/karlson.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/level-devil.png" alt="Level Devil" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/magic-tiles-3.png" alt="Magic Tiles 3" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/magic-tiles-3.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/pvs.png" alt="Plant VS Zombies" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-12-2.png" alt="Eaglercraft 1.12.2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-12-2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/slope.png" alt="Slope" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/solar-smash.png" alt="Solar Smash" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/solar-smash.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/survival-race.png" alt="Survival Race" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/survival-race.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sound-buttons.png" alt="Sound Effect Buttons" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sound-buttons.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/stickman-hook.png" alt="Stickman Hook" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/stickman-hook.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tag.png" alt="Tag" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/thatsnotmyneighbor.png" alt="That's not my Neighbor" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/there-is-no-game.png" alt="There Is No Game" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/there-is-no-game.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tomb-of-the-mask.png" alt="Tomb of the Mask" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tomb-of-the-mask.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/we-become-what-we-behold.png" alt="We Become What we Behold" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')"/></spam> 
-    </div>
-
-    <h2 id="gameSection">TOUCHSCREEN GAMES</h2>
-    <div class="btn-grid">
-      <spam class="image"><img class="image" src="/game-images/games/among-us.png" alt="Among Us" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/a-dance-of-fire-and-ice.png" alt="A Dance of Fire and Ice" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/angry-birds.png" alt="Angry Birds" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/angry-birds.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/bridd-jump.png" alt="Bridd Jump" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/candy-jump.png" alt="Candy Jump" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/crossy-road.png" alt="Crossy Road" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/curveball.png" alt="CurveBall 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/curveball.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/dino.png" alt="Dino" onclick="openGame('https://jimmyqrg.github.io/dino/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/drift-boss.png" alt="Drift Boss" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/drive-mad.png" alt="Drive Mad" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/drive-mad.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/flappy-bird.png" alt="Flappy Bird" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/flappy-bird.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/geo-dash.png" alt="Geometry Dash Lite" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/geo-dash.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/wordle.png" alt="Infinite Wordle" onclick="openGame('https://jimmyqrg.github.io/wordle/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/wordle-noletterdetection.png" alt="Infinite Wordle (No Word Detection)" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/level-devil.png" alt="Level Devil" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/magic-tiles-3.png" alt="Magic Tiles 3" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/magic-tiles-3.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-8-8-t1.png" alt="Eaglercraft 1.8 Touchscreen (EM)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-8-8-t2.png" alt="Eaglercraft 1.8 Touchscreen (PM)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/skyball.png" alt="SkyBall" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/skyball.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sound-buttons.png" alt="Sound Effect Buttons" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sound-buttons.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/stickman-hook.png" alt="Stickman Hook" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/stickman-hook.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers.png" alt="Subway Surfers" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-beijing.png" alt="Subway Surfers Beijing" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-houston.png" alt="Subway Surfers Houston" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-monaco.png" alt="Subway Surfers Monaco" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-newyork.png" alt="Subway Surfers Newyork" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tomb-of-the-mask.png" alt="Tomb of the Mask" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tomb-of-the-mask.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/uno.png" alt="Uno" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/uno.html')"/></spam>
-    </div>
-
     <h2 id="gameSection">ALL GAMES</h2>
     <div id="allGames" class="btn-grid">
-      <spam class="image"><img class="image" src="/game-images/games/10-minutes-till-dawn.png" alt="10 Minutes Till Dawn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/1v1.lol.png" alt="1v1.lol" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/1v1-lol.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/3d-car-simulator.png" alt="3D Car Simulator" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/3d-car-simulator')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/a-dance-of-fire-and-ice.png" alt="A Dance of Fire and Ice" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/among-us.png" alt="Among Us" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/asriel.png" alt="Asriel Dreemurr Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/asriel', '_blank')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/flowey.png" alt="Mega Flowey Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/flowey', '_blank')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/gaster.png" alt="Gaster Boss Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/gaster-fight.html', '_blank')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/last-breath.png" alt="Last Breath" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-last-breath.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-cjs.png" alt="Sans CJS Fight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-cjs-i.png" alt="Sans CJS Fight (Invincible)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs-i.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-frisk-mode.png" alt="Sans Fight Frisk Mode" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-frisk-mode.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-hell-mode.png" alt="Sans Fight Hell Mode" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-hell.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-underfell.png" alt="Underfell Sans" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-underfell-i.png" alt="Underfell Sans (Invincible)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell-i.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans.png" alt="Sans Simulator" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sans-i.png" alt="Sans Simulator Invincible" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-i.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/undertale.png" alt="Undertale" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/undertale-y.png" alt="Undertale Yellow" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale-y.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/deltarune.png" alt="Deltarune" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/deltarune.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/underswap-papyrus.png" alt="Underswap Papyrus Fight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/underswap-papyrus.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/angry-birds.png" alt="Angry Birds" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/angry-birds.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/bottle-flip-3d.png" alt="Bottle Flip 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/bottle-flip-3d.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/bad-parenting-1.png" alt="Bad Parenting 1" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/bad-parenting-1.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/bridd-jump.png" alt="Bridd Jump" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/browser-quest.png" alt="Browser Quest" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/browser-quest.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/candy-jump.png" alt="Candy Jump" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/crossy-road.png" alt="Crossy Road" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/curveball.png" alt="CurveBall 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/curveball.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/doodle-jump.png" alt="Doodle Jump" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/doodle-jump.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/hacks.png" alt="Hacked Client (DRAGONX)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/hacks/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-12-2.png" alt="Eaglercraft 1.12.2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-12-2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-5-2.png" alt="Eaglercraft 1.5.2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-5-2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-8-8-t1.png" alt="Eaglercraft 1.8 Touchscreen (EM)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-8-8-t2.png" alt="Eaglercraft 1.8 Touchscreen (PM)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/r1-8-8.png" alt="Eaglercraft 1.8.8" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/dino.png" alt="Dino" onclick="openGame('https://jimmyqrg.github.io/dino/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/drift-boss.png" alt="Drift Boss" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/drive-mad.png" alt="Drive Mad" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/drive-mad.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/flappy-bird.png" alt="Flappy Bird" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/flappy-bird.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/fnf.png" alt="Friday Night Funkin" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/geo-dash.png" alt="Geometry Dash Lite" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/geo-dash.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/half-life.png" alt="Half Life" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/half-life.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/hex-gl.png" alt="Hex GL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hex-gl.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/hollow-knight.png" alt="Hollow Knight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/hollow-knight.png" alt="If the previous one doesn't work" onclick="openGame('https://login.jimmyqrg.com/jqrg-games/games/hollow-knight-.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/karlson.png" alt="Karlson" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/karlson.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/level-devil.png" alt="Level Devil" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/magic-tiles-3.png" alt="Magic Tiles 3" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/magic-tiles-3.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/melon-playground.png" alt="Melon Playground" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/melon-playground.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/pacman.png" alt="Pacman" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pacman.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/paperio2.png" alt="Paper.io 2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/paperio2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/portal.png" alt="Portals" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/portal.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/pvs.png" alt="Plant VS Zombies" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/skyball.png" alt="SkyBall" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/skyball.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/slope.png" alt="Slope" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/slope-2-players.png" alt="Slope 2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope-2.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/slope-3.png" alt="Slope 3" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope-3.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/snow-rider.png" alt="Snow Rider" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/snow-rider.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/solar-smash.png" alt="Solar Smash" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/solar-smash')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sound-buttons.png" alt="Sound Effect Buttons" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sound-buttons.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/sound-effect-player.png" alt="Don't you Lecture me With your 30$ Haircut" onclick="openGame('https://jimmyqrg.github.io/sound-effects')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/stickman-hook.png" alt="Stickman Hook" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/stickman-hook.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/survival-race.png" alt="Survival Race" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/survival-race.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tag.png" alt="Tag" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tg-playground.png" alt="People Play" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tg-playground.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/thatsnotmyneighbor.png" alt="That's not my Neighbor" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/there-is-no-game.png" alt="There Is No Game" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/there-is-no-game.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/trigger-rally.png" alt="Trigger Rally" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/trigger-rally.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/we-become-what-we-behold.png" alt="We Become What we Behold" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/wordle.png" alt="Infinite Wordle" onclick="openGame('https://jimmyqrg.github.io/wordle')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/wordle-noletterdetection.png" alt="Infinite Wordle (No Word Detection)" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers.png" alt="Subway Surfers" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-beijing.png" alt="Subway Surfers Beijing" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-houston.png" alt="Subway Surfers Houston" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-monaco.png" alt="Subway Surfers Monaco" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/subway-surfers-newyork.png" alt="Subway Surfers Newyork" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tomb-of-the-mask.png" alt="Tomb of the Mask" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tomb-of-the-mask.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/tunnel-rush.png" alt="Tunnel Rush" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tunnel-rush.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/uno.png" alt="Uno" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/uno.html')"/></spam>
-      <spam class="image"><img class="image" src="/game-images/games/zombie-derby-pixel-survival.png" alt="Zombie Derby Pixel Survival" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/zombie-derby-pixel-survival.html')"/></spam>
+      <!-- Featured + Touchscreen -->
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/a-dance-of-fire-and-ice.png" alt="A Dance of Fire and Ice" onclick="openGame('https://jimmyqrg.github.io/a-dance-of-fire-and-ice')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/angry-birds.png" alt="Angry Birds" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/angry-birds.html')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/bridd-jump.png" alt="Bridd Jump" onclick="openGame('https://jimmyqrg.github.io/bridd-jump/')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/drift-boss.png" alt="Drift Boss" onclick="openGame('https://jimmyqrg.github.io/drift-boss/')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/drive-mad.png" alt="Drive Mad" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/drive-mad.html')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/level-devil.png" alt="Level Devil" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/level-devil.html')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/magic-tiles-3.png" alt="Magic Tiles 3" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/magic-tiles-3.html')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/sound-buttons.png" alt="Sound Effect Buttons" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sound-buttons.html')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/stickman-hook.png" alt="Stickman Hook" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/stickman-hook.html')"/></spam>
+      <spam class="image game-item" data-featured="true" data-touchscreen="true"><img class="image" src="/game-images/games/tomb-of-the-mask.png" alt="Tomb of the Mask" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tomb-of-the-mask.html')"/></spam>
+
+      <!-- Featured Only -->
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/rammerhead.png" alt="RammerHead Unblocker" onclick="window.open('https://wiki.schooloqy.com')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/10-minutes-till-dawn.png" alt="10 Minutes Till Dawn" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/10-minutes-till-dawn.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/asriel.png" alt="Asriel Dreemurr Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/asriel', '_blank')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/undertale.png" alt="Undertale" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/deltarune.png" alt="Deltarune" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/deltarune.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/backrooms.png" alt="Backrooms 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/backrooms.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/browser-quest.png" alt="Browser Quest" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/browser-quest.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/fnf.png" alt="Friday Night Funkin" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/fnf.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/half-life.png" alt="Half Life" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/half-life.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/hollow-knight.png" alt="Hollow Knight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hollow-knight.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/hypper-sandbox.png" alt="Hypper Sandbox" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hypper-sandbox.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/karlson.png" alt="Karlson" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/karlson.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/pvs.png" alt="Plant VS Zombies" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pvs.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/r1-12-2.png" alt="Eaglercraft 1.12.2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-12-2.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/slope.png" alt="Slope" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/solar-smash.png" alt="Solar Smash" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/solar-smash.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/survival-race.png" alt="Survival Race" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/survival-race.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/tag.png" alt="Tag" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tag.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/thatsnotmyneighbor.png" alt="That's not my Neighbor" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/thatsnotmyneighbor.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/there-is-no-game.png" alt="There Is No Game" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/there-is-no-game.html')"/></spam>
+      <spam class="image game-item" data-featured="true"><img class="image" src="/game-images/games/we-become-what-we-behold.png" alt="We Become What we Behold" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/we-become-what-we-behold.html')"/></spam>
+
+      <!-- Touchscreen Only -->
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/among-us.png" alt="Among Us" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/among-us.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/candy-jump.png" alt="Candy Jump" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/candy-jump.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/crossy-road.png" alt="Crossy Road" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/crossy-road.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/curveball.png" alt="CurveBall 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/curveball.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/dino.png" alt="Dino" onclick="openGame('https://jimmyqrg.github.io/dino/')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/flappy-bird.png" alt="Flappy Bird" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/flappy-bird.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/geo-dash.png" alt="Geometry Dash Lite" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/geo-dash.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/wordle.png" alt="Infinite Wordle" onclick="openGame('https://jimmyqrg.github.io/wordle/')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/wordle-noletterdetection.png" alt="Infinite Wordle (No Word Detection)" onclick="openGame('https://jimmyqrg.github.io/wordle/no-word-detection/')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/r1-8-8-t1.png" alt="Eaglercraft 1.8 Touchscreen (EM)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t1.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/r1-8-8-t2.png" alt="Eaglercraft 1.8 Touchscreen (PM)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8-t2.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/skyball.png" alt="SkyBall" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/skyball.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/subway-surfers.png" alt="Subway Surfers" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/subway-surfers-beijing.png" alt="Subway Surfers Beijing" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-beijing.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/subway-surfers-houston.png" alt="Subway Surfers Houston" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-houston.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/subway-surfers-monaco.png" alt="Subway Surfers Monaco" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-monaco.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/subway-surfers-newyork.png" alt="Subway Surfers Newyork" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/subway-surfers-newyork.html')"/></spam>
+      <spam class="image game-item" data-touchscreen="true"><img class="image" src="/game-images/games/uno.png" alt="Uno" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/uno.html')"/></spam>
+
+      <!-- Regular Games (no special tags) -->
+      <spam class="image game-item"><img class="image" src="/game-images/games/1v1.lol.png" alt="1v1.lol" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/1v1-lol.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/3d-car-simulator.png" alt="3D Car Simulator" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/3d-car-simulator')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/flowey.png" alt="Mega Flowey Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/flowey', '_blank')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/gaster.png" alt="Gaster Boss Fight" onclick="window.open('https://jimmyqrg.github.io/jqrg-games/games/gaster-fight.html', '_blank')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/last-breath.png" alt="Last Breath" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-last-breath.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-cjs.png" alt="Sans CJS Fight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-cjs-i.png" alt="Sans CJS Fight (Invincible)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-cjs-i.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-frisk-mode.png" alt="Sans Fight Frisk Mode" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-frisk-mode.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-hell-mode.png" alt="Sans Fight Hell Mode" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-hell.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-underfell.png" alt="Underfell Sans" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-underfell-i.png" alt="Underfell Sans (Invincible)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-underfell-i.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans.png" alt="Sans Simulator" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sans-i.png" alt="Sans Simulator Invincible" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/sans-i.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/undertale-y.png" alt="Undertale Yellow" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/undertale-y.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/underswap-papyrus.png" alt="Underswap Papyrus Fight" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/underswap-papyrus.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/bottle-flip-3d.png" alt="Bottle Flip 3D" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/bottle-flip-3d.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/bad-parenting-1.png" alt="Bad Parenting 1" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/bad-parenting-1.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/doodle-jump.png" alt="Doodle Jump" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/doodle-jump.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/hacks.png" alt="Hacked Client (DRAGONX)" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/hacks/')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/r1-5-2.png" alt="Eaglercraft 1.5.2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-5-2.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/r1-8-8.png" alt="Eaglercraft 1.8.8" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/eaglercraft/r1-8-8.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/hex-gl.png" alt="Hex GL" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/hex-gl.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/hollow-knight.png" alt="If the previous one doesn't work" onclick="openGame('https://login.jimmyqrg.com/jqrg-games/games/hollow-knight-.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/melon-playground.png" alt="Melon Playground" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/melon-playground.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/pacman.png" alt="Pacman" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/pacman.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/paperio2.png" alt="Paper.io 2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/paperio2.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/portal.png" alt="Portals" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/portal.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/slope-2-players.png" alt="Slope 2" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope-2.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/slope-3.png" alt="Slope 3" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/slope-3.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/snow-rider.png" alt="Snow Rider" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/snow-rider.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/sound-effect-player.png" alt="Don't you Lecture me With your 30$ Haircut" onclick="openGame('https://jimmyqrg.github.io/sound-effects')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/tg-playground.png" alt="People Play" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tg-playground.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/trigger-rally.png" alt="Trigger Rally" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/trigger-rally.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/tunnel-rush.png" alt="Tunnel Rush" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/tunnel-rush.html')"/></spam>
+      <spam class="image game-item"><img class="image" src="/game-images/games/zombie-derby-pixel-survival.png" alt="Zombie Derby Pixel Survival" onclick="openGame('https://jimmyqrg.github.io/jqrg-games/games/zombie-derby-pixel-survival.html')"/></spam>
     </div>
+
+    <!-- No Results Message -->
+    <div class="no-results" id="noResults">
+      <i class="fas fa-search"></i>
+      No games found matching your search
+    </div>
+
     <br />
-    <spam class="image"><img class="image" src="/game-images/games/you-are-an-idiot.png" alt="You Are An Idiot Web Virus" onclick="openGame('https://jimmyqrg.github.io/you-are-an-idiot/')"/></spam>
+    <spam class="image game-item"><img class="image" src="/game-images/games/you-are-an-idiot.png" alt="You Are An Idiot Web Virus" onclick="openGame('https://jimmyqrg.github.io/you-are-an-idiot/')"/></spam>
     <p style="font-size: 20px; max-width: 400px; margin: 30px auto">
       Warning: This is a remade safe version of a famous web virus, if you are
       using a mobile please don't click in!!! This virus has big loud weird
@@ -252,6 +438,98 @@
         </a>
       </div>
     </footer>
+
+    <script>
+      // Search & Filter Functionality
+      const searchInput = document.getElementById('searchInput');
+      const filterBtn = document.getElementById('filterBtn');
+      const filterDropdown = document.getElementById('filterDropdown');
+      const filterOptions = document.querySelectorAll('.filter-option');
+      const filterCount = document.getElementById('filterCount');
+      const noResults = document.getElementById('noResults');
+      const allGamesContainer = document.getElementById('allGames');
+
+      // Active filters
+      const activeFilters = {
+        featured: false,
+        touchscreen: false
+      };
+
+      // Toggle filter dropdown
+      filterBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterDropdown.classList.toggle('show');
+        filterBtn.classList.toggle('active', filterDropdown.classList.contains('show'));
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!filterDropdown.contains(e.target) && e.target !== filterBtn) {
+          filterDropdown.classList.remove('show');
+          filterBtn.classList.remove('active');
+        }
+      });
+
+      // Filter option click handler
+      filterOptions.forEach(option => {
+        option.addEventListener('click', () => {
+          const filterType = option.dataset.filter;
+          activeFilters[filterType] = !activeFilters[filterType];
+          option.classList.toggle('active', activeFilters[filterType]);
+          updateFilterCount();
+          filterGames();
+        });
+      });
+
+      // Update filter count badge
+      function updateFilterCount() {
+        const count = Object.values(activeFilters).filter(v => v).length;
+        filterCount.textContent = count;
+        filterBtn.classList.toggle('has-filters', count > 0);
+      }
+
+      // Search input handler
+      searchInput.addEventListener('input', filterGames);
+
+      // Main filter function
+      function filterGames() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const gameItems = allGamesContainer.querySelectorAll('.game-item');
+        let visibleCount = 0;
+
+        gameItems.forEach(item => {
+          const img = item.querySelector('img');
+          const altText = img ? img.alt.toLowerCase() : '';
+          
+          // Check search match
+          const matchesSearch = !searchTerm || altText.includes(searchTerm);
+          
+          // Check filter match
+          let matchesFilter = true;
+          if (activeFilters.featured || activeFilters.touchscreen) {
+            matchesFilter = false;
+            if (activeFilters.featured && item.dataset.featured === 'true') {
+              matchesFilter = true;
+            }
+            if (activeFilters.touchscreen && item.dataset.touchscreen === 'true') {
+              matchesFilter = true;
+            }
+          }
+
+          // Show/hide based on both conditions
+          const shouldShow = matchesSearch && matchesFilter;
+          item.classList.toggle('hidden', !shouldShow);
+          
+          if (shouldShow) visibleCount++;
+        });
+
+        // Show/hide no results message
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      // Initialize
+      updateFilterCount();
+    </script>
 
   </body>
 </html>
