@@ -6,6 +6,14 @@
     <title>Minecraft Server List | JimmyQrg Infos</title>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="icon" href="https://jimmyqrg.github.io/info.ico">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="../../../js/style.js"></script>
     <script src="../../../js/cursor.js"></script>
@@ -17,7 +25,7 @@
             <div class="diamond-icon"></div>
             <h1 class="header-title">SERVER LIST</h1>
             <p class="header-subtitle">JimmyQrg Info</p>
-            <p style="color: #a0d2ff; max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
+            <p style="color: rgba(255, 255, 255, 0.7); max-width: 800px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
                 Free server list that are enterable in eaglercraft
             </p>
         </header>
@@ -27,7 +35,7 @@
         </div>
         
         <div class="footer">
-            <p>© 2025 JimmyQrg</p>
+            <p>© 2026 JimmyQrg | ikunbeautiful@gmail.com</p>
         </div>
     </div>
 
@@ -143,19 +151,23 @@
                     const originalText = button.innerHTML;
                     button.innerHTML = '<i class="fas fa-check"></i> IP Copied!';
                     button.style.background = 'linear-gradient(90deg, #00c853, #29ff6a)';
+                    button.style.borderColor = 'transparent';
                     
                     setTimeout(() => {
                         button.innerHTML = originalText;
-                        button.style.background = 'linear-gradient(90deg, #6a2cff, #2f8bff)';
+                        button.style.background = 'rgba(0, 0, 0, 0.6)';
+                        button.style.borderColor = 'white';
                     }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy IP: ', err);
                     button.innerHTML = '<i class="fas fa-times"></i> Failed to Copy';
                     button.style.background = 'linear-gradient(90deg, #ff3b3b, #ff6b2d)';
+                    button.style.borderColor = 'transparent';
                     
                     setTimeout(() => {
                         button.innerHTML = '<i class="fas fa-copy"></i> Copy IP Address';
-                        button.style.background = 'linear-gradient(90deg, #6a2cff, #2f8bff)';
+                        button.style.background = 'rgba(0, 0, 0, 0.6)';
+                        button.style.borderColor = 'white';
                     }, 2000);
                 });
             }

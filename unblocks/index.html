@@ -5,53 +5,96 @@
   <script src="/js/openGame.js"></script>
 
   <link rel="stylesheet" href="/css/main.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <script src="/js/open-game.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
   <script src="/js/panicKey.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home | Infinite Campus</title>
   <link rel="icon" type="image/png" href="infinite-campus.png">
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="/js/style.js"></script>
-    <script src="/js/cursor.js"></script>
+  <script src="/js/cursor.js"></script>
   <style>
     body.portal-page {
       background: url("c6e66984-1a96-4753-b83d-e7824f7c7c2a.png") no-repeat center center fixed;
       background-size: cover;
-      }
-</style>
+    }
+  </style>
 </head>
 <body class="portal-page">
   <div class="bg-effects"></div>
   <!-- Back button -->
   <a href="https://jimmyqrg.github.io/?page=extend" class="back-btn">⬅ Back</a>
 
-  <h1>OTHER UNBLOCKS</h1>
+  <h1 class="page-title">OTHER UNBLOCKS</h1>
 
-  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/dino/')">
-    OFFLINE DINOSOUR GAME
-  </button>
+  <div class="blocks-container">
+    <a href="#" onclick="openGame('https://jimmyqrg.github.io/dino/'); return false;" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-dragon"></i>
+        </div>
+        <div class="block-text">OFFLINE DINOSAUR GAME</div>
+      </div>
+    </a>
+    <a href="https://gn-math.schooloqy.com" target="_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-calculator"></i>
+        </div>
+        <div class="block-text">GN-MATH</div>
+      </div>
+    </a>
+    <a href="#" onclick="openGame('https://jimmyqrg.github.io/unblocks/i-ready-games/'); return false;" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-book-open"></i>
+        </div>
+        <div class="block-text">I-READY GAMES</div>
+      </div>
+    </a>
+  </div>
 
-  <button class="btn" onclick="window.open('https://gn-math.schooloqy.com')">
-    GN-MATH
-  </button>
+  <h2 class="page-title">PROXY</h2>
 
-  <button class="btn" onclick="openGame('https://jimmyqrg.github.io/unblocks/i-ready-games/')">
-    I-READY GAMES
-  </button>
+  <div class="blocks-container">
+    <a href="https://wiki.schooloqy.com" target="_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="block-text">JIMMYQRG'S HACKWIZE</div>
+      </div>
+    </a>
+    <a href="https://unblockit.schooloqy.com" target="_blank" class="block-link">
+      <div class="block">
+        <div class="block-icon">
+          <i class="fas fa-shield-halved"></i>
+        </div>
+        <div class="block-text">RAMMERHEAD</div>
+      </div>
+    </a>
+  </div>
 
-  <h2>PROXY</h2>
+  <p>Wanna create your own game website? Tutorial: <a href="https://docs.google.com/document/d/1ky210XqK9hBFeYQBO_oxZM8o9GmbKGaDafuoqEtcBgI/edit?tab=t.0" style="color:#4d8cff; text-decoration: underline;">Click me</a>.</p>
 
-  <button class="btn" onclick="window.open('https://wiki.schooloqy.com')">
-    JIMMYQRG'S HACKWIZE
-  </button>
-
-  <button class="btn" onclick="window.open('https://unblockit.schooloqy.com')">
-    RAMMERHEAD
-  </button>
-
-  <p>Wanna create your own game website? Totorial: <a href="https://docs.google.com/document/d/1ky210XqK9hBFeYQBO_oxZM8o9GmbKGaDafuoqEtcBgI/edit?tab=t.0" style="color:white;">Click me</a>.</p>
+  <!-- === Footer === -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p class="footer-copyright">copyright ikunbeautiful@gmail.com 2026</p>
+      <a href="https://www.github.com/jimmyqrg/" target="_blank" rel="noopener noreferrer" class="footer-github-link">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </footer>
 
 </body>
 </html>
