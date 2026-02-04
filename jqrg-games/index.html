@@ -53,13 +53,31 @@
         height: calc(100% - 12px);
         top: 6px;
         border-radius: 44px;
-        background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #f472b6 100%);
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Gradient loops: cyan → purple → pink → purple → cyan (seamless) */
+        background: linear-gradient(
+          90deg,
+          #00d4ff 0%,
+          #7c3aed 25%,
+          #f472b6 50%,
+          #7c3aed 75%,
+          #00d4ff 100%
+        );
+        background-size: 200% 100%;
+        animation: gradientFlow 3s linear infinite;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    top 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 0;
         box-shadow: 
           0 0 20px rgba(0, 212, 255, 0.4),
           0 0 40px rgba(124, 58, 237, 0.3),
           inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      @keyframes gradientFlow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
       }
 
       .tab-btn {
