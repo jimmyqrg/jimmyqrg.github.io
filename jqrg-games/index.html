@@ -774,6 +774,9 @@
         const gameItems = allGamesContainer.querySelectorAll('.game-item');
         let visibleCount = 0;
 
+        // Get list of active filter keys
+        const activeFilterKeys = Object.keys(activeFilters).filter(key => activeFilters[key]);
+
         gameItems.forEach(item => {
           const img = item.querySelector('img');
           const altText = img ? img.alt.toLowerCase() : '';
@@ -781,25 +784,13 @@
           // Check search match
           const matchesSearch = !searchTerm || altText.includes(searchTerm);
           
-          // Check filter match - AND logic when both filters are active
+          // Check filter match - AND logic: must match ALL active filters
           let matchesFilter = true;
-          const bothFiltersActive = activeFilters.featured && activeFilters.touchscreen && activeFilters.j;
-          
-          if (bothFiltersActive) {
-            // AND logic: must match BOTH filters
-            matchesFilter = item.dataset.featured === 'true' && item.dataset.touchscreen === 'true';
-          } else if (activeFilters.featured || activeFilters.touchscreen || activeFilters.j) {
-            // Single filter active: match that filter
-            matchesFilter = false;
-            if (activeFilters.featured && item.dataset.featured === 'true') {
-              matchesFilter = true;
-            }
-            if (activeFilters.touchscreen && item.dataset.touchscreen === 'true') {
-              matchesFilter = true;
-            }
-            if (activeFilters.j && item.dataset.j === 'true') {
-              matchesFilter = true;
-            }
+          if (activeFilterKeys.length > 0) {
+            // Game must match EVERY active filter
+            matchesFilter = activeFilterKeys.every(filterKey => 
+              item.dataset[filterKey] === 'true'
+            );
           }
 
           // Show/hide based on both conditions
