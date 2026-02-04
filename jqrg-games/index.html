@@ -27,55 +27,158 @@
       <script src="../js/cursor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      /* Tab Navigation */
+      /* ===== NEW TAB DESIGN - Floating Pill with Glow ===== */
       .tab-container {
         display: flex;
         justify-content: center;
-        gap: 8px;
-        margin: 30px auto 20px;
-        max-width: 600px;
-        width: 90%;
-        flex-wrap: wrap;
+        margin: 35px auto 25px;
+        position: relative;
+      }
+
+      .tab-rail {
+        display: flex;
+        background: linear-gradient(145deg, rgba(15, 15, 25, 0.9), rgba(25, 25, 40, 0.85));
+        border-radius: 50px;
+        padding: 6px;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 
+          0 10px 40px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+      }
+
+      .tab-slider {
+        position: absolute;
+        height: calc(100% - 12px);
+        top: 6px;
+        border-radius: 44px;
+        background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #f472b6 100%);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 0;
+        box-shadow: 
+          0 0 20px rgba(0, 212, 255, 0.4),
+          0 0 40px rgba(124, 58, 237, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
       }
 
       .tab-btn {
-        padding: 12px 24px;
-        border-radius: 12px;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        background: rgba(0, 0, 0, 0.5);
-        color: white;
-        font-size: 0.95rem;
+        padding: 14px 28px;
+        border-radius: 44px;
+        border: none;
+        background: transparent;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.9rem;
         font-family: "Oxanium", sans-serif;
-        font-weight: 600;
+        font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 1.5px;
+        position: relative;
+        z-index: 1;
+        white-space: nowrap;
       }
 
       .tab-btn:hover {
-        border-color: rgba(77, 140, 255, 0.6);
-        background: rgba(77, 140, 255, 0.2);
+        color: rgba(255, 255, 255, 0.85);
       }
 
       .tab-btn.active {
-        border-color: transparent;
-        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-        background-size: 300% 100%;
-        animation: gradientTravel 4s linear infinite;
-        box-shadow: 0 0 15px rgba(77, 140, 255, 0.5),
-          0 0 30px rgba(138, 77, 255, 0.3);
+        color: white;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      }
+
+      .tab-btn i {
+        margin-right: 8px;
+        font-size: 0.85rem;
       }
 
       /* Tab Content */
       .tab-content {
         display: none;
+        animation: fadeIn 0.4s ease;
       }
 
       .tab-content.active {
         display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* ===== FIX: Games Grid Layout ===== */
+      #allGames.btn-grid {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+        justify-items: center;
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      #allGames .game-item {
+        display: block;
+        width: 100%;
+        max-width: 180px;
+      }
+
+      #allGames .game-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      #allGames .game-item:hover img {
+        transform: scale(1.05) translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Responsive Tabs & Grid */
+      @media (max-width: 700px) {
+        .tab-rail {
+          flex-direction: column;
+          border-radius: 20px;
+          padding: 8px;
+          width: 90%;
+          max-width: 300px;
+        }
+        
+        .tab-slider {
+          width: calc(100% - 16px) !important;
+          left: 8px !important;
+          height: auto;
+          border-radius: 16px;
+        }
+        
+        .tab-btn {
+          padding: 12px 20px;
+          width: 100%;
+          text-align: center;
+          font-size: 0.85rem;
+        }
+        
+        #allGames.btn-grid {
+          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+          gap: 12px;
+          width: 95%;
+        }
+        
+        #allGames .game-item {
+          max-width: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #allGames.btn-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+        }
       }
 
       /* Search & Filter Styles */
@@ -324,9 +427,12 @@
 
     <!-- Tab Navigation -->
     <div class="tab-container">
-      <button class="tab-btn active" data-tab="all-games">All Games</button>
-      <button class="tab-btn" data-tab="collections">Collections</button>
-      <button class="tab-btn" data-tab="others">Others</button>
+      <div class="tab-rail">
+        <div class="tab-slider" id="tabSlider"></div>
+        <button class="tab-btn active" data-tab="all-games"><i class="fas fa-gamepad"></i>All Games</button>
+        <button class="tab-btn" data-tab="collections"><i class="fas fa-layer-group"></i>Collections</button>
+        <button class="tab-btn" data-tab="others"><i class="fas fa-ellipsis-h"></i>Others</button>
+      </div>
     </div>
 
     <!-- ========== ALL GAMES TAB ========== -->
@@ -540,9 +646,38 @@
     </footer>
 
     <script>
-      // Tab Functionality
+      // Tab Functionality with Sliding Indicator
       const tabBtns = document.querySelectorAll('.tab-btn');
       const tabContents = document.querySelectorAll('.tab-content');
+      const tabSlider = document.getElementById('tabSlider');
+
+      // Position the slider on the active tab
+      function moveSlider(activeBtn) {
+        const isMobile = window.innerWidth <= 700;
+        if (isMobile) {
+          tabSlider.style.left = '8px';
+          tabSlider.style.top = activeBtn.offsetTop + 'px';
+          tabSlider.style.width = 'calc(100% - 16px)';
+          tabSlider.style.height = activeBtn.offsetHeight + 'px';
+        } else {
+          tabSlider.style.left = activeBtn.offsetLeft + 'px';
+          tabSlider.style.top = '6px';
+          tabSlider.style.width = activeBtn.offsetWidth + 'px';
+          tabSlider.style.height = 'calc(100% - 12px)';
+        }
+      }
+
+      // Initialize slider position
+      window.addEventListener('load', () => {
+        const activeTab = document.querySelector('.tab-btn.active');
+        if (activeTab) moveSlider(activeTab);
+      });
+
+      // Reposition on resize
+      window.addEventListener('resize', () => {
+        const activeTab = document.querySelector('.tab-btn.active');
+        if (activeTab) moveSlider(activeTab);
+      });
 
       tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -551,6 +686,9 @@
           // Update active tab button
           tabBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
+          
+          // Move slider to active tab
+          moveSlider(btn);
           
           // Update active tab content
           tabContents.forEach(content => {
