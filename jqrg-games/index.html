@@ -475,6 +475,10 @@
             <div class="filter-checkbox"><i class="fas fa-check"></i></div>
             <span class="filter-label">Touchscreen Games</span>
           </div>
+          <div class="filter-option" data-filter="j">
+            <div class="filter-checkbox"><i class="fas fa-check"></i></div>
+            <span class="filter-label">JimmyQrg Original Games</span>
+          </div>
         </div>
       </div>
 
@@ -779,18 +783,21 @@
           
           // Check filter match - AND logic when both filters are active
           let matchesFilter = true;
-          const bothFiltersActive = activeFilters.featured && activeFilters.touchscreen;
+          const bothFiltersActive = activeFilters.featured && activeFilters.touchscreen && activeFilters.j;
           
           if (bothFiltersActive) {
             // AND logic: must match BOTH filters
             matchesFilter = item.dataset.featured === 'true' && item.dataset.touchscreen === 'true';
-          } else if (activeFilters.featured || activeFilters.touchscreen) {
+          } else if (activeFilters.featured || activeFilters.touchscreen || activeFilters.j) {
             // Single filter active: match that filter
             matchesFilter = false;
             if (activeFilters.featured && item.dataset.featured === 'true') {
               matchesFilter = true;
             }
             if (activeFilters.touchscreen && item.dataset.touchscreen === 'true') {
+              matchesFilter = true;
+            }
+            if (activeFilters.j && item.dataset.j === 'true') {
               matchesFilter = true;
             }
           }
