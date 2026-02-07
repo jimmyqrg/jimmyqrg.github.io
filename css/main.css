@@ -2049,15 +2049,28 @@ body {
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        /* Use filter drop-shadow for glow (works with transparent text) */
-        filter: drop-shadow(0 0 8px rgba(77, 140, 255, 0.8))
-                drop-shadow(0 0 20px rgba(138, 77, 255, 0.6))
-                drop-shadow(0 0 40px rgba(255, 77, 184, 0.4));
         margin-bottom: 20px;
         letter-spacing: 4px;
         font-weight: 600;
         position: relative;
         display: inline-block;
+        animation: gradientTravel 6s linear infinite;
+      }
+
+      /* Glow effect using pseudo-element */
+      body.info-page .portal-title::before {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: blur(15px);
+        opacity: 0.8;
         animation: gradientTravel 6s linear infinite;
       }
 
@@ -2069,15 +2082,28 @@ body {
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
-        /* Use filter drop-shadow for glow (works with transparent text) */
-        filter: drop-shadow(0 0 8px rgba(77, 140, 255, 0.8))
-                drop-shadow(0 0 20px rgba(138, 77, 255, 0.6))
-                drop-shadow(0 0 40px rgba(255, 77, 184, 0.4));
         margin-bottom: 20px;
         letter-spacing: 4px;
         font-weight: 600;
         position: relative;
         display: inline-block;
+        animation: gradientTravel 6s linear infinite;
+      }
+
+      /* Glow effect using pseudo-element */
+      body.info-page .header-title::before {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: blur(15px);
+        opacity: 0.8;
         animation: gradientTravel 6s linear infinite;
       }
 
