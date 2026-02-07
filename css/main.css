@@ -348,6 +348,31 @@
         transform: scale(1.1);
       }
 
+      /* PWA Install Block - Special styling */
+      .block.install-block {
+        border: 2px solid rgba(0, 212, 255, 0.6);
+        background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15));
+        animation: installPulse 3s ease-in-out infinite;
+      }
+
+      .block.install-block .block-icon i {
+        color: #00d4ff;
+      }
+
+      .block.install-block:hover {
+        border-color: rgba(0, 212, 255, 1);
+        background: linear-gradient(90deg, rgba(0, 212, 255, 1), rgba(124, 58, 237, 1), rgba(244, 114, 182, 1), rgba(0, 212, 255, 1));
+      }
+
+      @keyframes installPulse {
+        0%, 100% {
+          box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+        50% {
+          box-shadow: 0 0 35px rgba(0, 212, 255, 0.5), inset 0 0 25px rgba(0, 212, 255, 0.2);
+        }
+      }
+
       @keyframes diamondShineSweep {
         0% {
           transform: translateX(-100%) translateY(-100%) rotate(45deg);

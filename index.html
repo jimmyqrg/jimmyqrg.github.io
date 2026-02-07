@@ -51,6 +51,11 @@
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#4d8cff" />
+    <!-- iOS PWA support -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="JimmyQrg" />
+    <link rel="apple-touch-icon" href="/game-images/games/jq.png" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home | JQRG</title>
@@ -124,7 +129,19 @@
           <div class="block-text">JQRGD TEST</div>
         </div>
       </a>
+      <!-- PWA Install Block -->
+      <div class="block-link" id="installAppBtn" style="display: none; cursor: pointer;">
+        <div class="block install-block">
+          <div class="block-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <div class="block-text">INSTALL APP</div>
+        </div>
+      </div>
     </div>
+
+    <!-- PWA Install Status -->
+    <p id="installStatus" style="display: none; text-align: center; padding: 10px 20px; margin: 10px auto; max-width: 500px; border-radius: 10px; background: rgba(0,0,0,0.3);"></p>
 
     <p>
       <span class="announcement-link">Announcements (Click to reopen)</span
@@ -462,8 +479,14 @@
 
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker
-            .register("sw.js")
-            .then(() => console.log("Service Worker registered"))
+            .register("/sw.js", { scope: "/" })
+            .then((registration) => {
+              console.log("Service Worker registered with scope:", registration.scope);
+              // Check for updates
+              registration.addEventListener('updatefound', () => {
+                console.log('Service Worker update found');
+              });
+            })
             .catch((err) =>
               console.error("Service Worker registration failed:", err)
             );
