@@ -2055,6 +2055,7 @@ body {
         position: relative;
         display: inline-block;
         animation: gradientTravel 6s linear infinite;
+        isolation: isolate;
       }
 
       /* Glow effect using pseudo-element */
@@ -2088,6 +2089,7 @@ body {
         position: relative;
         display: inline-block;
         animation: gradientTravel 6s linear infinite;
+        isolation: isolate;
       }
 
       /* Glow effect using pseudo-element */
