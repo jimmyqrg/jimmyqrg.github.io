@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jqrg-pwa-v3';
+const CACHE_NAME = 'jqrg-pwa-v4';
 
 // Complete list of all source files to pre-cache
 const urlsToCache = [
@@ -25,6 +25,7 @@ const urlsToCache = [
   '/github.png',
   '/jqrg-jiushifen.png',
   '/currentDomain.txt',
+  '/u/ubgu-logo.png',
 
   // ============ CSS FILES ============
   '/css/main.css',

@@ -518,6 +518,22 @@
         background: rgba(255, 255, 255, 0.1);
       }
 
+      .footer-partner-logo {
+        position: absolute;
+        left: 20px;
+        bottom: 10px;
+        height: 40px;
+        width: auto;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+      }
+
+      .footer-partner-logo:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
       /* ---------- Modals (panels that match button style) ---------- */
       .modal-overlay {
         position: fixed;
