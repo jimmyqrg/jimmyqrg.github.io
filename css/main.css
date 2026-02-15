@@ -534,6 +534,11 @@
         transform: scale(1.1);
       }
 
+      /* Ensure all footers have position relative for partner logo */
+      footer, .footer, .site-footer {
+        position: relative;
+      }
+
       /* ---------- Modals (panels that match button style) ---------- */
       .modal-overlay {
         position: fixed;
@@ -2070,25 +2075,19 @@ body {
         font-weight: 600;
         position: relative;
         display: inline-block;
-        animation: gradientTravel 6s linear infinite;
-        isolation: isolate;
+        animation: gradientTravel 6s linear infinite, portalTitleGlow 4s ease-in-out infinite;
       }
 
-      /* Glow effect using pseudo-element */
-      body.info-page .portal-title::before {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        filter: blur(15px);
-        opacity: 0.8;
-        animation: gradientTravel 6s linear infinite;
+      @keyframes portalTitleGlow {
+        0%, 100% {
+          filter: drop-shadow(0 0 10px rgba(77, 140, 255, 0.8)) drop-shadow(0 0 20px rgba(138, 77, 255, 0.6)) drop-shadow(0 0 30px rgba(255, 77, 184, 0.4));
+        }
+        33% {
+          filter: drop-shadow(0 0 10px rgba(138, 77, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 77, 184, 0.6)) drop-shadow(0 0 30px rgba(77, 140, 255, 0.4));
+        }
+        66% {
+          filter: drop-shadow(0 0 10px rgba(255, 77, 184, 0.8)) drop-shadow(0 0 20px rgba(77, 140, 255, 0.6)) drop-shadow(0 0 30px rgba(138, 77, 255, 0.4));
+        }
       }
 
       body.info-page .header-title {
@@ -2104,25 +2103,7 @@ body {
         font-weight: 600;
         position: relative;
         display: inline-block;
-        animation: gradientTravel 6s linear infinite;
-        isolation: isolate;
-      }
-
-      /* Glow effect using pseudo-element */
-      body.info-page .header-title::before {
-        content: attr(data-text);
-        position: absolute;
-        left: 0;
-        top: 0;
-        z-index: -1;
-        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        filter: blur(15px);
-        opacity: 0.8;
-        animation: gradientTravel 6s linear infinite;
+        animation: gradientTravel 6s linear infinite, portalTitleGlow 4s ease-in-out infinite;
       }
 
       @keyframes portalGlow {

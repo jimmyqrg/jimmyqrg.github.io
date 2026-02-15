@@ -365,4 +365,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   ensureModalBody('announcementContent');
   ensureModalBody('settingsContent');
+
+  // === Footer Partner Logo Injection ===
+  const footer = document.querySelector('.site-footer, .footer, footer');
+  if (footer && !footer.querySelector('.footer-partner-logo')) {
+    const logo = document.createElement('img');
+    logo.src = '/u/ubgu-logo.png';
+    logo.alt = 'UBGU Logo';
+    logo.className = 'footer-partner-logo';
+    logo.onclick = function() { window.open('https://ubgameunion.neocities.org/', '_blank'); };
+    footer.insertBefore(logo, footer.firstChild);
+  }
 });
