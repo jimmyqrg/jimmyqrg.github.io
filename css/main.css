@@ -521,22 +521,41 @@
       .footer-partner-logo {
         position: absolute;
         left: 20px;
-        bottom: 10px;
-        height: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 36px;
         width: auto;
         cursor: pointer;
-        opacity: 0.7;
+        opacity: 0.6;
         transition: all 0.3s ease;
       }
 
       .footer-partner-logo:hover {
         opacity: 1;
-        transform: scale(1.1);
+        transform: translateY(-50%) scale(1.1);
       }
 
       /* Ensure all footers have position relative for partner logo */
       footer, .footer, .site-footer {
         position: relative;
+        padding-left: 80px !important;
+        padding-right: 80px !important;
+      }
+
+      @media (max-width: 600px) {
+        .footer-partner-logo {
+          position: static;
+          transform: none;
+          display: block;
+          margin: 0 auto 15px;
+        }
+        .footer-partner-logo:hover {
+          transform: scale(1.1);
+        }
+        footer, .footer, .site-footer {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
       }
 
       /* ---------- Modals (panels that match button style) ---------- */
