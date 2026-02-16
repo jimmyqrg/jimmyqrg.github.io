@@ -662,14 +662,15 @@
       }
 
       .footer-partner-logo {
-        position: absolute;
+        position: fixed;
         left: 20px;
-        bottom: 15px;
+        bottom: 20px;
         height: 32px;
         width: auto;
         cursor: pointer;
         opacity: 0.5;
         transition: all 0.3s ease;
+        z-index: 100;
       }
 
       .footer-partner-logo:hover {
@@ -677,20 +678,11 @@
         transform: scale(1.1);
       }
 
-      /* Ensure all footers have position relative for partner logo */
-      footer, .footer, .site-footer {
-        position: relative;
-      }
-
       @media (max-width: 500px) {
         .footer-partner-logo {
-          position: static;
-          transform: none;
-          display: block;
-          margin: 0 auto 15px;
-        }
-        .footer-partner-logo:hover {
-          transform: scale(1.1);
+          left: 10px;
+          bottom: 10px;
+          height: 28px;
         }
       }
 
