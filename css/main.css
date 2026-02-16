@@ -19,6 +19,147 @@
         font-family: var(--title-font) !important;
       }
 
+      /* ---------- Placeholder Loading System ---------- */
+      .placeholder-loading {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(40, 40, 50, 0.8), rgba(30, 30, 40, 0.9));
+        border-radius: inherit;
+      }
+
+      .placeholder-loading::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          rgba(77, 140, 255, 0.15),
+          rgba(138, 77, 255, 0.08),
+          transparent
+        );
+        animation: placeholderShimmer 1.5s ease-in-out infinite;
+      }
+
+      .placeholder-loading::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        margin: -12px 0 0 -12px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-top-color: #4d8cff;
+        border-radius: 50%;
+        animation: placeholderSpin 0.8s linear infinite;
+      }
+
+      @keyframes placeholderShimmer {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+
+      @keyframes placeholderSpin {
+        to { transform: rotate(360deg); }
+      }
+
+      /* Image placeholder */
+      .placeholder-image {
+        aspect-ratio: 1;
+        min-width: 80px;
+        min-height: 80px;
+      }
+
+      /* Block placeholder */
+      .placeholder-block {
+        min-height: 120px;
+        border-radius: var(--panel-radius);
+      }
+
+      /* Text placeholder */
+      .placeholder-text {
+        height: 1.2em;
+        min-width: 100px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+
+      .placeholder-text.short { width: 60px; }
+      .placeholder-text.medium { width: 120px; }
+      .placeholder-text.long { width: 200px; }
+
+      /* Hide actual content while loading */
+      .content-loading {
+        opacity: 0 !important;
+        position: absolute !important;
+        pointer-events: none !important;
+      }
+
+      /* Fade in when loaded */
+      .content-loaded {
+        animation: contentFadeIn 0.4s ease-out forwards;
+      }
+
+      @keyframes contentFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Pulse animation for slow-loading items */
+      .placeholder-slow::before {
+        animation: placeholderShimmerSlow 2s ease-in-out infinite;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 200, 100, 0.1),
+          rgba(255, 150, 50, 0.15),
+          rgba(255, 200, 100, 0.1),
+          transparent
+        );
+      }
+
+      .placeholder-slow::after {
+        border-top-color: #ffaa4d;
+      }
+
+      @keyframes placeholderShimmerSlow {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+
+      /* Very slow loading - red tint */
+      .placeholder-very-slow::before {
+        animation: placeholderShimmerVerySlow 2.5s ease-in-out infinite;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 100, 100, 0.1),
+          rgba(255, 77, 77, 0.15),
+          rgba(255, 100, 100, 0.1),
+          transparent
+        );
+      }
+
+      .placeholder-very-slow::after {
+        border-top-color: #ff4d4d;
+      }
+
+      @keyframes placeholderShimmerVerySlow {
+        0% { left: -100%; }
+        100% { left: 100%; }
+      }
+
       /* ---------- Base ---------- */
       * {
         box-sizing: border-box;
@@ -521,28 +662,25 @@
       .footer-partner-logo {
         position: absolute;
         left: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        height: 36px;
+        bottom: 15px;
+        height: 32px;
         width: auto;
         cursor: pointer;
-        opacity: 0.6;
+        opacity: 0.5;
         transition: all 0.3s ease;
       }
 
       .footer-partner-logo:hover {
         opacity: 1;
-        transform: translateY(-50%) scale(1.1);
+        transform: scale(1.1);
       }
 
       /* Ensure all footers have position relative for partner logo */
       footer, .footer, .site-footer {
         position: relative;
-        padding-left: 80px !important;
-        padding-right: 80px !important;
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 500px) {
         .footer-partner-logo {
           position: static;
           transform: none;
@@ -551,10 +689,6 @@
         }
         .footer-partner-logo:hover {
           transform: scale(1.1);
-        }
-        footer, .footer, .site-footer {
-          padding-left: 20px !important;
-          padding-right: 20px !important;
         }
       }
 
@@ -845,6 +979,63 @@
       input[type="checkbox"]:checked {
         background: linear-gradient(135deg, var(--glow-start), var(--glow-end));
         border-color: transparent;
+      }
+
+      /* Install App Button */
+      .install-btn {
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 14px 28px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, #4d8cff, #8a4dff);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(77, 140, 255, 0.3);
+        font-family: var(--font);
+      }
+
+      .install-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(77, 140, 255, 0.5), 0 0 30px rgba(138, 77, 255, 0.3);
+        background: linear-gradient(135deg, #5d9cff, #9a5aff);
+      }
+
+      .install-btn:active {
+        transform: translateY(0);
+      }
+
+      .install-btn i {
+        font-size: 1.1rem;
+      }
+
+      .install-status {
+        margin-top: 12px;
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        display: none;
+      }
+
+      .install-status:not(:empty) {
+        display: block;
+      }
+
+      .install-status.success {
+        background: rgba(77, 255, 77, 0.15);
+        color: #4dff4d;
+        border: 1px solid rgba(77, 255, 77, 0.3);
+      }
+
+      .install-status.warning {
+        background: rgba(255, 170, 77, 0.15);
+        color: #ffaa4d;
+        border: 1px solid rgba(255, 170, 77, 0.3);
       }
 
       .small-note {
@@ -2081,48 +2272,16 @@ body {
         transform-style: preserve-3d;
       }
 
-      body.info-page .portal-title {
-        font-size: 5rem;
-        font-family: var(--title-font);
-        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        margin-bottom: 20px;
-        letter-spacing: 4px;
-        font-weight: 600;
-        position: relative;
-        display: inline-block;
-        animation: gradientTravel 6s linear infinite, portalTitleGlow 4s ease-in-out infinite;
-      }
-
-      @keyframes portalTitleGlow {
-        0%, 100% {
-          filter: drop-shadow(0 0 10px rgba(77, 140, 255, 0.8)) drop-shadow(0 0 20px rgba(138, 77, 255, 0.6)) drop-shadow(0 0 30px rgba(255, 77, 184, 0.4));
-        }
-        33% {
-          filter: drop-shadow(0 0 10px rgba(138, 77, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 77, 184, 0.6)) drop-shadow(0 0 30px rgba(77, 140, 255, 0.4));
-        }
-        66% {
-          filter: drop-shadow(0 0 10px rgba(255, 77, 184, 0.8)) drop-shadow(0 0 20px rgba(77, 140, 255, 0.6)) drop-shadow(0 0 30px rgba(138, 77, 255, 0.4));
-        }
-      }
-
+      body.info-page .portal-title,
       body.info-page .header-title {
-        font-size: 4.5rem;
+        font-size: 2.8rem;
         font-family: var(--title-font);
-        background: linear-gradient(90deg, #4d8cff, #8a4dff, #ff4db8, #4d8cff);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
+        color: white;
         margin-bottom: 20px;
-        letter-spacing: 4px;
+        letter-spacing: 2px;
         font-weight: 600;
         position: relative;
-        display: inline-block;
-        animation: gradientTravel 6s linear infinite, portalTitleGlow 4s ease-in-out infinite;
+        text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
       }
 
       @keyframes portalGlow {
@@ -2500,11 +2659,9 @@ body {
         body.info-page .panels-container {
           grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
         }
-        body.info-page .portal-title {
-          font-size: 4rem;
-        }
+        body.info-page .portal-title,
         body.info-page .header-title {
-          font-size: 3.8rem;
+          font-size: 2.5rem;
         }
       }
 
@@ -2522,11 +2679,9 @@ body {
         body.info-page .main-container {
           padding: 20px;
         }
-        body.info-page .portal-title {
-          font-size: 3rem;
-        }
+        body.info-page .portal-title,
         body.info-page .header-title {
-          font-size: 3rem;
+          font-size: 2rem;
         }
         body.info-page .portal-panel,
         body.info-page .server-card {

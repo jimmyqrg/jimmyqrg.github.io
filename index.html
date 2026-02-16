@@ -129,19 +129,7 @@
           <div class="block-text">JQRGD TEST</div>
         </div>
       </a>
-      <!-- PWA Install Block -->
-      <div class="block-link" id="installAppBtn" style="display: none; cursor: pointer;">
-        <div class="block install-block">
-          <div class="block-icon">
-            <i class="fas fa-download"></i>
-          </div>
-          <div class="block-text">INSTALL APP</div>
-        </div>
-      </div>
     </div>
-
-    <!-- PWA Install Status -->
-    <p id="installStatus" style="display: none; text-align: center; padding: 10px 20px; margin: 10px auto; max-width: 500px; border-radius: 10px; background: rgba(0,0,0,0.3);"></p>
 
     <p>
       <span class="announcement-link">Announcements (Click to reopen)</span
@@ -418,6 +406,22 @@
         <button id="unauthorizeBtn" class="btn" style="margin-top: 10px">
           UNAUTHORIZE
         </button>
+
+        <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
+
+        <!-- ========== INSTALL APP ========== -->
+        <h3>📲 Install App</h3>
+        
+        <p style="opacity: 0.8; margin-bottom: 15px;">
+          Install this website as an app on your device for quick access and offline use.
+        </p>
+        
+        <button id="installAppBtn" class="install-btn" style="display: none;">
+          <i class="fas fa-download"></i>
+          <span>Install App</span>
+        </button>
+        
+        <p id="installStatus" class="install-status"></p>
 
         <hr style="border: 1px solid rgba(255,255,255,0.2); margin: 30px 0;">
 
@@ -832,8 +836,7 @@
           ) {
             if (installStatus) {
               installStatus.textContent = "✓ App is already installed";
-              installStatus.style.display = "block";
-              installStatus.style.color = "#4dff4d";
+              installStatus.className = "install-status success";
             }
             if (installAppBtn) installAppBtn.style.display = "none";
             return true;
@@ -851,8 +854,8 @@
             deferredPrompt = e;
 
             // Show install button
-            if (installAppBtn) installAppBtn.style.display = "block";
-            if (installStatus) installStatus.style.display = "none";
+            if (installAppBtn) installAppBtn.style.display = "inline-flex";
+            if (installStatus) installStatus.textContent = "";
 
             // Add click listener only once
             if (!installBtnListenerAdded) {
@@ -868,8 +871,7 @@
           window.addEventListener("appinstalled", () => {
             if (installStatus) {
               installStatus.textContent = "✓ App installed successfully!";
-              installStatus.style.display = "block";
-              installStatus.style.color = "#4dff4d";
+              installStatus.className = "install-status success";
             }
             if (installAppBtn) installAppBtn.style.display = "none";
             deferredPrompt = null;
@@ -894,8 +896,7 @@
                   installStatus.textContent =
                     'Use your browser menu (⋮) and select "Install [App Name]"';
                 }
-                installStatus.style.display = "block";
-                installStatus.style.color = "#ffaa4d";
+                installStatus.className = "install-status warning";
               }
             }
           }, 2000);
