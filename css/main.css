@@ -1264,7 +1264,7 @@ body {
         transition: transform calc(0.5s + var(--tilt-speed, 0s)) ease;
       }
       .image img::before {
-        content: "";
+        content: attr(data-alt);
         position: absolute;
         top: -50%;
         left: -50%;
@@ -1284,7 +1284,7 @@ body {
         pointer-events: none;
       }
       .image img::after {
-        content: "";
+        content: attr(data-alt);
         position: absolute;
         top: 0;
         left: 0;
