@@ -507,7 +507,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Copy alt to data-alt for image alt display
-  const images = document.querySelectorAll('.game-image img, .collection-img img');
+  const images = document.querySelectorAll('.game-item img, .collection-img img');
   images.forEach(img => {
     if (img.alt && !img.parentElement.getAttribute('data-alt')) {
       img.parentElement.setAttribute('data-alt', img.alt);
