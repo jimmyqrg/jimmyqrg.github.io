@@ -90,14 +90,6 @@ document.addEventListener("DOMContentLoaded", function() {
       cursorImages.push(img);
     }
 
-    // Preload all cursor images to prevent lag during animation
-    const cursorImages = [];
-    for (let i = 1; i <= totalFrames; i++) {
-      const img = new Image();
-      img.src = `${basePath}cursor${i}.png`;
-      cursorImages.push(img);
-    }
-
     // Initialize cursor state
     if (!isCursorEnabled()) {
       // Ensure cursor is disabled

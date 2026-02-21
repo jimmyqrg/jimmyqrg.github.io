@@ -1,8 +1,8 @@
-(async function () {
-  const OLD_DOMAIN = "https://login.jimmyqrg.com";
+let currentDomainCache = null;
 
-  // 1. Load currentDomain.txt
-  let newDomain;
+async function getCurrentDomain() {
+  if (currentDomainCache) return currentDomainCache;
+  
   try {
     const response = await fetch("/currentDomain.txt");
     const domain = (await response.text()).trim();
