@@ -157,6 +157,25 @@
         box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
       }
 
+      /* Game name label */
+      #allGames .game-item .game-label {
+        display: block;
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.85);
+        text-align: center;
+        font-family: "Oxanium", sans-serif;
+        font-weight: 500;
+        line-height: 1.3;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      #allGames .game-item:hover .game-label {
+        color: white;
+      }
+
       /* Responsive Tabs & Grid */
       @media (max-width: 700px) {
         .tab-rail {
@@ -815,6 +834,22 @@
 
       // Initialize
       updateFilterCount();
+
+      // Add game labels from alt text
+      function addGameLabels() {
+        const gameItems = document.querySelectorAll('#allGames .game-item');
+        gameItems.forEach(item => {
+          if (item.querySelector('.game-label')) return; // Already has label
+          const img = item.querySelector('img');
+          if (img && img.alt) {
+            const label = document.createElement('span');
+            label.className = 'game-label';
+            label.textContent = img.alt;
+            item.appendChild(label);
+          }
+        });
+      }
+      addGameLabels();
     </script>
 
   </body>

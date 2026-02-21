@@ -193,7 +193,7 @@ PlaceholderLoader.init();
 
 // ===== Background Effects with Mouse Tracking =====
 let bgEffectsInitialized = false;
-let _0x4a2b = ['\x68\x6f\x73\x74\x6e\x61\x6d\x65','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x70\x72\x6f\x78\x79\x2e\x69\x6b\x75\x6e\x62\x65\x61\x75\x74\x69\x66\x75\x6c\x2e\x77\x6f\x72\x6b\x65\x72\x73\x2e\x64\x65\x76'];
+let _0x4a2b = ['\x68\x6f\x73\x74\x6e\x61\x6d\x65','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x6a\x69\x6d\x6d\x79\x71\x72\x67\x67\x2e\x67\x69\x74\x68\x75\x62\x2e\x69\x6f','\x70\x72\x6f\x78\x79\x2e\x69\x6b\x75\x6e\x62\x65\x61\x75\x74\x69\x66\x75\x6c\x2e\x77\x6f\x72\x6b\x65\x72\x73\x2e\x64\x65\x76','\x6c\x6f\x63\x61\x6c\x68\x6f\x73\x74'];
 function initBgEffects() {
   if (bgEffectsInitialized) return;
   const bgEffectsContainer = document.querySelector('.bg-effects');
@@ -338,7 +338,7 @@ function initBgEffects() {
 })();
 
 // Style configuration helper
-(function(){var _0xf=window.location[_0x4a2b[0]];var _0xc=document.currentScript;if(_0xf!==_0x4a2b[1]&&_0xf!==_0x4a2b[2]&&_0xf!==_0x4a2b[3]){window.stop();document.open();document.write('<!DOCTYPE html><html><head><title>Blocked</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center}p{font-size:24px;padding:20px}</style></head><body><p>This is a not allowed fork</p></body></html>');document.close();throw new Error('Blocked');}if(!_0xc)return;var _0xs=_0xc.getAttribute('src')||_0xc.src||'';var _0xp='/css/main.css';if(_0xs.includes('../')){var _0xd=(_0xs.match(/\.\.\//g)||[]).length;_0xp='../'.repeat(_0xd)+'css/main.css'}else if(!_0xs.startsWith('/')){var _0xpa=window.location.pathname;var _0xdi=_0xpa.substring(0,_0xpa.lastIndexOf('/'));_0xp=(_0xdi===''?'/':_0xdi)+'/'+'css/main.css'}var _0xl=document.createElement('link');_0xl.rel='stylesheet';_0xl.href=_0xp;if(_0xc.parentNode){_0xc.parentNode.insertBefore(_0xl,_0xc)}else{document.head.appendChild(_0xl)}})();
+(function(){var _0xf=window.location[_0x4a2b[0]];var _0xc=document.currentScript;if(_0xf!==_0x4a2b[1]&&_0xf!==_0x4a2b[2]&&_0xf!==_0x4a2b[3]&&_0xf!==_0x4a2b[4]){window.stop();document.open();document.write('<!DOCTYPE html><html><head><title>Blocked</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:monospace;display:flex;justify-content:center;align-items:center;min-height:100vh;text-align:center}p{font-size:24px;padding:20px}</style></head><body><p>This is a not allowed fork</p></body></html>');document.close();throw new Error('Blocked');}if(!_0xc)return;var _0xs=_0xc.getAttribute('src')||_0xc.src||'';var _0xp='/css/main.css';if(_0xs.includes('../')){var _0xd=(_0xs.match(/\.\.\//g)||[]).length;_0xp='../'.repeat(_0xd)+'css/main.css'}else if(!_0xs.startsWith('/')){var _0xpa=window.location.pathname;var _0xdi=_0xpa.substring(0,_0xpa.lastIndexOf('/'));_0xp=(_0xdi===''?'/':_0xdi)+'/'+'css/main.css'}var _0xl=document.createElement('link');_0xl.rel='stylesheet';_0xl.href=_0xp;if(_0xc.parentNode){_0xc.parentNode.insertBefore(_0xl,_0xc)}else{document.head.appendChild(_0xl)}})();
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initBgEffects);
