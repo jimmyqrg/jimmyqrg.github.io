@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jqrg-pwa-v4';
+const CACHE_NAME = 'jqrg-pwa-v5';
 
 // Complete list of all source files to pre-cache
 const urlsToCache = [
@@ -99,6 +99,7 @@ const urlsToCache = [
   '/game-images/games/candy-jump.png',
   '/game-images/games/catgun-island.png',
   '/game-images/games/chat.png',
+  '/game-images/games/cookie-clicker.png',
   '/game-images/games/crossy-road.png',
   '/game-images/games/curveball.png',
   '/game-images/games/deltarune.png',
@@ -134,6 +135,7 @@ const urlsToCache = [
   '/game-images/games/r1-8-8-t2.png',
   '/game-images/games/r1-8-8.png',
   '/game-images/games/rammerhead.png',
+  '/game-images/games/retro-bowl.png',
   '/game-images/games/sans-cjs-i.png',
   '/game-images/games/sans-cjs.png',
   '/game-images/games/sans-frisk-mode.png',
@@ -158,6 +160,7 @@ const urlsToCache = [
   '/game-images/games/subway-surfers.png',
   '/game-images/games/survival-race.png',
   '/game-images/games/tag.png',
+  '/game-images/games/tanuki-sunset.png',
   '/game-images/games/tg-playground.png',
   '/game-images/games/thatsnotmyneighbor.png',
   '/game-images/games/there-is-no-game.png',
@@ -254,6 +257,9 @@ const urlsToCache = [
   '/jqrg-games/games/browser-quest.html',
   '/jqrg-games/games/candy-jump.html',
   '/jqrg-games/games/catgun-island.html',
+  '/jqrg-games/games/cookie-clicker.html',
+  '/jqrg-games/games/count-master.html',
+  '/jqrg-games/games/crazy-cattle.html',
   '/jqrg-games/games/crossy-road.html',
   '/jqrg-games/games/curveball.html',
   '/jqrg-games/games/deltarune.html',
@@ -272,6 +278,7 @@ const urlsToCache = [
   '/jqrg-games/games/hollow-knight-.html',
   '/jqrg-games/games/hollow-knight.html',
   '/jqrg-games/games/hypper-sandbox.html',
+  '/jqrg-games/games/iron-lungs.html',
   '/jqrg-games/games/karlson.html',
   '/jqrg-games/games/level-devil.html',
   '/jqrg-games/games/magic-tiles-3.html',
@@ -281,6 +288,7 @@ const urlsToCache = [
   '/jqrg-games/games/patrick-star.html',
   '/jqrg-games/games/portal.html',
   '/jqrg-games/games/pvs.html',
+  '/jqrg-games/games/retro-bowl.html',
   '/jqrg-games/games/sans-cjs-i.html',
   '/jqrg-games/games/sans-cjs.html',
   '/jqrg-games/games/sans-frisk-mode.html',
@@ -307,6 +315,7 @@ const urlsToCache = [
   '/jqrg-games/games/survival-race-game-code.html',
   '/jqrg-games/games/survival-race.html',
   '/jqrg-games/games/tag.html',
+  '/jqrg-games/games/tanuki-sunset.html',
   '/jqrg-games/games/tg-playground.html',
   '/jqrg-games/games/thatsnotmyneighbor.html',
   '/jqrg-games/games/there-is-no-game.html',
@@ -319,6 +328,7 @@ const urlsToCache = [
   '/jqrg-games/games/undertale-y.html',
   '/jqrg-games/games/undertale.html',
   '/jqrg-games/games/uno.html',
+  '/jqrg-games/games/vex.html',
   '/jqrg-games/games/we-become-what-we-behold.html',
   '/jqrg-games/games/wordle.html',
   '/jqrg-games/games/zombie-derby-pixel-survival.html',
