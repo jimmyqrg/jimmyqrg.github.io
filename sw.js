@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jqrg-pwa-v5';
+const CACHE_NAME = 'jqrg-pwa-v6';
 
 // Complete list of all source files to pre-cache
 const urlsToCache = [
@@ -100,6 +100,8 @@ const urlsToCache = [
   '/game-images/games/catgun-island.png',
   '/game-images/games/chat.png',
   '/game-images/games/cookie-clicker.png',
+  '/game-images/games/count-master.png',
+  '/game-images/games/crazy-cattle.png',
   '/game-images/games/crossy-road.png',
   '/game-images/games/curveball.png',
   '/game-images/games/deltarune.png',
@@ -108,6 +110,7 @@ const urlsToCache = [
   '/game-images/games/drift-boss.png',
   '/game-images/games/drive-mad.png',
   '/game-images/games/flappy-bird.png',
+  '/game-images/games/flappy-dunk.png',
   '/game-images/games/flowey.png',
   '/game-images/games/fnf.png',
   '/game-images/games/gaster.png',
@@ -117,6 +120,7 @@ const urlsToCache = [
   '/game-images/games/hex-gl.png',
   '/game-images/games/hollow-knight.png',
   '/game-images/games/hypper-sandbox.png',
+  '/game-images/games/iron-lungs.png',
   '/game-images/games/jls.png',
   '/game-images/games/jq.png',
   '/game-images/games/karlson.png',
@@ -171,6 +175,7 @@ const urlsToCache = [
   '/game-images/games/undertale-y.png',
   '/game-images/games/undertale.png',
   '/game-images/games/uno.png',
+  '/game-images/games/vex.png',
   '/game-images/games/we-become-what-we-behold.png',
   '/game-images/games/wmcbg.png',
   '/game-images/games/wordle-noletterdetection.png',
@@ -267,6 +272,7 @@ const urlsToCache = [
   '/jqrg-games/games/doodle-jump.html',
   '/jqrg-games/games/drive-mad.html',
   '/jqrg-games/games/flappy-bird.html',
+  '/jqrg-games/games/flappy-dunk',
   '/jqrg-games/games/flowey-i.html',
   '/jqrg-games/games/flowey.html',
   '/jqrg-games/games/fnf.html',
