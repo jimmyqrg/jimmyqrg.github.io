@@ -27,6 +27,12 @@
       <script src="/js/cursor.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+      /* Prevent horizontal overflow on narrow screens */
+      html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      
       /* ===== NEW TAB DESIGN - Floating Pill with Glow ===== */
       .tab-container {
         display: flex;
@@ -137,12 +143,14 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 20px 0;
+        box-sizing: border-box;
       }
 
       #allGames .game-item {
         display: block;
         width: 100%;
         max-width: 180px;
+        box-sizing: border-box;
       }
 
       #allGames .game-item img {
@@ -201,13 +209,14 @@
         }
         
         #allGames.btn-grid {
-          grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
           gap: 12px;
           width: 95%;
+          padding: 15px 10px;
         }
         
         #allGames .game-item {
-          max-width: 150px;
+          max-width: 100%;
         }
       }
 
@@ -215,6 +224,28 @@
         #allGames.btn-grid {
           grid-template-columns: repeat(2, 1fr);
           gap: 10px;
+          width: 100%;
+          padding: 10px;
+        }
+        
+        #allGames .game-item {
+          max-width: 100%;
+        }
+        
+        #allGames .game-item .game-label {
+          font-size: 0.75rem;
+        }
+      }
+      
+      @media (max-width: 360px) {
+        #allGames.btn-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 8px;
+          padding: 8px;
+        }
+        
+        #allGames .game-item .game-label {
+          font-size: 0.7rem;
         }
       }
 

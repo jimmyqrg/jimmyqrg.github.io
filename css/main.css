@@ -1718,7 +1718,29 @@ body {
         width: 75%;
         max-width: 80%;
         margin: 0 auto;
+        box-sizing: border-box;
       }
+      
+      /* Responsive btn-grid for narrow screens */
+      @media (max-width: 600px) {
+        .btn-grid {
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          width: 90%;
+          max-width: 95%;
+          gap: 10px;
+        }
+      }
+      
+      @media (max-width: 400px) {
+        .btn-grid {
+          grid-template-columns: repeat(2, 1fr);
+          width: 95%;
+          max-width: 100%;
+          gap: 8px;
+          padding: 0 10px;
+        }
+      }
+      
       p {
         margin-top: 40px;
         font-size: 0.9rem;
