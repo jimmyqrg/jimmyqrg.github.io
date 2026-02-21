@@ -1315,7 +1315,7 @@ body {
         transform: translate(-50%, -50%) translateZ(60px);
         background: rgba(0, 0, 0, 0.5); /* 30% opacity black */
         color: white;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: bold;
         padding: 12px 16px;
         border-radius: 10px; /* Corner radius */
