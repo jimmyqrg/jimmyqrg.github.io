@@ -22,16 +22,9 @@
   <button class="btn" id="backHomeBtn">
     ⬅ Back to Home
   </button>
-  <script src="/js/updateDomainUrls.js"></script>
   <script>
-    document.getElementById('backHomeBtn').onclick = async () => {
-      try {
-        const response = await fetch('/currentDomain.txt');
-        const domain = (await response.text()).trim();
-        window.location.href = `https://${domain}/?page=extend`;
-      } catch {
-        window.location.href = 'https://jimmyqrg.github.io/?page=extend';
-      }
+    document.getElementById('backHomeBtn').onclick = () => {
+      window.location.href = 'https://jimmyqrg.github.io/?page=extend';
     };
   </script>
   

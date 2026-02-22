@@ -35,7 +35,7 @@ including:
 > 6. `panicKey.js` if you press RIGHT SHIFT, it redirects to pausd.schoology.com, allows customization (customization is in `/index.html`)
 > 7. `preventOpen.js` link this script if somehow a page is wrongly `window.open`ing.
 > 8. `style.js` it's the script that supports `css/main.css`, without it, a lot of the styles won't work.
-> 9. `updateDomainUrl.js` & `currentDomain.js` total trash, ignore them.
+> 9. (Removed - no longer used)
 
 ### authority.js
 

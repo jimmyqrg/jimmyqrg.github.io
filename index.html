@@ -5,16 +5,7 @@
     <script src="js/mainPageCloak.js"></script>
 
     <script>
-      // Load current domain early
-      let currentDomain = "jimmyqrg.github.io"; // Default fallback
-      (async function () {
-        try {
-          const response = await fetch("/currentDomain.txt");
-          currentDomain = (await response.text()).trim();
-        } catch (error) {
-          console.error("Failed to load currentDomain.txt, using fallback");
-        }
-      })();
+      let currentDomain = "jimmyqrg.github.io";
     </script>
 
     <script>
@@ -47,7 +38,6 @@
       })();
     </script>
     <script src="/js/openGame.js"></script>
-    <script src="/js/updateDomainUrls.js"></script>
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#4d8cff" />
@@ -447,43 +437,11 @@
 
       // Wait for DOM to be ready
       document.addEventListener("DOMContentLoaded", function () {
-        // Update all URLs with domain from currentDomain.txt
-        (async function () {
-          try {
-            const response = await fetch("/currentDomain.txt");
-            const domain = (await response.text()).trim();
-            currentDomain = domain;
-
-            // Update all links with data-path attribute
-            document.querySelectorAll("a[data-path]").forEach((link) => {
-              const path = link.getAttribute("data-path");
-              link.href = `https://${domain}${path}`;
-            });
-
-            // Update all cloak icon images with data-src attribute (for tab cloak settings)
-            document
-              .querySelectorAll("img.cloakIconOption[data-src]")
-              .forEach((img) => {
-                const dataSrc = img.getAttribute("data-src");
-                if (dataSrc && dataSrc.includes("jimmyqrg.github.io")) {
-                  img.setAttribute(
-                    "data-src",
-                    dataSrc.replace(
-                      /https?:\/\/teacher\.jimmyqrg\.com/g,
-                      `https://${domain}`
-                    )
-                  );
-                }
-              });
-
-            // Update currentDomainCache for panicKey.js
-            if (typeof window !== "undefined") {
-              window.currentDomainCache = domain;
-            }
-          } catch (error) {
-            console.error("Failed to load currentDomain.txt, using fallback");
-          }
-        })();
+        // Update all links with data-path attribute
+        document.querySelectorAll("a[data-path]").forEach((link) => {
+          const path = link.getAttribute("data-path");
+          link.href = `https://${currentDomain}${path}`;
+        });
 
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker

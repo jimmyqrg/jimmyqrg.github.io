@@ -2,21 +2,9 @@
 // Panic Key Logic
 // -------------------------------
 
-// Load current domain utility
-let currentDomainCache = null;
-async function getCurrentDomain() {
-  if (currentDomainCache) {
-    return currentDomainCache;
-  }
-  try {
-    const response = await fetch("/currentDomain.txt");
-    const domain = (await response.text()).trim();
-    currentDomainCache = domain;
-    return domain;
-  } catch (error) {
-    console.error("Failed to load currentDomain.txt, using fallback:", error);
-    return "jimmyqrg.github.io"; // Fallback
-  }
+const currentDomainCache = "jimmyqrg.github.io";
+function getCurrentDomain() {
+  return currentDomainCache;
 }
 
 const PANIC_KEY_STORAGE = "panicKey";

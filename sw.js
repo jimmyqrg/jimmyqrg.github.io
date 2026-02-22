@@ -24,7 +24,6 @@ const urlsToCache = [
   '/undertale-background.png',
   '/github.png',
   '/jqrg-jiushifen.png',
-  '/currentDomain.txt',
   '/u/ubgu-logo.png',
 
   // ============ CSS FILES ============
@@ -34,14 +33,12 @@ const urlsToCache = [
   // ============ JS FILES ============
   '/js/authority.js',
   '/js/blacklist.js',
-  '/js/currentDomain.js',
   '/js/cursor.js',
   '/js/mainPageCloak.js',
   '/js/openGame.js',
   '/js/panicKey.js',
   '/js/preventOpen.js',
   '/js/style.js',
-  '/js/updateDomainUrls.js',
 
   // ============ CLOAK IMAGES ============
   '/cloak-images/default.png',

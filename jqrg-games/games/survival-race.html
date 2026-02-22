@@ -236,13 +236,7 @@
  frame_game.setAttribute('scrolling', 'no');
  frame_game.setAttribute('class', 'iframe-default');
  frame_game.setAttribute('allowfullscreen', 'true');
-try {
-  const response = await fetch('/currentDomain.txt');
-  const domain = (await response.text()).trim();
-  frame_game.setAttribute('src', `https://${domain}/survival-race/`);
-} catch {
-  frame_game.setAttribute('src', 'https://jimmyqrg.github.io/survival-race/');
-}
+frame_game.setAttribute('src', 'https://jimmyqrg.github.io/survival-race/');
 if (document.getElementById("preloading-game")) {
   await document.getElementById("preloading-game").remove();
 }

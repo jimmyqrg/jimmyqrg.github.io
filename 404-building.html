@@ -17,23 +17,12 @@
     <button id="backBtn" class="btn">Back</button>
   </div>
 
-  <script src="/js/updateDomainUrls.js"></script>
   <script>
     // Get the "back" link from URL
     const params = new URLSearchParams(window.location.search);
-    const backLink = params.get("back") || (async () => {
-      try {
-        const response = await fetch('/currentDomain.txt');
-        const domain = (await response.text()).trim();
-        return `https://${domain}/?page=extend`;
-      } catch {
-        return "https://jimmyqrg.github.io/?page=extend";
-      }
-    })();
-
-    document.getElementById("backBtn").onclick = async () => {
-      const link = typeof backLink === 'string' ? backLink : await backLink;
-      window.location.href = link;
+    const backLink = params.get("back") || "https://jimmyqrg.github.io/?page=extend";
+    document.getElementById("backBtn").onclick = () => {
+      window.location.href = backLink;
     };
   </script>
 
