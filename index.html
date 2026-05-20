@@ -1,3 +1,167 @@
-The url has changed. -- A note from JimmyQrg
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | Page Not Found</title>
 
-What to check: JimmyQrg Chat and JimmyQrg Google Document
+  <!-- Scripts -->
+  <script src="/js/mainPageCloak.js"></script>
+  <script src="/js/openGame.js"></script>
+  <script src="/js/panicKey.js"></script>
+  <script src="/js/style.js"></script>
+  <script src="/js/cursor.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="icon" type="image/ico" href="https://indiamonda.github.io/info.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body.error-page {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: 'Josefin Sans', sans-serif;
+      overflow: hidden;
+    }
+
+    .bg-effects {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05), transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03), transparent 40%);
+      z-index: 0;
+    }
+
+    .container {
+      width: 435px;
+      text-align: center;
+      padding: 50px 40px;
+      background: rgba(13, 17, 23, 0.85);
+      border: 1px solid #30363d;
+      border-radius: 16px;
+      box-shadow: 0 0 50px rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .visual-heading-1 {
+      display:block;
+      font-size: 90px;
+      margin: 0;
+      letter-spacing: -3px;
+      background: linear-gradient(90deg, #58a6ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight:700;line-height:1;
+    }
+
+    .visual-heading-2 {
+      display:block;
+      margin: 10px 0 25px;
+      font-weight: 400;
+      color: #8b949e;
+      font-size:20px;line-height:1.3;
+    }
+    /* Visually hidden semantic <h1> used for SEO + AI metadata. */
+    .seo-only{
+      position:absolute!important;left:-9999px!important;top:auto!important;
+      width:1px!important;height:1px!important;overflow:hidden!important;
+      clip:rect(0,0,0,0)!important;clip-path:inset(50%)!important;
+      font-size:0!important;line-height:0!important;color:transparent!important;
+      opacity:0!important;pointer-events:none!important;user-select:none!important;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 26px;
+      font-size: 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: 0.25s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: #9c41f6;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #c68cff;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(46,160,67,0.5);
+    }
+
+    .btn-secondary {
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+    }
+
+    .btn-secondary:hover {
+      background: #30363d;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 30px 20px;
+      }
+
+      .visual-heading-1 {
+        font-size: 60px;
+      }
+
+      .visual-heading-2 {
+        font-size: 16px;
+      }
+    }
+  </style>
+
+<!-- JQRG_CLOUD_INJECT_BEGIN --><script src="/js/jqrg-cloud.js" defer></script><script src="/js/jqrg-auth-ui.js" defer></script><!-- JQRG_CLOUD_INJECT_END -->
+</head>
+
+<body class="error-page">
+  <div class="bg-effects"></div>
+
+  <div class="container">
+    <h1 class="seo-only">The Link has Changed</h1>
+    <div class="visual-heading-1" role="heading" aria-level="1">What to check:</div>
+    <div class="visual-heading-2" role="heading" aria-level="2">Chat app & Google Document Save</div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('backHomeBtn').onclick = () => {
+      window.location.href = 'https://indiamonda.github.io/';
+    };
+    try { if (window.self !== window.top) document.querySelector('.buttons').style.display = 'none'; } catch (_) {}
+  </script>
+</body>
+</html>
